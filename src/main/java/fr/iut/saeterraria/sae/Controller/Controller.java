@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Controller;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,14 +18,13 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    @FXML
-    private Label welcomeText;
 
     @FXML
-    private TilePane fond;
+    private Pane fond;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Platform.runLater(()->fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         fond.setOnKeyPressed(Insert -> mouvement(Insert));
     }
 
