@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Controller;
 
+import fr.iut.saeterraria.sae.Modele.Jeu;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,10 +21,14 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     @FXML
-    private Pane fond;
+    private TilePane fond;
+
+    private Jeu jeu;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        jeu = new Jeu("Terraria",600,600);
+        fond.getChildren().add("Carte.tmx");
         Platform.runLater(()->fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         fond.setOnKeyPressed(Insert -> mouvement(Insert));
     }

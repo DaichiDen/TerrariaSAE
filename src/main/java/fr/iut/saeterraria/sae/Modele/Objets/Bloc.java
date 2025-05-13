@@ -6,10 +6,13 @@ import javafx.scene.image.Image;
 
 public class Bloc {
     private StringProperty nom;
-    private Image tiles;
+    private int width, height;
+
 
     public Bloc (String nom, Image tiles) {
         this.nom = new SimpleStringProperty(nom);
-        this.tiles = new Image("");
+        this.width=32;
+        this.height=32;
     }
+
 }

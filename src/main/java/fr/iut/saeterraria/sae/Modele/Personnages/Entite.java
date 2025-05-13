@@ -9,14 +9,15 @@ public abstract class Entite {
 
     private IntegerProperty vie, vieMax, energieMax, x, y, def;
     private StringProperty nom;
-    private double energie;
+    private IntegerProperty energie;
     private IntegerProperty vitesse;
 
-    public Entite(String nom, int vie, int vieMax, int energieMax, int x, int y, int def, int vitesse) {
+    public Entite(String nom, int vie, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesse) {
         this.nom = new SimpleStringProperty(nom);
+        this.vieMax = new SimpleIntegerProperty(vieMax);
         this.vie = new SimpleIntegerProperty(vie);
         this.energieMax = new SimpleIntegerProperty(energieMax);
-        this.energie = energieMax;
+        this.energie = new SimpleIntegerProperty(energie);
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.def = new SimpleIntegerProperty(def);
@@ -34,16 +35,44 @@ public abstract class Entite {
     }
 
     public final IntegerProperty vieProperty(){return vie;}
+    public final int getVieMax() {return vieMax.get();}
+    public final void setVieMax(int vie) {this.vieMax.set(vie);}
     public final int getVie() {return vie.get();}
     public final void setVie(int vie) {this.vie.set(vie);}
-    public final void incrementVie(int val) {this.vie.set(vie.get()+val);}
-    public final void decrementVie(int val) {this.vie.set(vie.get()-val);}
+    public final void incrementVie(int val) {
+        if(getVie()+val > getVieMax()){
+            setVie(getVieMax());
+        }else{
+            setVie(getVie()+val);
+        }
+    }
+    public final void decrementVie(int val) {
+        if(getVie()-val < 0){
+            setVie(0);
+        }else{
+            setVie(getVie()-val);
+        }
+    }
 
     public final IntegerProperty energieMaxProperty(){return energieMax;}
     public final int getEnergieMax() {return energieMax.get();}
     public final void setEnergieMax(int energieMax) {this.energieMax.set(energieMax);}
-    public final void incrementEnergie(int val) {this.energieMax.set(energieMax.get()+val);}
-    public final void decrementEnergie(int val) {this.energieMax.set(energieMax.get()-val);}
+    public final int getEnergie() {return energie.get();}
+    public final void setEnergie(int energie) {this.energie.set(energie);}
+    public final void incrementEnergie(int val) {
+        if(getEnergie()+val > getEnergieMax()){
+            setEnergie(getEnergie()+val);
+        }else{
+            setEnergie(energie.get()+val);
+        }
+    }
+    public final void decrementEnergie(int val) {
+        if(getEnergie()-val < 0){
+            setEnergie(0);
+        }else{
+            setEnergie(getEnergie()-val);
+        }
+    }
 
     public final IntegerProperty xProperty() {return x;}
     public final int getX() { return x.get(); }
@@ -59,10 +88,5 @@ public abstract class Entite {
 
     public final IntegerProperty vitesseProperty(){return vitesse;}
     public final int getVitesse() {return vitesse.getValue();}
-
-    public double getEnergie() {return energie;}
-    public void setEnergie(double energie) {this.energie = energie;}
-
-
 
 }

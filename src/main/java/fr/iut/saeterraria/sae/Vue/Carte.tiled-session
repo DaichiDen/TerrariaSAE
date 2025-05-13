@@ -1,0 +1,44 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Carte.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "C:/Users/luc54/Documents/Dirt_2.tsx": {
+            "scaleInDock": 1
+        },
+        "Carte.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 657,
+                "y": 557
+            }
+        },
+        "Terre base.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Terre haute.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/luc54/Documents/Carte",
+    "map.height": 30,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 40,
+    "openFiles": [
+        "Carte.tmx"
+    ],
+    "project": "Carte.tiled-project",
+    "recentFiles": [
+        "Terre haute.tsx",
+        "Terre base.tsx",
+        "Carte.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
