@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
+import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,7 +39,32 @@ public class Controller implements Initializable {
         jeu = new Jeu("Joueur",1024,1024);
         Platform.runLater(()->fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         fond.setOnKeyPressed(Insert -> mouvement(Insert));
+        fond.setOnKeyReleased(Insert -> stopmouvement(Insert));
         creerSpriteJoueur(jeu.getJoueur());
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                jeu.getJoueur().mettreAJour();
+
+            }
+        };
+        timer.start();
+    }
+
+    private void stopmouvement(KeyEvent event) {
+        switch (event.getCode()) {
+            case D:
+                jeu.getJoueur().setMarcheDroite(false);
+                break;
+            case RIGHT:
+                jeu.getJoueur().setMarcheDroite(false);
+                break;
+            case LEFT:
+                jeu.getJoueur().setMarcheGauche(false);
+                break;
+            case Q:
+                jeu.getJoueur().setMarcheGauche(false);
+        }
     }
 
     public ImageView createImageView(String imagePath){
@@ -65,11 +91,11 @@ public class Controller implements Initializable {
                 System.out.println("Descend");
                 break;
             case LEFT: // Déplace à gauche
-                jeu.getJoueur().déplacementGauche();
+                jeu.getJoueur().setMarcheGauche(true);
                 System.out.println("Gauche");
                 break;
             case RIGHT: // Déplace à droite
-                jeu.getJoueur().déplacementDroite();
+                jeu.getJoueur().setMarcheDroite(true);
                 System.out.println("Droite");
                 break;
             case SPACE: // Saute
@@ -77,11 +103,11 @@ public class Controller implements Initializable {
                 System.out.println("Saute");
                 break;
             case Q: // Déplace à gauche
-                jeu.getJoueur().déplacementGauche();
+                jeu.getJoueur().setMarcheGauche(true);
                 System.out.println("Gauche");
                 break;
             case D: // Déplace à droite
-                jeu.getJoueur().déplacementDroite();
+                jeu.getJoueur().setMarcheDroite(true);
                 System.out.println("Droite");
                 break;
             case S: // Descend d'une plateforme
@@ -96,7 +122,7 @@ public class Controller implements Initializable {
     // Crée le sprite du joueur et l'ajoute dans la vue
     private void creerSpriteJoueur(Joueur joueur){
 
-        ImageView sprite = createImageView("/Sprite/character.png");
+        ImageView sprite = createImageView("/Sprite/characterbis.png");
         sprite.setId(joueur.getNom());
         sprite.translateXProperty().bind(joueur.xProperty());
         sprite.translateYProperty().bind(joueur.yProperty());
