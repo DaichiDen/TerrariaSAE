@@ -9,7 +9,7 @@ public class PNJ extends Entite{
 
     private ArrayList<String> dialogue;
     public PNJ(String nom, int x, int y) {
-        super(nom,1,1,1,x,y,1,1);
+        super(nom,1,1,1,0,x,y,1,1);
         dialogue = new ArrayList<String>();
     }
 

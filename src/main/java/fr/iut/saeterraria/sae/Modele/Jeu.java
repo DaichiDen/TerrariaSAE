@@ -14,9 +14,9 @@ public class Jeu {
     private ArrayList<Ennemi> mobs;
     private ArrayList<PNJ> pNJ;
 
-    public Jeu(String nom, int width, int height){
+    public Jeu(String nomJoueur, int width, int height){
         carte = new Map(width, height);
-        joueur = new Joueur(nom);
+        joueur = new Joueur(nomJoueur);
         mobs = new ArrayList<>();
         pNJ = new ArrayList<>();
     }

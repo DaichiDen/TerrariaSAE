@@ -5,7 +5,7 @@ public class Joueur extends Entite {
     private int[] equipement; //armure, outil
 
     public Joueur(String nom) {
-        super(nom,20,20, 100, 0,0, 0,1);
+        super(nom,20,20, 100, 20,0, 0,1,32);
         this.inventaire = new int[56];
         this.equipement = new int[7];
     }
@@ -35,14 +35,30 @@ public class Joueur extends Entite {
     }
 
     public void sauter() {
-        int v = vitesseProperty().intValue();
-        for(int i = super.getY(); i < super.getY() + 10; i++){ // Hauteur de saut à voir et arrêt aussi à collision
-            super.setY(super.getY() + v/i); //Pour un ralentissement dans la montée
-        }
-        for(int i = super.getY(); i > super.getY() - 10; i--){ // A modifier pour s'arreter à collision
-            super.setY(super.getY() - v/i); //Pour une accélération dans la descente
-        }
+        super.setY(super.getY() - super.getVitesse());
+        
+//        for(int i = 1 ; i < 11 ; i++){ // Hauteur de saut à voir et arrêt aussi à collision
+//            System.out.println("up");
+//            super.setY(super.getY() + super.getVitesse()/i); //Pour un ralentissement dans la montée
+//        }
+//        for(int i = 11 ; i > 1 ; i--){ // A modifier pour s'arreter à collision
+//            System.out.println("down");
+//            super.setY(super.getY() - super.getVitesse()/i); //Pour une accélération dans la descente
+//        }
 
+      /**  for(int i = super.getY()+1; i < super.getY() + 11; i++){ // Hauteur de saut à voir et arrêt aussi à collision
+            System.out.println("up");
+            super.setY(super.getY() + super.getVitesse()/i); //Pour un ralentissement dans la montée
+        }
+        for(int i = super.getY(); i > super.getY(); i--){ // A modifier pour s'arreter à collision
+            System.out.println("down");
+            super.setY(super.getY() - super.getVitesse()/i); //Pour une accélération dans la descente
+       }  **/
+
+    }
+
+    public void descendre() {
+        super.setY(super.getY() + super.getVitesse());
     }
 
 }

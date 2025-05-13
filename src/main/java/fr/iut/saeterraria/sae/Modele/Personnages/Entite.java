@@ -24,6 +24,7 @@ public abstract class Entite {
         this.vitesse = new SimpleIntegerProperty(vitesse);
     }
 
+    // Gestion du nom
     public StringProperty nomProperty(){
         return this.nom;
     }
@@ -34,6 +35,7 @@ public abstract class Entite {
         this.nom.setValue(nom);
     }
 
+    // Gestion de la vie
     public final IntegerProperty vieProperty(){return vie;}
     public final int getVieMax() {return vieMax.get();}
     public final void setVieMax(int vie) {this.vieMax.set(vie);}
@@ -54,6 +56,7 @@ public abstract class Entite {
         }
     }
 
+    // Gestion de l'energie
     public final IntegerProperty energieMaxProperty(){return energieMax;}
     public final int getEnergieMax() {return energieMax.get();}
     public final void setEnergieMax(int energieMax) {this.energieMax.set(energieMax);}
@@ -61,9 +64,9 @@ public abstract class Entite {
     public final void setEnergie(int energie) {this.energie.set(energie);}
     public final void incrementEnergie(int val) {
         if(getEnergie()+val > getEnergieMax()){
-            setEnergie(getEnergie()+val);
+            setEnergie(getEnergieMax());
         }else{
-            setEnergie(energie.get()+val);
+            setEnergie(getEnergie()+val);
         }
     }
     public final void decrementEnergie(int val) {
@@ -74,18 +77,32 @@ public abstract class Entite {
         }
     }
 
+    // Gestion du positionnement horizontal
     public final IntegerProperty xProperty() {return x;}
     public final int getX() { return x.get(); }
     public final void setX(int x) { this.x.setValue(x);}
-
+    // Gestion su positionnement vertical
     public final IntegerProperty yProperty(){ return y; }
     public final int getY() { return y.get(); }
     public final void setY(int y) { this.y.setValue(y);}
 
+    // Gestion de la defense
     public final IntegerProperty defProperty(){ return def; }
     public final void setDef(int def) { this.def.setValue(def);}
     public final int getDef() { return def.get(); }
+    public final void incrementDef(int val) {
+        setDef(getDef()+val);
+    }
+    public final void decrementDef(int val) {
+        if(getDef()-val < 0){
+            setDef(0);
+        }else{
+            setDef(getDef()-val);
+        }
+    }
 
+
+    // Gestion de la vitesse
     public final IntegerProperty vitesseProperty(){return vitesse;}
     public final int getVitesse() {return vitesse.getValue();}
 

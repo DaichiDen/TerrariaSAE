@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
 
-<Pane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
+<Pane fx:id="screen" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
    <children>
-      <TilePane fx:id="fond" alignment="CENTER" prefHeight="400.0" prefWidth="600.0">
+      <TilePane fx:id="fond" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@character.png" />
-               </image>
-            </ImageView>
-         </children>
-      </TilePane>
+            <Button fx:id="scene1" mnemonicParsing="false" text="Button" />
+         </children></TilePane>
+      <Button mnemonicParsing="false" text="Button" />
    </children>
 </Pane>
