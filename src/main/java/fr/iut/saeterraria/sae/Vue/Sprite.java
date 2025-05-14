@@ -17,7 +17,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 
-public class Sprite implements ChangeListener {
+public class Sprite  {
 
     private TilePane map;
     private Jeu jeu;

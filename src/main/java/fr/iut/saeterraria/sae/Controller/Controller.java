@@ -28,6 +28,8 @@ public class Controller implements Initializable {
     @FXML
     private TilePane fond;
     @FXML
+    private TilePane joueur;
+    @FXML
     private Pane screen;
     @FXML
     private Button mapButton;
@@ -43,14 +45,14 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        scene = new Fond(10,5,fond);
+        scene = new Fond(10, 5, fond);
         initialiseTile();
-        jeu = new Jeu("Joueur",1024,1024);
-        Platform.runLater(()->fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
+        jeu = new Jeu("Joueur", 1024, 1024);
+        Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         fond.setOnKeyPressed(Insert -> mouvement(Insert));
 
         fond.setOnKeyReleased(Insert -> stopmouvement(Insert));
-        Sprite vuejoueur = new Sprite(jeu,fond); // Appelle la classe de la vue pour l'initialiser
+        Sprite vuejoueur = new Sprite(jeu, fond); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.creerSpriteJoueur(jeu.getJoueur()); // Appelle la méthode de la vue pour créer le visuel du joueur, et le lier au fond
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
@@ -65,9 +67,11 @@ public class Controller implements Initializable {
             }
         };
         timer.start();  // frameInterval est l'intervalle entre 2 màj graphiques
-                        // lastUpdate stocke le temps de la dernière màj graphique enregistré
-                        // La méthode vérifie si entre la dernière update et maintenant il s'est passé 1/60 ème de seconde ( 1 frame), si oui on actualise graphiquement
-   }
+        // lastUpdate stocke le temps de la dernière màj graphique enregistré
+        // La méthode vérifie si entre la dernière update et maintenant il s'est passé 1/60 ème de seconde ( 1 frame), si oui on actualise graphiquement
+        afficheCarte();
+    }
+
 
     private void stopmouvement(KeyEvent event) {
         switch (event.getCode()) {
@@ -86,16 +90,9 @@ public class Controller implements Initializable {
     }
 
 
-
-
-        //creerSpriteJoueur(jeu.getJoueur());
-        afficheCarte();
-   }
-
-
     //public void afficherMap()
     public void mouvement(KeyEvent event) {
-        switch (event.getCode()){
+        switch (event.getCode()) {
             case UP: // Saute
                 jeu.getJoueur().sauter();
                 System.out.println("Saute");
@@ -134,48 +131,18 @@ public class Controller implements Initializable {
     }
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private void initialiseTile(){
+    private void initialiseTile() {
         scene.ajoutTile("/Tiles/Fond_noir.png");
         scene.ajoutTile("/Tiles/Dirt_1.png");
         scene.ajoutTile("/Tiles/Dirt_2.png");
         scene.ajoutTile("/Tiles/Ciel.png");
     }
 
-    private void afficheCarte(){
+    private void afficheCarte() {
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 32; j++) {
                 scene.afficherCarte(i, j);
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
