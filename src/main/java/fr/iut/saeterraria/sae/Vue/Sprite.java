@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Controller.Controller;
 import fr.iut.saeterraria.sae.Modele.Jeu;
+
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -12,10 +13,15 @@ import javafx.scene.layout.TilePane;
 
 import java.net.URL;
 
-public class Sprite {
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
+
+public class Sprite implements ChangeListener {
 
     private TilePane map;
     private Jeu jeu;
+
 
     public Sprite(Jeu jeu, TilePane map){
         this.jeu = jeu;
@@ -45,5 +51,12 @@ public class Sprite {
         sprite.setFitHeight(80);
         map.getChildren().add(sprite);
     }
+
+
+
+
+
+
+
 
 }

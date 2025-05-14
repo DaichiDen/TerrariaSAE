@@ -2,11 +2,17 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
+
 import fr.iut.saeterraria.sae.Vue.Sprite;
 import javafx.animation.AnimationTimer;
+
+import fr.iut.saeterraria.sae.Vue.Fond;
+
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,9 +27,6 @@ public class Controller implements Initializable {
 
     @FXML
     private TilePane fond;
-
-    @FXML
-    private ImageView map;
     @FXML
     private Pane screen;
     @FXML
@@ -32,14 +35,20 @@ public class Controller implements Initializable {
     private Button scene1;
     @FXML
     private Button scene2;
+    @FXML
+    private Fond scene;
 
     private Jeu jeu;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        scene = new Fond(10,5,fond);
+        initialiseTile();
         jeu = new Jeu("Joueur",1024,1024);
         Platform.runLater(()->fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         fond.setOnKeyPressed(Insert -> mouvement(Insert));
+
         fond.setOnKeyReleased(Insert -> stopmouvement(Insert));
         Sprite vuejoueur = new Sprite(jeu,fond); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.creerSpriteJoueur(jeu.getJoueur()); // Appelle la méthode de la vue pour créer le visuel du joueur, et le lier au fond
@@ -76,6 +85,12 @@ public class Controller implements Initializable {
         }
     }
 
+
+
+
+        //creerSpriteJoueur(jeu.getJoueur());
+        afficheCarte();
+   }
 
 
     //public void afficherMap()
@@ -117,6 +132,50 @@ public class Controller implements Initializable {
                 break;
         }
     }
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void initialiseTile(){
+        scene.ajoutTile("/Tiles/Fond_noir.png");
+        scene.ajoutTile("/Tiles/Dirt_1.png");
+        scene.ajoutTile("/Tiles/Dirt_2.png");
+        scene.ajoutTile("/Tiles/Ciel.png");
+    }
+
+    private void afficheCarte(){
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 32; j++) {
+                scene.afficherCarte(i, j);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
