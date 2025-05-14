@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
+import fr.iut.saeterraria.sae.Vue.Sprite;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -40,10 +41,11 @@ public class Controller implements Initializable {
         Platform.runLater(()->fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         fond.setOnKeyPressed(Insert -> mouvement(Insert));
         fond.setOnKeyReleased(Insert -> stopmouvement(Insert));
-        creerSpriteJoueur(jeu.getJoueur());
-        AnimationTimer timer = new AnimationTimer() {
+        Sprite vuejoueur = new Sprite(jeu,fond); // Appelle la classe de la vue pour l'initialiser
+        vuejoueur.creerSpriteJoueur(jeu.getJoueur()); // Appelle la méthode de la vue pour créer le visuel du joueur, et le lier au fond
+        AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
-            private final long frameInterval = 16_666_666; // ~60 FPS
+            private final long frameInterval = 16_666_666; // Conversion nano secondes en secondes = 60 FPS
 
             @Override
             public void handle(long now) {
@@ -53,8 +55,10 @@ public class Controller implements Initializable {
                 }
             }
         };
-        timer.start();
-    }
+        timer.start();  // frameInterval est l'intervalle entre 2 màj graphiques
+                        // lastUpdate stocke le temps de la dernière màj graphique enregistré
+                        // La méthode vérifie si entre la dernière update et maintenant il s'est passé 1/60 ème de seconde ( 1 frame), si oui on actualise graphiquement
+   }
 
     private void stopmouvement(KeyEvent event) {
         switch (event.getCode()) {
@@ -72,16 +76,6 @@ public class Controller implements Initializable {
         }
     }
 
-    public ImageView createImageView(String imagePath){
-
-        URL imageURL = getClass().getResource(imagePath);
-        Image image = new Image(String.valueOf(imageURL));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(150);
-        imageView.setFitHeight(150);
-        return imageView;
-
-    }
 
 
     //public void afficherMap()
@@ -122,18 +116,6 @@ public class Controller implements Initializable {
             default:
                 break;
         }
-    }
-
-    // Crée le sprite du joueur et l'ajoute dans la vue
-    private void creerSpriteJoueur(Joueur joueur){
-
-        ImageView sprite = createImageView("/Sprite/character.png");
-        sprite.setId(joueur.getNom());
-        sprite.translateXProperty().bind(joueur.xProperty());
-        sprite.translateYProperty().bind(joueur.yProperty());
-        sprite.setFitWidth(100);
-        sprite.setFitHeight(80);
-        fond.getChildren().add(sprite);
     }
 
 
