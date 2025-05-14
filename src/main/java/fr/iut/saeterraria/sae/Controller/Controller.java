@@ -2,9 +2,12 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
+import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,9 +22,6 @@ public class Controller implements Initializable {
 
     @FXML
     private TilePane fond;
-
-    @FXML
-    private ImageView map;
     @FXML
     private Pane screen;
     @FXML
@@ -30,28 +30,22 @@ public class Controller implements Initializable {
     private Button scene1;
     @FXML
     private Button scene2;
+    @FXML
+    private Fond scene;
 
     private Jeu jeu;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        scene = new Fond(10,5,fond);
+        initialiseTile();
         jeu = new Jeu("Joueur",1024,1024);
         Platform.runLater(()->fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         fond.setOnKeyPressed(Insert -> mouvement(Insert));
-        creerSpriteJoueur(jeu.getJoueur());
+        //creerSpriteJoueur(jeu.getJoueur());
+        afficheCarte();
     }
-
-    public ImageView createImageView(String imagePath){
-
-        URL imageURL = getClass().getResource(imagePath);
-        Image image = new Image(String.valueOf(imageURL));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(150);
-        imageView.setFitHeight(150);
-        return imageView;
-
-    }
-
 
     //public void afficherMap()
     public void mouvement(KeyEvent event) {
@@ -95,14 +89,43 @@ public class Controller implements Initializable {
 
     // Crée le sprite du joueur et l'ajoute dans la vue
     private void creerSpriteJoueur(Joueur joueur){
-
-        ImageView sprite = createImageView("/Sprite/character.png");
+        URL imageURL = getClass().getResource("/Sprite/character.png");
+        Image image = new Image(String.valueOf(imageURL));
+        ImageView sprite = new ImageView(image);
+        sprite.setFitWidth(150);
+        sprite.setFitHeight(150);
         sprite.setId(joueur.getNom());
         sprite.translateXProperty().bind(joueur.xProperty());
         sprite.translateYProperty().bind(joueur.yProperty());
         sprite.setFitWidth(100);
         sprite.setFitHeight(80);
         fond.getChildren().add(sprite);
+    }
+
+    private void initialiseTile(){
+        scene.ajoutTile("/Tiles/Fond_noir.png");
+        scene.ajoutTile("/Tiles/Dirt_1.png");
+        scene.ajoutTile("/Tiles/Dirt_2.png");
+        scene.ajoutTile("/Tiles/Ciel.png");
+    }
+
+    private void afficheCarte(){
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 32; j++) {
+                scene.afficherCarte(i, j);
+            }
+        }
+    }
+
+    public ImageView createImageView(String imagePath){
+
+        URL imageURL = getClass().getResource(imagePath);
+        Image image = new Image(String.valueOf(imageURL));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(32);
+        imageView.setFitHeight(32);
+        return imageView;
+
     }
 
 

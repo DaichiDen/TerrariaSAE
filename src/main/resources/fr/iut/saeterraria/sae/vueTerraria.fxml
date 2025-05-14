@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="screen" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
+<Pane fx:id="screen" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
    <children>
-      <TilePane fx:id="fond" prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <Button fx:id="scene1" mnemonicParsing="false" text="Button" />
-         </children></TilePane>
-      <Button mnemonicParsing="false" text="Button" />
+      <TilePane fx:id="fond" prefColumns="30" prefHeight="1024.0" prefRows="10" prefTileHeight="32.0" prefTileWidth="32.0" prefWidth="1024.0" />
    </children>
 </Pane>
