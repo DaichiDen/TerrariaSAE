@@ -42,10 +42,15 @@ public class Controller implements Initializable {
         fond.setOnKeyReleased(Insert -> stopmouvement(Insert));
         creerSpriteJoueur(jeu.getJoueur());
         AnimationTimer timer = new AnimationTimer() {
+            private long lastUpdate = 0;
+            private final long frameInterval = 16_666_666; // ~60 FPS
+
             @Override
             public void handle(long now) {
-                jeu.getJoueur().mettreAJour();
-
+                if (now - lastUpdate >= frameInterval) {
+                    jeu.getJoueur().mettreAJour();
+                    lastUpdate = now;
+                }
             }
         };
         timer.start();
@@ -122,7 +127,7 @@ public class Controller implements Initializable {
     // Crée le sprite du joueur et l'ajoute dans la vue
     private void creerSpriteJoueur(Joueur joueur){
 
-        ImageView sprite = createImageView("/Sprite/characterbis.png");
+        ImageView sprite = createImageView("/Sprite/character.png");
         sprite.setId(joueur.getNom());
         sprite.translateXProperty().bind(joueur.xProperty());
         sprite.translateYProperty().bind(joueur.yProperty());

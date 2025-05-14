@@ -7,8 +7,8 @@ public class Joueur extends Entite {
     private boolean marcheDroite = false;
     private boolean marcheGauche = false;
     private int vitesseY = 0;
-    private final int gravité = 1;
-    private final int forceSaut = -15; // variable qui peut être modif pour avoir un saut plus ou moins haut etc..
+    private final int gravité = 2;
+    private final int forceSaut = -20; // variable qui peut être modif pour avoir un saut plus ou moins haut etc..
     private final int seuil_sol = 300 ; // variable temporaire ,elle sert juste à tester le saut, on en aura plus besoin lorsque on fera les collisions en sprint 2
 
     public Joueur(String nom) {
