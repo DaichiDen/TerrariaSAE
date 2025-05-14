@@ -28,7 +28,7 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         jeu = new Jeu("Terraria",600,600);
-        fond.getChildren().add("Carte.tmx");
+        //fond.getChildren().add("Carte.tmx");
         Platform.runLater(()->fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         fond.setOnKeyPressed(Insert -> mouvement(Insert));
     }

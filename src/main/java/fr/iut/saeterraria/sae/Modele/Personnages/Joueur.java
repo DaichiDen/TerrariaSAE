@@ -5,7 +5,7 @@ public class Joueur extends Entite {
     private int[] equipement; //armure, outil
 
     public Joueur(String nom) {
-        super(nom,20,20, 100, 0,0, 0,1);
+        super(nom,20,20, 100, 0,0, 0,1,10);
         this.inventaire = new int[56];
         this.equipement = new int[7];
     }

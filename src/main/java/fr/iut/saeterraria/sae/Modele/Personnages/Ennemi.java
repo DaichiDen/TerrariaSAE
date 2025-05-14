@@ -9,7 +9,7 @@ public class Ennemi extends Entite {
     private ArrayList<Item> listDrops;
 
     public Ennemi(String nom, int vie, int vieMax,int energieMax, int x, int y, int def, int vitesse) {
-        super(nom,vie, vieMax, energieMax, x, y, def, vitesse);
+        super(nom,vie, vieMax, energieMax,0, x, y, def, vitesse);
         listDrops = new ArrayList<>();
     }
 
