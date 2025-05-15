@@ -1,19 +1,14 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
-
-<<<<<<< HEAD
 import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.geometry.Rectangle2D;
 
-public class Joueur extends Entite {
-    //variables
-    private int[] inventaire;
-    private int[] equipement;
-=======
-import fr.iut.saeterraria.sae.Modele.Objets.Item;
+
+
 
 public class Joueur extends Entite {
     private Inventaire inventaire; //hotbar (1-7), inventaire de taille 36
->>>>>>> 6bda549c028a7e962271383cfb9d90858533a297
+    private int[] equipement;
     private boolean enSaut = false;
     private boolean marcheDroite = false;
     private boolean marcheGauche = false;
@@ -31,6 +26,9 @@ public class Joueur extends Entite {
         this.equipement = new int[7];
 	this.inventaire = new Inventaire();
 
+    }
+    public void ajouterItem(Item item, int quantite) {
+        inventaire.ajoutInventaire(item, quantite);
     }
 
 
@@ -64,16 +62,10 @@ public class Joueur extends Entite {
         if (!collisionBas) {
 		vitesseY+=gravité;		
 	}
-    
-        if (marcheGauche) {
-            super.setX(getX() - super.getVitesse());
-        } else if (marcheDroite) {
-            super.setX(getX() + super.getVitesse());
-        }
-
-        // Appliquer déplacement vertical, ensuite vérification des collisions, si le setY l'a fait rentrer dans qqch, alors le setY de la méthode collisionVertical le fait rester en dehors du bloc
         setY(getY() + vitesseY);
         collisionVerticale(map);
+        // Appliquer déplacement vertical, ensuite vérification des collisions, si le setY l'a fait rentrer dans qqch, alors le setY de la méthode collisionVertical le fait rester en dehors du bloc
+        
 
         // Appliquer déplacement horizontal
         if (marcheGauche) {
@@ -176,8 +168,6 @@ public class Joueur extends Entite {
 
     }
 
-   public void ajouterItem(Item item, int quantite) {
-        inventaire.ajoutInventaire(item, quantite);
-    }
-}
+
+
 
