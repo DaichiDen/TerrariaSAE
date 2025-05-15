@@ -45,14 +45,14 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        scene = new Fond(10, 5, fond);
-        initialiseTile();
+        scene = new Fond(10, 5, fond); // Initialise le fond (décor du jeu)
+        initialiseTile(); // Associe les images des blocs au décor
         jeu = new Jeu("Joueur", 1024, 1024);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
-        fond.setOnKeyPressed(Insert -> mouvement(Insert));
-        fond.setOnKeyReleased(Insert -> stopmouvement(Insert));
-        Sprite vuejoueur = new Sprite(jeu, fond); // Appelle la classe de la vue pour l'initialiser
-        vuejoueur.creerSpriteJoueur(jeu.getJoueur()); // Appelle la méthode de la vue pour créer le visuel du joueur, et le lier au fond
+        Sprite vuejoueur = new Sprite(jeu, screen); // Appelle la classe de la vue pour l'initialiser
+        vuejoueur.creerSpriteJoueur(jeu.getJoueur()); // Appelle la méthode de la vue pour créer le visuel du joueur, et le lier au pane
+        fond.setOnKeyPressed(Insert -> vuejoueur.mouvement(Insert));
+        fond.setOnKeyReleased(Insert -> vuejoueur.stopmouvement(Insert));
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
             private final long frameInterval = 16_666_666; // Conversion nano secondes en secondes = 60 FPS
@@ -72,62 +72,7 @@ public class Controller implements Initializable {
     }
 
 
-    private void stopmouvement(KeyEvent event) {
-        switch (event.getCode()) {
-            case D:
-                jeu.getJoueur().setMarcheDroite(false);
-                break;
-            case RIGHT:
-                jeu.getJoueur().setMarcheDroite(false);
-                break;
-            case LEFT:
-                jeu.getJoueur().setMarcheGauche(false);
-                break;
-            case Q:
-                jeu.getJoueur().setMarcheGauche(false);
-        }
-    }
 
-
-    //public void afficherMap()
-    public void mouvement(KeyEvent event) {
-        switch (event.getCode()) {
-            case UP: // Saute
-                jeu.getJoueur().sauter();
-                System.out.println("Saute");
-                break;
-            case DOWN: // Descend d'une plateforme
-                jeu.getJoueur().descendre();
-                System.out.println("Descend");
-                break;
-            case LEFT: // Déplace à gauche
-                jeu.getJoueur().setMarcheGauche(true);
-                System.out.println("Gauche");
-                break;
-            case RIGHT: // Déplace à droite
-                jeu.getJoueur().setMarcheDroite(true);
-                System.out.println("Droite");
-                break;
-            case SPACE: // Saute
-                jeu.getJoueur().sauter();
-                System.out.println("Saute");
-                break;
-            case Q: // Déplace à gauche
-                jeu.getJoueur().setMarcheGauche(true);
-                System.out.println("Gauche");
-                break;
-            case D: // Déplace à droite
-                jeu.getJoueur().setMarcheDroite(true);
-                System.out.println("Droite");
-                break;
-            case S: // Descend d'une plateforme
-                jeu.getJoueur().descendre();
-                System.out.println("Descend");
-                break;
-            default:
-                break;
-        }
-    }
 
 
     private void initialiseTile() {
