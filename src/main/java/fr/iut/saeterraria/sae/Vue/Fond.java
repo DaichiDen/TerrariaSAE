@@ -9,7 +9,7 @@ import javafx.scene.layout.TilePane;
 import java.net.URL;
 import java.util.HashMap;
 
-public class Fond {
+public class Fond extends CreateImage{
     private Map carte;
     private HashMap<Integer, Image> tiles;
     private static int id=0;
