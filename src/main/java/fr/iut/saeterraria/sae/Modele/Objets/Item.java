@@ -9,13 +9,15 @@ public class Item {
     private StringProperty name;
     private StringProperty description;
     private IntegerProperty codeObjet;
-    private static int id=0;
+    private IntegerProperty typeItem; // 1=stack 4 / 2= stack 16 / 3=stack 1
+    private static int id=1;
 
-    public Item(String nom, String descripcion) {
+    public Item(String nom, String descripcion,int typeItem) {
         this.name = new SimpleStringProperty(nom);
         this.description = new SimpleStringProperty(descripcion);
         this.codeObjet = new SimpleIntegerProperty(id);
         id++;
+        this.typeItem = new SimpleIntegerProperty(typeItem);
     }
 
     public StringProperty nameProperty() {

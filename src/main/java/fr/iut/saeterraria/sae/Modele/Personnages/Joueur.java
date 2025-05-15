@@ -1,7 +1,7 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 public class Joueur extends Entite {
-    private int[] inventaire; //hotbar (1-7), inventaire de taille 64
+    private Inventaire inventaire; //hotbar (1-7), inventaire de taille 64
     private int[] equipement;//armure, outil
     private boolean enSaut = false;
     private boolean marcheDroite = false;
@@ -13,20 +13,18 @@ public class Joueur extends Entite {
 
     public Joueur(String nom) {
         super(nom,20,20, 100, 20,0, 0,1,10);
-        this.inventaire = new int[56];
+        this.inventaire = new Inventaire();
         this.equipement = new int[7];
     }
 
     public void initInventaire(){
-        for (int i: inventaire) {
-            i=0;
-        }
+
         for (int i: equipement) {
             i=0;
         }
     }
 
-    public int[] getInventaire(){
+    public int[][] getInventaire(){
         return inventaire;
     }
     public int[] getEquipement(){

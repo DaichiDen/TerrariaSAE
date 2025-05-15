@@ -27,6 +27,8 @@ public class Controller implements Initializable {
     private Button mapButton;
     @FXML
     private Fond scene;
+    @FXML
+    private Button openInventaire;
 
     private Jeu jeu;
 
