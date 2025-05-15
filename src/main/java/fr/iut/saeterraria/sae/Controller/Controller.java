@@ -50,7 +50,6 @@ public class Controller implements Initializable {
         jeu = new Jeu("Joueur", 1024, 1024);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         fond.setOnKeyPressed(Insert -> mouvement(Insert));
-
         fond.setOnKeyReleased(Insert -> stopmouvement(Insert));
         Sprite vuejoueur = new Sprite(jeu, fond); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.creerSpriteJoueur(jeu.getJoueur()); // Appelle la méthode de la vue pour créer le visuel du joueur, et le lier au fond

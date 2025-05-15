@@ -43,7 +43,7 @@ public class Sprite  {
     // Permet d'associer l'image au joueur
     public void creerSpriteJoueur(Joueur joueur){
 
-        ImageView sprite = createImageView("/Sprite/character.png");
+        ImageView sprite = createImageView("/Sprite/character_mc.png");
         sprite.setId(joueur.getNom());
         sprite.translateXProperty().bind(joueur.xProperty());
         sprite.translateYProperty().bind(joueur.yProperty());
