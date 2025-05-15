@@ -1,22 +1,16 @@
 package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 
-import fr.iut.saeterraria.sae.Vue.Sprite;
+import fr.iut.saeterraria.sae.Vue.SpriteJoueur;
 import javafx.animation.AnimationTimer;
 
 import fr.iut.saeterraria.sae.Vue.Fond;
 
 import javafx.application.Platform;
-import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -39,11 +33,11 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        scene = new Fond(10, 5, fond); // Initialise le fond (décor du jeu)
+        scene = new Fond(fond); // Initialise le fond (décor du jeu)
         scene.initialiseTile(); // Associe les images des blocs au décor
         jeu = new Jeu("Joueur", 1024, 1024);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
-        Sprite vuejoueur = new Sprite(jeu, screen); // Appelle la classe de la vue pour l'initialiser
+        SpriteJoueur vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.creerSpriteJoueur(jeu.getJoueur()); // Appelle la méthode de la vue pour créer le visuel du joueur, et le lier au pane
         fond.setOnKeyPressed(Insert -> vuejoueur.mouvement(Insert));
         fond.setOnKeyReleased(Insert -> vuejoueur.stopmouvement(Insert));
@@ -65,6 +59,6 @@ public class Controller implements Initializable {
         scene.afficherCarte(); // Affiche le décor dans la vue
     }
 
-    // Permet d'afficher le terrain dans la scène (Pane principal)
+
 
 }

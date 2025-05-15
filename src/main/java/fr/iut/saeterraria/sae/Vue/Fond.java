@@ -13,11 +13,9 @@ public class Fond {
     private Map carte;
     private HashMap<Integer, Image> tiles;
     private static int id=0;
-    private int longueur;
-    private int largeur;
     private TilePane pane;
 
-    public Fond(int longueur,int largeur, TilePane pane){
+    public Fond( TilePane pane){
         this.carte = new Map();
         this.tiles = new HashMap<>();
         this.pane = pane;
@@ -33,10 +31,10 @@ public class Fond {
         ajoutTile("/Tiles/Dirt_2.png");
         ajoutTile("/Tiles/Ciel.png");
     }
-
+    // Permet d'afficher le terrain dans la scène (Pane principal)
     public void afficherCarte(){
-        for (int i = 0; i < 16; i++) {//Colonne
-            for (int j = 0; j < 32; j++) {//Ligne
+        for (int i = 0; i < carte.getLigne(); i++) { //Ligne
+            for (int j = 0; j < carte.getColonne(); j++) { //Colonne
                 this.pane.getChildren().add(new ImageView(tiles.get(carte.getCase(i,j))));
             }
         }

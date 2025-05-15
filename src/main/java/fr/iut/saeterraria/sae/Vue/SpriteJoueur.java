@@ -1,31 +1,24 @@
 package fr.iut.saeterraria.sae.Vue;
 
-import fr.iut.saeterraria.sae.Controller.Controller;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
-import javafx.animation.AnimationTimer;
-import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
 
 
 import java.net.URL;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
-
-public class Sprite  {
+public class SpriteJoueur {
 
     private Pane screen;
     private Jeu jeu;
 
 
-    public Sprite(Jeu jeu, Pane screen){
+    public SpriteJoueur(Jeu jeu, Pane screen){
         this.jeu = jeu;
         this.screen = screen;
     }
@@ -54,10 +47,10 @@ public class Sprite  {
                 jeu.getJoueur().sauter();
                 System.out.println("Saute");
                 break;
-            case DOWN: // Descend d'une plateforme
-                jeu.getJoueur().descendre();
-                System.out.println("Descend");
-                break;
+//            case DOWN: // Descend d'une plateforme
+//                jeu.getJoueur().descendre();
+//                System.out.println("Descend");
+//                break;
             case LEFT: // Déplace à gauche
                 jeu.getJoueur().setMarcheGauche(true);
                 System.out.println("Gauche");
@@ -78,10 +71,10 @@ public class Sprite  {
                 jeu.getJoueur().setMarcheDroite(true);
                 System.out.println("Droite");
                 break;
-            case S: // Descend d'une plateforme
-                jeu.getJoueur().descendre();
-                System.out.println("Descend");
-                break;
+//            case S: // Descend d'une plateforme
+//                jeu.getJoueur().descendre();
+//                System.out.println("Descend");
+//                break;
             default:
                 break;
         }
@@ -101,7 +94,6 @@ public class Sprite  {
 
     // Permet d'associer l'image au joueur au pane (conteneur principal)
     public void creerSpriteJoueur(Joueur joueur){
-
         ImageView sprite = createImageView("/Sprite/Chevalier_idleDroite.png");
         sprite.setId(joueur.getNom());
         sprite.translateXProperty().bind(joueur.xProperty());

@@ -2,8 +2,8 @@
 
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="screen" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
+<Pane fx:id="screen" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
    <children>
-      <TilePane fx:id="fond" prefColumns="30" prefHeight="1024.0" prefRows="10" prefTileHeight="32.0" prefTileWidth="32.0" prefWidth="1024.0" />
+      <TilePane fx:id="fond" layoutX="1.0" prefColumns="58" prefRows="30" />
    </children>
 </Pane>
