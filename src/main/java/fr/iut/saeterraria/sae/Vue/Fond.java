@@ -27,9 +27,19 @@ public class Fond {
       tiles.put(id, createImage(imagePath));
       id++;
     }
+    public void initialiseTile() {
+        ajoutTile("/Tiles/Fond_noir.png");
+        ajoutTile("/Tiles/Dirt_1.png");
+        ajoutTile("/Tiles/Dirt_2.png");
+        ajoutTile("/Tiles/Ciel.png");
+    }
 
-    public void afficherCarte(int x, int y){
-        this.pane.getChildren().add(new ImageView(tiles.get(carte.getCase(x,y))));
+    public void afficherCarte(){
+        for (int i = 0; i < 16; i++) {//Colonne
+            for (int j = 0; j < 32; j++) {//Ligne
+                this.pane.getChildren().add(new ImageView(tiles.get(carte.getCase(i,j))));
+            }
+        }
     }
 
     public Image createImage(String imagePath){

@@ -102,7 +102,7 @@ public class Sprite  {
     // Permet d'associer l'image au joueur au pane (conteneur principal)
     public void creerSpriteJoueur(Joueur joueur){
 
-        ImageView sprite = createImageView("/Sprite/character_mc.png");
+        ImageView sprite = createImageView("/Sprite/Chevalier_idleDroite.png");
         sprite.setId(joueur.getNom());
         sprite.translateXProperty().bind(joueur.xProperty());
         sprite.translateYProperty().bind(joueur.yProperty());

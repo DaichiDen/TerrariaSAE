@@ -28,15 +28,9 @@ public class Controller implements Initializable {
     @FXML
     private TilePane fond;
     @FXML
-    private TilePane joueur;
-    @FXML
     private Pane screen;
     @FXML
     private Button mapButton;
-    @FXML
-    private Button scene1;
-    @FXML
-    private Button scene2;
     @FXML
     private Fond scene;
 
@@ -46,7 +40,7 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         scene = new Fond(10, 5, fond); // Initialise le fond (décor du jeu)
-        initialiseTile(); // Associe les images des blocs au décor
+        scene.initialiseTile(); // Associe les images des blocs au décor
         jeu = new Jeu("Joueur", 1024, 1024);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         Sprite vuejoueur = new Sprite(jeu, screen); // Appelle la classe de la vue pour l'initialiser
@@ -68,25 +62,9 @@ public class Controller implements Initializable {
         timer.start();  // frameInterval est l'intervalle entre 2 màj graphiques
         // lastUpdate stocke le temps de la dernière màj graphique enregistré
         // La méthode vérifie si entre la dernière update et maintenant il s'est passé 1/60 ème de seconde ( 1 frame), si oui on actualise graphiquement
-        afficheCarte();
+        scene.afficherCarte(); // Affiche le décor dans la vue
     }
 
+    // Permet d'afficher le terrain dans la scène (Pane principal)
 
-
-
-
-    private void initialiseTile() {
-        scene.ajoutTile("/Tiles/Fond_noir.png");
-        scene.ajoutTile("/Tiles/Dirt_1.png");
-        scene.ajoutTile("/Tiles/Dirt_2.png");
-        scene.ajoutTile("/Tiles/Ciel.png");
-    }
-
-    private void afficheCarte() {
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 32; j++) {
-                scene.afficherCarte(i, j);
-            }
-        }
-    }
 }
