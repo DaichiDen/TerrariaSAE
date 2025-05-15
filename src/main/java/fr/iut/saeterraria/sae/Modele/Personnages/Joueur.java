@@ -16,7 +16,7 @@ public class Joueur extends Entite {
 
     //constantes
     private final int gravité = 2;
-    private final int forceSaut = -20;
+    private final int forceSaut = -18;
     private final int taille1bloc = 32;
 
     private boolean collisionBas = false;
@@ -65,7 +65,7 @@ public class Joueur extends Entite {
         setY(getY() + vitesseY);
         collisionVerticale(map);
         // Appliquer déplacement vertical, ensuite vérification des collisions, si le setY l'a fait rentrer dans qqch, alors le setY de la méthode collisionVertical le fait rester en dehors du bloc
-        
+
 
         // Appliquer déplacement horizontal
         if (marcheGauche) {
