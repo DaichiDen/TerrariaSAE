@@ -39,8 +39,6 @@ public class SpriteJoueur {
         }
     }
 
-
-    //public void afficherMap()
     public void mouvement(KeyEvent event) {
         switch (event.getCode()) {
             case UP: // Saute
