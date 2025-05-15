@@ -1,8 +1,10 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
+import fr.iut.saeterraria.sae.Modele.Objets.Item;
+
 public class Joueur extends Entite {
-    private Inventaire inventaire; //hotbar (1-7), inventaire de taille 64
-    private int[] equipement;//armure, outil
+    private Inventaire inventaire; //hotbar (1-7), inventaire de taille 36
+    private Hotbar hotbar;//armure, outil
     private boolean enSaut = false;
     private boolean marcheDroite = false;
     private boolean marcheGauche = false;
@@ -14,21 +16,14 @@ public class Joueur extends Entite {
     public Joueur(String nom) {
         super(nom,20,20, 100, 20,0, 0,1,10);
         this.inventaire = new Inventaire();
-        this.equipement = new int[7];
+        this.hotbar = new Hotbar();
     }
 
-    public void initInventaire(){
-
-        for (int i: equipement) {
-            i=0;
-        }
-    }
-
-    public int[][] getInventaire(){
+    public Inventaire getInventaire(){
         return inventaire;
     }
-    public int[] getEquipement(){
-        return equipement;
+    public Hotbar getHotbar(){
+        return hotbar;
     }
 
     public void setMarcheGauche(boolean marcheGauche){
@@ -82,4 +77,9 @@ public class Joueur extends Entite {
         super.setY(super.getY() + super.getVitesse());
     }
 
+    public void ajouterItem(Item item, int quantite) {
+        if(!hotbar.ajoutHotbar(item, quantite)) {
+            inventaire.ajoutInventaire(item,quantite);
+        }
+    }
 }
