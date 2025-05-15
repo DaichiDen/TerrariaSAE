@@ -20,6 +20,21 @@ public class Item {
         this.typeItem = new SimpleIntegerProperty(typeItem);
     }
 
+    public int getType(){
+        return typeItem.getValue();
+    }
+
+    public int nombreMax(){
+        int nbMax=1;
+        if (getType()==1){
+            nbMax=64;
+        }
+        else if (getType()==2) {
+            nbMax=16;
+        }
+        return nbMax;
+    }
+
     public StringProperty nameProperty() {
         return this.name;
     }

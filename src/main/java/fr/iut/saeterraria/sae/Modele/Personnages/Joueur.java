@@ -4,7 +4,6 @@ import fr.iut.saeterraria.sae.Modele.Objets.Item;
 
 public class Joueur extends Entite {
     private Inventaire inventaire; //hotbar (1-7), inventaire de taille 36
-    private Hotbar hotbar;//armure, outil
     private boolean enSaut = false;
     private boolean marcheDroite = false;
     private boolean marcheGauche = false;
@@ -16,14 +15,10 @@ public class Joueur extends Entite {
     public Joueur(String nom) {
         super(nom,20,20, 100, 20,0, 0,1,10);
         this.inventaire = new Inventaire();
-        this.hotbar = new Hotbar();
     }
 
     public Inventaire getInventaire(){
         return inventaire;
-    }
-    public Hotbar getHotbar(){
-        return hotbar;
     }
 
     public void setMarcheGauche(boolean marcheGauche){
@@ -40,20 +35,6 @@ public class Joueur extends Entite {
             vitesseY = forceSaut;
         }
     }
-        //        super.setY(super.getY() - super.getVitesse());
-
-//        for(int i = 1 ; i < 11 ; i++){ // Hauteur de saut à voir et arrêt aussi à collision
-//            System.out.println("up");
-//            super.setY(super.getY() + super.getVitesse()/i); //Pour un ralentissement dans la montée
-//        }
-//        for(int i = 11 ; i > 1 ; i--){ // A modifier pour s'arreter à collision
-//            System.out.println("down");
-//            super.setY(super.getY() - super.getVitesse()/i); //Pour une accélération dans la descente
-//        }
-
-
-
-
 
     public void mettreAJour() {
         if (marcheGauche) {
@@ -78,8 +59,6 @@ public class Joueur extends Entite {
     }
 
     public void ajouterItem(Item item, int quantite) {
-        if(!hotbar.ajoutHotbar(item, quantite)) {
-            inventaire.ajoutInventaire(item,quantite);
-        }
+        inventaire.ajoutInventaire(item, quantite);
     }
 }

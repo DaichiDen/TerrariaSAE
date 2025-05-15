@@ -6,14 +6,20 @@ public class Inventaire {
     private int[][] inventaireJoueur;
 
     public Inventaire() {
-        this.inventaireJoueur = new int[2][36]; // 36 Colonnes pour les 36 cases et 2 lignes pour l'id item et sa quantité
+        this.inventaireJoueur = new int[2][42]; // 6 première colonne pour hotbar36 Colonnes pour les 36 cases et 2 lignes pour l'id item et sa quantité
     }
 
     public boolean ajoutInventaire(Item item, int quantite) {
         boolean trouve = false;
-        int compteur =0;
-        while (!trouve && compteur<36) {
-            if(inventaireJoueur[0][compteur]==0) {
+        int compteur = 0;
+        while (!trouve && compteur<42) {
+            if(inventaireJoueur[0][compteur]==item.getCodeObjet()) {
+                if (inventaireJoueur[1][compteur]+quantite<=item.nombreMax()){
+                    inventaireJoueur[1][compteur]+=quantite;
+                }
+
+            }
+            else if(inventaireJoueur[0][compteur]==0) {
                 inventaireJoueur[0][compteur]=item.getCodeObjet();
                 inventaireJoueur[1][compteur]=quantite;
                 trouve = true;
