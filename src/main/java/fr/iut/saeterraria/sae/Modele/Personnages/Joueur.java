@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
+<<<<<<< HEAD
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import javafx.geometry.Rectangle2D;
 
@@ -7,6 +8,12 @@ public class Joueur extends Entite {
     //variables
     private int[] inventaire;
     private int[] equipement;
+=======
+import fr.iut.saeterraria.sae.Modele.Objets.Item;
+
+public class Joueur extends Entite {
+    private Inventaire inventaire; //hotbar (1-7), inventaire de taille 36
+>>>>>>> 6bda549c028a7e962271383cfb9d90858533a297
     private boolean enSaut = false;
     private boolean marcheDroite = false;
     private boolean marcheGauche = false;
@@ -21,22 +28,21 @@ public class Joueur extends Entite {
 
     public Joueur(String nom) {
         super(nom, 20, 20, 100, 20, 0, 0, 1, 10, new Rectangle2D(0, 0, 64, 70));
-        this.inventaire = new int[56];
         this.equipement = new int[7];
+	this.inventaire = new Inventaire();
+
     }
 
-    public void initInventaire() {
-        for (int i = 0; i < inventaire.length; i++) inventaire[i] = 0;
-        for (int i = 0; i < equipement.length; i++) equipement[i] = 0;
-    }
 
-    public int[] getInventaire() {
+
+
+        
+        
+
+    public Inventaire getInventaire(){
         return inventaire;
     }
 
-    public int[] getEquipement() {
-        return equipement;
-    }
 
     public void setMarcheGauche(boolean marcheGauche) {
         this.marcheGauche = marcheGauche;
@@ -56,7 +62,13 @@ public class Joueur extends Entite {
     public void mettreAJour(Map map) {
         // Appliquer gravité
         if (!collisionBas) {
-            vitesseY += gravité;
+		vitesseY+=gravité;		
+	}
+    
+        if (marcheGauche) {
+            super.setX(getX() - super.getVitesse());
+        } else if (marcheDroite) {
+            super.setX(getX() + super.getVitesse());
         }
 
         // Appliquer déplacement vertical, ensuite vérification des collisions, si le setY l'a fait rentrer dans qqch, alors le setY de la méthode collisionVertical le fait rester en dehors du bloc
@@ -163,4 +175,9 @@ public class Joueur extends Entite {
 
 
     }
+
+   public void ajouterItem(Item item, int quantite) {
+        inventaire.ajoutInventaire(item, quantite);
+    }
+}
 

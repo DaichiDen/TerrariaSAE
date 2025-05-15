@@ -14,7 +14,7 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 
 
-public class SpriteJoueur {
+public class SpriteJoueur extends CreateImage{
 
     private Pane screen;
     private Jeu jeu;
@@ -82,22 +82,13 @@ public class SpriteJoueur {
         }
     }
 
-    // Permet de renvoyer une fenêtre d'image par son URL
-    public ImageView createImageView(String imagePath){
 
-        URL imageURL = getClass().getResource(imagePath);
-        Image image = new Image(String.valueOf(imageURL));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(150);
-        imageView.setFitHeight(150);
-        return imageView;
-
-    }
 
     // Permet d'associer l'image au joueur au pane (conteneur principal)
     public void creerSpriteJoueur(Joueur joueur){
         ImageView sprite = createImageView("/Sprite/Hero_stop.png");
-        sprite.setId(joueur.getNom());
+        ImageView sprite = super.createImageView("/Sprite/Chevalier_idleDroite.png");
+	sprite.setId(joueur.getNom());
         sprite.translateXProperty().bind(joueur.xProperty());
         sprite.translateYProperty().bind(joueur.yProperty());
         sprite.setFitWidth(54);

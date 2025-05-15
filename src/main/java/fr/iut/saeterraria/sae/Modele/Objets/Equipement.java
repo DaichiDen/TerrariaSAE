@@ -4,7 +4,7 @@ package fr.iut.saeterraria.sae.Modele.Objets;
 public abstract class Equipement extends Item{
 
     public Equipement(String nom, String desc) {
-        super(nom, desc);
+        super(nom, desc,3);
     }
 
 
