@@ -49,10 +49,10 @@ public class SpriteJoueur {
                 jeu.getJoueur().sauter();
                 System.out.println("Saute");
                 break;
-//            case DOWN: // Descend d'une plateforme
-//                jeu.getJoueur().descendre();
-//                System.out.println("Descend");
-//                break;
+            case DOWN: // Descend d'une plateforme
+                jeu.getJoueur().descendre();
+                System.out.println("Descend");
+                break;
             case LEFT: // Déplace à gauche
                 jeu.getJoueur().setMarcheGauche(true);
                 System.out.println("Gauche");
@@ -73,10 +73,10 @@ public class SpriteJoueur {
                 jeu.getJoueur().setMarcheDroite(true);
                 System.out.println("Droite");
                 break;
-//            case S: // Descend d'une plateforme
-//                jeu.getJoueur().descendre();
-//                System.out.println("Descend");
-//                break;
+            case S: // Descend d'une plateforme
+                jeu.getJoueur().descendre();
+                System.out.println("Descend");
+                break;
             default:
                 break;
         }
@@ -96,12 +96,12 @@ public class SpriteJoueur {
 
     // Permet d'associer l'image au joueur au pane (conteneur principal)
     public void creerSpriteJoueur(Joueur joueur){
-        ImageView sprite = createImageView("/Sprite/Chevalier_idleDroite.png");
+        ImageView sprite = createImageView("/Sprite/test.png");
         sprite.setId(joueur.getNom());
         sprite.translateXProperty().bind(joueur.xProperty());
         sprite.translateYProperty().bind(joueur.yProperty());
-        sprite.setFitWidth(100);
-        sprite.setFitHeight(80);
+        sprite.setFitWidth(32);
+        sprite.setFitHeight(64);
         screen.getChildren().add(sprite);
     }
 

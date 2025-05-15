@@ -53,10 +53,9 @@ public class Controller implements Initializable {
             @Override
             public void handle(long now) {
                 if (now - lastUpdate >= frameInterval) {
-                    jeu.getJoueur().collision(map);
-                    jeu.getJoueur().mettreAJour();
-                    lastUpdate = now;
 
+                    jeu.getJoueur().mettreAJour(map);
+                    lastUpdate = now;
                 }
             }
         };

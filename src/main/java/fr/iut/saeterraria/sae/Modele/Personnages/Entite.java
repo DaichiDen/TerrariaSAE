@@ -14,14 +14,14 @@ public abstract class Entite {
     private IntegerProperty vitesse;
     private Rectangle2D hitbox;
 
-    public Entite(String nom, int vie, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesse, Rectangle2D hitbox) {
+    public Entite(String nom, int vie, int vieMax, int energieMax, int energie, double x, double y, int def, int vitesse, Rectangle2D hitbox) {
         this.nom = new SimpleStringProperty(nom);
         this.vieMax = new SimpleIntegerProperty(vieMax);
         this.vie = new SimpleIntegerProperty(vie);
         this.energieMax = new SimpleIntegerProperty(energieMax);
         this.energie = new SimpleIntegerProperty(energie);
-        this.x = new SimpleIntegerProperty(x);
-        this.y = new SimpleIntegerProperty(y);
+        this.x = new SimpleIntegerProperty((int) x);
+        this.y = new SimpleIntegerProperty((int) y);
         this.def = new SimpleIntegerProperty(def);
         this.vitesse = new SimpleIntegerProperty(vitesse);
         this.hitbox = hitbox;
@@ -85,12 +85,12 @@ public abstract class Entite {
 
     // Gestion du positionnement horizontal
     public final IntegerProperty xProperty() {return x;}
-    public final int getX() { return x.get(); }
-    public final void setX(int x) { this.x.setValue(x);}
+    public final double getX() { return x.get(); }
+    public final void setX(double x) { this.x.setValue(x);}
     // Gestion su positionnement vertical
     public final IntegerProperty yProperty(){ return y; }
-    public final int getY() { return y.get(); }
-    public final void setY(int y) { this.y.setValue(y);}
+    public final double getY() { return y.get(); }
+    public final void setY(double y) { this.y.setValue(y);}
 
     // Gestion de la defense
     public final IntegerProperty defProperty(){ return def; }
