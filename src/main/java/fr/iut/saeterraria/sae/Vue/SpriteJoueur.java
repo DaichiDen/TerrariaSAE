@@ -96,11 +96,11 @@ public class SpriteJoueur {
 
     // Permet d'associer l'image au joueur au pane (conteneur principal)
     public void creerSpriteJoueur(Joueur joueur){
-        ImageView sprite = createImageView("/Sprite/test.png");
+        ImageView sprite = createImageView("/Sprite/Hero_stop.png");
         sprite.setId(joueur.getNom());
         sprite.translateXProperty().bind(joueur.xProperty());
         sprite.translateYProperty().bind(joueur.yProperty());
-        sprite.setFitWidth(32);
+        sprite.setFitWidth(54);
         sprite.setFitHeight(64);
         screen.getChildren().add(sprite);
     }
