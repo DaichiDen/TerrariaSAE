@@ -4,6 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Rectangle2D;
 
 public abstract class Entite {
 
@@ -11,8 +12,9 @@ public abstract class Entite {
     private StringProperty nom;
     private IntegerProperty energie;
     private IntegerProperty vitesse;
+    private Rectangle2D hitbox;
 
-    public Entite(String nom, int vie, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesse) {
+    public Entite(String nom, int vie, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesse, Rectangle2D hitbox) {
         this.nom = new SimpleStringProperty(nom);
         this.vieMax = new SimpleIntegerProperty(vieMax);
         this.vie = new SimpleIntegerProperty(vie);
@@ -22,6 +24,7 @@ public abstract class Entite {
         this.y = new SimpleIntegerProperty(y);
         this.def = new SimpleIntegerProperty(def);
         this.vitesse = new SimpleIntegerProperty(vitesse);
+        this.hitbox = hitbox;
     }
 
     // Gestion du nom
@@ -47,6 +50,9 @@ public abstract class Entite {
         }else{
             setVie(getVie()+val);
         }
+    }
+    public Rectangle2D getHitbox(){
+        return this.hitbox;
     }
     public final void decrementVie(int val) {
         if(getVie()-val < 0){
@@ -105,5 +111,6 @@ public abstract class Entite {
     // Gestion de la vitesse
     public final IntegerProperty vitesseProperty(){return vitesse;}
     public final int getVitesse() {return vitesse.getValue();}
+    public void setVitesse(int vitesse) {this.vitesse.setValue(vitesse);}
 
 }

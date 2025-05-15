@@ -3,10 +3,12 @@ package fr.iut.saeterraria.sae.Vue;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+
 
 
 import java.net.URL;
@@ -16,6 +18,8 @@ public class SpriteJoueur {
 
     private Pane screen;
     private Jeu jeu;
+
+    private Rectangle2D hitboxJoueur;
 
 
     public SpriteJoueur(Jeu jeu, Pane screen){
@@ -101,6 +105,7 @@ public class SpriteJoueur {
         screen.getChildren().add(sprite);
     }
 
+    }
 
 
 
@@ -108,4 +113,5 @@ public class SpriteJoueur {
 
 
 
-}
+
+

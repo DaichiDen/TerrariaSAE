@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 
+
 import java.net.URL;
 import java.util.HashMap;
 
@@ -36,6 +37,9 @@ public class Fond {
         for (int i = 0; i < carte.getLigne(); i++) { //Ligne
             for (int j = 0; j < carte.getColonne(); j++) { //Colonne
                 this.pane.getChildren().add(new ImageView(tiles.get(carte.getCase(i,j))));
+
+
+
             }
         }
     }

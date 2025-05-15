@@ -57,4 +57,11 @@ public class Map {
 
     public int getCase(int x, int y){ return map[x][y];}
 
+    public int getCoordonnéesX(int x){
+        return x*32;
+    }
+    public int getCoordonnéesY(int y){
+        return y*32;
+    }
+
 }

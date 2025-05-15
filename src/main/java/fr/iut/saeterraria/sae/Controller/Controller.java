@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
+import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Vue.SpriteJoueur;
 import javafx.animation.AnimationTimer;
 
@@ -30,26 +31,32 @@ public class Controller implements Initializable {
 
     private Jeu jeu;
 
+    private Map map;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         scene = new Fond(fond); // Initialise le fond (décor du jeu)
         scene.initialiseTile(); // Associe les images des blocs au décor
         jeu = new Jeu("Joueur", 1024, 1024);
+        map = new Map();
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         SpriteJoueur vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.creerSpriteJoueur(jeu.getJoueur()); // Appelle la méthode de la vue pour créer le visuel du joueur, et le lier au pane
         fond.setOnKeyPressed(Insert -> vuejoueur.mouvement(Insert));
         fond.setOnKeyReleased(Insert -> vuejoueur.stopmouvement(Insert));
+
+
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
             private final long frameInterval = 16_666_666; // Conversion nano secondes en secondes = 60 FPS
-
             @Override
             public void handle(long now) {
                 if (now - lastUpdate >= frameInterval) {
+                    jeu.getJoueur().collision(map);
                     jeu.getJoueur().mettreAJour();
                     lastUpdate = now;
+
                 }
             }
         };

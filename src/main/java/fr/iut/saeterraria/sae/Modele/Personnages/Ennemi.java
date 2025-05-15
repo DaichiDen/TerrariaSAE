@@ -1,6 +1,7 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
+import javafx.geometry.Rectangle2D;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ public class Ennemi extends Entite {
     private ArrayList<Item> listDrops;
 
     public Ennemi(String nom, int vie, int vieMax,int energieMax, int x, int y, int def, int vitesse) {
-        super(nom,vie, vieMax, energieMax, 20, x, y, def, vitesse);
+        super(nom,vie, vieMax, energieMax, 20, x, y, def, vitesse,new Rectangle2D(0,0,32,32));
         listDrops = new ArrayList<>();
     }
 
