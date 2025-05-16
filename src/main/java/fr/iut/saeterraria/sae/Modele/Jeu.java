@@ -49,6 +49,8 @@ public class Jeu {
         return joueur;
     }
 
+    public Map getCarte() { return carte; }
+
     public ArrayList<Ennemi> getMobs() {
         return mobs;
     }
