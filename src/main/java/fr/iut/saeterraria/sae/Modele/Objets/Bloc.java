@@ -4,15 +4,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 
-public class Bloc {
+public class Bloc extends Item{
     private StringProperty nom;
     private int width, height;
 
 
-    public Bloc (String nom, Image tiles) {
-        this.nom = new SimpleStringProperty(nom);
-        this.width=32;
-        this.height=32;
+    public Bloc (String nom,String description) {
+        super(nom,description,1);
     }
 
 }

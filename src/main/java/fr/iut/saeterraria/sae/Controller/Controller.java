@@ -1,75 +1,105 @@
 package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
+
+import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Vue.SpriteJoueur;
+import fr.iut.saeterraria.sae.Vue.vueInventaire;
+import javafx.animation.AnimationTimer;
+
+import fr.iut.saeterraria.sae.Vue.Fond;
+
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.*;
+
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
     @FXML
     private TilePane fond;
+    @FXML
+    private Pane screen;
+    @FXML
+    private Button mapButton;
+    @FXML
+    private Button openInventaire;
+    @FXML
+    private Button quitterInventaire;
+    @FXML
+    private Pane screenInventaire;
+    @FXML
+    private GridPane inventaire;
+    @FXML
+    private HBox hotbar;
 
     private Jeu jeu;
+    private Fond scene;
+    private vueInventaire inventaireVue;
+    private SpriteJoueur vuejoueur;
+
+    private Map map;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        jeu = new Jeu("Terraria",600,600);
-        //fond.getChildren().add("Carte.tmx");
-        Platform.runLater(()->fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
-        fond.setOnKeyPressed(Insert -> mouvement(Insert));
+
+
+
+
+
+
+
+        scene = new Fond(fond); // Initialise le fond (décor du jeu)
+        scene.initialiseTile(); // Associe les images des blocs au décor
+        jeu = new Jeu("Joueur", 1024, 1024);
+        map = new Map();
+        inventaireVue = new vueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
+        Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
+        SpriteJoueur vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
+        vuejoueur.creerSpriteJoueur(jeu.getJoueur()); // Appelle la méthode de la vue pour créer le visuel du joueur, et le lier au pane
+        openInventaire.setOnAction(c -> ouvrirInventaire());
+        quitterInventaire.setOnAction(c -> exitInventaire());
+        fond.setOnKeyPressed(Insert -> vuejoueur.mouvement(Insert));
+        fond.setOnKeyReleased(Insert -> vuejoueur.stopmouvement(Insert));
+
+
+        AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
+            private long lastUpdate = 0;
+            private final long frameInterval = 16_666_666; // Conversion nano secondes en secondes = 60 FPS
+            @Override
+            public void handle(long now) {
+                if (now - lastUpdate >= frameInterval) {
+
+                    jeu.getJoueur().mettreAJour(map);
+                    lastUpdate = now;
+                }
+            }
+        };
+        timer.start();  // frameInterval est l'intervalle entre 2 màj graphiques
+        // lastUpdate stocke le temps de la dernière màj graphique enregistré
+        // La méthode vérifie si entre la dernière update et maintenant il s'est passé 1/60 ème de seconde ( 1 frame), si oui on actualise graphiquement
+        scene.afficherCarte(); // Affiche le décor dans la vue
+
     }
 
-
-    public void mouvement(KeyEvent event) {
-        switch (event.getCode()){
-            case UP: // Saute
-                System.out.println("Saute");
-                break;
-            case DOWN: // Descend d'une plateforme
-                System.out.println("Descend");
-                break;
-            case LEFT: // Déplace à gauche
-                System.out.println("Gauche");
-                break;
-            case RIGHT: // Déplace à droite
-                System.out.println("Droite");
-                break;
-            case SPACE: // Saute
-                System.out.println("Saute");
-                break;
-            case Q: // Déplace à gauche
-                System.out.println("Gauche");
-                break;
-            case D: // Déplace à droite
-                System.out.println("Droite");
-                break;
-            case S: // Descend d'une plateforme
-                System.out.println("Descend");
-                break;
-            default:
-                break;
-        }
+    public void ouvrirInventaire() {
+        openInventaire.setVisible(false);
+        jeu.getJoueur().setMarcheDroite(false);
+        jeu.getJoueur().setMarcheGauche(false);
+        screenInventaire.setVisible(true);
     }
 
-    private void creerSpriteJoueur(String nom){
-    }
-
-
-
-    private void afficherSpriteJoueur(){
+    public void exitInventaire(){
+        screenInventaire.setVisible(false);
+        openInventaire.setVisible(true);
+        Platform.runLater(() -> fond.requestFocus());
     }
 }

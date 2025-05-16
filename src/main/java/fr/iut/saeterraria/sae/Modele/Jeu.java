@@ -3,8 +3,10 @@ package fr.iut.saeterraria.sae.Modele;
 import fr.iut.saeterraria.sae.Modele.Objets.*;
 import fr.iut.saeterraria.sae.Modele.Personnages.*;
 import fr.iut.saeterraria.sae.Modele.Map.*;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // Environnement du jeu
 public class Jeu {
@@ -13,10 +15,11 @@ public class Jeu {
     private Joueur joueur;
     private ArrayList<Ennemi> mobs;
     private ArrayList<PNJ> pNJ;
+    private HashMap<Integer, Image> items;
 
-    public Jeu(String nom, int width, int height){
-        carte = new Map(width, height);
-        joueur = new Joueur(nom);
+    public Jeu(String nomJoueur, int width, int height){
+        carte = new Map();
+        joueur = new Joueur(nomJoueur);
         mobs = new ArrayList<>();
         pNJ = new ArrayList<>();
     }
