@@ -17,7 +17,7 @@ public class Jeu {
     private ArrayList<PNJ> pNJ;
     private HashMap<Integer, Image> items;
 
-    public Jeu(String nomJoueur, int width, int height){
+    public Jeu(String nomJoueur){
         carte = new Map();
         joueur = new Joueur(nomJoueur);
         mobs = new ArrayList<>();
@@ -42,6 +42,9 @@ public class Jeu {
         return entite.getVie()>0;
     }
 
+    public Map getCarte(){
+        return carte;
+    }
     public Joueur getJoueur() {
         return joueur;
     }

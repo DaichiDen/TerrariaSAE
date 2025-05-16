@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -46,29 +47,16 @@ public class Controller implements Initializable {
     private vueInventaire inventaireVue;
     private SpriteJoueur vuejoueur;
 
-    private Map map;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
-
-
-
-
-
         scene = new Fond(fond); // Initialise le fond (décor du jeu)
-        scene.initialiseTile(); // Associe les images des blocs au décor
-        jeu = new Jeu("Joueur", 1024, 1024);
-        map = new Map();
+        jeu = new Jeu("Joueur");
+        Clavier controlleurJoueur = new Clavier(jeu);
         inventaireVue = new vueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         SpriteJoueur vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
-        vuejoueur.creerSpriteJoueur(jeu.getJoueur()); // Appelle la méthode de la vue pour créer le visuel du joueur, et le lier au pane
-        openInventaire.setOnAction(c -> ouvrirInventaire());
-        quitterInventaire.setOnAction(c -> exitInventaire());
-        fond.setOnKeyPressed(Insert -> vuejoueur.mouvement(Insert));
-        fond.setOnKeyReleased(Insert -> vuejoueur.stopmouvement(Insert));
+        fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
 
 
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
@@ -78,7 +66,7 @@ public class Controller implements Initializable {
             public void handle(long now) {
                 if (now - lastUpdate >= frameInterval) {
 
-                    jeu.getJoueur().mettreAJour(map);
+                    jeu.getJoueur().mettreAJour(jeu.getCarte());
                     lastUpdate = now;
                 }
             }
@@ -96,10 +84,12 @@ public class Controller implements Initializable {
         jeu.getJoueur().setMarcheGauche(false);
         screenInventaire.setVisible(true);
     }
-
     public void exitInventaire(){
         screenInventaire.setVisible(false);
         openInventaire.setVisible(true);
         Platform.runLater(() -> fond.requestFocus());
     }
+
+
+
 }

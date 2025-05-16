@@ -20,6 +20,7 @@ public class Fond extends CreateImage{
         this.carte = new Map();
         this.tiles = new HashMap<>();
         this.pane = pane;
+        initialiseTile();
     }
 
     public void ajoutTile(String imagePath){

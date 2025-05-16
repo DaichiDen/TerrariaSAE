@@ -17,30 +17,21 @@ public class Joueur extends Entite {
     //constantes
     private final int gravité = 2;
     private final int forceSaut = -18;
-    private final int taille1bloc = 32;
 
     private boolean collisionBas = false;
 
     public Joueur(String nom) {
 
-
-
-
-        super(nom, 20, 20, 100, 20, 0, 0, 1, 10, new Rectangle2D(0, 0, 64, 70));
+        super(nom, 20, 20, 100, 20, 0, 0, 1, 10);
 
         this.equipement = new int[7];
-	this.inventaire = new Inventaire();
+	    this.inventaire = new Inventaire();
 
     }
     public void ajouterItem(Item item, int quantite) {
         inventaire.ajoutInventaire(item, quantite);
     }
 
-
-
-
-        
-        
 
     public Inventaire getInventaire(){
         return inventaire;
@@ -85,12 +76,12 @@ public class Joueur extends Entite {
     public void collisionVerticale(Map map) { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
 
+        Rectangle2D hitboxJoueur = new Rectangle2D(getX(),getY(),taille1bloc,taille1bloc*2);
 
-        Rectangle2D hitboxJoueur = new Rectangle2D(getX(), getY(), taille1bloc, taille1bloc*2);
         int caseX = (int) (getX() / taille1bloc);
         int caseY = (int) (getY() / taille1bloc);
-        //boucle sur les 3 blocs en x et y
-        for (int i = caseY - 1; i <= caseY + 3; i++) {
+        //boucle sur les 4 blocs autour du joueur , i+1 i-1 ,j+1 j-1
+        for (int i = caseY - 1; i <= caseY + 3; i++) { // +3 pour la taille du personnage (2 blocs de hauteur)
             for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (i >= 0 && i < map.getLigne() && j >= 0 && j < map.getColonne()) {
                     if (map.getCase(i, j) != 3) { // si le bloc n'est pas du ciel
@@ -122,7 +113,9 @@ public class Joueur extends Entite {
     }
 
     public void collisionHorizontale(Map map) {
+
         Rectangle2D hitboxJoueur = new Rectangle2D(this.getX(), this.getY(), taille1bloc, taille1bloc*2);
+
         int caseX = (int) (this.getX() / taille1bloc);
         int caseY = (int) (this.getY() / taille1bloc);
 
@@ -130,7 +123,7 @@ public class Joueur extends Entite {
         boolean collisionGauche = false;
 
         for (int i = caseY - 1; i <= caseY + 3; i++) {
-            for (int j = caseX - 1; j <= caseX + 3; j++) {
+            for (int j = caseX - 1; j <= caseX + 2; j++) {
                 if (i >= 0 && i < map.getLigne() && j >= 0 && j < map.getColonne()) {
                     if (map.getCase(i, j) != 3) {
                         int xBloc = map.getCoordonnéesX(j);
@@ -166,7 +159,7 @@ public class Joueur extends Entite {
         if (collisionGauche) setMarcheGauche(false);
     }
 
-    //TODO Il faut trouver une façon de fix les hitbox horizontales, je pense que soit la hitbox des blocs est trop grande ,soit du joueur)
+    //TODO fragmenter les méthodes de collisions de la sorte: Collision bas,haut,gauche,droite, on ne regardera plus le bloc à droite si le perso est en état marcheGauche , ça nous fait gagner 0.000000000000000000001 ms
 
 
 

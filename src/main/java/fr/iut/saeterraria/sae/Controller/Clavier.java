@@ -1,32 +1,23 @@
-package fr.iut.saeterraria.sae.Vue;
+package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-
-import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 
+import java.awt.*;
 
-
-import java.net.URL;
-
-
-public class SpriteJoueur extends CreateImage{
-
-    private Pane screen;
+public class Clavier implements EventHandler<KeyEvent> {
     private Jeu jeu;
 
-    private Rectangle2D hitboxJoueur;
 
+    public Clavier(Jeu jeu) {
+        this.jeu=jeu;
 
-    public SpriteJoueur(Jeu jeu, Pane screen){
-        this.jeu = jeu;
-        this.screen = screen;
-        creerSpriteJoueur(this.jeu.getJoueur());
     }
+
 
     public void stopmouvement(KeyEvent event) {
         switch (event.getCode()) {
@@ -44,7 +35,7 @@ public class SpriteJoueur extends CreateImage{
         }
     }
 
-    public void mouvement(KeyEvent event) {
+    public void actionJoueur(KeyEvent event) {
         switch (event.getCode()) {
             case UP: // Saute
                 jeu.getJoueur().sauter();
@@ -78,31 +69,21 @@ public class SpriteJoueur extends CreateImage{
 //                jeu.getJoueur().descendre();
 //                System.out.println("Descend");
 //                break;
+            case I:
+                break;
+
             default:
                 break;
         }
     }
 
-
-
-    // Permet d'associer l'image au joueur au pane (conteneur principal)
-    public void creerSpriteJoueur(Joueur joueur){
-        ImageView sprite = createImageView("/Sprite/Hero_stop.png");
-	sprite.setId(joueur.getNom());
-        sprite.translateXProperty().bind(joueur.xProperty());
-        sprite.translateYProperty().bind(joueur.yProperty());
-        sprite.setFitWidth(54);
-        sprite.setFitHeight(64);
-        screen.getChildren().add(sprite);
+    @Override
+    public void handle(KeyEvent keyEvent) {
+        if(keyEvent.getEventType().equals(KeyEvent.KEY_PRESSED)){
+            actionJoueur(keyEvent);
+        }
+        else if (keyEvent.getEventType().equals(KeyEvent.KEY_RELEASED)){
+            stopmouvement(keyEvent);
+        }
     }
-
-    }
-
-
-
-
-
-
-
-
-
+}

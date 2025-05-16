@@ -12,9 +12,10 @@ public abstract class Entite {
     private StringProperty nom;
     private IntegerProperty energie;
     private IntegerProperty vitesse;
-    private Rectangle2D hitbox;
+    public final int taille1bloc = 32;
 
-    public Entite(String nom, int vie, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesse, Rectangle2D hitbox) {
+
+    public Entite(String nom, int vie, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesse) {
         this.nom = new SimpleStringProperty(nom);
         this.vieMax = new SimpleIntegerProperty(vieMax);
         this.vie = new SimpleIntegerProperty(vie);
@@ -24,7 +25,6 @@ public abstract class Entite {
         this.y = new SimpleIntegerProperty(y);
         this.def = new SimpleIntegerProperty(def);
         this.vitesse = new SimpleIntegerProperty(vitesse);
-        this.hitbox = hitbox;
     }
 
     // Gestion du nom
@@ -51,9 +51,7 @@ public abstract class Entite {
             setVie(getVie()+val);
         }
     }
-    public Rectangle2D getHitbox(){
-        return this.hitbox;
-    }
+
     public final void decrementVie(int val) {
         if(getVie()-val < 0){
             setVie(0);
