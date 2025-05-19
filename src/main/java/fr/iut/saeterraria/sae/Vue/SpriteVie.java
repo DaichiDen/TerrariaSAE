@@ -27,39 +27,31 @@ public class SpriteVie extends CreateImage{
         }
     }
 
-    public void mettreAJourSpriteVie(Joueur joueur){
+
+    public void mettreAJourSpriteVie(Joueur joueur) {
         vieAct = joueur.getBarreVie().getVie();
-        int vieEnMoins = (viePre - vieAct)%5;
-        int i = liste_hp.length-1;
 
-//        while(vieEnMoins > 0){
-//            screen.getChildren().remove(i);
-//            if(liste_hp[i] == 0) {
-//                screen.getChildren().add(i,createImageView("/Sprite/full_life.png",width,height));
-//            }
-//            if(liste_hp[i] == 1){
-//                screen.getChildren().add(i,createImageView("/Sprite/half_life.png",width,height));
-//            }
-//            if(liste_hp[i] == 2){
-//                screen.getChildren().add(i,createImageView("/Sprite/no_life.png",width,height));
-//            }
-//            vieEnMoins =- 1;
-//            i--;
-//        }
+        // Nettoyer tous les anciens cœurs
+        screen.getChildren().clear();
 
-        while(vieEnMoins > 0){
-            screen.getChildren().remove(i);
-            if(vieEnMoins > 0){
-                screen.getChildren().add(i,createImageView("/Sprite/half_life.png",width,height));
-                vieEnMoins =- 1;
+        int maxVie = joueur.getBarreVie().getVieMax();
+        int nbCoeurs = maxVie / 2;
+
+        int hpRestant = vieAct;
+
+        for (int i = 0; i < nbCoeurs; i++) {
+            if (hpRestant >= 2) {
+                screen.getChildren().add(createImageView("/Sprite/full_life.png", width, height));
+                hpRestant -= 2;
+            } else if (hpRestant == 1) {
+                screen.getChildren().add(createImageView("/Sprite/half_life.png", width, height));
+                hpRestant -= 1;
+            } else {
+                screen.getChildren().add(createImageView("/Sprite/no_life.png", width, height));
             }
-            if(vieEnMoins > 0){
-                screen.getChildren().add(i,createImageView("/Sprite/no_life.png",width,height));
-                vieEnMoins =- 1;
-            }
-
-            i--;
         }
+
+        viePre = vieAct; // Met à jour l'ancienne vie
     }
 
 

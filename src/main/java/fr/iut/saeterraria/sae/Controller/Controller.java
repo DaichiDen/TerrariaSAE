@@ -93,6 +93,7 @@ public class Controller implements Initializable {
 
                 if (now - lastUpdate >= frameInterval) {
 
+                    controlleurJoueur.update();
                     jeu.getJoueur().mettreAJour(jeu.getCarte());
                     barre.mettreAJourSpriteVie(jeu.getJoueur());
                     vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
