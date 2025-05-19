@@ -11,35 +11,26 @@ public class Joueur extends Entite {
     private boolean marcheGauche = false;
     private int vitesseY = 0;
 
-    private int etat; // etat pour savoir s'il marche ou pas (voir si nécessaire)
-
     //constantes
     private final int gravité = 2;
     private final int forceSaut = -18;
 
     private boolean collisionBas = false;
 
+    // valeurs pour l'inertie dur joueur (voir dans mettreAJour)
+    private int vitesseX = 0;
+    private final int accel_sol = 5;
+    private final int accel_air = 2;
+    private final int friction_sol = 4;
+    private final int friction_air = 1;
+
+
     public Joueur(String nom) {
 
-        super(nom, 100, 100, 20, 0, 0, 1, 10);
-
+        super(nom, 20, 100, 20, 0, 0, 1, 10);
         this.equipement = new int[7];
 	    this.inventaire = new Inventaire();
 
-    }
-
-    public void setEtat(){
-        if(getMarcheGauche() && !getMarcheDroite()){
-            etat = 1;
-        }else if(getMarcheDroite() && !getMarcheGauche()){
-            etat = 2;
-        }else{
-            etat = 0;
-        }
-    }
-
-    public int getEtat(){
-        return etat;
     }
 
     public void ajouterItem(Item item, int quantite) {
@@ -78,23 +69,57 @@ public class Joueur extends Entite {
     }
 
     public void mettreAJour(Map map) {
-        // Appliquer gravité
-        if (!collisionBas) {
-		vitesseY+=gravité;		
-	}
-        setY(getY() + vitesseY);
-        collisionVerticale(map);
-        // Appliquer déplacement vertical, ensuite vérification des collisions, si le setY l'a fait rentrer dans qqch, alors le setY de la méthode collisionVertical le fait rester en dehors du bloc
+        if (estVivant()) {
+            // Appliquer gravité
+            if (!collisionBas) {
+                vitesseY += gravité;
+            }
+            setY(getY() + vitesseY);
+            collisionVerticale(map);
+            // Appliquer déplacement vertical, ensuite vérification des collisions, si le setY l'a fait rentrer dans qqch, alors le setY de la méthode collisionVertical le fait rester en dehors du bloc
 
+            // inertie
+            boolean auSol = collisionBas;
 
-        // Appliquer déplacement horizontal
-        if (marcheGauche) {
-            setX(getX() - getVitesse());
+            int accel;
+            if (auSol) {
+                accel = accel_sol;
+            } else {
+                accel = accel_air;
+            }
+
+            int friction;
+            if (auSol) {
+                friction = friction_sol;
+            } else {
+                friction = friction_air;
+            }
+
+            // Gestion de l'accélération
+            if (marcheDroite && !marcheGauche) {
+                vitesseX += accel;
+            } else if (marcheGauche && !marcheDroite) {
+                vitesseX -= accel;
+            } else {
+                // Si pas de touche appuyée on applique la friction
+                if (vitesseX > 0) {
+                    vitesseX = Math.max(0, vitesseX - friction); // Réduit la vitesseX par la friction et empêche un dépassement de zéro vers le négatif.
+                } else if (vitesseX < 0) {
+                    vitesseX = Math.min(0, vitesseX + friction); // pareil mais dans l'autre sens
+                }
+            }
+
+            // Limiter la vitesse avec l'inertie
+            if (vitesseX > getVitesseMax()) vitesseX = getVitesseMax();
+            if (vitesseX < -getVitesseMax()) vitesseX = -getVitesseMax();
+
+            // Appliquer le déplacement
+            setX(getX() + vitesseX);
+            collisionHorizontale(map);
+        }else {
+            vitesseY -= gravité;
+            setY(getY() + vitesseY);
         }
-        else if (marcheDroite) {
-            setX(getX() + getVitesse());
-        }
-        collisionHorizontale(map);
     }
 
     public void collisionVerticale(Map map) { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
@@ -130,7 +155,7 @@ public class Joueur extends Entite {
                                 setY(blocBas);
                             }
                             if(map.getCase(i,j) == 4){
-                                this.decrementVie(20);
+                                this.decrementVie(1);
                                 System.out.println(this.getBarreVie().getVie());
                             }
                         }

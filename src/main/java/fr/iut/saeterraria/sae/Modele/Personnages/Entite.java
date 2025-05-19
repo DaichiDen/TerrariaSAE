@@ -11,11 +11,11 @@ public abstract class Entite {
     private IntegerProperty energieMax, x, y, def;
     private StringProperty nom;
     private IntegerProperty energie;
-    private IntegerProperty vitesse;
+    private IntegerProperty vitesseMax;
     private BarreVie barreVie;
     public final int taille1bloc = 32;
 
-    public Entite(String nom,int vieMax, int energieMax, int energie, int x, int y, int def, int vitesse) {
+    public Entite(String nom,int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax) {
         this.nom = new SimpleStringProperty(nom);
         this.barreVie = new BarreVie(vieMax);
         this.energieMax = new SimpleIntegerProperty(energieMax);
@@ -23,7 +23,7 @@ public abstract class Entite {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.def = new SimpleIntegerProperty(def);
-        this.vitesse = new SimpleIntegerProperty(vitesse);
+        this.vitesseMax = new SimpleIntegerProperty(vitesseMax);
     }
 
     // Gestion du nom
@@ -37,6 +37,7 @@ public abstract class Entite {
         this.nom.setValue(nom);
     }
 
+    // Gestion de la vie
     public BarreVie getBarreVie(){
         return this.barreVie;
     }
@@ -53,6 +54,14 @@ public abstract class Entite {
             barreVie.setVie(0);
         }else{
             barreVie.setVie(barreVie.getVie()-val);
+        }
+    }
+
+    public final boolean estVivant(){
+        if(barreVie.getVie() == 0){
+            return false;
+        }else{
+            return true;
         }
     }
 
@@ -103,8 +112,8 @@ public abstract class Entite {
 
 
     // Gestion de la vitesse
-    public final IntegerProperty vitesseProperty(){return vitesse;}
-    public final int getVitesse() {return vitesse.getValue();}
-    public void setVitesse(int vitesse) {this.vitesse.setValue(vitesse);}
+    public final IntegerProperty vitesseMaxProperty(){return vitesseMax;}
+    public final int getVitesseMax() {return vitesseMax.getValue();}
+    public void setVitesseMax(int vitesse) {this.vitesseMax.setValue(vitesse);}
 
 }
