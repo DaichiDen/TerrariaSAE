@@ -62,11 +62,16 @@ public class Joueur extends Entite {
         this.marcheDroite = marcheDroite;
     }
 
+
     public boolean getMarcheGauche() {
         return this.marcheGauche;
     }
     public boolean getMarcheDroite() {
         return this.marcheDroite;
+
+    public int getVitesseY(){
+        return vitesseY;
+
     }
 
     public void sauter() {
