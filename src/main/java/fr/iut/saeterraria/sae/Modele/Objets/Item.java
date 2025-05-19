@@ -5,19 +5,20 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Item {
     private StringProperty name;
     private StringProperty description;
-    private IntegerProperty codeObjetProperty;
     private IntegerProperty typeItem; // 1=stack 64 / 2= stack 16 / 3=stack 1
-    private static int id=1;
+    private Recette recette;
 
     public Item(String nom, String descripcion,int typeItem) {
         this.name = new SimpleStringProperty(nom);
         this.description = new SimpleStringProperty(descripcion);
-        this.codeObjetProperty = new SimpleIntegerProperty(id);
-        id++;
         this.typeItem = new SimpleIntegerProperty(typeItem);
+        this.recette = new Recette();
     }
 
     public int getType(){
@@ -42,13 +43,16 @@ public class Item {
         return this.name.getValue();
     }
 
-
     public StringProperty descriptionProperty() {
         return this.description;
     }
     public String getDescription(){ return this.description.getValue(); }
 
-    public IntegerProperty codeObjetProperty() { return codeObjetProperty; }
-    public int getCodeObjet(){ return codeObjetProperty.getValue(); }
+    public void addInRecette(ElementRecette recette){
+        this.recette.addElementRecette(recette);
+    }
 
+    public ArrayList<ElementRecette> getRecette(){
+        return this.recette.getRecette();
+    }
 }

@@ -3,11 +3,8 @@ import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.geometry.Rectangle2D;
 
-
-
-
 public class Joueur extends Entite {
-    private Inventaire inventaire; //hotbar (1-7), inventaire de taille 36
+    private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
     private int[] equipement;
     private boolean enSaut = false;
     private boolean marcheDroite = false;
@@ -49,11 +46,9 @@ public class Joueur extends Entite {
         inventaire.ajoutInventaire(item, quantite);
     }
 
-
     public Inventaire getInventaire(){
         return inventaire;
     }
-
 
     public void setMarcheGauche(boolean marcheGauche) {
         this.marcheGauche = marcheGauche;
@@ -134,7 +129,6 @@ public class Joueur extends Entite {
             }
         }
     }
-
     public void collisionHorizontale(Map map) {
 
         Rectangle2D hitboxJoueur = new Rectangle2D(this.getX(), this.getY(), taille1bloc, taille1bloc*2);

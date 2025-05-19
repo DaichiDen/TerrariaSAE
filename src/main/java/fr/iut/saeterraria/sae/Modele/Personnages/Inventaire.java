@@ -2,24 +2,30 @@ package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Inventaire {
+    private HashMap<Integer,Item> items;
     private int[][] inventaireJoueur;
 
-    public Inventaire() {
-        this.inventaireJoueur = new int[2][42]; // 6 première colonne pour hotbar36 Colonnes pour les 36 cases et 2 lignes pour l'id item et sa quantité
+    public Inventaire(HashMap<Integer,Item> items) {
+        this.inventaireJoueur = new int[2][42]; // 6 première colonne pour hotbar 36 Colonnes pour les 36 cases et 2 lignes pour l'id item et sa quantité
+        items = items;
     }
 
-    public boolean ajoutInventaire(Item item, int quantite) {
+    public boolean ajoutInventaire(Item item, int quantite) { //A revoir
+        
         boolean trouve = false;
         int compteur = 0;
         while (!trouve && compteur<42) {
-            if(inventaireJoueur[0][compteur]==item.getCodeObjet()) {
-                if (inventaireJoueur[1][compteur]+quantite<=item.nombreMax()){
+            if(inventaireJoueur[0][compteur]==) {
+                if (maxStack(quantite,compteur)){ // Si la case de l'inventaire contient déjà un item
                     inventaireJoueur[1][compteur]+=quantite;
                 }
 
             }
-            else if(inventaireJoueur[0][compteur]==0) {
+            else if(inventaireJoueur[0][compteur]==0) { // Si la case de l'inventaire contient pas d'item
                 inventaireJoueur[0][compteur]=item.getCodeObjet();
                 inventaireJoueur[1][compteur]=quantite;
                 trouve = true;
@@ -27,12 +33,7 @@ public class Inventaire {
             }
             compteur++;
         }
-        if(!trouve) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return trouve;
     }
 
     public int[][] getInventaireJoueur() {
@@ -42,7 +43,7 @@ public class Inventaire {
     public void removeItem(Item item) {
         boolean trouve = false;
         int compteur =0;
-        while (!trouve || compteur==36) {
+        while (!trouve && compteur < 42) {
             if(inventaireJoueur[0][compteur]==item.getCodeObjet()) {
                 inventaireJoueur[0][compteur]=0;
                 inventaireJoueur[1][compteur]=0;
@@ -52,4 +53,27 @@ public class Inventaire {
             compteur++;
         }
     }
+
+    public boolean maxStack(int ajout,int place){
+        boolean stack = false;
+        switch (items.get(inventaireJoueur[0][place]).getType()){
+            case 1:
+                if (inventaireJoueur[1][place]+ajout<=64) {
+                    stack = true;
+                }
+                break;
+            case 2:
+                if (inventaireJoueur[1][place]+ajout<=16) {
+                    stack = true;
+                }
+                break;
+            case 3:
+                if (inventaireJoueur[1][place]+ajout<=1) {
+                    stack = true;
+                }
+                break;
+        }
+        return stack;
+    }
+
 }
