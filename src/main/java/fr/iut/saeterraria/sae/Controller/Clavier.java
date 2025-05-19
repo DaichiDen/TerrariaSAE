@@ -7,7 +7,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
-import java.awt.*;
 
 public class Clavier implements EventHandler<KeyEvent> {
     private Jeu jeu;
@@ -20,6 +19,7 @@ public class Clavier implements EventHandler<KeyEvent> {
 
 
     public void stopmouvement(KeyEvent event) {
+
         switch (event.getCode()) {
             case D:
                 jeu.getJoueur().setMarcheDroite(false);
@@ -32,7 +32,12 @@ public class Clavier implements EventHandler<KeyEvent> {
                 break;
             case Q:
                 jeu.getJoueur().setMarcheGauche(false);
+
+
+
         }
+
+
     }
 
     public void actionJoueur(KeyEvent event) {
