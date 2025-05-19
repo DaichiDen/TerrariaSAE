@@ -74,14 +74,9 @@ public class Controller implements Initializable {
         Clavier controlleurJoueur = new Clavier(jeu);
         inventaireVue = new vueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
-        SpriteJoueur vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
+        vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
+
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
-
-
-
-
-
-
 
 
 
@@ -90,9 +85,13 @@ public class Controller implements Initializable {
             private final long frameInterval = 16_666_666; // Conversion nano secondes en secondes = 60 FPS
             @Override
             public void handle(long now) {
+
                 if (now - lastUpdate >= frameInterval) {
 
                     jeu.getJoueur().mettreAJour(jeu.getCarte());
+
+                    vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
+
                     lastUpdate = now;
                 }
             }

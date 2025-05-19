@@ -15,8 +15,6 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("vueTerraria.fxml"));
 
 
-
-
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
 

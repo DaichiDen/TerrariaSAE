@@ -14,6 +14,8 @@ public class Joueur extends Entite {
     private boolean marcheGauche = false;
     private int vitesseY = 0;
 
+    private int etat; // etat pour savoir s'il marche ou pas (voir si nécessaire)
+
     //constantes
     private final int gravité = 2;
     private final int forceSaut = -18;
@@ -28,6 +30,21 @@ public class Joueur extends Entite {
 	    this.inventaire = new Inventaire();
 
     }
+
+    public void setEtat(){
+        if(getMarcheGauche() && !getMarcheDroite()){
+            etat = 1;
+        }else if(getMarcheDroite() && !getMarcheGauche()){
+            etat = 2;
+        }else{
+            etat = 0;
+        }
+    }
+
+    public int getEtat(){
+        return etat;
+    }
+
     public void ajouterItem(Item item, int quantite) {
         inventaire.ajoutInventaire(item, quantite);
     }
@@ -41,9 +58,15 @@ public class Joueur extends Entite {
     public void setMarcheGauche(boolean marcheGauche) {
         this.marcheGauche = marcheGauche;
     }
-
     public void setMarcheDroite(boolean marcheDroite) {
         this.marcheDroite = marcheDroite;
+    }
+
+    public boolean getMarcheGauche() {
+        return this.marcheGauche;
+    }
+    public boolean getMarcheDroite() {
+        return this.marcheDroite;
     }
 
     public void sauter() {
@@ -159,7 +182,7 @@ public class Joueur extends Entite {
         if (collisionGauche) setMarcheGauche(false);
     }
 
-    //TODO fragmenter les méthodes de collisions de la sorte: Collision bas,haut,gauche,droite, on ne regardera plus le bloc à droite si le perso est en état marcheGauche , ça nous fait gagner 0.000000000000000000001 ms
+
 
 
 
