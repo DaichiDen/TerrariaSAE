@@ -3,17 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
    <center>
       <Pane fx:id="menu" prefHeight="400.0" prefWidth="600.0">
          <children>
             <Pane fx:id="screen" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <TilePane fx:id="fond" prefColumns="58" prefRows="30" />
-                  <Button fx:id="openInventaire" onAction="#ouvrirInventaire" defaultButton="true" prefHeight="26.0" prefWidth="89.0" text="Inventaire"> </Button>
+                  <Button fx:id="openInventaire" defaultButton="true" onAction="#ouvrirInventaire" prefHeight="26.0" prefWidth="89.0" text="Inventaire"> </Button>
                   <Pane fx:id="screenInventaire" prefHeight="400.0" prefWidth="600.0" visible="false">
                      <children>
-                        <Button fx:id="quitterInventaire" onAction="#exitInventaire" defaultButton="true" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" text="Quitter" />
+                        <Button fx:id="quitterInventaire" defaultButton="true" layoutY="1.0" mnemonicParsing="false" onAction="#exitInventaire" prefHeight="26.0" prefWidth="89.0" text="Quitter" />
                         <GridPane fx:id="inventaire" gridLinesVisible="true" layoutY="27.0" prefHeight="372.0" prefWidth="600.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="308.0" />
@@ -38,9 +38,16 @@
                   </Pane>
                </children>
             </Pane>
-            <Button fx:id="start" onAction="#startGame" layoutX="274.0" layoutY="151.0" mnemonicParsing="false" text="Start" />
-            <Button fx:id="quit" onAction="#rageQuit" layoutX="274.0" layoutY="208.0" mnemonicParsing="false" text="Quit" />
+            <Button fx:id="start" layoutX="274.0" layoutY="151.0" mnemonicParsing="false" onAction="#startGame" text="Start" />
+            <Button fx:id="quit" layoutX="276.0" layoutY="209.0" mnemonicParsing="false" onAction="#rageQuit" text="Quit" />
          </children>
       </Pane>
    </center>
+   <top>
+      <Pane prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="Vie" prefHeight="15.0" prefWidth="50.0" />
+         </children></Pane>
+   </top>
+
 </BorderPane>

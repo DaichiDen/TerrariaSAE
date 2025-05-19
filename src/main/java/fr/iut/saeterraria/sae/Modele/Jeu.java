@@ -39,7 +39,7 @@ public class Jeu {
     }
 
     public boolean estVivant(Entite entite){
-        return entite.getVie()>0;
+        return entite.getBarreVie().getVie()>0;
     }
 
     public Map getCarte(){

@@ -28,12 +28,12 @@ public class vueInventaire extends CreateImage{
     public void afficherInventaire() {
         // Affiche l'hotbar
         for (int j = 0; j < 7; j++) {
-            tableauInventaire.add(super.createImageView("/Tiles/Dirt_1.png"),0,j);
+            tableauInventaire.add(super.createImageView("/Tiles/Dirt_1.png",150,150),0,j);
         }
         // Affiche l'inventaire
         for (int i = 2; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
-                tableauInventaire.add(super.createImageView("/Tiles/Ciel.png"),i,j);
+                tableauInventaire.add(super.createImageView("/Tiles/Ciel.png",150,150),i,j);
             }
         }
     }

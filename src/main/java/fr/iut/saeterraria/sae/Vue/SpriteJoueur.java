@@ -16,6 +16,7 @@ public class SpriteJoueur extends CreateImage{
 
     private Pane screen;
     private Jeu jeu;
+    private int width,height;
 
     private ImageView spriteActuel;
     private String dernierEtat = "";
@@ -26,45 +27,10 @@ public class SpriteJoueur extends CreateImage{
     public SpriteJoueur(Jeu jeu, Pane screen){
         this.jeu = jeu;
         this.screen = screen;
+        this.width=150;
+        this.height=150;
     }
 
-    // Permet d'associer l'image au joueur au pane (conteneur principal)
-    public void creerSpriteJoueur(Joueur joueur) {
-        if (joueur.getMarcheGauche() == true) {
-            ImageView sprite = createImageView("/Sprite/Chevalier_marcheGauche.gif");
-            sprite.setId(joueur.getNom());
-            sprite.translateXProperty().bind(joueur.xProperty());
-            sprite.translateYProperty().bind(joueur.yProperty());
-            sprite.setFitWidth(54);
-            sprite.setFitHeight(64);
-            screen.getChildren().add(sprite);
-        }
-        else if (joueur.getMarcheDroite() == true) {
-            ImageView sprite = createImageView("/Sprite/Chevalier_marcheDroite.gif");
-            sprite.setId(joueur.getNom());
-            sprite.translateXProperty().bind(joueur.xProperty());
-            sprite.translateYProperty().bind(joueur.yProperty());
-            sprite.setFitWidth(54);
-            sprite.setFitHeight(64);
-            screen.getChildren().add(sprite);
-        }
-        else{
-            ImageView sprite = createImageView("/Sprite/Hero_stop.png");
-            sprite.setId(joueur.getNom());
-            sprite.translateXProperty().bind(joueur.xProperty());
-            sprite.translateYProperty().bind(joueur.yProperty());
-            sprite.setFitWidth(54);
-            sprite.setFitHeight(64);
-            screen.getChildren().add(sprite);
-        }
-    }
-
-    public void supprimerSpriteJoueur(Joueur joueur) {
-        ImageView sprite = (ImageView) screen.lookup("#" + joueur.getNom());
-        if (sprite != null) {
-            screen.getChildren().remove(sprite);
-        }
-    }
 
     public void mettreAJourSpriteJoueur(Joueur joueur) {
         String etatActuel;
@@ -89,11 +55,11 @@ public class SpriteJoueur extends CreateImage{
 
         // Créer le bon sprite
         if (etatActuel.equals("gauche")) {
-            spriteActuel = createImageView("/Sprite/Chevalier_marcheGauche.gif");
+            spriteActuel = createImageView("/Sprite/Chevalier_marcheGauche.gif",width,height);
         } else if (etatActuel.equals("droite")) {
-            spriteActuel = createImageView("/Sprite/Chevalier_marcheDroite.gif");
+            spriteActuel = createImageView("/Sprite/Chevalier_marcheDroite.gif",width,height);
         } else {
-            spriteActuel = createImageView("/Sprite/Hero_stop.png");
+            spriteActuel = createImageView("/Sprite/Hero_stop.png",width,height);
         }
 
         spriteActuel.setId(joueur.getNom());

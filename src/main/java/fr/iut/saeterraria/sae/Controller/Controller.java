@@ -4,6 +4,7 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Vue.SpriteJoueur;
+import fr.iut.saeterraria.sae.Vue.SpriteVie;
 import fr.iut.saeterraria.sae.Vue.vueInventaire;
 import javafx.animation.AnimationTimer;
 
@@ -57,6 +58,9 @@ public class Controller implements Initializable {
     @FXML
     private HBox hotbar;
 
+    @FXML
+    private Pane Vie;
+
     private Jeu jeu;
     private Fond scene;
     private vueInventaire inventaireVue;
@@ -69,8 +73,9 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         scene = new Fond(fond); // Initialise le fond (décor du jeu)
-
+        
         jeu = new Jeu("Joueur");
+        SpriteVie barre = new SpriteVie(Vie, jeu);
         Clavier controlleurJoueur = new Clavier(jeu);
         inventaireVue = new vueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
@@ -89,9 +94,8 @@ public class Controller implements Initializable {
                 if (now - lastUpdate >= frameInterval) {
 
                     jeu.getJoueur().mettreAJour(jeu.getCarte());
-
+                    barre.mettreAJourSpriteVie(jeu.getJoueur());
                     vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
-
                     lastUpdate = now;
                 }
             }

@@ -32,6 +32,7 @@ public class Fond extends CreateImage{
         ajoutTile("/Tiles/Dirt_1.png");
         ajoutTile("/Tiles/Dirt_2.png");
         ajoutTile("/Tiles/Ciel.png");
+        ajoutTile("/Tiles/piques_vorpales.png");
     }
     // Permet d'afficher le terrain dans la scène (Pane principal)
     public void afficherCarte(){
