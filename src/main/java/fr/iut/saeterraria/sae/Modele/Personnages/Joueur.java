@@ -46,8 +46,8 @@ public class Joueur extends Entite {
         inventaire.ajoutInventaire(item, quantite);
     }
 
-    public Inventaire getInventaire(){
-        return inventaire;
+    public int[][] getInventaire(){
+        return inventaire.getInventaireJoueur();
     }
 
     public void setMarcheGauche(boolean marcheGauche) {

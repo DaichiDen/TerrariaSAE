@@ -11,7 +11,9 @@ import java.util.HashMap;
 public class Item {
     private StringProperty name;
     private StringProperty description;
+    private IntegerProperty codeObjet;
     private IntegerProperty typeItem; // 1=stack 64 / 2= stack 16 / 3=stack 1
+    private static int id = 1;
     private Recette recette;
 
     public Item(String nom, String descripcion,int typeItem) {
@@ -19,12 +21,16 @@ public class Item {
         this.description = new SimpleStringProperty(descripcion);
         this.typeItem = new SimpleIntegerProperty(typeItem);
         this.recette = new Recette();
+        this.codeObjet = new SimpleIntegerProperty(id);
+        id++;
     }
+
+    public IntegerProperty codeObjetProperty() { return codeObjet; }
+    public int getCodeObjet() { return codeObjet.getValue(); }
 
     public int getType(){
         return typeItem.getValue();
     }
-
     public int nombreMax(){
         int nbMax=1;
         if (getType()==1){
@@ -51,7 +57,6 @@ public class Item {
     public void addInRecette(ElementRecette recette){
         this.recette.addElementRecette(recette);
     }
-
     public ArrayList<ElementRecette> getRecette(){
         return this.recette.getRecette();
     }
