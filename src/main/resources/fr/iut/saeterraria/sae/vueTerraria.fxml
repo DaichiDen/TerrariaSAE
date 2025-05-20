@@ -39,7 +39,15 @@
                </children>
             </Pane>
             <Button fx:id="start" layoutX="274.0" layoutY="151.0" mnemonicParsing="false" onAction="#startGame" text="Start" />
-            <Button fx:id="quit" layoutX="276.0" layoutY="209.0" mnemonicParsing="false" onAction="#rageQuit" text="Quit" />
+
+     
+
+
+     <Button fx:id="quit" layoutX="274.0" layoutY="208.0" mnemonicParsing="false" onAction="#rageQuit" text="Quit" />
+
+
+
+
          </children>
       </Pane>
    </center>
