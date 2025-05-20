@@ -21,7 +21,7 @@ public class Joueur extends Entite {
 
     public Joueur(String nom) {
 
-        super(nom, 20, 20, 100, 20, 0, 0, 1, 10);
+        super(nom, 100, 100, 20, 0, 0, 1, 10);
 
         this.equipement = new int[7];
 	    this.inventaire = new Inventaire();
@@ -63,6 +63,7 @@ public class Joueur extends Entite {
     }
     public boolean getMarcheDroite() {
         return this.marcheDroite;
+    }
 
     public int getVitesseY(){
         return vitesseY;
@@ -128,8 +129,13 @@ public class Joueur extends Entite {
                                 vitesseY = 0;
                                 setY(blocBas);
                             }
+                            if(map.getCase(i,j) == 4){
+                                this.decrementVie(20);
+                                System.out.println(this.getBarreVie().getVie());
+                            }
                         }
                     }
+
                 }
             }
         }

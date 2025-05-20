@@ -13,7 +13,7 @@ public class Ennemi extends Entite {
 
 
 
-        super(nom,vie, vieMax, energieMax, 20, x, y, def, vitesse);
+        super(nom,vieMax,  energieMax, 20, x, y, def, vitesse);
 
         listDrops = new ArrayList<>();
     }

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
    <center>
       <Pane fx:id="menu" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -39,8 +39,19 @@
                </children>
             </Pane>
             <Button fx:id="start" layoutX="274.0" layoutY="151.0" mnemonicParsing="false" onAction="#startGame" text="Start" />
-            <Button fx:id="quit" layoutX="274.0" layoutY="208.0" mnemonicParsing="false" onAction="#rageQuit" text="Quit" />
+
+           <Button fx:id="quit" layoutX="274.0" layoutY="208.0" mnemonicParsing="false" onAction="#rageQuit" text="Quit" />
+
+
+
          </children>
       </Pane>
    </center>
+   <top>
+      <Pane prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="Vie" prefHeight="15.0" prefWidth="50.0" />
+         </children></Pane>
+   </top>
+
 </BorderPane>

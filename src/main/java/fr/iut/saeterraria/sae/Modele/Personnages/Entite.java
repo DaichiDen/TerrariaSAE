@@ -8,17 +8,16 @@ import javafx.geometry.Rectangle2D;
 
 public abstract class Entite {
 
-    private IntegerProperty vie, vieMax, energieMax, x, y, def;
+    private IntegerProperty energieMax, x, y, def;
     private StringProperty nom;
     private IntegerProperty energie;
     private IntegerProperty vitesse;
+    private BarreVie barreVie;
     public final int taille1bloc = 32;
 
-
-    public Entite(String nom, int vie, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesse) {
+    public Entite(String nom,int vieMax, int energieMax, int energie, int x, int y, int def, int vitesse) {
         this.nom = new SimpleStringProperty(nom);
-        this.vieMax = new SimpleIntegerProperty(vieMax);
-        this.vie = new SimpleIntegerProperty(vie);
+        this.barreVie = new BarreVie(vieMax);
         this.energieMax = new SimpleIntegerProperty(energieMax);
         this.energie = new SimpleIntegerProperty(energie);
         this.x = new SimpleIntegerProperty(x);
@@ -38,25 +37,22 @@ public abstract class Entite {
         this.nom.setValue(nom);
     }
 
-    // Gestion de la vie
-    public final IntegerProperty vieProperty(){return vie;}
-    public final int getVieMax() {return vieMax.get();}
-    public final void setVieMax(int vie) {this.vieMax.set(vie);}
-    public final int getVie() {return vie.get();}
-    public final void setVie(int vie) {this.vie.set(vie);}
+    public BarreVie getBarreVie(){
+        return this.barreVie;
+    }
     public final void incrementVie(int val) {
-        if(getVie()+val > getVieMax()){
-            setVie(getVieMax());
+        if(barreVie.getVie()+val > barreVie.getVieMax()){
+            barreVie.setVie(barreVie.getVie());
         }else{
-            setVie(getVie()+val);
+            barreVie.setVie(barreVie.getVie()+val);
         }
     }
 
     public final void decrementVie(int val) {
-        if(getVie()-val < 0){
-            setVie(0);
+        if(barreVie.getVie()-val < 0){
+            barreVie.setVie(0);
         }else{
-            setVie(getVie()-val);
+            barreVie.setVie(barreVie.getVie()-val);
         }
     }
 
