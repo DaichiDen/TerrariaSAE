@@ -8,7 +8,7 @@
    <children>
       <AnchorPane fx:id="menu" prefHeight="100.0" prefWidth="254.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView pickOnBounds="true" preserveRatio="false" fitHeight="800" fitWidth="1536">
+            <ImageView pickOnBounds="true" preserveRatio="false" fitHeight="1080" fitWidth="1920">
                <image>
                   <Image url="@../../../../Menu_Bleu.png" />
                </image></ImageView>
