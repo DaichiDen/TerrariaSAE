@@ -85,6 +85,7 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         scene = new Fond(fond);// Initialise le fond (décor du jeu)
 
+
         imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
         imagefond.fitHeightProperty().bind(imagebloc_death.widthProperty());
 
@@ -94,6 +95,8 @@ public class Controller implements Initializable {
 
         File file = new File("/Sound/burp.wav");
         URL imageURL = getClass().getResource("/Sound/burp.wav");
+
+
         Son burp = new Son("/Sound/burp.wav");
 
         jeu = new Jeu("Joueur");
@@ -104,6 +107,9 @@ public class Controller implements Initializable {
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
 
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
+
+        Son lumiere = new Son("/Sound/Lumière.mp3");
+        lumiere.play();
 
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
@@ -125,10 +131,12 @@ public class Controller implements Initializable {
                         delay.setOnFinished(event ->{
                             principal.setVisible(false);
                             death.setVisible(true);
+                            lumiere.stop();
                             burp.play();
 
                         }); // Action à faire après le délai
                         delay.play();
+                        // Démarre le délai
 
                         PauseTransition delay2 = new PauseTransition(Duration.seconds(16));
                         delay2.setOnFinished(event ->{
@@ -136,7 +144,7 @@ public class Controller implements Initializable {
                             rageQuit();
                         });
                         delay2.play();
- // Démarre le délai
+                        // Démarre le délai
                     }
                 }
             }
@@ -152,9 +160,8 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         openInventaire.setVisible(false);
-        jeu.getJoueur().setMarcheDroite(false);
-        jeu.getJoueur().setMarcheGauche(false);
         screenInventaire.setVisible(true);
+        Platform.runLater(() -> fond.requestFocus());
     }
     @FXML
     public void exitInventaire(){

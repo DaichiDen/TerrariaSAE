@@ -157,7 +157,8 @@ public class Joueur extends Entite {
                             }
                             if(map.getCase(i,j) == 4){
                                 this.decrementVie(1);
-                                System.out.println(this.getBarreVie().getVie());
+
+
                             }
                         }
                     }
