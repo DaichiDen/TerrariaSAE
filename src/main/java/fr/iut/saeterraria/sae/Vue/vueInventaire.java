@@ -5,6 +5,7 @@ import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
