@@ -86,6 +86,7 @@ public class Controller implements Initializable {
         scene = new Fond(fond);// Initialise le fond (décor du jeu)
 
 
+
         imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
         imagefond.fitHeightProperty().bind(imagebloc_death.widthProperty());
 
@@ -95,6 +96,8 @@ public class Controller implements Initializable {
 
         File file = new File("/Sound/burp.wav");
         URL imageURL = getClass().getResource("/Sound/burp.wav");
+
+
 
 
         Son burp = new Son("/Sound/burp.wav");
