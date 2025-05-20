@@ -120,6 +120,7 @@ public class Joueur extends Entite {
             vitesseY -= gravité;
             setY(getY() + vitesseY);
         }
+
     }
 
     public void collisionVerticale(Map map) { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
