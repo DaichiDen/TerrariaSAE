@@ -59,7 +59,7 @@ public class SpriteJoueur extends CreateImage{
         } else if (etatActuel.equals("droite")) {
             spriteActuel = createImageView("/Sprite/Chevalier_marcheDroite.gif",width,height);
         } else {
-            spriteActuel = createImageView("/Sprite/Hero_stop.png",width,height);
+            spriteActuel = createImageView("/Sprite/edin.png",width,height);
         }
 
         spriteActuel.setId(joueur.getNom());

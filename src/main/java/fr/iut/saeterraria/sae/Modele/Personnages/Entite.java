@@ -1,10 +1,12 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
+import fr.iut.saeterraria.sae.Vue.Son;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Rectangle2D;
+
 
 public abstract class Entite {
 
@@ -14,6 +16,9 @@ public abstract class Entite {
     private IntegerProperty vitesseMax;
     private BarreVie barreVie;
     public final int taille1bloc = 32;
+
+    Son damage1 = new Son("/Sound/damage1.wav");
+    Son damage2 = new Son("/Sound/damage2.wav");
 
     public Entite(String nom,int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax) {
         this.nom = new SimpleStringProperty(nom);
@@ -50,11 +55,31 @@ public abstract class Entite {
     }
 
     public final void decrementVie(int val) {
+
+            int n = (int) (Math.random()*10);
+            switch (n){
+                case 0:
+                    damage1.play();
+                    damage1.stop();
+                    break;
+                case 1:
+                    damage2.play();
+                    damage2.stop();
+                   break;
+                case 2:
+                    break;
+                default:
+                    System.out.println("dmg"+n);
+                    break;
+            }
+
         if(barreVie.getVie()-val < 0){
             barreVie.setVie(0);
         }else{
             barreVie.setVie(barreVie.getVie()-val);
+
         }
+
     }
 
     public final boolean estVivant(){
