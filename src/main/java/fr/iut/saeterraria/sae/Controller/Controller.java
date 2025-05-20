@@ -17,14 +17,23 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 import javafx.scene.input.KeyEvent;
+
+import javafx.scene.layout.*;
+
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
+
+
+
+
 
 
 import java.net.URL;
@@ -35,11 +44,7 @@ import static javafx.application.Platform.exit;
 public class Controller implements Initializable {
 
     @FXML
-    private Pane menu;
-    @FXML
-    private Button start;
-    @FXML
-    private Button quit;
+    private AnchorPane menu;
     @FXML
     private TilePane fond;
     @FXML
@@ -56,23 +61,19 @@ public class Controller implements Initializable {
     private GridPane inventaire;
     @FXML
     private HBox hotbar;
-
     @FXML
     private Pane Vie;
+    @FXML
+    private BorderPane principal;
 
     private Jeu jeu;
     private Fond scene;
     private vueInventaire inventaireVue;
     private SpriteJoueur vuejoueur;
 
-
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         scene = new Fond(fond); // Initialise le fond (décor du jeu)
-        
         jeu = new Jeu("Joueur");
         SpriteVie barre = new SpriteVie(Vie, jeu);
         Clavier controlleurJoueur = new Clavier(jeu);
@@ -81,8 +82,6 @@ public class Controller implements Initializable {
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
 
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
-
-
 
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
@@ -122,10 +121,7 @@ public class Controller implements Initializable {
         jeu.getJoueur().setMarcheGauche(false);
         screenInventaire.setVisible(true);
     }
-
-
     @FXML
-
     public void exitInventaire(){
         screenInventaire.setVisible(false);
         openInventaire.setVisible(true);
@@ -133,19 +129,23 @@ public class Controller implements Initializable {
     }
 
 
-
-
     @FXML
     public void startGame(){
-        start.setVisible(false);
-        quit.setVisible(false);
-        start.setDisable(true);
-        quit.setDisable(true);
-        screen.setVisible(true);
+        menu.setVisible(false);
+        principal.setVisible(true);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
     }
     @FXML
     public void rageQuit(){ exit();}
 
+    public ImageView createImageView(String imagePath, int width, int height){
 
+        URL imageURL = getClass().getResource(imagePath);
+        Image image = new Image(String.valueOf(imageURL));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        return imageView;
+
+    }
 }

@@ -39,9 +39,6 @@ public class Fond extends CreateImage{
         for (int i = 0; i < carte.getLigne(); i++) { //Ligne
             for (int j = 0; j < carte.getColonne(); j++) { //Colonne
                 this.pane.getChildren().add(new ImageView(tiles.get(carte.getCase(i,j))));
-
-
-
             }
         }
     }
