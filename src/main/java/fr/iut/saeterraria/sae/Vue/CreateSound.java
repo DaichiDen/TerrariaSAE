@@ -15,4 +15,7 @@ public class CreateSound {
     public void jouerSon(MediaPlayer mediaPlayer){
         mediaPlayer.play();
     }
+    public void stopSon(MediaPlayer mediaPlayer){
+        mediaPlayer.stop();
+    }
 }

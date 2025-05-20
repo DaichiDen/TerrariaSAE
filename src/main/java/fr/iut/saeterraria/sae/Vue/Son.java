@@ -11,4 +11,7 @@ public class Son extends CreateSound{
     public void play() {
         super.jouerSon(this.fichier);
     }
+    public void stop(){
+        super.stopSon(this.fichier);
+    }
 }

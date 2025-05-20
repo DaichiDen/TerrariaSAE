@@ -111,8 +111,9 @@ public class Controller implements Initializable {
                         }); // Action à faire après le délai
                         delay.play();
 
-                        PauseTransition delay2 = new PauseTransition(Duration.seconds(13));
+                        PauseTransition delay2 = new PauseTransition(Duration.seconds(16));
                         delay2.setOnFinished(event ->{
+                            burp.stop();
                             rageQuit();
                         });
                         delay2.play();
