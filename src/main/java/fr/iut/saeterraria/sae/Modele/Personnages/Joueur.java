@@ -131,7 +131,7 @@ public class Joueur extends Entite {
         int caseX = (int) (getX() / taille1bloc);
         int caseY = (int) (getY() / taille1bloc);
         //boucle sur les 4 blocs autour du joueur , i+1 i-1 ,j+1 j-1
-        for (int i = caseY - 1; i <= caseY + 3; i++) { // +3 pour la taille du personnage (2 blocs de hauteur)
+        for (int i = caseY - 1; i <= caseY + 2; i++) { // +2 pour la taille du personnage (2 blocs de hauteur)
             for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (i >= 0 && i < map.getLigne() && j >= 0 && j < map.getColonne()) {
                     if (map.getCase(i, j) != 3) { // si le bloc n'est pas du ciel
@@ -176,8 +176,8 @@ public class Joueur extends Entite {
         boolean collisionDroite = false;
         boolean collisionGauche = false;
 
-        for (int i = caseY - 1; i <= caseY + 3; i++) {
-            for (int j = caseX - 1; j <= caseX + 2; j++) {
+        for (int i = caseY - 1; i <= caseY + 2; i++) {
+            for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (i >= 0 && i < map.getLigne() && j >= 0 && j < map.getColonne()) {
                     if (map.getCase(i, j) != 3) {
                         int xBloc = map.getCoordonnéesX(j);
