@@ -10,6 +10,7 @@ import javafx.animation.AnimationTimer;
 
 import fr.iut.saeterraria.sae.Vue.Fond;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,9 +24,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-
-
-
+import javafx.util.Duration;
 
 
 import java.net.URL;
@@ -88,9 +87,9 @@ public class Controller implements Initializable {
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
             private final long frameInterval = 16_666_666; // Conversion nano secondes en secondes = 60 FPS
+
             @Override
             public void handle(long now) {
-
                 if (now - lastUpdate >= frameInterval) {
 
                     controlleurJoueur.update();
@@ -98,13 +97,21 @@ public class Controller implements Initializable {
                     barre.mettreAJourSpriteVie(jeu.getJoueur());
                     vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
                     lastUpdate = now;
+
+                    if (!jeu.estVivant(jeu.getJoueur())) {
+                        // Le joueur est mort, démarrer le délai de 10 secondes avant rageQuit
+                        PauseTransition delay = new PauseTransition(Duration.seconds(0.70)); // Délai de 10 secondes
+                        delay.setOnFinished(event -> rageQuit()); // Action à faire après le délai
+                        delay.play(); // Démarre le délai
+                    }
                 }
             }
         };
-        timer.start();  // frameInterval est l'intervalle entre 2 màj graphiques
+        timer.start(); // frameInterval est l'intervalle entre 2 màj graphiques
         // lastUpdate stocke le temps de la dernière màj graphique enregistré
         // La méthode vérifie si entre la dernière update et maintenant il s'est passé 1/60 ème de seconde ( 1 frame), si oui on actualise graphiquement
-        scene.afficherCarte(); // Affiche le décor dans la vue
+        scene.afficherCarte();// Affiche le décor dans la vue
+
 
     }
 
