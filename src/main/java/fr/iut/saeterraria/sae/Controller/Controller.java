@@ -62,7 +62,19 @@ public class Controller implements Initializable {
     private BorderPane principal;
 
     @FXML
-    private Pane death;
+    private AnchorPane death;
+
+    @FXML
+    private ImageView imagefond;
+
+    @FXML
+    private ImageView imageaccueil;
+
+    @FXML
+    private StackPane imagebloc_death;
+
+    @FXML
+    private StackPane imagebloc_accueil;
 
     private Jeu jeu;
     private Fond scene;
@@ -72,13 +84,20 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         scene = new Fond(fond);// Initialise le fond (décor du jeu)
+
+        imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
+        imagefond.fitHeightProperty().bind(imagebloc_death.widthProperty());
+
+        imageaccueil.setFitWidth(menu.getWidth());
+        imageaccueil.fitWidthProperty().bind(imagebloc_accueil.widthProperty());
+        imageaccueil.fitHeightProperty().bind(imagebloc_accueil.widthProperty());
+
         File file = new File("/Sound/burp.wav");
         URL imageURL = getClass().getResource("/Sound/burp.wav");
         Son burp = new Son("/Sound/burp.wav");
 
         jeu = new Jeu("Joueur");
         SpriteVie barre = new SpriteVie(Vie, jeu);
-        death.getChildren().add(createImageView("/death_screen.gif" ,1920,1080) );
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond);
         inventaireVue = new vueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
