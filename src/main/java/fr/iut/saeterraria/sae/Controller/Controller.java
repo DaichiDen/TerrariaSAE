@@ -3,12 +3,8 @@ package fr.iut.saeterraria.sae.Controller;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
 import fr.iut.saeterraria.sae.Modele.Map.Map;
-import fr.iut.saeterraria.sae.Vue.SpriteJoueur;
-import fr.iut.saeterraria.sae.Vue.SpriteVie;
-import fr.iut.saeterraria.sae.Vue.vueInventaire;
+import fr.iut.saeterraria.sae.Vue.*;
 import javafx.animation.AnimationTimer;
-
-import fr.iut.saeterraria.sae.Vue.Fond;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -31,11 +27,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
-
-
-
-
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -66,6 +61,9 @@ public class Controller implements Initializable {
     @FXML
     private BorderPane principal;
 
+    @FXML
+    private Pane death;
+
     private Jeu jeu;
     private Fond scene;
     private vueInventaire inventaireVue;
@@ -73,10 +71,15 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        scene = new Fond(fond); // Initialise le fond (décor du jeu)
+        scene = new Fond(fond);// Initialise le fond (décor du jeu)
+        File file = new File("/Sound/burp.wav");
+        URL imageURL = getClass().getResource("/Sound/burp.wav");
+        Son burp = new Son("/Sound/burp.wav");
+
         jeu = new Jeu("Joueur");
         SpriteVie barre = new SpriteVie(Vie, jeu);
-        Clavier controlleurJoueur = new Clavier(jeu);
+        death.getChildren().add(createImageView("/death_screen.gif" ,1920,1080) );
+        Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond);
         inventaireVue = new vueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
@@ -100,8 +103,20 @@ public class Controller implements Initializable {
                     if (!jeu.estVivant(jeu.getJoueur())) {
                         // Le joueur est mort, démarrer le délai de 10 secondes avant rageQuit
                         PauseTransition delay = new PauseTransition(Duration.seconds(0.70)); // Délai de 10 secondes
-                        delay.setOnFinished(event -> rageQuit()); // Action à faire après le délai
-                        delay.play(); // Démarre le délai
+                        delay.setOnFinished(event ->{
+                            principal.setVisible(false);
+                            death.setVisible(true);
+                            burp.play();
+
+                        }); // Action à faire après le délai
+                        delay.play();
+
+                        PauseTransition delay2 = new PauseTransition(Duration.seconds(13));
+                        delay2.setOnFinished(event ->{
+                            rageQuit();
+                        });
+                        delay2.play();
+ // Démarre le délai
                     }
                 }
             }
