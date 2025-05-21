@@ -8,10 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 
-
-import java.net.URL;
-
-
 public class SpriteJoueur extends CreateImage{
 
     private Pane screen;
@@ -59,7 +55,7 @@ public class SpriteJoueur extends CreateImage{
         } else if (etatActuel.equals("droite")) {
             spriteActuel = createImageView("/Sprite/Chevalier_marcheDroite.gif",width,height);
         } else {
-            spriteActuel = createImageView("/Sprite/edin.png",width,height);
+            spriteActuel = createImageView("/Sprite/edin1.png",width,height);
         }
 
         spriteActuel.setId(joueur.getNom());
