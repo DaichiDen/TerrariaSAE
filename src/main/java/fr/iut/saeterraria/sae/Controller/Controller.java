@@ -51,7 +51,7 @@ public class Controller implements Initializable {
     @FXML
     private Button quitterInventaire;
     @FXML
-    private Pane screenInventaire;
+    private AnchorPane screenInventaire;
     @FXML
     private GridPane inventaire;
     @FXML
@@ -76,6 +76,9 @@ public class Controller implements Initializable {
     @FXML
     private StackPane imagebloc_accueil;
 
+    @FXML
+    private ImageView fondinventaire;
+
     private Jeu jeu;
     private Fond scene;
     private vueInventaire inventaireVue;
@@ -83,7 +86,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        scene = new Fond(fond);// Initialise le fond (décor du jeu)
+        scene = new Fond(fond); // Initialise le fond (décor du jeu)
 
 
 
@@ -96,9 +99,6 @@ public class Controller implements Initializable {
 
         File file = new File("/Sound/burp.wav");
         URL imageURL = getClass().getResource("/Sound/burp.wav");
-
-
-
 
         Son burp = new Son("/Sound/burp.wav");
 

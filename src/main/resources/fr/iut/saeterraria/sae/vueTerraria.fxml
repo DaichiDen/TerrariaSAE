@@ -21,31 +21,37 @@
                <children>
                   <TilePane fx:id="fond" prefColumns="58" prefRows="30" />
                   <Button fx:id="openInventaire" defaultButton="true" onAction="#ouvrirInventaire" prefHeight="26.0" prefWidth="89.0" text="Inventaire"> </Button>
-                  <Pane fx:id="screenInventaire" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false">
+                  <AnchorPane fx:id="screenInventaire" layoutX="-1.0" visible="false">
                      <children>
-                        <Button fx:id="quitterInventaire" defaultButton="true" layoutY="1.0" mnemonicParsing="false" onAction="#exitInventaire" prefHeight="26.0" prefWidth="89.0" text="Quitter" />
-                        <GridPane fx:id="inventaire" gridLinesVisible="true" layoutY="27.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <ImageView fx:id="fondiventaire" fitHeight="591.0" fitWidth="923.0" layoutX="250.0" layoutY="250.0" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../../../../gris.png" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="quitterInventaire" defaultButton="true" mnemonicParsing="false" onAction="#exitInventaire" prefHeight="112.0" prefWidth="230.0" text="Quitter" AnchorPane.bottomAnchor="928.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1692.0" AnchorPane.topAnchor="0.0" />
+                        <GridPane fx:id="inventaire" gridLinesVisible="true" layoutX="179.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="432.0" prefWidth="898.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="750.0" AnchorPane.topAnchor="250.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="308.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="292.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="292.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="292.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="292.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="292.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.6666259765625" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="383.66668701171875" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" />
                           </columnConstraints>
                           <rowConstraints>
-                              <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
+                        <ScrollBar layoutX="1579.0" orientation="VERTICAL" prefHeight="926.0" prefWidth="310.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="100.0" />
                      </children>
-                  </Pane>
+                  </AnchorPane>
                </children>
             </Pane>
          </center>
@@ -53,7 +59,7 @@
                   </BorderPane>
       <AnchorPane fx:id="menu" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <StackPane fx:id="imagebloc_accueil" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <StackPane fx:id="imagebloc_accueil" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fx:id="imageaccueil" fitHeight="1080" fitWidth="1920" pickOnBounds="true">
                      <image>
