@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -40,71 +42,6 @@ public class Clavier implements EventHandler<KeyEvent> {
     }
 
 
-    public void stopmouvement(KeyEvent event) {
-
-        switch (event.getCode()) {
-            case D:
-                jeu.getJoueur().setMarcheDroite(false);
-                break;
-            case RIGHT:
-                jeu.getJoueur().setMarcheDroite(false);
-                break;
-            case LEFT:
-                jeu.getJoueur().setMarcheGauche(false);
-                break;
-            case Q:
-                jeu.getJoueur().setMarcheGauche(false);
-                break;
-            case M:
-                jeu.getJoueur().getBarreVie().setVie(0);
-                break;
-
-        }
-
-
-    }
-
-    public void actionJoueur(KeyEvent event) {
-        switch (event.getCode()) {
-            case UP: // Saute
-                jeu.getJoueur().sauter();
-                System.out.println("Saute");
-                break;
-//            case DOWN: // Descend d'une plateforme
-//                jeu.getJoueur().descendre();
-//                System.out.println("Descend");
-//                break;
-            case LEFT: // Déplace à gauche
-                jeu.getJoueur().setMarcheGauche(true);
-                System.out.println("Gauche");
-                break;
-            case RIGHT: // Déplace à droite
-                jeu.getJoueur().setMarcheDroite(true);
-                System.out.println("Droite");
-                break;
-            case SPACE: // Saute
-                jeu.getJoueur().sauter();
-                System.out.println("Saute");
-                break;
-            case Q: // Déplace à gauche
-                jeu.getJoueur().setMarcheGauche(true);
-                System.out.println("Gauche");
-                break;
-            case D: // Déplace à droite
-                jeu.getJoueur().setMarcheDroite(true);
-                System.out.println("Droite");
-                break;
-//            case S: // Descend d'une plateforme
-//                jeu.getJoueur().descendre();
-//                System.out.println("Descend");
-//                break;
-            case I:
-                break;
-
-            default:
-                break;
-        }
-    }
 
     public void handle(KeyEvent event) { //
         KeyCode code = event.getCode(); // le code de la touche de l'event

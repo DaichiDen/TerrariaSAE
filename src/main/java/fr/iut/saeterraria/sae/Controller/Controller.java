@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
 
 import javafx.scene.input.KeyEvent;
 
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import javafx.scene.layout.GridPane;
@@ -105,12 +106,12 @@ public class Controller implements Initializable {
         jeu = new Jeu("Joueur");
         SpriteVie barre = new SpriteVie(Vie, jeu);
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond);
+        Souris controlleurSouris = new Souris(jeu,scene);
         inventaireVue = new vueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
-
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
-
+        fond.addEventHandler(MouseEvent.MOUSE_CLICKED, click -> controlleurSouris.handle(click));
         Son lumiere = new Son("/Sound/Lumière.mp3");
         lumiere.play();
 

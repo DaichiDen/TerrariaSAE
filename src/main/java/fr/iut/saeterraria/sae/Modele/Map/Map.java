@@ -46,6 +46,10 @@ public class Map {
         return map;
     }
 
+    public void setCase (int x,int y,int val){
+        map[x][y]=val;
+    }
+
     public int getColonne(){
         return map[0].length;
     }
@@ -61,5 +65,16 @@ public class Map {
     public int getCoordonnéesY(int y){
         return y*32;
     }
+
+    public int getIndiceX(double pixelX){
+        return (int)(pixelX / 32);
+    }
+
+    public int getIndiceY(double pixelY){
+        return (int)(pixelY / 32);
+    }
+
+
+
 
 }

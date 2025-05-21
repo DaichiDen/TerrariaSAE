@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Modele.Personnages;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.input.MouseEvent;
 
 public class Joueur extends Entite {
     private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
@@ -121,7 +122,70 @@ public class Joueur extends Entite {
             setY(getY() + vitesseY);
         }
 
+
     }
+    public void miner(Map map,int x,int y) {
+        int[][][] tab = inRange(map);
+
+        for(int i = tab.length-1; i >= 0; i--) {
+            for(int j = tab[i].length-1; j >= 0; j--) {
+                if (x >= tab[i][j][0] && x < tab[i][j][0] + 32 &&
+                        y >= tab[i][j][1] && y < tab[i][j][1] + 32) {
+                    System.out.println("test");
+                    map.setCase(i/32,j/32,3);
+                }
+            }
+        }
+    }
+
+    public int[][][] inRange(Map map) {
+        int caseX = (int) (getX() / taille1bloc);
+        int caseY = (int) (getY() / taille1bloc);
+
+        int[][][] tab = new int[6][5][2]; // 6 lignes visibles (Y), 5 colonnes (X)
+        for (int dy = -2; dy <= 3; dy++) { // hauteur : 6 cases (y -2 à y +3)
+            for (int dx = -2; dx <= 2; dx++) { // largeur : 5 cases (x -2 à x +2)
+
+                int x = caseX + dx;
+                int y = caseY + dy;
+
+                int i = dy + 2; // Pour que dy = -2 commence à l'indice 0
+                int j = dx + 2; // Pour que dx = -2 commence à l'indice 0
+
+                if (y >= 0 && y < map.getLigne() && x >= 0 && x < map.getColonne()) {
+                    if (map.getCase(y, x) != 3) {
+                        tab[i][j][0] = (map.getCoordonnéesX(x));
+                        tab[i][j][1] = (map.getCoordonnéesY(y));
+                    } else {
+                        tab[i][j][0] = -1; // rien d’intéressant ici
+                        tab[i][j][1] = -1;
+                    }
+                } else {
+                    tab[i][j][0] = -1;
+                    tab[i][j][1] = -1;
+                }
+            }
+        }
+
+        return tab;
+    }
+
+
+    public void afficheInRange(int[][][] tab){
+        for(int i = 0; i < tab.length; i++){
+            for(int j = 0; j < tab[i].length; j++){
+                if (tab[i][j][0] != -1) {
+                    System.out.print("[x=" + tab[i][j][0] + ", y=" + tab[i][j][1] + "] ");
+                } else {
+                    System.out.print("[ -- ] ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println("------------------");
+    }
+
+
 
     public void collisionVerticale(Map map) { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
