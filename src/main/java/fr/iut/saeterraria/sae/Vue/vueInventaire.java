@@ -3,9 +3,7 @@ package fr.iut.saeterraria.sae.Vue;
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 
 import java.util.HashMap;
 
@@ -78,66 +76,80 @@ public class vueInventaire extends CreateRessourceVisuel {
 
         // Affiche l'hotbar
         for (int j = 0; j < tableauInventaire.getColumnCount(); j++) {
-            if ( (player.getInventaire().getInventaireJoueur()[0][j].getItem() != null)) {
-
-                afficheItemQuantite("/Tiles/".concat(items.get( (player.getInventaire().getInventaireJoueur())[0][j].getItem().getCodeObjet())).concat(".png"), (player.getInventaire().getInventaireJoueur())[0][j].getQuantite(), 0, j,0);
+            if ( (player.getInventaire().getInventaireJoueur()[0][j].getItem().getCodeObjet() != 0)) {
+                String URL = "/Tiles/".concat(items.get((player.getInventaire().getInventaireJoueur())[0][j].getItem().getCodeObjet())).concat(".png");
+                int quantite = (player.getInventaire().getInventaireJoueur())[0][j].getQuantite();
+                afficheItemQuantite(URL,quantite, 0, j,0);
             }
             else{
-                HBox hBox = new HBox();
-                StackPane stackPane = new StackPane();
-                Region region = new Region();
-                region.setStyle("-fx-background-color: beige");
-                region.setOpacity(0.8);
-                stackPane.getChildren().add(region);
-                stackPane.getChildren().add(hBox);
-                hBox.setAlignment(Pos.CENTER);
-                hBox.setSpacing(5);
-                tableauInventaire.add(stackPane,j,0);
+                structureGridpane(j,0,0);
             }
         }
         // Affiche l'inventaire
+
         for (int i = 1; i < tableauInventaire.getRowCount(); i++) {
             for (int j = 0; j < tableauInventaire.getColumnCount(); j++) {
-                if (player.getInventaire().getInventaireJoueur()[i][j].getItem() != null) {
-                    afficheItemQuantite("/Tiles/".concat(items.get((player.getInventaire().getInventaireJoueur())[i][j].getItem().getCodeObjet())).concat(".png"), (player.getInventaire().getInventaireJoueur())[i][j].getQuantite(), i, j, 1);
+               if (player.getInventaire().getInventaireJoueur()[i][j].getItem().getCodeObjet() != 0) {
+                   String URL = "/Tiles/".concat(items.get((player.getInventaire().getInventaireJoueur())[i][j].getItem().getCodeObjet())).concat(".png");
+                   int quantite = (player.getInventaire().getInventaireJoueur())[i][j].getQuantite();
+
+                   afficheItemQuantite(URL, quantite, i, j, 1);
                 }
                 else {
-                    HBox hBox = new HBox();
-                    StackPane stackPane = new StackPane();
-                    Region region = new Region();
-                    region.setStyle("-fx-background-color: grey");
-                    region.setOpacity(0.8);
-                    stackPane.getChildren().add(region);
-                    stackPane.getChildren().add(hBox);
-                    hBox.setAlignment(Pos.CENTER);
-                    hBox.setSpacing(5);
-                    tableauInventaire.add(stackPane,j,i);
+                    structureGridpane(j,i,1);
                 }
             }
         }
     }
 
     public void afficheItemQuantite(String path,int quantite, int i, int j, int zoneinventaire){//j la colonne et i la ligne
+        HBox hBox = structureGridpane(j,i,zoneinventaire);
+        int longueurCase = (int)(tableauInventaire.getWidth()/tableauInventaire.getColumnCount());
+        int largeurCase = ((int)tableauInventaire.getHeight()/tableauInventaire.getRowCount());
+        hBox.getChildren().add(super.createImageView(path,longueurCase,largeurCase));//Item
+        hBox.getChildren().add(createLabel(quantite)); //Quantite
+    }
+
+    public HBox structureGridpane(int colonne, int ligne, int zoneinventaire){
         HBox hBox = new HBox();
         StackPane stackPane = new StackPane();
         Region region = new Region();
+        region.setOpacity(0.8);
+        stackPane.getChildren().add(region);
+        stackPane.getChildren().add(hBox);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setSpacing(5);
+        tableauInventaire.add(stackPane,colonne,ligne);
+
         if(zoneinventaire==0) {
             region.setStyle("-fx-background-color: beige");
         }
         else {
             region.setStyle("-fx-background-color: grey");
         }
-        region.setOpacity(0.8);
-        stackPane.getChildren().add(region);
-        stackPane.getChildren().add(hBox);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setSpacing(5);
-        hBox.getChildren().add(super.createImageView(path,(int)(tableauInventaire.getWidth()/tableauInventaire.getColumnCount()),((int)tableauInventaire.getHeight()/tableauInventaire.getRowCount())));//Item
-        hBox.getChildren().add(createLabel(quantite)); //Quantite
-        tableauInventaire.add(stackPane,i,j);
+        return hBox;
     }
 
-    public void chercheItem(){
-
+    public void updateElement(int ligne, int colonne) { //Quand le joueur obtient/perd un item
+        tableauInventaire.getChildren().removeIf(Node -> GridPane.getColumnIndex(Node)==colonne && GridPane.getRowIndex(Node)==ligne);
+        if(player.getInventaire().getInventaireJoueur()[ligne][colonne].getItem().getCodeObjet()!= 0) {
+            String URL = "/Tiles/".concat(items.get((player.getInventaire().getInventaireJoueur())[ligne][colonne].getItem().getCodeObjet())).concat(".png");
+            int quantite = player.getInventaire().getInventaireJoueur()[ligne][colonne].getQuantite();
+            if(ligne==0) {
+                afficheItemQuantite(URL, quantite, ligne, colonne, 0);
+            }
+            else {
+                afficheItemQuantite(URL, quantite, ligne, colonne, 1);
+            }
+        }
+        else {
+            if(ligne==0) {
+                structureGridpane(colonne,ligne,0);
+            }
+            else {
+                structureGridpane(colonne,ligne,1);
+            }
+        }
     }
 }
+

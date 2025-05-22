@@ -108,7 +108,6 @@ public class Jeu {
         items.put(69,new Armure("Botte en DELJCCium","",5));
 
         // Armes
-
     }
     
 }

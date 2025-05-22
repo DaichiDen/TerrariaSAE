@@ -1,6 +1,7 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
+import javafx.beans.property.IntegerProperty;
 
 public class Case {
 
@@ -10,7 +11,7 @@ public class Case {
     private int colonne;
 
     public Case(int ligne, int colonne) {
-        this.item = null;
+        this.item = new Item();
         this.quantite = 0;
         this.ligne = ligne;
         this.colonne = colonne;

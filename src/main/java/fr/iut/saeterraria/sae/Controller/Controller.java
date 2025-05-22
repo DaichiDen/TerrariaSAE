@@ -101,6 +101,14 @@ public class Controller implements Initializable{
 
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
 
+        for (int i=0; i<jeu.getJoueur().getInventaire().getInventaireJoueur().length; i++) {
+            for(int j=0; j<jeu.getJoueur().getInventaire().getInventaireJoueur()[i].length; j++) {
+                int finalI = i;
+                int finalJ = j;
+                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].getItem().codeObjetProperty().addListener((ob, ol, nv)-> inventaireVue.updateElement(jeu.getJoueur().getInventaire().getInventaireJoueur()[finalI][finalJ].getLigne(), jeu.getJoueur().getInventaire().getInventaireJoueur()[finalI][finalJ].getColonne()));
+            }
+        }
+
         BiblioSon.play(1);
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;

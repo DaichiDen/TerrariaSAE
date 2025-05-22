@@ -9,7 +9,7 @@ public class Inventaire {
     private Case[][] inventaireJoueur;
 
     public Inventaire() {
-        this.inventaireJoueur = new Case[7][6]; // 6 première colonne pour hotbar 36 Colonnes pour les 36 cases et 2 lignes pour l'id item et sa quantité
+        this.inventaireJoueur = new Case[7][6]; // 6 première colonne pour hotbar 36 Colonnes pour les 36 cases
         initialiseInventaire();
     }
 
@@ -71,6 +71,7 @@ public class Inventaire {
             }
         }
     }
+
     public void decrementeItem(int ligne, int colonne) {
          this.inventaireJoueur[ligne][colonne].retireQuantite(1);
     }

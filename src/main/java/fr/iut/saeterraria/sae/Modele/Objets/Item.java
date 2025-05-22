@@ -24,6 +24,13 @@ public class Item {
         this.codeObjet = new SimpleIntegerProperty(id);
         id++;
     }
+    public Item(){
+        this.name = new SimpleStringProperty("");
+        this.description = new SimpleStringProperty("");
+        this.typeItem = new SimpleIntegerProperty(0);
+        this.recette = new Recette();
+        this.codeObjet = new SimpleIntegerProperty(0);
+    }
 
     public IntegerProperty codeObjetProperty() { return codeObjet; }
     public int getCodeObjet() { return codeObjet.getValue(); }
