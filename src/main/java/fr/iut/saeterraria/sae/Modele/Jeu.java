@@ -80,6 +80,8 @@ public class Jeu {
 
         //Bloc outil
         items.put(10, new Etabli("Etabli","Un établi qui permet la fabrication d'objets",1,3));
+        items.put(11, new Etabli("Forge","Un établi qui permet la fabrication d'objets",1,3));
+        items.put(12, new Etabli("Alambique","Un établi qui permet la fabrication d'objets",1,3));
 
         // Outils
         items.put(50,new Pelle("Pelle de bois","Une pelle en bois ordinaire, accélère la vitesse pour creuser des objets"));

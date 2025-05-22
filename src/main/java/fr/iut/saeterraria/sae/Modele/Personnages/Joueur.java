@@ -32,15 +32,14 @@ public class Joueur extends Entite {
         super(nom, 20, 100, 20, 0, 0, 1, 10);
         this.equipement = new int[7];
 	    this.inventaire = new Inventaire();
-
     }
 
     public void ajouterItem(Item item, int quantite) {
         inventaire.ajoutInventaire(item, quantite);
     }
 
-    public Case[][] getInventaire(){
-        return inventaire.getInventaireJoueur();
+    public Inventaire getInventaire(){
+        return inventaire;
     }
 
     public void setMarcheGauche(boolean marcheGauche) {
@@ -60,7 +59,6 @@ public class Joueur extends Entite {
 
     public int getVitesseY(){
         return vitesseY;
-
     }
 
     public void sauter() {
