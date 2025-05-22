@@ -234,7 +234,7 @@ public class Joueur extends Entite {
     public void collisionVerticale(Map map) { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
 
-        Rectangle2D hitboxJoueur = new Rectangle2D(getX(),getY(),taille1bloc,taille1bloc*2);
+        Rectangle2D hitboxJoueur = new Rectangle2D(getX(),getY(),taille1bloc-2,taille1bloc*2);
 
         int caseX = (int) (getX() / taille1bloc);
         int caseY = (int) (getY() / taille1bloc);
@@ -277,7 +277,7 @@ public class Joueur extends Entite {
     }
     public void collisionHorizontale(Map map) {
 
-        Rectangle2D hitboxJoueur = new Rectangle2D(this.getX(), this.getY(), taille1bloc, taille1bloc*2);
+        Rectangle2D hitboxJoueur = new Rectangle2D(this.getX(), this.getY(), taille1bloc-2, taille1bloc*2);
 
         int caseX = (int) (this.getX() / taille1bloc);
         int caseY = (int) (this.getY() / taille1bloc);
