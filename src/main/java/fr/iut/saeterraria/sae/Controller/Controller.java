@@ -78,13 +78,14 @@ public class Controller implements Initializable {
     private StackPane imagebloc_accueil;
 
     private Jeu jeu;
-    private Fond scene;
+    public Fond scene;
     private vueInventaire inventaireVue;
     private SpriteJoueur vuejoueur;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        scene = new Fond(fond);// Initialise le fond (décor du jeu)
+        jeu = new Jeu("Joueur");
+        scene = new Fond(fond,jeu.getCarte());// Initialise le fond (décor du jeu)
 
 
 
@@ -103,17 +104,21 @@ public class Controller implements Initializable {
 
         Son burp = new Son("/Sound/burp.wav");
 
-        jeu = new Jeu("Joueur");
+
+
+
         SpriteVie barre = new SpriteVie(Vie, jeu);
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond);
-        Souris controlleurSouris = new Souris(jeu,scene);
+        Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte());
         inventaireVue = new vueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
         fond.addEventHandler(MouseEvent.MOUSE_CLICKED, click -> controlleurSouris.handle(click));
+        fond.addEventHandler(MouseEvent.MOUSE_CLICKED,click -> controlleurSouris.handle(click));
         Son lumiere = new Son("/Sound/Lumière.mp3");
         lumiere.play();
+
 
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
@@ -128,6 +133,7 @@ public class Controller implements Initializable {
                     barre.mettreAJourSpriteVie(jeu.getJoueur());
                     vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
                     lastUpdate = now;
+
 
                     if (!jeu.estVivant(jeu.getJoueur())) {
                         // Le joueur est mort, démarrer le délai de 10 secondes avant rageQuit
@@ -156,6 +162,7 @@ public class Controller implements Initializable {
         timer.start(); // frameInterval est l'intervalle entre 2 màj graphiques
         // lastUpdate stocke le temps de la dernière màj graphique enregistré
         // La méthode vérifie si entre la dernière update et maintenant il s'est passé 1/60 ème de seconde ( 1 frame), si oui on actualise graphiquement
+
         scene.afficherCarte();// Affiche le décor dans la vue
 
 
@@ -184,14 +191,4 @@ public class Controller implements Initializable {
     @FXML
     public void rageQuit(){ exit();}
 
-    public ImageView createImageView(String imagePath, int width, int height){
-
-        URL imageURL = getClass().getResource(imagePath);
-        Image image = new Image(String.valueOf(imageURL));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-        return imageView;
-
-    }
 }

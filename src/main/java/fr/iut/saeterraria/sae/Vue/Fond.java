@@ -16,8 +16,9 @@ public class Fond extends CreateImage {
     private static int id = 0;
     private TilePane pane;
 
-    public Fond(TilePane pane) {
-        this.carte = new Map();
+
+    public Fond(TilePane pane,Map carte) {
+        this.carte = carte;
         this.tiles = new HashMap<>();
         this.pane = pane;
         initialiseTile();
@@ -38,6 +39,7 @@ public class Fond extends CreateImage {
 
     // Permet d'afficher le terrain dans la scène (Pane principal)
     public void afficherCarte() {
+        pane.getChildren().clear();
         for (int i = 0; i < carte.getLigne(); i++) { //Ligne
             for (int j = 0; j < carte.getColonne(); j++) { //Colonne
                 this.pane.getChildren().add(new ImageView(tiles.get(carte.getCase(i, j))));

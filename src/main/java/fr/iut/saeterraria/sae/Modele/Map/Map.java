@@ -74,6 +74,13 @@ public class Map {
         return (int)(pixelY / 32);
     }
 
+    public void detruireBloc(int x,int y){
+        map[y][x]=3;
+    }
+    public void poserBloc(int x,int y,int val){
+        map[y][x]=val;
+    }
+
 
 
 

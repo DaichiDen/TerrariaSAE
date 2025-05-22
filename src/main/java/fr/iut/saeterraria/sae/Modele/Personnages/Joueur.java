@@ -26,11 +26,13 @@ public class Joueur extends Entite {
     private final int friction_air = 1;
 
 
+
     public Joueur(String nom) {
 
         super(nom, 20, 100, 20, 0, 0, 1, 10);
         this.equipement = new int[7];
 	    this.inventaire = new Inventaire();
+
 
     }
 
@@ -125,65 +127,107 @@ public class Joueur extends Entite {
 
     }
     public void miner(Map map,int x,int y) {
-        int[][][] tab = inRange(map);
-
-        for(int i = tab.length-1; i >= 0; i--) {
-            for(int j = tab[i].length-1; j >= 0; j--) {
-                if (x >= tab[i][j][0] && x < tab[i][j][0] + 32 &&
-                        y >= tab[i][j][1] && y < tab[i][j][1] + 32) {
-                    System.out.println("test");
-                    map.setCase(i/32,j/32,3);
-                }
-            }
+        if(peutEtreAtteint(map,x,y)){
+            map.detruireBloc(x,y);
+        }
+    }
+    public void poser(Map map,int x,int y) {
+        if(peutEtreAtteint(map,x,y)){
+            map.poserBloc(x,y,2);
         }
     }
 
-    public int[][][] inRange(Map map) {
-        int caseX = (int) (getX() / taille1bloc);
-        int caseY = (int) (getY() / taille1bloc);
+    public boolean peutEtreAtteint(Map map, int blocX, int blocY) {
 
-        int[][][] tab = new int[6][5][2]; // 6 lignes visibles (Y), 5 colonnes (X)
-        for (int dy = -2; dy <= 3; dy++) { // hauteur : 6 cases (y -2 à y +3)
-            for (int dx = -2; dx <= 2; dx++) { // largeur : 5 cases (x -2 à x +2)
+        int centreX = (int) (this.getX() + 16) / 32;
+        int centreY = (int) (this.getY() + 32) / 32;
 
-                int x = caseX + dx;
-                int y = caseY + dy;
+        int dx = blocX - centreX;
+        int dy = blocY - centreY;
 
-                int i = dy + 2; // Pour que dy = -2 commence à l'indice 0
-                int j = dx + 2; // Pour que dx = -2 commence à l'indice 0
-
-                if (y >= 0 && y < map.getLigne() && x >= 0 && x < map.getColonne()) {
-                    if (map.getCase(y, x) != 3) {
-                        tab[i][j][0] = (map.getCoordonnéesX(x));
-                        tab[i][j][1] = (map.getCoordonnéesY(y));
-                    } else {
-                        tab[i][j][0] = -1; // rien d’intéressant ici
-                        tab[i][j][1] = -1;
-                    }
-                } else {
-                    tab[i][j][0] = -1;
-                    tab[i][j][1] = -1;
-                }
-            }
+        if (Math.abs(dx) > 2 || Math.abs(dy) > 3) {
+            return false;
         }
 
-        return tab;
+
+        if (Math.abs(dx) <= 1 && Math.abs(dy) <= 2) {
+            return true;
+        }
+
+        if (Math.abs(dx) == 2 && dy == 0) {
+            int midX = centreX + Integer.signum(dx);
+            return map.getCase(midX, centreY) == 3;
+        }
+
+
+        if (Math.abs(dy) == 3 && dx == 0) {
+            int midY = centreY + Integer.signum(dy);
+            return map.getCase(centreX, midY) == 3;
+        }
+
+
+        if ((Math.abs(dx) == 2 && Math.abs(dy) == 2) || (Math.abs(dx) == 1 && Math.abs(dy) == 3)) {
+            int midX = centreX + Integer.signum(dx);
+            int midY = centreY + Integer.signum(dy);
+            return map.getCase(midX, centreY) == 3 && map.getCase(centreX, midY) == 3;
+        }
+
+
+        return false;
     }
 
 
-    public void afficheInRange(int[][][] tab){
-        for(int i = 0; i < tab.length; i++){
-            for(int j = 0; j < tab[i].length; j++){
-                if (tab[i][j][0] != -1) {
-                    System.out.print("[x=" + tab[i][j][0] + ", y=" + tab[i][j][1] + "] ");
-                } else {
-                    System.out.print("[ -- ] ");
-                }
-            }
-            System.out.println();
-        }
-        System.out.println("------------------");
-    }
+
+
+
+
+
+//    public int[][][] dansZone(Map map) {
+//        int caseX = (int) (getX() / taille1bloc);
+//        int caseY = (int) (getY() / taille1bloc);
+//
+//        int[][][] tab = new int[6][5][2]; // 6 lignes visibles (Y), 5 colonnes (X)
+//        for (int dy = -2; dy <= 3; dy++) { // hauteur : 6 cases (y -2 à y +3)
+//            for (int dx = -2; dx <= 2; dx++) { // largeur : 5 cases (x -2 à x +2)
+//
+//                int x = caseX + dx;
+//                int y = caseY + dy;
+//
+//                int i = dy + 2; // Pour que dy = -2 commence à l'indice 0
+//                int j = dx + 2; // Pour que dx = -2 commence à l'indice 0
+//
+//                if (y >= 0 && y < map.getLigne() && x >= 0 && x < map.getColonne()) {
+//                    if (map.getCase(y, x) != 3) {
+//                        tab[i][j][0] = (map.getCoordonnéesX(x));
+//                        tab[i][j][1] = (map.getCoordonnéesY(y));
+//                    } else {
+//                        tab[i][j][0] = -1;
+//                        tab[i][j][1] = -1;
+//                    }
+//                } else {
+//                    tab[i][j][0] = -1;
+//                    tab[i][j][1] = -1;
+//                }
+//            }
+//        }
+//
+//        return tab;
+//    }
+
+
+//    public void afficheInRange(int[][][] tab){
+//        for(int i = 0; i < tab.length; i++){
+//            for(int j = 0; j < tab[i].length; j++){
+//                if (tab[i][j][0] != -1) {
+//                    System.out.print("[x=" + tab[i][j][0] + ", y=" + tab[i][j][1] + "] ");
+//                } else {
+//                    System.out.print("[ -- ] ");
+//                }
+//            }
+//            System.out.println();
+//        }
+//        System.out.println("------------------");
+//    }
 
 
 

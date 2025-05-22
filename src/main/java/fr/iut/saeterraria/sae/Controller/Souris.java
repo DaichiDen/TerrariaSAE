@@ -6,24 +6,36 @@ import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.event.EventHandler;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 
 public class Souris implements EventHandler<MouseEvent> {
     private Jeu jeu;
-    private Fond tilePane;
+    private Fond fond;
     private Map map;
 
-    public Souris(Jeu jeu, Fond fond){
+    public Souris(Jeu jeu,Fond fond,Map map){
         this.jeu = jeu;
-        this.tilePane = fond;
+        this.fond = fond;
+        this.map = map;
+
+
     }
     @Override
     public void handle(MouseEvent mouseEvent) {
-        int x = (int)mouseEvent.getSceneX();
-        int y = (int)mouseEvent.getSceneY();
-        System.out.println("X :"+x+ " Y :"+y);
-        jeu.getJoueur().miner(jeu.getCarte(),x,y);
-        tilePane.afficherCarte();
+        int x = (int)mouseEvent.getX()/32;
+        int y = (int)mouseEvent.getY()/32;
+        if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+            System.out.println("X :" + x + " Y :" + y);
+            jeu.getJoueur().miner(jeu.getCarte(), x, y);
+            fond.afficherCarte();
+        }
+        else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+            jeu.getJoueur().poser(jeu.getCarte(), x, y);
+            fond.afficherCarte();
+        }
+
+
     }
 }
