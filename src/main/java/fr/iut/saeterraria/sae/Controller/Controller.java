@@ -137,7 +137,7 @@ public class Controller implements Initializable {
 
                     if (!jeu.estVivant(jeu.getJoueur())) {
                         // Le joueur est mort, démarrer le délai de 10 secondes avant rageQuit
-                        PauseTransition delay = new PauseTransition(Duration.seconds(0.70)); // Délai de 10 secondes
+                        PauseTransition delay = new PauseTransition(Duration.seconds(1.5)); // Délai de 10 secondes
                         delay.setOnFinished(event ->{
                             principal.setVisible(false);
                             death.setVisible(true);

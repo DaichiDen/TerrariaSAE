@@ -14,7 +14,7 @@ public class Joueur extends Entite {
 
     //constantes
     private final int gravité = 2;
-    private final int forceSaut = -18;
+    private final int forceSaut = -40;
 
     private boolean collisionBas = false;
 
@@ -139,8 +139,8 @@ public class Joueur extends Entite {
 
     public boolean peutEtreAtteint(Map map, int blocX, int blocY) {
 
-        int centreX = (int) (this.getX() + 16) / 32;
-        int centreY = (int) (this.getY() + 32) / 32;
+        int centreX = (this.getX() + 16) / 32; // centre horizontal
+        int centreY = (this.getY() + 16) / 32; // centre vertical corrigé
 
         int dx = blocX - centreX;
         int dy = blocY - centreY;
@@ -149,32 +149,29 @@ public class Joueur extends Entite {
             return false;
         }
 
-
         if (Math.abs(dx) <= 1 && Math.abs(dy) <= 2) {
             return true;
         }
 
         if (Math.abs(dx) == 2 && dy == 0) {
             int midX = centreX + Integer.signum(dx);
-            return map.getCase(midX, centreY) == 3;
+            return map.getCase(centreY, midX) == 3;
         }
-
 
         if (Math.abs(dy) == 3 && dx == 0) {
             int midY = centreY + Integer.signum(dy);
-            return map.getCase(centreX, midY) == 3;
+            return map.getCase(midY, centreX) == 3;
         }
-
 
         if ((Math.abs(dx) == 2 && Math.abs(dy) == 2) || (Math.abs(dx) == 1 && Math.abs(dy) == 3)) {
             int midX = centreX + Integer.signum(dx);
             int midY = centreY + Integer.signum(dy);
-            return map.getCase(midX, centreY) == 3 && map.getCase(centreX, midY) == 3;
+            return map.getCase(centreY, midX) == 3 && map.getCase(midY, centreX) == 3;
         }
-
 
         return false;
     }
+
 
 
 
