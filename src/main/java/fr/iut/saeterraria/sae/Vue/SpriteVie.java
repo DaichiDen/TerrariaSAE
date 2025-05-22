@@ -2,10 +2,9 @@ package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class SpriteVie extends CreateImage{
+public class SpriteVie extends CreateRessourceVisuel {
     private int[] liste_hp;
     private Pane screen;
     private Jeu jeu;
@@ -53,6 +52,8 @@ public class SpriteVie extends CreateImage{
 
         viePre = vieAct; // Met à jour l'ancienne vie
     }
+
+
 
 
 }

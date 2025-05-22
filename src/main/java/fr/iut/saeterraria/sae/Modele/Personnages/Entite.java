@@ -1,11 +1,10 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
-import fr.iut.saeterraria.sae.Vue.Son;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.geometry.Rectangle2D;
+import javafx.scene.media.MediaPlayer;
 
 
 public abstract class Entite {
@@ -16,9 +15,9 @@ public abstract class Entite {
     private IntegerProperty vitesseMax;
     private BarreVie barreVie;
     public final int taille1bloc = 32;
-
-    Son damage1 = new Son("/Sound/damage1.wav");
-    Son damage2 = new Son("/Sound/damage2.wav");
+//
+//    MediaPlayer damage1 = super.Sonore("/Sound/damage1.wav");
+//    MediaPlayer damage2 = super.Sonore("/Sound/damage2.wav");
 
     public Entite(String nom,int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax) {
         this.nom = new SimpleStringProperty(nom);
@@ -59,12 +58,12 @@ public abstract class Entite {
             int n = (int) (Math.random()*10);
             switch (n){
                 case 0:
-                    damage1.play();
-                    damage1.stop();
+//                    damage1.play();
+//                    damage1.stop();
                     break;
                 case 1:
-                    damage2.play();
-                    damage2.stop();
+//                    damage2.play();
+//                    damage2.stop();
                    break;
                 case 2:
                     break;

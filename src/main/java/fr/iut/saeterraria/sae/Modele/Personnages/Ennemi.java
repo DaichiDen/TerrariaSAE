@@ -4,14 +4,13 @@ import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.geometry.Rectangle2D;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Ennemi extends Entite {
 
     private ArrayList<Item> listDrops;
 
     public Ennemi(String nom, int vie, int vieMax,int energieMax, int x, int y, int def, int vitesse) {
-
-
 
         super(nom,vieMax,  energieMax, 20, x, y, def, vitesse);
 

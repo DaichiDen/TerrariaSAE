@@ -3,6 +3,8 @@ import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.geometry.Rectangle2D;
 
+import java.util.HashMap;
+
 public class Joueur extends Entite {
     private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
     private int[] equipement;
@@ -37,7 +39,7 @@ public class Joueur extends Entite {
         inventaire.ajoutInventaire(item, quantite);
     }
 
-    public int[][] getInventaire(){
+    public Case[][] getInventaire(){
         return inventaire.getInventaireJoueur();
     }
 

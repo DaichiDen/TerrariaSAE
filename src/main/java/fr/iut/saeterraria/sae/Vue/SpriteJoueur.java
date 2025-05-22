@@ -7,12 +7,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-
-
-import java.net.URL;
-
-
-public class SpriteJoueur extends CreateImage{
+public class SpriteJoueur extends CreateRessourceVisuel {
 
     private Pane screen;
     private Jeu jeu;
@@ -23,14 +18,12 @@ public class SpriteJoueur extends CreateImage{
 
     private Rectangle2D hitboxJoueur;
 
-
     public SpriteJoueur(Jeu jeu, Pane screen){
         this.jeu = jeu;
         this.screen = screen;
         this.width=150;
         this.height=150;
     }
-
 
     public void mettreAJourSpriteJoueur(Joueur joueur) {
         String etatActuel;
@@ -71,7 +64,6 @@ public class SpriteJoueur extends CreateImage{
 
         dernierEtat = etatActuel;
     }
-
 
 }
 
