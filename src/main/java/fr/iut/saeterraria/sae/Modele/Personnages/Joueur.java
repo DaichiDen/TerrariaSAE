@@ -4,6 +4,9 @@ import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.input.MouseEvent;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Joueur extends Entite {
     private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
     private int[] equipement;
@@ -138,42 +141,86 @@ public class Joueur extends Entite {
     }
 
     public boolean peutEtreAtteint(Map map, int blocX, int blocY) {
+        int joueurX = (this.getX() + 16) / 32;
+        int joueurY = (this.getY() + 16) / 32;
 
-        int centreX = (this.getX() + 16) / 32; // centre horizontal
-        int centreY = (this.getY() + 16) / 32; // centre vertical corrigé
+        int dx = blocX - joueurX;
+        int dy = blocY - joueurY;
 
-        int dx = blocX - centreX;
-        int dy = blocY - centreY;
+        double distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance > 2.5) return false; // Quand c'est pas à portée
 
-        if (Math.abs(dx) > 2 || Math.abs(dy) > 3) {
-            return false;
+        // On marche dans la ligne du joueur au bloc cible
+        int rayonLaser = (Math.max(Math.abs(dx), Math.abs(dy)) * 2); // le nombre d'étapes
+        for (int i = 1; i < rayonLaser; i++) {
+            double t = i / (double)rayonLaser;
+            int xi = (int)Math.round(joueurX + dx * t);
+            int yi = (int)Math.round(joueurY + dy * t);
+
+            if ((xi != blocX || yi != blocY) && map.getCase(yi, xi) != 3) { // Si bloc devant (obstacle)
+                return false;
+            }
         }
 
-        if (Math.abs(dx) <= 1 && Math.abs(dy) <= 2) {
-            return true;
-        }
-
-        if (Math.abs(dx) == 2 && dy == 0) {
-            int midX = centreX + Integer.signum(dx);
-            return map.getCase(centreY, midX) == 3;
-        }
-
-        if (Math.abs(dy) == 3 && dx == 0) {
-            int midY = centreY + Integer.signum(dy);
-            return map.getCase(midY, centreX) == 3;
-        }
-
-        if ((Math.abs(dx) == 2 && Math.abs(dy) == 2) || (Math.abs(dx) == 1 && Math.abs(dy) == 3)) {
-            int midX = centreX + Integer.signum(dx);
-            int midY = centreY + Integer.signum(dy);
-            return map.getCase(centreY, midX) == 3 && map.getCase(midY, centreX) == 3;
-        }
-
-        return false;
+        return true;
     }
 
 
 
+
+//    public boolean peutEtreAtteint(Map map, int blocX, int blocY) {
+//        int centreX = (this.getX() + 16) / 32; // centre horizontal
+//        int centreY = (this.getY() + 16) / 32; // centre vertical (milieu du perso)
+//
+//        int dx = blocX - centreX;
+//        int dy = blocY - centreY;
+//
+//        if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+//            return false;
+//        }
+//
+//        // Si dans un rayon de 1, accessible direct
+//        if (Math.abs(dx) <= 1 && Math.abs(dy) <= 1) {
+//            return true;
+//        }
+//
+//        // Si distance de 2 en X (horizontal)
+//        if (Math.abs(dx) == 2 && Math.abs(dy) <= 1) {
+//            int midX = centreX + Integer.signum(dx);
+//            return map.getCase(centreY, midX) == 3 &&
+//                    map.getCase(centreY - 1, midX) == 3;
+//        }
+//
+//        // Si distance de 2 en Y (vertical)
+//        if (Math.abs(dy) == 2 && Math.abs(dx) <= 1) {
+//            int midY = centreY + Integer.signum(dy);
+//            return map.getCase(midY, centreX) == 3;
+//        }
+//
+//        // Diagonales longues (2 en X et 2 en Y)
+//        if (Math.abs(dx) == 2 && Math.abs(dy) == 2) {
+//            int midX = centreX + Integer.signum(dx);
+//            int midY = centreY + Integer.signum(dy);
+//            return map.getCase(centreY, midX) == 3 &&
+//                    map.getCase(centreY - 1, midX) == 3 &&
+//                    map.getCase(midY, centreX) == 3;
+//        }
+//
+//        // Cas en L : (2,1)
+//        if (Math.abs(dx) == 2 && Math.abs(dy) == 1) {
+//            int midX = centreX + Integer.signum(dx);
+//            return map.getCase(centreY, midX) == 3 &&
+//                    map.getCase(centreY - 1, midX) == 3;
+//        }
+//
+//        // Cas en L : (1,2)
+//        if (Math.abs(dx) == 1 && Math.abs(dy) == 2) {
+//            int midY = centreY + Integer.signum(dy);
+//            return map.getCase(midY, centreX) == 3;
+//        }
+//
+//        return false;
+//    }
 
 
 
