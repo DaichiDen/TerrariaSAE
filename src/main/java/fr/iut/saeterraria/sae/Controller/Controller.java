@@ -161,9 +161,9 @@ public class Controller implements Initializable{
 
     @FXML
     public void ouvrirInventaire() {
+        jeu.getJoueur().getInventaire().remplirTest(jeu.getItems());
         openInventaire.setVisible(false);
         screenInventaire.setVisible(true);
-        jeu.getJoueur().getInventaire().remplirTest(jeu.getItems());
         Platform.runLater(() -> fond.requestFocus());
     }
     @FXML

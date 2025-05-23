@@ -75,10 +75,9 @@ public class Case {
         }
         return maxStack;
     }
-
     public void activerChangement() {
-        this.changement.set(true);
-        this.changement.set(false);
+        this.changement.setValue(true);
+        this.changement.setValue(false);
     }
 
     public BooleanProperty changementProperty() {

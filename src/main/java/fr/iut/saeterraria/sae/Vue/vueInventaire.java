@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 
@@ -104,9 +105,7 @@ public class vueInventaire extends CreateRessourceVisuel {
 
     public void afficheItemQuantite(String path,int quantite, int i, int j, int zoneinventaire){//j la colonne et i la ligne
         HBox hBox = structureGridpane(j,i,zoneinventaire);
-        int longueurCase = (int)(tableauInventaire.getWidth()/tableauInventaire.getColumnCount());
-        int largeurCase = ((int)tableauInventaire.getHeight()/tableauInventaire.getRowCount());
-        hBox.getChildren().add(super.createImageView(path,longueurCase,largeurCase));//Item
+        hBox.getChildren().add(super.createImageView(path,50,50));//Item
         hBox.getChildren().add(createLabel(quantite)); //Quantite
     }
 
@@ -131,10 +130,27 @@ public class vueInventaire extends CreateRessourceVisuel {
     }
 
     public void updateElement(int ligne, int colonne) { //Quand le joueur obtient/perd un item
-        tableauInventaire.getChildren().removeIf(Node -> GridPane.getColumnIndex(Node)==colonne && GridPane.getRowIndex(Node)==ligne);
+        Node caseInventaire = null;
+            for (Node node : tableauInventaire.getChildren()) {
+                Integer ligne1 = GridPane.getRowIndex(node);
+                Integer colonne1 = GridPane.getColumnIndex(node);
+                if(ligne1==null) {
+                    ligne1 = 0;
+                }
+                if(colonne1==null) {
+                    colonne1 = 0;
+                }
+                if(ligne1==ligne && colonne1==colonne) {
+                    caseInventaire = node;
+                }
+                if(ligne1.equals(tableauInventaire.getRowCount()) && colonne1.equals(tableauInventaire.getColumnCount())) {
+                }
+            }
+        tableauInventaire.getChildren().remove(caseInventaire);
         if(player.getInventaire().getInventaireJoueur()[ligne][colonne].getItem().getCodeObjet()!= 0) {
             String URL = "/Tiles/".concat(items.get((player.getInventaire().getInventaireJoueur())[ligne][colonne].getItem().getCodeObjet())).concat(".png");
             int quantite = player.getInventaire().getInventaireJoueur()[ligne][colonne].getQuantite();
+
             if(ligne==0) {
                 afficheItemQuantite(URL, quantite, ligne, colonne, 0);
             }

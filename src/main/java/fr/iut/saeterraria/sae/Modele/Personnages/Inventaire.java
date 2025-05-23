@@ -50,9 +50,9 @@ public class Inventaire {
                 i++;
             }
             i=0;
-            j=0;
             // Si la case est vide
             while(!placer && i < planInventaire.length ) {
+                j=0;
                 while (!placer && j < planInventaire[i].length) {
                     if (planInventaire[i][j] == 2) {
                         if (reste <= this.inventaireJoueur[i][j].getMaxStack())  { // Si l'ajout de l'item va pas dépasser la limite de stack
@@ -78,6 +78,15 @@ public class Inventaire {
         }
         else {
             inventaireJoueur[ligne][colonne].setCase(new Item(), 0);
+        }
+    }
+
+    public void incrementerItem(int ligne,int colonne) {
+        if(inventaireJoueur[ligne][colonne].getQuantite()+1<=this.inventaireJoueur[ligne][colonne].getMaxStack()) {
+            this.inventaireJoueur[ligne][colonne].ajouteQuantite(1);
+        }
+        else {
+            ajoutInventaire(inventaireJoueur[ligne][colonne].getItem(),1);
         }
     }
 
@@ -127,7 +136,7 @@ public class Inventaire {
     public void remplirTest(HashMap<Integer, Item> items) {
         for(int i=0; i<this.inventaireJoueur.length; i++) {
             for(int j=0; j<this.inventaireJoueur[i].length; j++) {
-                inventaireJoueur[i][j].setCase(items.get(1),10);
+                inventaireJoueur[i][j].setCase(items.get(1),1);
             }
         }
     }
@@ -135,7 +144,7 @@ public class Inventaire {
     public void viderTest() {
         for(int i=0; i<this.inventaireJoueur.length; i++) {
             for(int j=0; j<this.inventaireJoueur[i].length; j++) {
-                inventaireJoueur[i][j].setCase(new Item(),10);
+                incrementerItem(i,j);
             }
         }
     }
