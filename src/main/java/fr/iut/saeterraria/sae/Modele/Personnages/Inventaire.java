@@ -73,7 +73,12 @@ public class Inventaire {
     }
 
     public void decrementeItem(int ligne, int colonne) {
-         this.inventaireJoueur[ligne][colonne].retireQuantite(1);
+        if(inventaireJoueur[ligne][colonne].getQuantite()-1>0) {
+            this.inventaireJoueur[ligne][colonne].retireQuantite(1);
+        }
+        else {
+            inventaireJoueur[ligne][colonne].setCase(new Item(), 0);
+        }
     }
 
     public Case[][] getInventaireJoueur() {
@@ -115,6 +120,22 @@ public class Inventaire {
                 if(inventaireJoueur[i][j].getQuantite()==0 && inventaireJoueur[i][j].getItem() != null) {
                     removeItem(i,j);
                 }
+            }
+        }
+    }
+
+    public void remplirTest(HashMap<Integer, Item> items) {
+        for(int i=0; i<this.inventaireJoueur.length; i++) {
+            for(int j=0; j<this.inventaireJoueur[i].length; j++) {
+                inventaireJoueur[i][j].setCase(items.get(1),10);
+            }
+        }
+    }
+
+    public void viderTest() {
+        for(int i=0; i<this.inventaireJoueur.length; i++) {
+            for(int j=0; j<this.inventaireJoueur[i].length; j++) {
+                inventaireJoueur[i][j].setCase(new Item(),10);
             }
         }
     }

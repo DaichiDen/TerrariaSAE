@@ -98,9 +98,6 @@ public class Clavier implements EventHandler<KeyEvent> {
 //                jeu.getJoueur().descendre();
 //                System.out.println("Descend");
 //                break;
-            case I:
-                break;
-
             default:
                 break;
         }
@@ -120,7 +117,8 @@ public class Clavier implements EventHandler<KeyEvent> {
                 jeu.getJoueur().getBarreVie().setVie(0);
             }
             if(code == KeyCode.I ) {
-                if (inventaireOuvert == false){
+                if (!inventaireOuvert){
+                    jeu.getJoueur().getInventaire().viderTest();
                     ouvrirInventaire();
                     inventaireOuvert = true;
                 }

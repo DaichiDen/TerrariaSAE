@@ -105,7 +105,11 @@ public class Controller implements Initializable{
             for(int j=0; j<jeu.getJoueur().getInventaire().getInventaireJoueur()[i].length; j++) {
                 int finalI = i;
                 int finalJ = j;
-                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].getItem().codeObjetProperty().addListener((ob, ol, nv)-> inventaireVue.updateElement(jeu.getJoueur().getInventaire().getInventaireJoueur()[finalI][finalJ].getLigne(), jeu.getJoueur().getInventaire().getInventaireJoueur()[finalI][finalJ].getColonne()));
+                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].changementProperty().addListener((ob,ol,nv) -> {
+                    if(nv) {
+                        inventaireVue.updateElement(finalI,finalJ);
+                    }
+                });
             }
         }
 
@@ -159,6 +163,7 @@ public class Controller implements Initializable{
     public void ouvrirInventaire() {
         openInventaire.setVisible(false);
         screenInventaire.setVisible(true);
+        jeu.getJoueur().getInventaire().remplirTest(jeu.getItems());
         Platform.runLater(() -> fond.requestFocus());
     }
     @FXML
