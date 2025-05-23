@@ -9,7 +9,7 @@ public class Pioche extends Outils {
     }
 
     @Override
-    public boolean action() {
-        return false;
+    public void action() {
+        System.out.println("test");
     }
 }

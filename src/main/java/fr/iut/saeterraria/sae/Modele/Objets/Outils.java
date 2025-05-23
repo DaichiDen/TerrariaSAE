@@ -13,5 +13,5 @@ public abstract class Outils extends Item{
         super(nom,description,3);
     }
 
-    public abstract boolean action();
+    public abstract void action();
 }

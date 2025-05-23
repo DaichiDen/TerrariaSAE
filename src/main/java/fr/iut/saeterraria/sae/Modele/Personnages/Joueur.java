@@ -369,6 +369,10 @@ public class Joueur extends Entite {
         if (collisionDroite) setMarcheDroite(false);
         if (collisionGauche) setMarcheGauche(false);
     }
+    public void tp(){
+        this.setX(0);
+        this.setY(0);
+    }
 
 
 
