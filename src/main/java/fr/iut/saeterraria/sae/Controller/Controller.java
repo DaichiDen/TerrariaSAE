@@ -57,28 +57,23 @@ public class Controller implements Initializable{
     private Pane Vie;
     @FXML
     private BorderPane principal;
-
     @FXML
     private AnchorPane death;
-
     @FXML
     private ImageView imagefond;
-
     @FXML
     private ImageView imageaccueil;
-
     @FXML
     private StackPane imagebloc_death;
-
     @FXML
     private StackPane imagebloc_accueil;
-
     @FXML
-    private ImageView fondinventaire;
+    private GridPane hotBar;
 
     private Jeu jeu;
     public Fond scene;
     private vueInventaire inventaireVue;
+    private vueHotbar hotBarVue;
     private SpriteJoueur vuejoueur;
     private VueSon BiblioSon = new VueSon();
 
@@ -99,6 +94,7 @@ public class Controller implements Initializable{
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond);
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte());
         inventaireVue = new vueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
+        hotBarVue = new vueHotbar(jeu,hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
@@ -167,17 +163,18 @@ public class Controller implements Initializable{
     @FXML
     public void ouvrirInventaire() {
         jeu.getJoueur().getInventaire().remplirTest(jeu.getItems());
+        hotBar.setVisible(false);
         openInventaire.setVisible(false);
         screenInventaire.setVisible(true);
         Platform.runLater(() -> fond.requestFocus());
     }
     @FXML
     public void exitInventaire(){
+        hotBar.setVisible(true);
         screenInventaire.setVisible(false);
         openInventaire.setVisible(true);
         Platform.runLater(() -> fond.requestFocus());
     }
-
 
     @FXML
     public void startGame(){
