@@ -19,7 +19,7 @@ public class Joueur extends Entite {
 
     //constantes
     private final int gravité = 2;
-    private final int forceSaut = -40;
+    private final int forceSaut = -18;
 
     private boolean collisionBas = false;
 

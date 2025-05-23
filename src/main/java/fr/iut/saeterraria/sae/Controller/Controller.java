@@ -84,7 +84,8 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        scene = new Fond(fond); // Initialise le fond (décor du jeu)
+        jeu = new Jeu("Joueur");//Mettre un nom dynamique?
+        scene = new Fond(fond,jeu.getCarte()); // Initialise le fond (décor du jeu)
 
         imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
         imagefond.fitHeightProperty().bind(imagebloc_death.widthProperty());
@@ -93,7 +94,7 @@ public class Controller implements Initializable{
         imageaccueil.fitWidthProperty().bind(imagebloc_accueil.widthProperty());
         imageaccueil.fitHeightProperty().bind(imagebloc_accueil.widthProperty());
 
-        jeu = new Jeu("Joueur");//Mettre un nom dynamique?
+
         SpriteVie barre = new SpriteVie(Vie, jeu);
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond);
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte());
@@ -101,6 +102,7 @@ public class Controller implements Initializable{
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
+        fond.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
 
         for (int i=0; i<jeu.getJoueur().getInventaire().getInventaireJoueur().length; i++) {
             for(int j=0; j<jeu.getJoueur().getInventaire().getInventaireJoueur()[i].length; j++) {
