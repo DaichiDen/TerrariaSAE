@@ -2,7 +2,6 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
-import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Vue.*;
 import javafx.animation.AnimationTimer;
 
@@ -15,7 +14,6 @@ import javafx.scene.control.Button;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 
 import javafx.scene.input.KeyEvent;
 
@@ -26,10 +24,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.util.Duration;
-
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
@@ -37,7 +33,7 @@ import java.util.ResourceBundle;
 
 import static javafx.application.Platform.exit;
 
-public class Controller implements Initializable {
+public class Controller implements Initializable{
 
     @FXML
     private AnchorPane menu;
@@ -52,7 +48,7 @@ public class Controller implements Initializable {
     @FXML
     private Button quitterInventaire;
     @FXML
-    private Pane screenInventaire;
+    private AnchorPane screenInventaire;
     @FXML
     private GridPane inventaire;
     @FXML
@@ -77,17 +73,18 @@ public class Controller implements Initializable {
     @FXML
     private StackPane imagebloc_accueil;
 
+    @FXML
+    private ImageView fondinventaire;
+
     private Jeu jeu;
     public Fond scene;
     private vueInventaire inventaireVue;
     private SpriteJoueur vuejoueur;
+    private VueSon BiblioSon = new VueSon();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        jeu = new Jeu("Joueur");
-        scene = new Fond(fond,jeu.getCarte());// Initialise le fond (décor du jeu)
-
-
+        scene = new Fond(fond); // Initialise le fond (décor du jeu)
 
         imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
         imagefond.fitHeightProperty().bind(imagebloc_death.widthProperty());
@@ -96,17 +93,7 @@ public class Controller implements Initializable {
         imageaccueil.fitWidthProperty().bind(imagebloc_accueil.widthProperty());
         imageaccueil.fitHeightProperty().bind(imagebloc_accueil.widthProperty());
 
-        File file = new File("/Sound/burp.wav");
-        URL imageURL = getClass().getResource("/Sound/burp.wav");
-
-
-
-
-        Son burp = new Son("/Sound/burp.wav");
-
-
-
-
+        jeu = new Jeu("Joueur");//Mettre un nom dynamique?
         SpriteVie barre = new SpriteVie(Vie, jeu);
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond);
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte());
@@ -114,12 +101,20 @@ public class Controller implements Initializable {
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
-        fond.addEventHandler(MouseEvent.MOUSE_CLICKED, click -> controlleurSouris.handle(click));
-        fond.addEventHandler(MouseEvent.MOUSE_CLICKED,click -> controlleurSouris.handle(click));
-        Son lumiere = new Son("/Sound/Lumière.mp3");
-        lumiere.play();
 
+        for (int i=0; i<jeu.getJoueur().getInventaire().getInventaireJoueur().length; i++) {
+            for(int j=0; j<jeu.getJoueur().getInventaire().getInventaireJoueur()[i].length; j++) {
+                int finalI = i;
+                int finalJ = j;
+                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].changementProperty().addListener((ob,ol,nv) -> {
+                    if(nv) {
+                        inventaireVue.updateElement(finalI,finalJ);
+                    }
+                });
+            }
+        }
 
+        BiblioSon.play(1);
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
             private final long frameInterval = 16_666_666; // Conversion nano secondes en secondes = 60 FPS
@@ -141,8 +136,8 @@ public class Controller implements Initializable {
                         delay.setOnFinished(event ->{
                             principal.setVisible(false);
                             death.setVisible(true);
-                            lumiere.stop();
-                            burp.play();
+                            BiblioSon.stop(1);
+                            BiblioSon.play(4);
 
                         }); // Action à faire après le délai
                         delay.play();
@@ -150,7 +145,7 @@ public class Controller implements Initializable {
 
                         PauseTransition delay2 = new PauseTransition(Duration.seconds(16));
                         delay2.setOnFinished(event ->{
-                            burp.stop();
+                            BiblioSon.stop(4);
                             rageQuit();
                         });
                         delay2.play();
@@ -165,11 +160,11 @@ public class Controller implements Initializable {
 
         scene.afficherCarte();// Affiche le décor dans la vue
 
-
     }
 
     @FXML
     public void ouvrirInventaire() {
+        jeu.getJoueur().getInventaire().remplirTest(jeu.getItems());
         openInventaire.setVisible(false);
         screenInventaire.setVisible(true);
         Platform.runLater(() -> fond.requestFocus());

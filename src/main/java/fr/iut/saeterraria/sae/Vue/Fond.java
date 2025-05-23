@@ -1,6 +1,5 @@
 package fr.iut.saeterraria.sae.Vue;
 
-import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,7 +9,9 @@ import javafx.scene.layout.TilePane;
 import java.net.URL;
 import java.util.HashMap;
 
-public class Fond extends CreateImage {
+
+public class Fond extends CreateRessourceVisuel {
+
     private Map carte;
     private HashMap<Integer, Image> tiles;
     private static int id = 0;

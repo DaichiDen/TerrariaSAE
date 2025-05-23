@@ -7,6 +7,8 @@ import javafx.scene.input.MouseEvent;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import java.util.HashMap;
+
 public class Joueur extends Entite {
     private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
     private int[] equipement;
@@ -36,15 +38,14 @@ public class Joueur extends Entite {
         this.equipement = new int[7];
 	    this.inventaire = new Inventaire();
 
-
     }
 
     public void ajouterItem(Item item, int quantite) {
         inventaire.ajoutInventaire(item, quantite);
     }
 
-    public int[][] getInventaire(){
-        return inventaire.getInventaireJoueur();
+    public Inventaire getInventaire(){
+        return inventaire;
     }
 
     public void setMarcheGauche(boolean marcheGauche) {
@@ -64,7 +65,6 @@ public class Joueur extends Entite {
 
     public int getVitesseY(){
         return vitesseY;
-
     }
 
     public void sauter() {

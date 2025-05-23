@@ -38,9 +38,7 @@ public class Clavier implements EventHandler<KeyEvent> {
         this.quitterInventaire=quitterInventaire;
         this.openInventaire=openInventaire;
         this.fond=fond;
-
     }
-
 
 
     public void handle(KeyEvent event) { //
@@ -57,7 +55,8 @@ public class Clavier implements EventHandler<KeyEvent> {
                 jeu.getJoueur().getBarreVie().setVie(0);
             }
             if(code == KeyCode.I ) {
-                if (inventaireOuvert == false){
+                if (!inventaireOuvert){
+                    jeu.getJoueur().getInventaire().viderTest();
                     ouvrirInventaire();
                     inventaireOuvert = true;
                 }
