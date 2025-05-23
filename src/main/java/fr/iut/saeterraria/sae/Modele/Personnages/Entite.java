@@ -54,23 +54,7 @@ public abstract class Entite {
     }
 
     public final void decrementVie(int val) {
-
-            int n = (int) (Math.random()*10);
-            switch (n){
-                case 0:
-//                    damage1.play();
-//                    damage1.stop();
-                    break;
-                case 1:
-//                    damage2.play();
-//                    damage2.stop();
-                   break;
-                case 2:
-                    break;
-                default:
-                    System.out.println("dmg"+n);
-                    break;
-            }
+        
 
         if(barreVie.getVie()-val < 0){
             barreVie.setVie(0);
