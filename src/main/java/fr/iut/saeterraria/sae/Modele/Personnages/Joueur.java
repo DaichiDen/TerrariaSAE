@@ -140,6 +140,7 @@ public class Joueur extends Entite {
         }
     }
 
+
     public boolean peutEtreAtteint(Map map, int blocX, int blocY) {
         int joueurX = (this.getX() + 16) / 32;
         int joueurY = (this.getY() + 16) / 32;
@@ -164,6 +165,9 @@ public class Joueur extends Entite {
 
         return true;
     }
+
+
+
 
 
 
