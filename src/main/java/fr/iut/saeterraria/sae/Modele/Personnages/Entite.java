@@ -54,7 +54,7 @@ public abstract class Entite {
     }
 
     public final void decrementVie(int val) {
-        
+
 
         if(barreVie.getVie()-val < 0){
             barreVie.setVie(0);

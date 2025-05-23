@@ -8,7 +8,7 @@ public class Pelle extends Outils {
         super(nom, description);
     }
 
-    public boolean action() {
-        return false;
+    public void action(){
+        System.out.println("test");
     }
 }

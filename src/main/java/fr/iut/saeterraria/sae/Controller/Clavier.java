@@ -66,6 +66,9 @@ public class Clavier implements EventHandler<KeyEvent> {
                 }
 
             }
+            if(code == KeyCode.J){
+                jeu.getJoueur().tp();
+            }
 
         } else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
             touchesAppuyees.remove(code);// touche retirée de la liste car relâchée
