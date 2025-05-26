@@ -4,6 +4,7 @@ import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.input.MouseEvent;
 
+import javax.swing.*;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,6 +17,7 @@ public class Joueur extends Entite {
     private boolean marcheDroite = false;
     private boolean marcheGauche = false;
     private int vitesseY = 0;
+    private int mainCourante;
 
     //constantes
     private final int gravité = 2;
@@ -30,15 +32,33 @@ public class Joueur extends Entite {
     private final int friction_sol = 4;
     private final int friction_air = 1;
 
-
-
     public Joueur(String nom) {
-
         super(nom, 20, 100, 20, 0, 0, 1, 10);
         this.equipement = new int[7];
-	    this.inventaire = new Inventaire();
-
+        this.inventaire = new Inventaire();
+        this.mainCourante = 0;
     }
+
+    public void incrementeMainCourante() {
+        if (this.mainCourante == 6) {
+            setMainCourante(0);
+        }
+        else {
+            this.mainCourante++;
+        }
+    }
+    public void decrementeMainCourante() {
+        if (this.mainCourante == 0) {
+            setMainCourante(6);
+        }
+        else {
+            this.mainCourante--;
+        }
+    }
+    public void setMainCourante(int mainCourante) {
+        this.mainCourante = mainCourante;
+    }
+    public int getMainCourante(){ return mainCourante; }
 
     public void ajouterItem(Item item, int quantite) {
         inventaire.ajoutInventaire(item, quantite);
@@ -54,7 +74,6 @@ public class Joueur extends Entite {
     public void setMarcheDroite(boolean marcheDroite) {
         this.marcheDroite = marcheDroite;
     }
-
 
     public boolean getMarcheGauche() {
         return this.marcheGauche;
@@ -129,17 +148,18 @@ public class Joueur extends Entite {
 
 
     }
+
     public void miner(Map map,int x,int y) {
         if(peutEtreAtteint(map,x,y)){
             map.detruireBloc(x,y);
         }
     }
+
     public void poser(Map map,int x,int y) {
         if(peutEtreAtteint(map,x,y)){
             map.poserBloc(x,y,2);
         }
     }
-
 
     public boolean peutEtreAtteint(Map map, int blocX, int blocY) {
         int joueurX = (this.getX() + 16) / 32;
@@ -165,11 +185,6 @@ public class Joueur extends Entite {
 
         return true;
     }
-
-
-
-
-
 
 
 //    public boolean peutEtreAtteint(Map map, int blocX, int blocY) {
@@ -373,11 +388,6 @@ public class Joueur extends Entite {
         this.setX(0);
         this.setY(0);
     }
-
-
-
-
-
 
     }
 

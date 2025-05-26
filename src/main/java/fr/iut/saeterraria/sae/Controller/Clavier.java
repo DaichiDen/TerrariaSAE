@@ -1,6 +1,7 @@
 package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Vue.vueHotbar;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,14 +10,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
 import java.util.HashSet;
 import java.util.Set;
-
-
-
 
 public class Clavier implements EventHandler<KeyEvent> {
     private Jeu jeu;
@@ -27,24 +27,27 @@ public class Clavier implements EventHandler<KeyEvent> {
     @FXML
     private Button quitterInventaire;
     @FXML
-    private Pane screenInventaire;
+    private AnchorPane screenInventaire;
+    @FXML
+    private GridPane hotBarInventaire;
     private final Set<KeyCode> touchesAppuyees = new HashSet<>();
     private boolean inventaireOuvert = false;
+    private vueHotbar vueHotbar;
 
 
-    public Clavier(Jeu jeu, Pane screenInventaire,Button quitterInventaire,Button openInventaire,TilePane fond) {
+    public Clavier(Jeu jeu, AnchorPane screenInventaire,Button quitterInventaire,Button openInventaire,TilePane fond, GridPane hotBarInventaire) {
         this.jeu=jeu;
         this.screenInventaire=screenInventaire;
         this.quitterInventaire=quitterInventaire;
         this.openInventaire=openInventaire;
         this.fond=fond;
+        this.hotBarInventaire=hotBarInventaire;
+        this.vueHotbar = new vueHotbar(jeu,hotBarInventaire);
     }
 
 
     public void handle(KeyEvent event) { //
         KeyCode code = event.getCode(); // le code de la touche de l'event
-
-
         if (event.getEventType() == KeyEvent.KEY_PRESSED) {
             touchesAppuyees.add(code); // ajout du code à la liste pour les garder en mémoire (touches enfoncées)
 
@@ -66,6 +69,34 @@ public class Clavier implements EventHandler<KeyEvent> {
                 }
 
             }
+            if (code == KeyCode.DIGIT1 || code == KeyCode.DIGIT2 || code == KeyCode.DIGIT3 || code == KeyCode.DIGIT4 || code == KeyCode.DIGIT5 || code == KeyCode.DIGIT6) {
+                int mainCourante = jeu.getJoueur().getMainCourante();
+                if (code == KeyCode.DIGIT1){
+                    jeu.getJoueur().setMainCourante(0);
+                    vueHotbar.updateElement(0);
+                }
+                if (code == KeyCode.DIGIT2) {
+                    jeu.getJoueur().setMainCourante(1);
+                    vueHotbar.updateElement(1);
+                }
+                if (code == KeyCode.DIGIT3) {
+                    jeu.getJoueur().setMainCourante(2);
+                    vueHotbar.updateElement(2);
+                }
+                if (code == KeyCode.DIGIT4) {
+                    jeu.getJoueur().setMainCourante(3);
+                    vueHotbar.updateElement(3);
+                }
+                if (code == KeyCode.DIGIT5) {
+                    jeu.getJoueur().setMainCourante(4);
+                    vueHotbar.updateElement(4);
+                }
+                if (code == KeyCode.DIGIT6) {
+                    jeu.getJoueur().setMainCourante(5);
+                    vueHotbar.updateElement(5);
+                }
+                vueHotbar.updateElement(mainCourante);
+            }
             if(code == KeyCode.J){
                 jeu.getJoueur().tp();
             }
@@ -85,6 +116,7 @@ public class Clavier implements EventHandler<KeyEvent> {
     @FXML
     public void ouvrirInventaire() {
         openInventaire.setVisible(false);
+        hotBarInventaire.setVisible(false);
         jeu.getJoueur().setMarcheDroite(false);
         jeu.getJoueur().setMarcheGauche(false);
         screenInventaire.setVisible(true);
@@ -92,6 +124,7 @@ public class Clavier implements EventHandler<KeyEvent> {
     @FXML
     public void exitInventaire(){
         screenInventaire.setVisible(false);
+        hotBarInventaire.setVisible(true);
         openInventaire.setVisible(true);
         Platform.runLater(() -> fond.requestFocus());
     }

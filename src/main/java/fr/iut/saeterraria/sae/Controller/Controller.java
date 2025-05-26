@@ -52,8 +52,6 @@ public class Controller implements Initializable{
     @FXML
     private GridPane inventaire;
     @FXML
-    private HBox hotbar;
-    @FXML
     private Pane Vie;
     @FXML
     private BorderPane principal;
@@ -91,7 +89,7 @@ public class Controller implements Initializable{
 
 
         SpriteVie barre = new SpriteVie(Vie, jeu);
-        Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond);
+        Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar);
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte());
         inventaireVue = new vueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         hotBarVue = new vueHotbar(jeu,hotBar);
@@ -105,7 +103,11 @@ public class Controller implements Initializable{
                 int finalI = i;
                 int finalJ = j;
                 jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].changementProperty().addListener((ob,ol,nv) -> {
-                    if(nv) {
+                    if(finalI==0 && nv) {
+                        inventaireVue.updateElement(finalI,finalJ);
+                        hotBarVue.updateElement(finalJ);
+                    }
+                    else if(nv) {
                         inventaireVue.updateElement(finalI,finalJ);
                     }
                 });
