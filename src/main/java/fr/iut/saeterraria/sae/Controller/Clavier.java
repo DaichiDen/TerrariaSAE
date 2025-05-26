@@ -62,10 +62,6 @@ public class Clavier implements EventHandler<KeyEvent> {
             if (code == KeyCode.NUMPAD5) {
                 jeu.getJoueur().getBarreVie().setVie(0);
             }
-
-
-
-
             if(code == KeyCode.I ) {
                 if (!inventaireOuvert){
 
@@ -77,18 +73,16 @@ public class Clavier implements EventHandler<KeyEvent> {
                 }
 
             }
-
-            if (code == KeyCode.J)  { // à déplacer dans souris quand on aura une hotbar (main courante)
+            if (code == KeyCode.J) { // à déplacer dans souris quand on aura une hotbar (main courante)
                 if (!jeu.getJoueur().getPierreTp().getEtat_tp()) {
                     jeu.getJoueur().getPierreTp().setX(jeu.getJoueur().getX());
                     jeu.getJoueur().getPierreTp().setY(jeu.getJoueur().getY());
                     jeu.getJoueur().getPierreTp().setEtat_tp(true);
-                }
-                else {
+                } else {
                     jeu.getJoueur().tp(jeu.getJoueur().getPierreTp().getX(), jeu.getJoueur().getPierreTp().getY());
                     jeu.getJoueur().getPierreTp().setEtat_tp(false);
                 }
-
+            }
             if (code == KeyCode.DIGIT1 || code == KeyCode.DIGIT2 || code == KeyCode.DIGIT3 || code == KeyCode.DIGIT4 || code == KeyCode.DIGIT5 || code == KeyCode.DIGIT6) {
                 int mainCourante = jeu.getJoueur().getMainCourante();
                 if (code == KeyCode.DIGIT1){
@@ -117,11 +111,6 @@ public class Clavier implements EventHandler<KeyEvent> {
                 }
                 vueHotbar.updateElement(mainCourante);
             }
-
-
-
-            }
-
 
         } else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
             touchesAppuyees.remove(code);// touche retirée de la liste car relâchée

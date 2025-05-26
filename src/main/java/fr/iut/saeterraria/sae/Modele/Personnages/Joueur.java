@@ -37,6 +37,7 @@ public class Joueur extends Entite {
         this.equipement = new int[7];
         this.inventaire = new Inventaire();
         this.pierreTp = new Pierre_TP();
+        this.mainCourante = 0;
     }
 
 
