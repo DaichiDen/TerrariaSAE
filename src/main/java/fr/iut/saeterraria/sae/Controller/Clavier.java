@@ -62,8 +62,13 @@ public class Clavier implements EventHandler<KeyEvent> {
             if (code == KeyCode.NUMPAD5) {
                 jeu.getJoueur().getBarreVie().setVie(0);
             }
-            if (code == KeyCode.I) {
-                if (!inventaireOuvert) {
+
+
+
+
+            if(code == KeyCode.I ) {
+                if (!inventaireOuvert){
+
                     ouvrirInventaire();
                     inventaireOuvert = true;
                 } else {

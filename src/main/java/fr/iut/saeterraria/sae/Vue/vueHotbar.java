@@ -103,7 +103,7 @@ public class vueHotbar extends CreateRessourceVisuel {
         hBox.setAlignment(Pos.CENTER);
         hBox.setSpacing(5);
         if(maincourante) {
-            region.setStyle("-fx-background-color: red;");
+            region.setStyle("-fx-background-color: red");
         }
         else {
             region.setStyle("-fx-background-color: beige");
@@ -129,6 +129,9 @@ public class vueHotbar extends CreateRessourceVisuel {
             String URL = "/Tiles/".concat(items.get((jeu.getJoueur().getInventaire().getInventaireJoueur())[0][colonne].getItem().getCodeObjet())).concat(".png");
             int quantite = jeu.getJoueur().getInventaire().getInventaireJoueur()[0][colonne].getQuantite();
                 afficheItemQuantite(URL, quantite,colonne);
+        }
+        else if (jeu.getJoueur().getMainCourante() == colonne) {
+            structureHotBar(colonne,true);
         }
         else { // Si la case de la hotbar est vide
             structureHotBar(colonne, false);
