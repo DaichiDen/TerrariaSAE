@@ -30,6 +30,7 @@ public class Souris implements EventHandler<MouseEvent> {
             System.out.println("X :" + x + " Y :" + y);
             jeu.getJoueur().miner(jeu.getCarte(), x, y);
             fond.afficherCarte();
+            jeu.getJoueur().attaquer();
         }
         else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             jeu.getJoueur().poser(jeu.getCarte(), x, y,2);

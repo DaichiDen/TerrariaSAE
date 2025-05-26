@@ -22,7 +22,7 @@ public class Jeu {
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
     public Jeu(String nomJoueur){
         carte = new Map();
-        joueur = new Joueur(nomJoueur,carte);
+        joueur = new Joueur(nomJoueur,carte, this);
         mobs = new ArrayList<>();
         pNJ = new ArrayList<>();
         items = new HashMap<>();

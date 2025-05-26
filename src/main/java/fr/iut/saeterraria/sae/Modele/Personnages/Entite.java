@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
+import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -22,6 +23,7 @@ public abstract class Entite {
     protected boolean marcheDroite = false;
     protected boolean marcheGauche = false;
     protected int vitesseY = 0;
+    protected Jeu jeu;
     //constantes
     private final int gravité = 2;
     protected final int forceSaut = -18;
@@ -36,7 +38,7 @@ public abstract class Entite {
 //    MediaPlayer damage1 = super.Sonore("/Sound/damage1.wav");
 //    MediaPlayer damage2 = super.Sonore("/Sound/damage2.wav");
 
-    public Entite(String nom,int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Map map) {
+    public Entite(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Map map, Jeu jeu) {
         this.nom = new SimpleStringProperty(nom);
         this.barreVie = new BarreVie(vieMax);
         this.energieMax = new SimpleIntegerProperty(energieMax);
@@ -46,6 +48,7 @@ public abstract class Entite {
         this.def = new SimpleIntegerProperty(def);
         this.vitesseMax = new SimpleIntegerProperty(vitesseMax);
         this.map = map;
+        this.jeu=jeu;
     }
 
 
@@ -74,6 +77,30 @@ public abstract class Entite {
             vitesseY = forceSaut;
         }
     }
+    public boolean collisionne(int x2, int y2){
+        Rectangle2D hitboxJoueur = new Rectangle2D(jeu.getJoueur().getX(), jeu.getJoueur().getY(),taille1bloc,taille1bloc*2);
+        Rectangle2D hitboxMob = new Rectangle2D(x2,y2, taille1bloc, taille1bloc * 2);
+        if(hitboxMob.intersects(hitboxJoueur)) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public void attaquer () {
+        for (Entite e : jeu.getMobs()) {
+            if (e == this) continue;
+
+            int distanceX = Math.abs(e.getX() - this.getX());
+            int distanceY = Math.abs(e.getY() - this.getY());
+
+            if (distanceX < taille1bloc * 2 && distanceY < taille1bloc * 2) {
+                e.decrementVie(1);
+                System.out.println("Touché !");
+            }
+        }
+    }
+
     public boolean peutEtreAtteint(Map map, int blocX, int blocY,double val) {
         int joueurX = (this.getX() + 16) / 32;
         int joueurY = (this.getY() + 16) / 32;
@@ -98,8 +125,6 @@ public abstract class Entite {
 
         return true;
     }
-    public abstract void attaquer();
-
 
     public void mettreAJour() {
         if (estVivant()) {
@@ -247,6 +272,7 @@ public abstract class Entite {
         if (collisionGauche) setMarcheGauche(false);
     }
 
+
     // Gestion du nom
     public StringProperty nomProperty(){
         return this.nom;
@@ -312,11 +338,11 @@ public abstract class Entite {
 
     // Gestion du positionnement horizontal
     public final IntegerProperty xProperty() {return x;}
-    public final int getX() { return x.get(); }
+    public int getX() { return x.get(); }
     public final void setX(int x) { this.x.setValue(x);}
     // Gestion su positionnement vertical
     public final IntegerProperty yProperty(){ return y; }
-    public final int getY() { return y.get(); }
+    public int getY() { return y.get(); }
     public final void setY(int y) { this.y.setValue(y);}
 
     // Gestion de la defense

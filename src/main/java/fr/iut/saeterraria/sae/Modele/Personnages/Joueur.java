@@ -1,4 +1,5 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
+import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
@@ -21,6 +22,7 @@ public class Joueur extends Entite {
     private Pierre_TP pierreTp;
     private int mainCourante;
     private boolean collisionBas = false;
+    private Map map;
 
     // valeurs pour l'inertie dur joueur (voir dans mettreAJour)
     private int vitesseX = 0;
@@ -30,14 +32,16 @@ public class Joueur extends Entite {
     private final int friction_air = 1;
 
 
-    public Joueur(String nom, Map map) {
+    public Joueur(String nom, Map map, Jeu jeu) {
 
 
-        super(nom, 20, 100, 20, 0, 0, 1, 10, map);
+        super(nom, 20, 100, 20, 0, 0, 1, 10, map, jeu);
         this.equipement = new int[7];
         this.inventaire = new Inventaire();
         this.pierreTp = new Pierre_TP();
         this.mainCourante = 0;
+        this.map = map;
+
     }
 
 
@@ -70,10 +74,8 @@ public class Joueur extends Entite {
             return inventaire;
         }
 
-        @Override
-        public void attaquer () {
 
-        }
+
 
 
         public void mettreAJour () {
@@ -96,6 +98,7 @@ public class Joueur extends Entite {
                 map.detruireBloc(x, y);
             }
         }
+
 
         public void poser (Map map,int x, int y, int val){
 

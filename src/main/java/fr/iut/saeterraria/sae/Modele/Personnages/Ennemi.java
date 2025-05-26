@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
+import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.geometry.Rectangle2D;
@@ -11,9 +12,9 @@ public class Ennemi extends Entite {
 
     private ArrayList<Item> listDrops;
 
-    public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def, int vitesse, Map map) {
+    public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def, int vitesse, Map map, Jeu jeu) {
 
-        super(nom,vieMax,  energieMax, 20, x, y, def, vitesse,map);
+        super(nom,vieMax,  energieMax, 20, x, y, def, vitesse,map,jeu);
         listDrops = new ArrayList<>();
     }
 
@@ -24,10 +25,9 @@ public class Ennemi extends Entite {
         return (int) (Math.random()*11);
     }
 
-    @Override
-    public void attaquer() {
 
-    }
+
+
 
     public void mettreAJour(){
         super.mettreAJour();

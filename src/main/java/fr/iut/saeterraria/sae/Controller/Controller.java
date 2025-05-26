@@ -77,7 +77,7 @@ public class Controller implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         jeu = new Jeu("Joueur");//Mettre un nom dynamique?
         scene = new Fond(fond,jeu.getCarte());// Initialise le fond (décor du jeu)
-        jeu.addMobs(new Ennemi("Pierre",20,20,10,0,0,10,jeu.getCarte()));
+        jeu.addMobs(new Ennemi("Pierre",20,20,10,0,0,10,jeu.getCarte(), jeu));
         imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
         imagefond.fitHeightProperty().bind(imagebloc_death.widthProperty());
 
@@ -128,8 +128,8 @@ public class Controller implements Initializable{
                     vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
                     for (int i = 0; i < jeu.getMobs().size(); i++) {
                         jeu.getMobs().get(i).mettreAJour();
+                        System.out.println(jeu.getMobs().get(i).getBarreVie().getVie());
                     }
-                    System.out.println(jeu.getMobs().get(0).getX());
                     lastUpdate = now;
 
 
