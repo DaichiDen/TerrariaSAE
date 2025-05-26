@@ -32,6 +32,7 @@ public class Clavier implements EventHandler<KeyEvent> {
     private boolean inventaireOuvert = false;
 
 
+
     public Clavier(Jeu jeu, Pane screenInventaire,Button quitterInventaire,Button openInventaire,TilePane fond) {
         this.jeu=jeu;
         this.screenInventaire=screenInventaire;
@@ -51,24 +52,32 @@ public class Clavier implements EventHandler<KeyEvent> {
             if (code == KeyCode.SPACE || code == KeyCode.UP) {
                 jeu.getJoueur().sauter();
             }
-            if(code == KeyCode.NUMPAD5){
+            if (code == KeyCode.NUMPAD5) {
                 jeu.getJoueur().getBarreVie().setVie(0);
             }
-            if(code == KeyCode.I ) {
-                if (!inventaireOuvert){
+            if (code == KeyCode.I) {
+                if (!inventaireOuvert) {
                     jeu.getJoueur().getInventaire().viderTest();
                     ouvrirInventaire();
                     inventaireOuvert = true;
-                }
-                else{
+                } else {
                     exitInventaire();
                     inventaireOuvert = false;
                 }
 
             }
-            if(code == KeyCode.J){
-                jeu.getJoueur().tp();
+            if (code == KeyCode.J)  { // à déplacer dans souris quand on aura une hotbar (main courante)
+                if (!jeu.getJoueur().getPierreTp().getEtat_tp()) {
+                    jeu.getJoueur().getPierreTp().setX(jeu.getJoueur().getX());
+                    jeu.getJoueur().getPierreTp().setY(jeu.getJoueur().getY());
+                    jeu.getJoueur().getPierreTp().setEtat_tp(true);
+                }
+                else {
+                    jeu.getJoueur().tp(jeu.getJoueur().getPierreTp().getX(), jeu.getJoueur().getPierreTp().getY());
+                    jeu.getJoueur().getPierreTp().setEtat_tp(false);
+                }
             }
+
 
         } else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
             touchesAppuyees.remove(code);// touche retirée de la liste car relâchée

@@ -32,7 +32,7 @@ public class Souris implements EventHandler<MouseEvent> {
             fond.afficherCarte();
         }
         else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-            jeu.getJoueur().poser(jeu.getCarte(), x, y);
+            jeu.getJoueur().poser(jeu.getCarte(), x, y,2);
             fond.afficherCarte();
         }
 

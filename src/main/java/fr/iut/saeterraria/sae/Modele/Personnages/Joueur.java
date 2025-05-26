@@ -1,13 +1,9 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
+import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.input.MouseEvent;
-
-import java.util.LinkedList;
-import java.util.Queue;
-
-import java.util.HashMap;
 
 public class Joueur extends Entite {
     private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
@@ -16,6 +12,8 @@ public class Joueur extends Entite {
     private boolean marcheDroite = false;
     private boolean marcheGauche = false;
     private int vitesseY = 0;
+    private Pierre_TP pierreTp;
+
 
     //constantes
     private final int gravité = 2;
@@ -37,6 +35,7 @@ public class Joueur extends Entite {
         super(nom, 20, 100, 20, 0, 0, 1, 10);
         this.equipement = new int[7];
 	    this.inventaire = new Inventaire();
+        this.pierreTp = new Pierre_TP();
 
     }
 
@@ -134,9 +133,10 @@ public class Joueur extends Entite {
             map.detruireBloc(x,y);
         }
     }
-    public void poser(Map map,int x,int y) {
+    public void poser(Map map, int x, int y, int val) {
+
         if(peutEtreAtteint(map,x,y)){
-            map.poserBloc(x,y,2);
+            map.poserBloc(x,y,val);
         }
     }
 
@@ -369,9 +369,12 @@ public class Joueur extends Entite {
         if (collisionDroite) setMarcheDroite(false);
         if (collisionGauche) setMarcheGauche(false);
     }
-    public void tp(){
-        this.setX(0);
-        this.setY(0);
+    public void tp(int x, int y){
+        this.setX(x);
+        this.setY(y);
+    }
+    public Pierre_TP getPierreTp(){
+        return this.pierreTp;
     }
 
 
