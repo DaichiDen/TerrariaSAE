@@ -2,9 +2,6 @@ package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Inventaire {
     private Case[][] inventaireJoueur;
 
@@ -23,7 +20,7 @@ public class Inventaire {
 
     // Ajoute l'item dans une case ou dans plusieurs si aucune case peut contenir toute la quantité (ou pas du tout si aucune case le permet)==
     public void ajoutInventaire(Item item, int quantite) {
-        int[][] planInventaire= findItem(item,quantite);
+        int[][] planInventaire= findItem(item);
         int i=0;
         int j=0;
         boolean placer = false;
@@ -95,12 +92,12 @@ public class Inventaire {
     }
 
     public void removeItem(int ligne, int colonne) {
-        inventaireJoueur[ligne][colonne].setCase(null, 0);
+        inventaireJoueur[ligne][colonne].setCase(new Item(), 0);
         System.out.println("Suppression item de l'inventaire effectué");
     }
 
     // Trouve toutes les instances de l'item dans l'inventaire ainsi que les cases vides
-    public int[][] findItem(Item item, int quantite) {
+    public int[][] findItem(Item item) {
         boolean presentItemCaseLibre = false;
         int[][] instance = new int[this.inventaireJoueur.length][this.inventaireJoueur[0].length];
         for (int i = 0; i < this.inventaireJoueur.length; i++) {
@@ -120,32 +117,6 @@ public class Inventaire {
         }
         else{
             return null;
-        }
-    }
-
-    public void mettreAJourInventaire() {
-        for(int i=0; i<this.inventaireJoueur.length; i++) {
-            for (int j = 0; j < this.inventaireJoueur[0].length; j++) {
-                if(inventaireJoueur[i][j].getQuantite()==0 && inventaireJoueur[i][j].getItem() != null) {
-                    removeItem(i,j);
-                }
-            }
-        }
-    }
-
-    public void remplirTest(HashMap<Integer, Item> items) {
-        for(int i=0; i<this.inventaireJoueur.length; i++) {
-            for(int j=0; j<this.inventaireJoueur[i].length; j++) {
-                inventaireJoueur[i][j].setCase(items.get(1),1);
-            }
-        }
-    }
-
-    public void viderTest() {
-        for(int i=0; i<this.inventaireJoueur.length; i++) {
-            for(int j=0; j<this.inventaireJoueur[i].length; j++) {
-                incrementerItem(i,j);
-            }
         }
     }
 

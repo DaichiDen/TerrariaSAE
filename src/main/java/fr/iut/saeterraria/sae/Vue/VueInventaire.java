@@ -13,7 +13,7 @@ public class VueInventaire extends CreateRessourceVisuel {
     private Button quitterInventaire;
     private Pane screenInventaire;
     private Joueur player;
-    private GridPane tableauInventaire;
+    private GridPane tableauInventaire;//Affichage de l'inventaire
     private HashMap<Integer, String> items;
 
     // gridpane.add(new Button(), 1, 0); // column=1 row=0
@@ -142,8 +142,6 @@ public class VueInventaire extends CreateRessourceVisuel {
                 }
                 if(ligne1==ligne && colonne1==colonne) {
                     caseInventaire = node;
-                }
-                if(ligne1.equals(tableauInventaire.getRowCount()) && colonne1.equals(tableauInventaire.getColumnCount())) {
                 }
             }
         tableauInventaire.getChildren().remove(caseInventaire);

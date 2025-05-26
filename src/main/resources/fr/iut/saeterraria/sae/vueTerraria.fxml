@@ -21,8 +21,8 @@
                   <TilePane fx:id="fond" prefColumns="58" prefRows="30" />
                   <AnchorPane prefHeight="200.0" prefWidth="675.0">
                      <children>
-                        <Button fx:id="openInventaire" defaultButton="true" layoutX="20.0" layoutY="45.0" onAction="#ouvrirInventaire" prefHeight="52.0" prefWidth="81.0" text="Inventaire" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="579.0" AnchorPane.topAnchor="25.0"> </Button>
-                        <GridPane fx:id="hotBar" gridLinesVisible="true" layoutX="125.0" layoutY="80.0" prefHeight="91.0" prefWidth="311.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="10.0">
+                        <Button fx:id="openInventaire" defaultButton="true" layoutX="20.0" layoutY="45.0" onAction="#ouvrirInventaire" prefHeight="52.0" prefWidth="81.0" text="Inventaire" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="569.0" AnchorPane.topAnchor="25.0"> </Button>
+                        <GridPane fx:id="hotBar" gridLinesVisible="true" layoutX="125.0" layoutY="80.0" prefHeight="91.0" prefWidth="311.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="10.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
