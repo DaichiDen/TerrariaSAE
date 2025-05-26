@@ -74,6 +74,32 @@ public abstract class Entite {
             vitesseY = forceSaut;
         }
     }
+    public boolean peutEtreAtteint(Map map, int blocX, int blocY,double val) {
+        int joueurX = (this.getX() + 16) / 32;
+        int joueurY = (this.getY() + 16) / 32;
+
+        int dx = blocX - joueurX;
+        int dy = blocY - joueurY;
+
+        double distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance > val) return false; // Quand c'est pas à portée
+
+        // On marche dans la ligne du joueur au bloc cible
+        int rayonLaser = (Math.max(Math.abs(dx), Math.abs(dy)) * 2); // le nombre d'étapes
+        for (int i = 1; i < rayonLaser; i++) {
+            double t = i / (double)rayonLaser;
+            int xi = (int)Math.round(joueurX + dx * t);
+            int yi = (int)Math.round(joueurY + dy * t);
+
+            if ((xi != blocX || yi != blocY) && map.getCase(yi, xi) != 3) { // Si bloc devant (obstacle)
+                return false;
+            }
+        }
+
+        return true;
+    }
+    public abstract void attaquer();
+
 
     public void mettreAJour() {
         if (estVivant()) {

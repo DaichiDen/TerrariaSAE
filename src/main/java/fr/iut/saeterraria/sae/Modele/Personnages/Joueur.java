@@ -27,46 +27,27 @@ public class Joueur extends Entite {
         return inventaire;
     }
 
+    @Override
+    public void attaquer() {
+
+    }
+
     public void mettreAJour() {
         super.mettreAJour();
     }
     public void miner(Map map,int x,int y) {
-        if(peutEtreAtteint(map,x,y)){
+        if(peutEtreAtteint(map,x,y,2.5)){
             map.detruireBloc(x,y);
         }
     }
     public void poser(Map map, int x, int y, int val) {
 
-        if(peutEtreAtteint(map,x,y)){
+        if(peutEtreAtteint(map,x,y,2.5)){
             map.poserBloc(x,y,val);
         }
     }
 
 
-    public boolean peutEtreAtteint(Map map, int blocX, int blocY) {
-        int joueurX = (this.getX() + 16) / 32;
-        int joueurY = (this.getY() + 16) / 32;
-
-        int dx = blocX - joueurX;
-        int dy = blocY - joueurY;
-
-        double distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance > 2.5) return false; // Quand c'est pas à portée
-
-        // On marche dans la ligne du joueur au bloc cible
-        int rayonLaser = (Math.max(Math.abs(dx), Math.abs(dy)) * 2); // le nombre d'étapes
-        for (int i = 1; i < rayonLaser; i++) {
-            double t = i / (double)rayonLaser;
-            int xi = (int)Math.round(joueurX + dx * t);
-            int yi = (int)Math.round(joueurY + dy * t);
-
-            if ((xi != blocX || yi != blocY) && map.getCase(yi, xi) != 3) { // Si bloc devant (obstacle)
-                return false;
-            }
-        }
-
-        return true;
-    }
 
 //    public boolean peutEtreAtteint(Map map, int blocX, int blocY) {
 //        int centreX = (this.getX() + 16) / 32; // centre horizontal

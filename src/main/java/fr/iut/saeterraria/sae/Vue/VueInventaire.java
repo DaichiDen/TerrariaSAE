@@ -8,7 +8,7 @@ import javafx.scene.layout.*;
 
 import java.util.HashMap;
 
-public class vueInventaire extends CreateRessourceVisuel {
+public class VueInventaire extends CreateRessourceVisuel {
     private Pane fond;
     private Button quitterInventaire;
     private Pane screenInventaire;
@@ -17,7 +17,7 @@ public class vueInventaire extends CreateRessourceVisuel {
     private HashMap<Integer, String> items;
 
     // gridpane.add(new Button(), 1, 0); // column=1 row=0
-    public vueInventaire(Button button, Pane pane, Joueur joueur, GridPane tableauInventaire, Pane fond) {
+    public VueInventaire(Button button, Pane pane, Joueur joueur, GridPane tableauInventaire, Pane fond) {
         this.quitterInventaire = button;
         this.screenInventaire = pane;
         this.player = joueur;

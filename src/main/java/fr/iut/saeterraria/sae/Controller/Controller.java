@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.input.KeyEvent;
@@ -25,10 +24,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -73,7 +70,7 @@ public class Controller implements Initializable{
 
     private Jeu jeu;
     public Fond scene;
-    private vueInventaire inventaireVue;
+    private VueInventaire inventaireVue;
     private vueHotbar hotBarVue;
     private SpriteJoueur vuejoueur;
     private VueSon BiblioSon = new VueSon();
@@ -94,7 +91,7 @@ public class Controller implements Initializable{
         SpriteVie barre = new SpriteVie(Vie, jeu);
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond);
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte());
-        inventaireVue = new vueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
+        inventaireVue = new VueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         hotBarVue = new vueHotbar(jeu,hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
