@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
+import fr.iut.saeterraria.sae.Modele.Personnages.Ennemi;
 import fr.iut.saeterraria.sae.Vue.*;
 import javafx.animation.AnimationTimer;
 
@@ -80,8 +81,8 @@ public class Controller implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         jeu = new Jeu("Joueur");//Mettre un nom dynamique?
-        scene = new Fond(fond,jeu.getCarte()); // Initialise le fond (décor du jeu)
-
+        scene = new Fond(fond,jeu.getCarte());// Initialise le fond (décor du jeu)
+        jeu.addMobs(new Ennemi("Pierre",20,20,10,0,0,10,jeu.getCarte()));
         imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
         imagefond.fitHeightProperty().bind(imagebloc_death.widthProperty());
 
@@ -97,6 +98,7 @@ public class Controller implements Initializable{
         hotBarVue = new vueHotbar(jeu,hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
+        VueEnnemi ennemi = new VueEnnemi(jeu, screen);
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
         fond.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
 
@@ -122,9 +124,13 @@ public class Controller implements Initializable{
                 if (now - lastUpdate >= frameInterval) {
 
                     controlleurJoueur.update();
-                    jeu.getJoueur().mettreAJour(jeu.getCarte());
+                    jeu.getJoueur().mettreAJour();
                     barre.mettreAJourSpriteVie(jeu.getJoueur());
                     vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
+                    for (int i = 0; i < jeu.getMobs().size(); i++) {
+                        jeu.getMobs().get(i).mettreAJour();
+                    }
+                    System.out.println(jeu.getMobs().get(0).getX());
                     lastUpdate = now;
 
 
