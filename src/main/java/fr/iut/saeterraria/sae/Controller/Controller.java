@@ -164,7 +164,6 @@ public class Controller implements Initializable{
 
     @FXML
     public void ouvrirInventaire() {
-        jeu.getJoueur().getInventaire().remplirTest(jeu.getItems());
         hotBar.setVisible(false);
         openInventaire.setVisible(false);
         screenInventaire.setVisible(true);
