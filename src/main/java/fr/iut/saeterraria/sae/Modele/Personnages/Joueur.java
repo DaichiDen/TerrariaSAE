@@ -18,13 +18,7 @@ import java.util.HashMap;
 public class Joueur extends Entite {
     private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
     private int[] equipement;
-
     private Pierre_TP pierreTp;
-
-    private boolean enSaut = false;
-    private boolean marcheDroite = false;
-    private boolean marcheGauche = false;
-    private int vitesseY = 0;
     private int mainCourante;
     private boolean collisionBas = false;
 

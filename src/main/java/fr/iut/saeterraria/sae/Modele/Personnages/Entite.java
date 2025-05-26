@@ -19,9 +19,9 @@ public abstract class Entite {
     private BarreVie barreVie;
     public final int taille1bloc = 32;
     private boolean enSaut = false;
-    private boolean marcheDroite = false;
-    private boolean marcheGauche = false;
-    private int vitesseY = 0;
+    protected boolean marcheDroite = false;
+    protected boolean marcheGauche = false;
+    protected int vitesseY = 0;
     //constantes
     private final int gravité = 2;
     protected final int forceSaut = -18;
