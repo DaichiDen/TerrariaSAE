@@ -24,7 +24,7 @@ public abstract class Entite {
     private int vitesseY = 0;
     //constantes
     private final int gravité = 2;
-    private final int forceSaut = -18;
+    protected final int forceSaut = -18;
     //inertie et friction
     private int vitesseX = 0;
     private final int accel_sol = 5;

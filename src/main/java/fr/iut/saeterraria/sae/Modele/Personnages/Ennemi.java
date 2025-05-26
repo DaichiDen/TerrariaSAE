@@ -24,6 +24,11 @@ public class Ennemi extends Entite {
         return (int) (Math.random()*11);
     }
 
+    @Override
+    public void attaquer() {
+
+    }
+
     public void mettreAJour(){
         super.mettreAJour();
     }

@@ -16,4 +16,8 @@ public class PNJ extends Entite{
         dialogue = new ArrayList<String>();
     }
 
+    @Override
+    public void attaquer() {
+
+    }
 }
