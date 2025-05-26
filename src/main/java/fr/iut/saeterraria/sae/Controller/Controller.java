@@ -8,13 +8,18 @@ import javafx.animation.AnimationTimer;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import javafx.scene.input.MouseEvent;
@@ -65,6 +70,14 @@ public class Controller implements Initializable{
     private StackPane imagebloc_accueil;
     @FXML
     private GridPane hotBar;
+    @FXML
+    private VBox choixNom;
+    @FXML
+    private VBox boxAccueil;
+    @FXML
+    private Label phraseNom;
+    @FXML
+    private TextField zoneNom;
 
     private Jeu jeu;
     public Fond scene;
@@ -75,7 +88,12 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        jeu = new Jeu("Joueur");//Mettre un nom dynamique?
+        jeu = new Jeu( confirmerNom());
+//        zoneNom.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+//            if (event.getCode() == KeyCode.ENTER) {
+//                jeu = new Jeu( confirmerNom());}
+//        });
+        System.out.println("Joueur " + jeu.getJoueur().getNom());
         scene = new Fond(fond,jeu.getCarte());// Initialise le fond (décor du jeu)
         jeu.addMobs(new Ennemi("Pierre",20,20,10,0,0,10,jeu.getCarte()));
         imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
@@ -129,7 +147,6 @@ public class Controller implements Initializable{
                     for (int i = 0; i < jeu.getMobs().size(); i++) {
                         jeu.getMobs().get(i).mettreAJour();
                     }
-                    System.out.println(jeu.getMobs().get(0).getX());
                     lastUpdate = now;
 
 
@@ -182,9 +199,18 @@ public class Controller implements Initializable{
 
     @FXML
     public void startGame(){
+        boxAccueil.setVisible(false);
+        imagebloc_accueil.toBack();
+        choixNom.setVisible(true);
+    }
+
+    public String confirmerNom(){
         menu.setVisible(false);
+
         principal.setVisible(true);
-        Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
+        String nomJoueur = zoneNom.getText();
+        Platform.runLater(() -> fond.requestFocus());
+        return nomJoueur;
     }
     @FXML
     public void rageQuit(){ exit();}
