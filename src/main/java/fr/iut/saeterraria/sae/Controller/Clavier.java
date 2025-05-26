@@ -83,32 +83,17 @@ public class Clavier implements EventHandler<KeyEvent> {
                     jeu.getJoueur().getPierreTp().setEtat_tp(false);
                 }
             }
-            if (code == KeyCode.DIGIT1 || code == KeyCode.DIGIT2 || code == KeyCode.DIGIT3 || code == KeyCode.DIGIT4 || code == KeyCode.DIGIT5 || code == KeyCode.DIGIT6) {
-                int mainCourante = jeu.getJoueur().getMainCourante();
-                if (code == KeyCode.DIGIT1){
-                    jeu.getJoueur().setMainCourante(0);
-                    vueHotbar.updateElement(0);
-                }
-                if (code == KeyCode.DIGIT2) {
-                    jeu.getJoueur().setMainCourante(1);
-                    vueHotbar.updateElement(1);
-                }
-                if (code == KeyCode.DIGIT3) {
-                    jeu.getJoueur().setMainCourante(2);
-                    vueHotbar.updateElement(2);
-                }
-                if (code == KeyCode.DIGIT4) {
-                    jeu.getJoueur().setMainCourante(3);
-                    vueHotbar.updateElement(3);
-                }
-                if (code == KeyCode.DIGIT5) {
-                    jeu.getJoueur().setMainCourante(4);
-                    vueHotbar.updateElement(4);
-                }
-                if (code == KeyCode.DIGIT6) {
-                    jeu.getJoueur().setMainCourante(5);
-                    vueHotbar.updateElement(5);
-                }
+            String keyText = event.getText();
+            if (keyText.equals("&") || keyText.equals("\"") || keyText.equals("é") || keyText.equals("'") || keyText.equals("(") || keyText.equals("-")) {
+            int mainCourante = jeu.getJoueur().getMainCourante();
+            switch (keyText) {
+                case "&" -> { jeu.getJoueur().setMainCourante(0); vueHotbar.updateElement(0); }
+                case "é" -> { jeu.getJoueur().setMainCourante(1); vueHotbar.updateElement(1); }
+                case "\"" -> { jeu.getJoueur().setMainCourante(2); vueHotbar.updateElement(2); }
+                case "'" -> { jeu.getJoueur().setMainCourante(3); vueHotbar.updateElement(3); }
+                case "(" -> { jeu.getJoueur().setMainCourante(4); vueHotbar.updateElement(4); }
+                case "-" -> { jeu.getJoueur().setMainCourante(5); vueHotbar.updateElement(5); }
+            }
                 vueHotbar.updateElement(mainCourante);
             }
 
