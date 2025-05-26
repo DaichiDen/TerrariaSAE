@@ -64,7 +64,6 @@ public class Clavier implements EventHandler<KeyEvent> {
             }
             if (code == KeyCode.I) {
                 if (!inventaireOuvert) {
-                    jeu.getJoueur().getInventaire().viderTest();
                     ouvrirInventaire();
                     inventaireOuvert = true;
                 } else {

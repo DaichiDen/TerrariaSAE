@@ -96,14 +96,6 @@ public class Joueur extends Entite {
             return vitesseY;
         }
 
-        public void sauter () {
-            if (!enSaut) {
-                enSaut = true;
-                vitesseY = forceSaut;
-            }
-        }
-
-
         public void miner (Map map,int x, int y){
             if (peutEtreAtteint(map, x, y, 2.5)) {
                 map.detruireBloc(x, y);
@@ -257,6 +249,3 @@ public class Joueur extends Entite {
 
     }
 
-
-    private <__TMP__> __TMP__ setMainCourante() {
-    }
