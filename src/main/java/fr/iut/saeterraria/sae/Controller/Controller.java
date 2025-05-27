@@ -143,8 +143,26 @@ public class Controller implements Initializable{
                     jeu.getJoueur().mettreAJour();
                     barre.mettreAJourSpriteVie(jeu.getJoueur());
                     vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
-                    for (int i = 0; i < jeu.getMobs().size(); i++) {
-                        jeu.getMobs().get(i).mettreAJour();
+                    if(jeu.getMobs().size()>0) {
+                        for (int i = 0; i < jeu.getMobs().size(); i++) {
+                            if(jeu.getMobs().get(i)==null) {
+                                if (!jeu.getMobs().get(i).estVivant()) {
+                                    PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+                                    int finalI = i;
+                                    int finalI1 = i;
+                                    delay.setOnFinished(event -> {
+                                        screen.getChildren().remove(finalI);
+                                        jeu.getMobs().remove(finalI1);
+
+                                    });
+                                    delay.play();
+
+
+                                }
+                            }
+
+                            jeu.getMobs().get(i).mettreAJour();
+                        }
                     }
                     lastUpdate = now;
 

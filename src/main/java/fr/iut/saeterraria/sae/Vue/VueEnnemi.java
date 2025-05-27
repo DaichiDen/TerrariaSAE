@@ -20,14 +20,14 @@ public class VueEnnemi extends CreateRessourceVisuel {
     private ImageView spriteActuel;
     private String dernierEtat = "";
 
-    private Rectangle2D hitboxJoueur;
+
 
     public VueEnnemi(Jeu jeu, Pane screen){
         this.jeu = jeu;
         this.screen = screen;
         this.width=150;
         this.height=150;
-        spriteActuel = createImageView("/Sprite/test_ennemi.png",width,height);
+        spriteActuel = createImageView("/Sprite/BM_Sac_a_caca.png",width,height);
         spriteActuel.setId(jeu.getMobs().get(0).getNom());
         spriteActuel.translateXProperty().bind(jeu.getMobs().get(0).xProperty());
         spriteActuel.translateYProperty().bind(jeu.getMobs().get(0).yProperty());
@@ -37,7 +37,7 @@ public class VueEnnemi extends CreateRessourceVisuel {
     }
 
     public void mettreAjour(){
-
+        System.out.println("ntm");
     }
 
 
