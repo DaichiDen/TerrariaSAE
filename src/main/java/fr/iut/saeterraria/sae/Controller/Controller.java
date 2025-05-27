@@ -207,6 +207,7 @@ public class Controller implements Initializable{
         menu.setVisible(false);
         principal.setVisible(true);
         jeu.getJoueur().setNom(zoneNom.getText());
+        Platform.runLater(() -> fond.requestFocus());
     }
     @FXML
     public void rageQuit(){ exit();}
