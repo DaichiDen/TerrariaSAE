@@ -26,8 +26,10 @@ public class Ennemi extends Entite {
     }
 
 
+    @Override
+    public void attaquer(int x, int y, int range) {
 
-
+    }
 
     public void mettreAJour(){
         super.mettreAJour();

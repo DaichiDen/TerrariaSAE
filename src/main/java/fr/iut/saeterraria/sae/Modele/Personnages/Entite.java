@@ -80,23 +80,7 @@ public abstract class Entite {
     }
 
 
-    public void attaquer(int x, int y, int range) {
-        for (Entite e : jeu.getMobs()) {
-
-            Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(),taille1bloc,taille1bloc*2);
-
-            // Si le clic est à l'intérieur de la hitbox du mob
-            if (hitboxMob.contains(x,y)) {
-                int ennemiX = (e.getX() + 16) / 32;
-                int ennemiY = (e.getY() + 16) / 32;
-                if (peutEtreAtteint(jeu.getCarte(), ennemiX, ennemiY, range)) {
-                    e.decrementVie(1);
-                    System.out.println("Touché !");
-                    System.out.println(e.getBarreVie().getVie());
-                }
-            }
-        }
-    }
+    public abstract void attaquer(int x, int y, int range);
 
     public boolean peutEtreAtteint(Map map, int blocX, int blocY,double val) {
         int joueurX = (this.getX() + 16) / 32;

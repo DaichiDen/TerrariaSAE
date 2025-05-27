@@ -21,15 +21,8 @@ public class Joueur extends Entite {
     private int[] equipement;
     private Pierre_TP pierreTp;
     private int mainCourante;
-    private boolean collisionBas = false;
-    private Map map;
 
-    // valeurs pour l'inertie dur joueur (voir dans mettreAJour)
-    private int vitesseX = 0;
-    private final int accel_sol = 5;
-    private final int accel_air = 2;
-    private final int friction_sol = 4;
-    private final int friction_air = 1;
+    private Map map;
 
 
     public Joueur(String nom, Map map, Jeu jeu) {
@@ -93,7 +86,9 @@ public class Joueur extends Entite {
             return vitesseY;
         }
 
-        public void miner (Map map,int x, int y){
+
+
+    public void miner (Map map,int x, int y){
             if (peutEtreAtteint(map, x, y, 2.5)) {
                 map.detruireBloc(x, y);
             }
@@ -106,87 +101,30 @@ public class Joueur extends Entite {
                 map.poserBloc(x, y, val);
             }
         }
+    @Override
+    public void attaquer(int x, int y, int range) {
+        for (Entite e : jeu.getMobs()) {
 
+            Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(),taille1bloc,taille1bloc*2);
 
-        public boolean peutEtreAtteint (Map map,int blocX, int blocY){
-            int joueurX = (this.getX() + 16) / 32;
-            int joueurY = (this.getY() + 16) / 32;
-
-            int dx = blocX - joueurX;
-            int dy = blocY - joueurY;
-
-            double distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance > 2.5) return false; // Quand c'est pas à portée
-
-            // On marche dans la ligne du joueur au bloc cible
-            int rayonLaser = (Math.max(Math.abs(dx), Math.abs(dy)) * 2); // le nombre d'étapes
-            for (int i = 1; i < rayonLaser; i++) {
-                double t = i / (double) rayonLaser;
-                int xi = (int) Math.round(joueurX + dx * t);
-                int yi = (int) Math.round(joueurY + dy * t);
-
-                if ((xi != blocX || yi != blocY) && map.getCase(yi, xi) != 3) { // Si bloc devant (obstacle)
-                    return false;
+            // Si le clic est à l'intérieur de la hitbox du mob
+            if (hitboxMob.contains(x,y)) {
+                int ennemiX = (e.getX() + 16) / 32;
+                int ennemiY = (e.getY() + 16) / 32;
+                if (peutEtreAtteint(jeu.getCarte(), ennemiX, ennemiY, range)) {
+                    e.decrementVie(1);
+                    System.out.println("Touché !");
+                    System.out.println(e.getBarreVie().getVie());
                 }
             }
-
-            return true;
         }
+    }
 
 
-//    public boolean peutEtreAtteint(Map map, int blocX, int blocY) {
-//        int centreX = (this.getX() + 16) / 32; // centre horizontal
-//        int centreY = (this.getY() + 16) / 32; // centre vertical (milieu du perso)
-//
-//        int dx = blocX - centreX;
-//        int dy = blocY - centreY;
-//
-//        if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
-//            return false;
-//        }
-//
-//        // Si dans un rayon de 1, accessible direct
-//        if (Math.abs(dx) <= 1 && Math.abs(dy) <= 1) {
-//            return true;
-//        }
-//
-//        // Si distance de 2 en X (horizontal)
-//        if (Math.abs(dx) == 2 && Math.abs(dy) <= 1) {
-//            int midX = centreX + Integer.signum(dx);
-//            return map.getCase(centreY, midX) == 3 &&
-//                    map.getCase(centreY - 1, midX) == 3;
-//        }
-//
-//        // Si distance de 2 en Y (vertical)
-//        if (Math.abs(dy) == 2 && Math.abs(dx) <= 1) {
-//            int midY = centreY + Integer.signum(dy);
-//            return map.getCase(midY, centreX) == 3;
-//        }
-//
-//        // Diagonales longues (2 en X et 2 en Y)
-//        if (Math.abs(dx) == 2 && Math.abs(dy) == 2) {
-//            int midX = centreX + Integer.signum(dx);
-//            int midY = centreY + Integer.signum(dy);
-//            return map.getCase(centreY, midX) == 3 &&
-//                    map.getCase(centreY - 1, midX) == 3 &&
-//                    map.getCase(midY, centreX) == 3;
-//        }
-//
-//        // Cas en L : (2,1)
-//        if (Math.abs(dx) == 2 && Math.abs(dy) == 1) {
-//            int midX = centreX + Integer.signum(dx);
-//            return map.getCase(centreY, midX) == 3 &&
-//                    map.getCase(centreY - 1, midX) == 3;
-//        }
-//
-//        // Cas en L : (1,2)
-//        if (Math.abs(dx) == 1 && Math.abs(dy) == 2) {
-//            int midY = centreY + Integer.signum(dy);
-//            return map.getCase(midY, centreX) == 3;
-//        }
-//
-//        return false;
-//    }
+
+
+
+
 
 
 //    public int[][][] dansZone(Map map) {
