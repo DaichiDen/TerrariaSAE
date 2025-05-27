@@ -27,13 +27,13 @@ public class VueEnnemi extends CreateRessourceVisuel {
         this.screen = screen;
         this.width=150;
         this.height=150;
-        spriteActuel = createImageView("/Sprite/BM_Sac_a_caca.png",150,150);
-        screen.getChildren().add(spriteActuel);
+        spriteActuel = createImageView("/Sprite/test_ennemi.png",width,height);
         spriteActuel.setId(jeu.getMobs().get(0).getNom());
         spriteActuel.translateXProperty().bind(jeu.getMobs().get(0).xProperty());
         spriteActuel.translateYProperty().bind(jeu.getMobs().get(0).yProperty());
         spriteActuel.setFitWidth(54);
         spriteActuel.setFitHeight(64);
+        screen.getChildren().add(spriteActuel);
     }
 
     public void mettreAjour(){

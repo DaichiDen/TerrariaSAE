@@ -77,7 +77,7 @@ public class Controller implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         jeu = new Jeu("Joueur");//Mettre un nom dynamique?
         scene = new Fond(fond,jeu.getCarte());// Initialise le fond (décor du jeu)
-        jeu.addMobs(new Ennemi("Pierre",20,20,10,0,0,10,jeu.getCarte(), jeu));
+        jeu.addMobs(new Ennemi("Pierre",20,20,50,0,0,10,jeu.getCarte(), jeu));
         imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
         imagefond.fitHeightProperty().bind(imagebloc_death.widthProperty());
 
@@ -95,7 +95,7 @@ public class Controller implements Initializable{
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
         VueEnnemi ennemi = new VueEnnemi(jeu, screen);
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
-        fond.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
+        screen.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
 
         for (int i=0; i<jeu.getJoueur().getInventaire().getInventaireJoueur().length; i++) {
             for(int j=0; j<jeu.getJoueur().getInventaire().getInventaireJoueur()[i].length; j++) {
@@ -128,7 +128,6 @@ public class Controller implements Initializable{
                     vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
                     for (int i = 0; i < jeu.getMobs().size(); i++) {
                         jeu.getMobs().get(i).mettreAJour();
-                        System.out.println(jeu.getMobs().get(i).getBarreVie().getVie());
                     }
                     lastUpdate = now;
 

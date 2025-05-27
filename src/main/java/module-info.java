@@ -3,6 +3,7 @@ module fr.iut.saeterraria.sae {
     requires javafx.fxml;
     requires java.desktop;
     requires javafx.media;
+    requires jdk.xml.dom;
 
 
     opens fr.iut.saeterraria.sae to javafx.fxml;

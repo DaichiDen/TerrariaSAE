@@ -24,19 +24,16 @@ public class Souris implements EventHandler<MouseEvent> {
     }
     @Override
     public void handle(MouseEvent mouseEvent) {
-        int x = (int)mouseEvent.getX()/32;
-        int y = (int)mouseEvent.getY()/32;
+        int x = (int)mouseEvent.getX();
+        int y = (int)mouseEvent.getY();
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-            System.out.println("X :" + x + " Y :" + y);
-            jeu.getJoueur().miner(jeu.getCarte(), x, y);
+            jeu.getJoueur().miner(jeu.getCarte(), x/32, y/32);
             fond.afficherCarte();
-            jeu.getJoueur().attaquer();
+            jeu.getJoueur().attaquer(x,y,2);
         }
         else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-            jeu.getJoueur().poser(jeu.getCarte(), x, y,2);
+            jeu.getJoueur().poser(jeu.getCarte(), x/32, y/32,2);
             fond.afficherCarte();
         }
-
-
     }
 }

@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.media.MediaPlayer;
+import org.w3c.dom.css.Rect;
 
 
 public abstract class Entite {
@@ -77,26 +78,22 @@ public abstract class Entite {
             vitesseY = forceSaut;
         }
     }
-    public boolean collisionne(int x2, int y2){
-        Rectangle2D hitboxJoueur = new Rectangle2D(jeu.getJoueur().getX(), jeu.getJoueur().getY(),taille1bloc,taille1bloc*2);
-        Rectangle2D hitboxMob = new Rectangle2D(x2,y2, taille1bloc, taille1bloc * 2);
-        if(hitboxMob.intersects(hitboxJoueur)) {
-            return true;
-        }
-        return false;
 
-    }
 
-    public void attaquer () {
+    public void attaquer(int x, int y, int range) {
         for (Entite e : jeu.getMobs()) {
-            if (e == this) continue;
 
-            int distanceX = Math.abs(e.getX() - this.getX());
-            int distanceY = Math.abs(e.getY() - this.getY());
+            Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(),taille1bloc,taille1bloc*2);
 
-            if (distanceX < taille1bloc * 2 && distanceY < taille1bloc * 2) {
-                e.decrementVie(1);
-                System.out.println("Touché !");
+            // Si le clic est à l'intérieur de la hitbox du mob
+            if (hitboxMob.contains(x,y)) {
+                int ennemiX = (e.getX() + 16) / 32;
+                int ennemiY = (e.getY() + 16) / 32;
+                if (peutEtreAtteint(jeu.getCarte(), ennemiX, ennemiY, range)) {
+                    e.decrementVie(1);
+                    System.out.println("Touché !");
+                    System.out.println(e.getBarreVie().getVie());
+                }
             }
         }
     }
