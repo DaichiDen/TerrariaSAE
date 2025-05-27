@@ -88,10 +88,13 @@ public class Joueur extends Entite {
 
 
 
-    public void miner (Map map,int x, int y){
+    public boolean miner (Map map,int x, int y){
+            boolean miner = false;
             if (peutEtreAtteint(map, x, y, 2.5)) {
                 map.detruireBloc(x, y);
+                miner = true;
             }
+            return miner;
         }
 
 

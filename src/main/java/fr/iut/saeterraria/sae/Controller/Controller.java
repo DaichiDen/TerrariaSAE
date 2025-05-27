@@ -105,7 +105,7 @@ public class Controller implements Initializable{
         Platform.runLater(() -> fond.requestFocus());
         SpriteVie barre = new SpriteVie(Vie, jeu);
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar);
-        Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte());
+        Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte(),fond);
         inventaireVue = new VueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         hotBarVue = new vueHotbar(jeu,hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
@@ -195,7 +195,6 @@ public class Controller implements Initializable{
         // lastUpdate stocke le temps de la dernière màj graphique enregistré
         // La méthode vérifie si entre la dernière update et maintenant il s'est passé 1/60 ème de seconde ( 1 frame), si oui on actualise graphiquement
 
-        scene.afficherCarte();// Affiche le décor dans la vue
 
     }
 
