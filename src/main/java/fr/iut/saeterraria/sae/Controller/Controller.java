@@ -88,12 +88,11 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        jeu = new Jeu( confirmerNom());
-//        zoneNom.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-//            if (event.getCode() == KeyCode.ENTER) {
-//                jeu = new Jeu( confirmerNom());}
-//        });
-        System.out.println("Joueur " + jeu.getJoueur().getNom());
+        jeu = new Jeu("Nom");
+        zoneNom.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                confirmerNom();
+        }});
         scene = new Fond(fond,jeu.getCarte());// Initialise le fond (décor du jeu)
         jeu.addMobs(new Ennemi("Pierre",20,20,10,0,0,10,jeu.getCarte()));
         imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
@@ -103,7 +102,7 @@ public class Controller implements Initializable{
         imageaccueil.fitWidthProperty().bind(imagebloc_accueil.widthProperty());
         imageaccueil.fitHeightProperty().bind(imagebloc_accueil.widthProperty());
 
-
+        Platform.runLater(() -> fond.requestFocus());
         SpriteVie barre = new SpriteVie(Vie, jeu);
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar);
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte());
@@ -204,13 +203,10 @@ public class Controller implements Initializable{
         choixNom.setVisible(true);
     }
 
-    public String confirmerNom(){
+    public void confirmerNom(){
         menu.setVisible(false);
-
         principal.setVisible(true);
-        String nomJoueur = zoneNom.getText();
-        Platform.runLater(() -> fond.requestFocus());
-        return nomJoueur;
+        jeu.getJoueur().setNom(zoneNom.getText());
     }
     @FXML
     public void rageQuit(){ exit();}
