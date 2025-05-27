@@ -2,13 +2,16 @@ package fr.iut.saeterraria.sae.Modele.Objets.Arme;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Armes;
 
-public class Epee extends Melee {
+public class Melee extends Armes {
 
-    public Epee(String nom, String desc, int attaque) {
-        super(nom, desc,attaque);
+
+    public Melee(String nom, String desc, double attaque) {
+        super(nom, desc, attaque);
     }
+
     @Override
     public void attaquer() {
 
     }
+    
 }

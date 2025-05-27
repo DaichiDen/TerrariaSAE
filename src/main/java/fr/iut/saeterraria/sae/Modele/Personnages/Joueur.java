@@ -10,6 +10,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.input.MouseEvent;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -118,6 +119,41 @@ public class Joueur extends Entite {
                 }
             }
         }
+    }
+
+    // Vérifie si la quantité d'items nécessaires sont suffisants pour construire, puis craft l'item
+    public void craftItem(Item item) {
+//        int[][] necessaire = new int[2][item.getRecette().size()];//Besoin pour faire le craft
+//        for (int i = 0; i < necessaire.length; i++) {
+//            necessaire[0][i] = item.getRecette().get(i).getItem().getCodeObjet();
+//            necessaire[1][i] = item.getRecette().get(i).getQuantite();
+//        }
+//
+//        boolean[] contient = new boolean[item.getRecette().size()];
+//        int[][] position = new int[item.getRecette().size()][item.getRecette().size()];
+//
+//        // Vérifie si les quantités sont suffisantes côté joueur
+//        for (int i=0; i< item.getRecette().size(); i++) {
+//            int[][] tabResult;
+//            tabResult = inventaire.findItem(item.getRecette().get(i).getItem());
+//
+//            if (tabResult != null) {
+//                int quantite=0;
+//                for(int o=0; o<tabResult.length; o++) {
+//                    for (int p=0; p<tabResult[o].length; p++) {
+//                        if(tabResult[o][p]==1) {
+//                            quantite+=inventaire.getInventaireJoueur()[o][p].getQuantite();
+//                        }
+//                    }
+//                }
+//                if(quantite>=necessaire[1][i]) {
+//                    contient[i] = true;
+//                }
+//            }
+//        }
+//
+//        // Enlève les quantités côté inventaire
+
     }
 
 
