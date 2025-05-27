@@ -4,8 +4,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class BarreVie {
-    private int x = 800;
-    private int y = 10;
     private IntegerProperty vieMax;
     private IntegerProperty vie;
 
@@ -21,12 +19,7 @@ public class BarreVie {
     public final int getVie() {return vie.get();}
     public final void setVie(int vie) {this.vie.set(vie);}
 
-    public int getX() {
-        return x;
-    }
-    public int getY() {
-        return y;
-    }
+
 }
 
 

@@ -228,6 +228,7 @@ public class Controller implements Initializable{
         Platform.runLater(() -> fond.requestFocus());
     }
     @FXML
-    public void rageQuit(){ exit();}
+    public void rageQuit(){ Platform.exit();}
 
 }
+//TODO faire des listener pour chaque vue qui fait une màj

@@ -73,7 +73,7 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
 
 
-
+//TODO juste créer 1 fois les image view et les actualiser, pas besoin de les récréer à chaque fois
 
 
 
