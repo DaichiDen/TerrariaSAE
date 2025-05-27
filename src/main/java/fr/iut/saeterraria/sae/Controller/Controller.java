@@ -8,13 +8,18 @@ import javafx.animation.AnimationTimer;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import javafx.scene.input.MouseEvent;
@@ -65,6 +70,14 @@ public class Controller implements Initializable{
     private StackPane imagebloc_accueil;
     @FXML
     private GridPane hotBar;
+    @FXML
+    private VBox choixNom;
+    @FXML
+    private VBox boxAccueil;
+    @FXML
+    private Label phraseNom;
+    @FXML
+    private TextField zoneNom;
 
     private Jeu jeu;
     public Fond scene;
@@ -75,7 +88,11 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        jeu = new Jeu("Joueur");//Mettre un nom dynamique?
+        jeu = new Jeu("Nom");
+        zoneNom.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                confirmerNom();
+        }});
         scene = new Fond(fond,jeu.getCarte());// Initialise le fond (décor du jeu)
         jeu.addMobs(new Ennemi("Pierre",20,20,50,0,0,10,jeu.getCarte(), jeu));
         imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
@@ -85,7 +102,7 @@ public class Controller implements Initializable{
         imageaccueil.fitWidthProperty().bind(imagebloc_accueil.widthProperty());
         imageaccueil.fitHeightProperty().bind(imagebloc_accueil.widthProperty());
 
-
+        Platform.runLater(() -> fond.requestFocus());
         SpriteVie barre = new SpriteVie(Vie, jeu);
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar);
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte());
@@ -181,9 +198,15 @@ public class Controller implements Initializable{
 
     @FXML
     public void startGame(){
+        boxAccueil.setVisible(false);
+        imagebloc_accueil.toBack();
+        choixNom.setVisible(true);
+    }
+
+    public void confirmerNom(){
         menu.setVisible(false);
         principal.setVisible(true);
-        Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
+        jeu.getJoueur().setNom(zoneNom.getText());
     }
     @FXML
     public void rageQuit(){ exit();}
