@@ -32,13 +32,18 @@ public class Souris implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         int x = ((int)mouseEvent.getX())/32;
         int y = ((int)mouseEvent.getY())/32;
-        System.out.println("X : "+x+"\nY : "+y);
+        int x1 = ((int)mouseEvent.getX());
+        int y1 = ((int)mouseEvent.getY());
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+            jeu.getJoueur().attaquer(x1, y1, 2);
             if (jeu.getJoueur().miner(jeu.getCarte(), x, y)){
                 this.tp.getChildren().remove((y*58)+x);
                 this.tp.getChildren().add( ( ((y*58)+x) ),new ImageView(fond.getTiles().get(map.getCase(y, x)) ) );
+                System.out.println("x" + x + " y" + y);
+
             }
-            jeu.getJoueur().attaquer(x,y,2);
+
+
         }
         else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             jeu.getJoueur().poser(jeu.getCarte(), x, y,2);
