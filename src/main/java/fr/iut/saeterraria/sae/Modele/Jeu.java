@@ -183,9 +183,7 @@ public class Jeu {
     }
 
     public void testCraft() {
-        joueur.getInventaire().getInventaireJoueur()[0][0].setCase(items.get(3),1);
-        joueur.getInventaire().getInventaireJoueur()[0][1].setCase(items.get(3),1);
-        joueur.getInventaire().getInventaireJoueur()[0][2].setCase(items.get(3),1);
+        System.out.println(getJoueur().ajouterItem(items.get(3),128));
     }
     
 }

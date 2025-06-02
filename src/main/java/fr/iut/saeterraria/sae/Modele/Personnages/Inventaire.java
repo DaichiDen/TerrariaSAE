@@ -19,7 +19,7 @@ public class Inventaire {
     }
 
     // Ajoute l'item dans une case ou dans plusieurs si aucune case peut contenir toute la quantité (ou pas du tout si aucune case le permet)==
-    public void ajoutInventaire(Item item, int quantite) {
+    public boolean ajoutInventaire(Item item, int quantite) {
         int[][] planInventaire= findItem(item);
         int i=0;
         int j=0;
@@ -36,7 +36,7 @@ public class Inventaire {
                             this.inventaireJoueur[i][j].ajouteQuantite(reste);
                             placer = true;
                         }
-                        else {//Limite atteinte par stack
+                        else if( !(this.inventaireJoueur[i][j].getQuantite() == this.inventaireJoueur[i][j].getMaxStack()) ){//Limite atteinte par stack
                             int ajout = this.inventaireJoueur[i][j].getMaxStack() - this.inventaireJoueur[i][j].getQuantite();
                             this.inventaireJoueur[i][j].ajouteQuantite(ajout);
                             reste = reste - ajout;
@@ -44,16 +44,16 @@ public class Inventaire {
                     }
                     j++;
                 }
+                j=0;
                 i++;
             }
             i=0;
             // Si la case est vide
             while(!placer && i < planInventaire.length ) {
-                j=0;
                 while (!placer && j < planInventaire[i].length) {
                     if (planInventaire[i][j] == 2) {
                         this.inventaireJoueur[i][j].ajouterItem(item);
-                        if (reste <= this.inventaireJoueur[i][j].getMaxStack())  { // Si l'ajout de l'item va pas dépasser la limite de stack
+                        if (reste <= this.inventaireJoueur[i][j].getMaxStack()) { // Si l'ajout de l'item va pas dépasser la limite de stack
                             this.inventaireJoueur[i][j].ajouteQuantite(reste);
                             placer = true;
                         }
@@ -65,9 +65,14 @@ public class Inventaire {
                     }
                     j++;
                 }
+                j=0;
                 i++;
             }
+            if (placer) {
+                System.out.println("Ajout dans l'inventaire");
+            }
         }
+        return placer;
     }
 
 //    public void decrementeItem(int ligne, int colonne) {
@@ -97,13 +102,13 @@ public class Inventaire {
         System.out.println("Suppression item de l'inventaire effectué");
     }
 
-    // Trouve toutes les instances de l'item dans l'inventaire ainsi que les cases vides
+    // Trouve toutes les instances de l'item dans l'inventaire ainsi que les cases vides, retourne null si pas de place
     public int[][] findItem(Item item) {
         boolean presentItemCaseLibre = false;
         int[][] instance = new int[this.inventaireJoueur.length][this.inventaireJoueur[0].length];
         for (int i = 0; i < this.inventaireJoueur.length; i++) {
             for (int j = 0; j < this.inventaireJoueur[i].length; j++) {
-                if (this.inventaireJoueur[i][j].comparerId(item.getCodeObjet())) {
+                if (this.inventaireJoueur[i][j].comparerId(item.getCodeObjet()) ) {
                     instance[i][j] = 1;
                     presentItemCaseLibre = true;
                 }
@@ -117,6 +122,7 @@ public class Inventaire {
             return instance;
         }
         else{
+            System.out.println("Impossible de rajouter dans l'inventaire");
             return null;
         }
     }

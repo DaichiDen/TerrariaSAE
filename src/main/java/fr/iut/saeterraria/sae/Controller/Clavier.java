@@ -111,6 +111,7 @@ public class Clavier implements EventHandler<KeyEvent> {
     }
     @FXML
     public void ouvrirInventaire() {
+        jeu.testCraft();
         openInventaire.setVisible(false);
         hotBarInventaire.setVisible(false);
         jeu.getJoueur().setMarcheDroite(false);

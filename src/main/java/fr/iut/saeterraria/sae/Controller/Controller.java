@@ -201,7 +201,6 @@ public class Controller implements Initializable{
 
     @FXML
     public void ouvrirInventaire() {
-        jeu.testCraft();
         hotBar.setVisible(false);
         openInventaire.setVisible(false);
         screenInventaire.setVisible(true);
