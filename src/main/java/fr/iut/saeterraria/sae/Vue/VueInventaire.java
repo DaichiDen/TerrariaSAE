@@ -33,7 +33,7 @@ public class VueInventaire extends CreateRessourceVisuel {
         // Blocs
         items.put(1, "Dirt_1"); // Terre Haute
         items.put(2, "Dirt_2"); // Terre Basse
-        items.put(3, "Ciel"); // Bois
+        items.put(3, "Dirt_1"); // Bois
         items.put(4, ""); // Minerai Charbon
         items.put(5, ""); // Charbon
         items.put(6, ""); // Pierre
@@ -51,7 +51,7 @@ public class VueInventaire extends CreateRessourceVisuel {
         // Outils
         items.put(50, ""); // Pelle de bois
         items.put(51, ""); // Hache de bois
-        items.put(52, ""); // Pioche de bois
+        items.put(18, "Ciel"); // Pioche de bois
         items.put(53, ""); // Pelle de pierre
         items.put(54, ""); // Hache de pierre
         items.put(55, ""); // Pioche de pierre
@@ -147,6 +147,7 @@ public class VueInventaire extends CreateRessourceVisuel {
         tableauInventaire.getChildren().remove(caseInventaire);
         if(player.getInventaire().getInventaireJoueur()[ligne][colonne].getItem().getCodeObjet()!= 0) {
             String URL = "/Tiles/".concat(items.get((player.getInventaire().getInventaireJoueur())[ligne][colonne].getItem().getCodeObjet())).concat(".png");
+
             int quantite = player.getInventaire().getInventaireJoueur()[ligne][colonne].getQuantite();
 
             if(ligne==0) {
@@ -165,5 +166,6 @@ public class VueInventaire extends CreateRessourceVisuel {
             }
         }
     }
+
 }
 

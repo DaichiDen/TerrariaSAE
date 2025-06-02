@@ -20,6 +20,7 @@ public class Jeu {
     private ArrayList<Ennemi> mobs;
     private ArrayList<PNJ> pNJ;
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
+
     public Jeu(String nomJoueur){
         carte = new Map();
         joueur = new Joueur(nomJoueur,carte, this);
@@ -27,6 +28,7 @@ public class Jeu {
         pNJ = new ArrayList<>();
         items = new HashMap<>();
         initialiseItems();
+        initializeRecettes();
     }
 
     public void addMobs(Ennemi ennemi) {
@@ -66,7 +68,7 @@ public class Jeu {
         return items;
     }
 
-    private void initialiseItems() { //Ajouter une range d"id pour item pas obtenable
+    private void initialiseItems() {//Ajouter une range d"id pour item pas obtenable
         // Blocs
         items.put(1, new Bloc("Terre Haute","Bloc commun qui recouvre le monde",1,1));
         items.put(2, new Bloc("Terre Basse","Bloc commun qui recouvre le sol du monde",1,1));
@@ -78,7 +80,6 @@ public class Jeu {
         items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1));
         items.put(9, new Bloc("Glace","",1,2));
         items.put(10, new Item("DELJCCium", "", 1));
-
         //Bloc outil
         items.put(20, new Etabli("Etabli","Un établi qui permet la fabrication d'objets",1,3));
         items.put(21, new Etabli("Forge","Un établi qui permet la fabrication d'objets",1,3));
@@ -179,8 +180,12 @@ public class Jeu {
         items.get(67).addInRecette(new ElementRecette(items.get(10),6));
         // Botte en DELJCCnium + forge
         items.get(69).addInRecette(new ElementRecette(items.get(10),4));
+    }
 
-
+    public void testCraft() {
+        joueur.getInventaire().getInventaireJoueur()[0][0].setCase(items.get(3),1);
+        joueur.getInventaire().getInventaireJoueur()[0][1].setCase(items.get(3),1);
+        joueur.getInventaire().getInventaireJoueur()[0][2].setCase(items.get(3),1);
     }
     
 }

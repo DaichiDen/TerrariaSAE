@@ -52,13 +52,14 @@ public class Inventaire {
                 j=0;
                 while (!placer && j < planInventaire[i].length) {
                     if (planInventaire[i][j] == 2) {
+                        this.inventaireJoueur[i][j].ajouterItem(item);
                         if (reste <= this.inventaireJoueur[i][j].getMaxStack())  { // Si l'ajout de l'item va pas dépasser la limite de stack
-                            this.inventaireJoueur[i][j].setCase(item,reste);
+                            this.inventaireJoueur[i][j].ajouteQuantite(reste);
                             placer = true;
                         }
                         else {//Limite atteinte par stack
                             int ajout = this.inventaireJoueur[i][j].getMaxStack();
-                            this.inventaireJoueur[i][j].setCase(item,ajout);
+                            this.inventaireJoueur[i][j].ajouteQuantite(ajout);
                             reste = reste - ajout;
                         }
                     }
@@ -69,23 +70,23 @@ public class Inventaire {
         }
     }
 
-    public void decrementeItem(int ligne, int colonne) {
-        if(inventaireJoueur[ligne][colonne].getQuantite()-1>0) {
-            this.inventaireJoueur[ligne][colonne].retireQuantite(1);
-        }
-        else {
-            inventaireJoueur[ligne][colonne].setCase(new Item(), 0);
-        }
-    }
-
-    public void incrementerItem(int ligne,int colonne) {
-        if(inventaireJoueur[ligne][colonne].getQuantite()+1<=this.inventaireJoueur[ligne][colonne].getMaxStack()) {
-            this.inventaireJoueur[ligne][colonne].ajouteQuantite(1);
-        }
-        else {
-            ajoutInventaire(inventaireJoueur[ligne][colonne].getItem(),1);
-        }
-    }
+//    public void decrementeItem(int ligne, int colonne) {
+//        if(inventaireJoueur[ligne][colonne].getQuantite()-1>0) {
+//            this.inventaireJoueur[ligne][colonne].retireQuantite(1);
+//        }
+//        else {
+//            inventaireJoueur[ligne][colonne].setCase(new Item(), 0);
+//        }
+//    }
+//
+//    public void incrementerItem(int ligne,int colonne) {
+//        if(inventaireJoueur[ligne][colonne].getQuantite()+1<=this.inventaireJoueur[ligne][colonne].getMaxStack()) {
+//            this.inventaireJoueur[ligne][colonne].ajouteQuantite(1);
+//        }
+//        else {
+//            ajoutInventaire(inventaireJoueur[ligne][colonne].getItem(),1);
+//        }
+//    }
 
     public Case[][] getInventaireJoueur() {
         return inventaireJoueur;
@@ -106,7 +107,7 @@ public class Inventaire {
                     instance[i][j] = 1;
                     presentItemCaseLibre = true;
                 }
-                else if (this.inventaireJoueur[i][j] == null){
+                else if (this.inventaireJoueur[i][j].getItem().getCodeObjet()==0){
                     instance[i][j] = 2;
                     presentItemCaseLibre = true;
                 }
@@ -119,5 +120,4 @@ public class Inventaire {
             return null;
         }
     }
-
 }

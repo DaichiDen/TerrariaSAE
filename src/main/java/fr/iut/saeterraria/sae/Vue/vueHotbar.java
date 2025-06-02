@@ -28,7 +28,7 @@ public class vueHotbar extends CreateRessourceVisuel {
         // Blocs
         items.put(1, "Dirt_1"); // Terre Haute
         items.put(2, "Dirt_2"); // Terre Basse
-        items.put(3, "Ciel"); // Bois
+        items.put(3, "Dirt_1"); // Bois
         items.put(4, ""); // Minerai Charbon
         items.put(5, ""); // Charbon
         items.put(6, ""); // Pierre
@@ -46,7 +46,7 @@ public class vueHotbar extends CreateRessourceVisuel {
         // Outils
         items.put(50, ""); // Pelle de bois
         items.put(51, ""); // Hache de bois
-        items.put(52, ""); // Pioche de bois
+        items.put(18, "Ciel"); // Pioche de bois
         items.put(53, ""); // Pelle de pierre
         items.put(54, ""); // Hache de pierre
         items.put(55, ""); // Pioche de pierre
@@ -74,6 +74,7 @@ public class vueHotbar extends CreateRessourceVisuel {
         for (int j = 0; j < hotBar.getColumnCount(); j++) {
             if ((jeu.getJoueur().getInventaire().getInventaireJoueur()[0][j].getItem().getCodeObjet() != 0)) {
                 String URL = "/Tiles/".concat(items.get((jeu.getJoueur().getInventaire().getInventaireJoueur())[0][j].getItem().getCodeObjet())).concat(".png");
+
                 int quantite = (jeu.getJoueur().getInventaire().getInventaireJoueur())[0][j].getQuantite();
                 afficheItemQuantite(URL, quantite,j);
             } else {

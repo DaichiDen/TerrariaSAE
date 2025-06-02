@@ -12,7 +12,6 @@ import java.net.URL;
 public abstract class CreateRessourceVisuel {
 
     public ImageView createImageView(String imagePath, int width, int height){
-
         URL imageURL = getClass().getResource(imagePath);
         Image image = new Image(String.valueOf(imageURL));
         ImageView imageView = new ImageView(image);

@@ -21,6 +21,12 @@ public class Case {
         this.changement = new SimpleBooleanProperty(false);
     }
 
+
+    public void ajouterItem(Item item) {
+        this.item = item;
+        activerChangement();
+    }
+
     public void setCase(Item item, int quantite) {
         this.item = item;
         this.quantite = quantite;
@@ -34,12 +40,17 @@ public class Case {
     public void setQuantite (int quantite) {
         this.quantite = quantite;
     }
+
     public void ajouteQuantite(int quantite) {
         this.quantite += quantite;
         activerChangement();
+
     }
     public void retireQuantite(int quantite) {
         this.quantite -= quantite;
+        if(this.quantite==0) {
+            item = new Item();
+        }
         activerChangement();
     }
     public int getQuantite() {

@@ -39,69 +39,63 @@ public class Joueur extends Entite {
     }
 
 
-        public void incrementeMainCourante () {
-            if (this.mainCourante == 6) {
-                setMainCourante(0);
-            } else {
-                this.mainCourante++;
-            }
+    public void incrementeMainCourante () {
+        if (this.mainCourante == 6) {
+            setMainCourante(0);
+        } else {
+            this.mainCourante++;
         }
-        public void decrementeMainCourante () {
-            if (this.mainCourante == 0) {
-                setMainCourante(6);
-            } else {
-                this.mainCourante--;
-            }
+    }
+    public void decrementeMainCourante () {
+        if (this.mainCourante == 0) {
+            setMainCourante(6);
+        } else {
+            this.mainCourante--;
         }
-        public void setMainCourante ( int mainCourante){
-            this.mainCourante = mainCourante;
-        }
-        public int getMainCourante () {
-            return mainCourante;
-        }
+    }
+    public void setMainCourante ( int mainCourante){
+        this.mainCourante = mainCourante;
+    }
+    public int getMainCourante () {
+        return mainCourante;
+    }
 
-        public void ajouterItem (Item item,int quantite){
-            inventaire.ajoutInventaire(item, quantite);
-        }
+    public void ajouterItem (Item item,int quantite){
+        inventaire.ajoutInventaire(item, quantite);
+    }
 
-        public Inventaire getInventaire () {
-            return inventaire;
-        }
+    public Inventaire getInventaire () {
+        return inventaire;
+    }
 
+    public void mettreAJour () {
+        super.mettreAJour();
+    }
 
+    public boolean getMarcheGauche () {
+        return this.marcheGauche;
+    }
+    public boolean getMarcheDroite () {
+        return this.marcheDroite;
+    }
 
-
-
-        public void mettreAJour () {
-            super.mettreAJour();
-        }
-
-        public boolean getMarcheGauche () {
-            return this.marcheGauche;
-        }
-        public boolean getMarcheDroite () {
-            return this.marcheDroite;
-        }
-
-        public int getVitesseY () {
-            return vitesseY;
-        }
-
+    public int getVitesseY () {
+        return vitesseY;
+    }
 
 
     public void miner (Map map,int x, int y){
-            if (peutEtreAtteint(map, x, y, 2.5)) {
-                map.detruireBloc(x, y);
-            }
+        if (peutEtreAtteint(map, x, y, 2.5)) {
+            map.detruireBloc(x, y);
         }
+    }
 
-
-        public void poser (Map map,int x, int y, int val){
-
-            if (peutEtreAtteint(map, x, y, 2.5)) {
-                map.poserBloc(x, y, val);
-            }
+    public void poser (Map map,int x, int y, int val){
+        if (peutEtreAtteint(map, x, y, 2.5)) {
+            map.poserBloc(x, y, val);
         }
+    }
+
     @Override
     public void attaquer(int x, int y, int range) {
         for (Entite e : jeu.getMobs()) {
@@ -121,39 +115,76 @@ public class Joueur extends Entite {
         }
     }
 
-    // Vérifie si la quantité d'items nécessaires sont suffisants pour construire, puis craft l'item
+    // Vérifie si la quantité d'items nécessaires sont suffisants pour construire, puis craft l'item si les ressources sont suffisantes
     public void craftItem(Item item) {
-//        int[][] necessaire = new int[2][item.getRecette().size()];//Besoin pour faire le craft
-//        for (int i = 0; i < necessaire.length; i++) {
-//            necessaire[0][i] = item.getRecette().get(i).getItem().getCodeObjet();
-//            necessaire[1][i] = item.getRecette().get(i).getQuantite();
-//        }
-//
-//        boolean[] contient = new boolean[item.getRecette().size()];
-//        int[][] position = new int[item.getRecette().size()][item.getRecette().size()];
-//
-//        // Vérifie si les quantités sont suffisantes côté joueur
-//        for (int i=0; i< item.getRecette().size(); i++) {
-//            int[][] tabResult;
-//            tabResult = inventaire.findItem(item.getRecette().get(i).getItem());
-//
-//            if (tabResult != null) {
-//                int quantite=0;
-//                for(int o=0; o<tabResult.length; o++) {
-//                    for (int p=0; p<tabResult[o].length; p++) {
-//                        if(tabResult[o][p]==1) {
-//                            quantite+=inventaire.getInventaireJoueur()[o][p].getQuantite();
-//                        }
-//                    }
-//                }
-//                if(quantite>=necessaire[1][i]) {
-//                    contient[i] = true;
-//                }
-//            }
-//        }
-//
-//        // Enlève les quantités côté inventaire
+        int[][] necessaire = new int[2][item.getRecette().size()];//Besoin pour faire le craft
 
+
+        // Liste les items et leur quantité pour le craft
+        for (int i = 0; i < necessaire[0].length; i++) {
+            necessaire[0][i] = item.getRecette().get(i).getItem().getCodeObjet();
+            necessaire[1][i] = item.getRecette().get(i).getQuantite();
+        }
+
+        boolean[] craftable = new boolean[item.getRecette().size()];//Indique si l'objet est en quantité suffisante
+        boolean craftableFin= true;
+        ArrayList<Case> position = new ArrayList<>();
+
+        // Vérifie si les quantités sont suffisantes côté joueur
+        for (int i=0; i< item.getRecette().size(); i++) {
+            int[][] tabResult;
+            tabResult = inventaire.findItem(item.getRecette().get(i).getItem());
+
+            if (tabResult != null) {
+                int quantite=0;
+                int o=0;
+                int p=0;
+                while(!craftable[i] && o<tabResult.length){
+                    while (!craftable[i] && p<tabResult[o].length){
+                        if(tabResult[o][p]==1) {
+                            quantite+=inventaire.getInventaireJoueur()[o][p].getQuantite();
+                            position.add(inventaire.getInventaireJoueur()[o][p]);
+                        }
+                        p++;
+                    }
+                    if(quantite>=necessaire[1][i]) {
+                        craftable[i] = true;
+                    }
+                    o++;
+                }
+            }
+        }
+        // Vérifie que tout les items nécessaires pour le craft sont en quantité suffisante avant de les décrémenter
+        // de l'inventaire du joueur
+        int j=0;
+        while (j< craftable.length && craftableFin) {
+            if (!craftable[j]){
+                craftableFin = false;
+            }
+                j++;
+        }
+
+        int c=0;
+        int k=0;//Pour se déplacer sur chaque position des items
+
+        // Enlève les quantités côté inventaire
+        if (craftableFin){
+             while (c < necessaire[1].length && necessaire[1][c]>0){//Pour chaque item nécessaire
+                 while (k < position.size() && necessaire[1][c]>0){ //Retire à chaque position des items
+                     if (necessaire[1][c] <= position.get(k).getQuantite()){ // Si la case a assez pour le craft
+                         position.get(k).retireQuantite(necessaire[1][c]);
+                     }
+                     else { // Si la case n'a pas assez pour le craft
+                         necessaire[1][c]-=position.get(k).getQuantite();
+                         position.get(k).retireQuantite(position.get(k).getQuantite());
+                     }
+                     k++;
+                 }
+                 c++;
+             }
+             inventaire.ajoutInventaire(item,1);
+            System.out.println("craft réussi");
+        }
     }
 
 
