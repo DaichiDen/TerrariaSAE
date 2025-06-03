@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Vue;
 
+import javafx.scene.control.ScrollPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
