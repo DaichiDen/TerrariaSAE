@@ -8,14 +8,13 @@ import javafx.animation.AnimationTimer;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
@@ -26,15 +25,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static javafx.application.Platform.exit;
 
 public class Controller implements Initializable{
 
@@ -82,7 +78,7 @@ public class Controller implements Initializable{
     private Jeu jeu;
     public Fond scene;
     private VueInventaire inventaireVue;
-    private vueHotbar hotBarVue;
+    private VueHotbar hotBarVue;
     private SpriteJoueur vuejoueur;
     private VueSon BiblioSon = new VueSon();
 
@@ -107,7 +103,7 @@ public class Controller implements Initializable{
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar);
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte());
         inventaireVue = new VueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
-        hotBarVue = new vueHotbar(jeu,hotBar);
+        hotBarVue = new VueHotbar(jeu,hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
         VueEnnemi ennemi = new VueEnnemi(jeu, screen);
@@ -116,17 +112,7 @@ public class Controller implements Initializable{
 
         for (int i=0; i<jeu.getJoueur().getInventaire().getInventaireJoueur().length; i++) {
             for(int j=0; j<jeu.getJoueur().getInventaire().getInventaireJoueur()[i].length; j++) {
-                int finalI = i;
-                int finalJ = j;
-                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].changementProperty().addListener((ob,ol,nv) -> {
-                    if(finalI==0 && nv) {
-                        inventaireVue.updateElement(finalI,finalJ);
-                        hotBarVue.updateElement(finalJ);
-                    }
-                    else if(nv) {
-                        inventaireVue.updateElement(finalI,finalJ);
-                    }
-                });
+                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].changementProperty().addListener(new ListenerInventaire(inventaireVue,hotBarVue,i,j));
             }
         }
 
