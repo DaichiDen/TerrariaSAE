@@ -17,8 +17,12 @@ public abstract class Entite {
     private IntegerProperty energie;
     private IntegerProperty vitesseMax;
     private BarreVie barreVie;
+
     private BooleanProperty estVivant;
-    public final int taille1bloc = 32;
+
+
+    public final static int taille1bloc = 32;
+
     private boolean enSaut = false;
     protected BooleanProperty marcheDroite = new SimpleBooleanProperty(false);
     protected BooleanProperty marcheGauche = new SimpleBooleanProperty(false);
@@ -29,10 +33,10 @@ public abstract class Entite {
     protected final int forceSaut = -18;
     //inertie et friction
     private int vitesseX = 0;
-    private final int accel_sol = 5;
-    private final int accel_air = 2;
-    private final int friction_sol = 4;
-    private final int friction_air = 1;
+    private final static int accel_sol = 5;
+    private final static int accel_air = 2;
+    private final static int friction_sol = 4;
+    private final static int friction_air = 1;
     private boolean collisionBas = false;
 //
 //    MediaPlayer damage1 = super.Sonore("/Sound/damage1.wav");

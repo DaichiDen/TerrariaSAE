@@ -18,9 +18,12 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
     private ImageView spriteActuel;
     private String dernierEtat = "";
+    private ImageView marchedroite= createImageView("/Sprite/Chevalier_marcheDroite_Bon.gif",width,height);
+    private ImageView marchegauche=  createImageView("/Sprite/Chevalier_marcheGauche_Bon.gif",width,height);
 
-    private ImageView marcheGauche = createImageView("/Sprite/Chevalier_marcheGauche.gif",width,height);
-    private ImageView marcheDroite = createImageView("/Sprite/Chevalier_marcheDroite.gif",width,height);
+
+
+
     private ImageView marcheNon = createImageView("/Sprite/Hero_stop.png",width,height);
 
 
@@ -62,11 +65,19 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
         // Créer le bon sprite
         if (etatActuel.equals("gauche")) {
-            spriteActuel = marcheGauche;
+
+
+
+
+
+
+
+            spriteActuel = marchegauche;
         } else if (etatActuel.equals("droite")) {
-            spriteActuel = marcheDroite;
+            spriteActuel = marchedroite;
         } else {
-            spriteActuel = marcheNon;
+            spriteActuel = statik;
+
         }
 
         spriteActuel.setId(joueur.getNom());
@@ -84,7 +95,7 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
 
 
-
+//TODO juste créer 1 fois les image view et les actualiser, pas besoin de les récréer à chaque fois
 
 
 
