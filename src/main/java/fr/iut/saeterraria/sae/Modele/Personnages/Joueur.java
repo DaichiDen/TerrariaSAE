@@ -1,10 +1,10 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
-import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 import javafx.geometry.Rectangle2D;
+
 
 
 import javafx.scene.input.MouseEvent;
@@ -78,16 +78,28 @@ public class Joueur extends Entite {
         return this.marcheDroite;
     }
 
-    public int getVitesseY () {
-        return vitesseY;
-    }
 
-
-    public void miner (Map map,int x, int y){
-        if (peutEtreAtteint(map, x, y, 2.5)) {
-            map.detruireBloc(x, y);
+        public void mettreAJour () {
+            super.mettreAJour();
         }
-    }
+
+
+        public int getVitesseY () {
+            return vitesseY;
+        }
+
+
+
+    public boolean miner (Map map,int x, int y){
+            boolean miner = false;
+            if (peutEtreAtteint(map, x, y, 2.5)) {
+                map.detruireBloc(x, y);
+                miner = true;
+            }
+            return miner;
+
+        }
+    
 
     public void poser (Map map,int x, int y, int val){
         if (peutEtreAtteint(map, x, y, 2.5)) {
@@ -97,7 +109,7 @@ public class Joueur extends Entite {
 
     @Override
     public void attaquer(int x, int y, int range) {
-        for (Entite e : jeu.getMobs()) {
+        for (Entite e : jeu.getEnnemis()) {
 
             Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(),taille1bloc,taille1bloc*2);
 
@@ -259,6 +271,8 @@ public class Joueur extends Entite {
         public Pierre_TP getPierreTp () {
             return this.pierreTp;
         }
+}
+        
 
-    }
+    
 

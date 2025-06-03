@@ -7,7 +7,8 @@ import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pelle;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
 import fr.iut.saeterraria.sae.Modele.Personnages.*;
 import fr.iut.saeterraria.sae.Modele.Map.*;
-import javafx.scene.image.Image;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,25 +18,39 @@ public class Jeu {
 
     private Map carte;
     private Joueur joueur;
-    private ArrayList<Ennemi> mobs;
+    private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
+    private ObservableList<Entite> mobs;
+
+
 
     public Jeu(String nomJoueur){
         carte = new Map();
         joueur = new Joueur(nomJoueur,carte, this);
-        mobs = new ArrayList<>();
+        ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         items = new HashMap<>();
+        mobs = FXCollections.observableArrayList(ennemis);
         initialiseItems();
         initializeRecettes();
     }
 
-    public void addMobs(Ennemi ennemi) {
-        mobs.add(ennemi);
+    public ObservableList<Entite> getMobs() {
+        return mobs;
     }
-    public void removemob(Ennemi ennemi){
-        mobs.remove(ennemi);
+    public void addMobs(Entite entite){
+        mobs.add(entite);
+    }
+    public void removeMob(Entite entite){
+        mobs.remove(entite);
+    }
+
+    public void addEnnemis(Ennemi ennemi) {
+        ennemis.add(ennemi);
+    }
+    public void removeEnnemi(Ennemi ennemi){
+        ennemis.remove(ennemi);
     }
 
     public void addPNJ(PNJ pnj) {
@@ -56,8 +71,8 @@ public class Jeu {
         return joueur;
     }
 
-    public ArrayList<Ennemi> getMobs() {
-        return mobs;
+    public ArrayList<Ennemi> getEnnemis() {
+        return ennemis;
     }
 
     public ArrayList<PNJ> getpNJ() {
