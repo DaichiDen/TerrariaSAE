@@ -70,26 +70,7 @@ public class Joueur extends Entite {
     public void mettreAJour () {
         super.mettreAJour();
     }
-
-    public boolean getMarcheGauche () {
-        return this.marcheGauche;
-    }
-    public boolean getMarcheDroite () {
-        return this.marcheDroite;
-    }
-
-
-        public void mettreAJour () {
-            super.mettreAJour();
-        }
-
-
-        public int getVitesseY () {
-            return vitesseY;
-        }
-
-
-
+    
     public boolean miner (Map map,int x, int y){
             boolean miner = false;
             if (peutEtreAtteint(map, x, y, 2.5)) {
