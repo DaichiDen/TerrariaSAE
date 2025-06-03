@@ -10,6 +10,7 @@ import java.util.HashSet;
 
 public class Ennemi extends Entite {
 
+
     private ArrayList<Item> listDrops;
 
     public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def, int vitesse, Map map, Jeu jeu) {

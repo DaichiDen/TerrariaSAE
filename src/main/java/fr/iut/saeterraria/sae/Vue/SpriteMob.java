@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
+import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
@@ -9,7 +10,7 @@ import javafx.scene.layout.Pane;
 
 
 
-public class SpriteJoueur extends CreateRessourceVisuel {
+public class SpriteMob extends CreateRessourceVisuel {
 
 
     private Pane screen;
@@ -18,33 +19,35 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
     private ImageView spriteActuel;
     private String dernierEtat = "";
+    private Rectangle2D hitboxJoueur;
 
     private ImageView marcheGauche = createImageView("/Sprite/Chevalier_marcheGauche.gif",width,height);
     private ImageView marcheDroite = createImageView("/Sprite/Chevalier_marcheDroite.gif",width,height);
-    private ImageView marcheNon = createImageView("/Sprite/Hero_stop.png",width,height);
+    private ImageView marcheNon = createImageView("/Sprite/BM_Sac_a_caca.png",width,height);
 
-
-
-    private Rectangle2D hitboxJoueur;
-
-    public SpriteJoueur(Jeu jeu, Pane screen){
+    public SpriteMob(Jeu jeu, Pane screen, String nom){
         this.jeu = jeu;
         this.screen = screen;
         this.width=150;
         this.height=150;
-        jeu.getJoueur().marcheGaucheProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
-        jeu.getJoueur().marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
-        jeu.getJoueur().xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
 
+        for(int i = 0; i < jeu.getMobs().size() ; i++) {
+            if (nom.equals("Pierre")) {
+                int finalI = i;
+                jeu.getMobs().get(i).marcheGaucheProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteMob(jeu.getMobs().get(finalI)));
+                jeu.getMobs().get(i).marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteMob(jeu.getMobs().get(finalI)));
+                jeu.getMobs().get(i).xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteMob(jeu.getMobs().get(finalI)));
+            }
+        }
 
     }
 
-    public void mettreAJourSpriteJoueur(Joueur joueur) {
+    public void mettreAJourSpriteMob(Entite entite) {
         String etatActuel;
 
-        if (joueur.getMarcheGauche()) {
+        if (entite.getMarcheGauche()) {
             etatActuel = "gauche";
-        } else if (joueur.getMarcheDroite()) {
+        } else if (entite.getMarcheDroite()) {
             etatActuel = "droite";
         } else {
             etatActuel = "stop";
@@ -62,16 +65,16 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
         // Créer le bon sprite
         if (etatActuel.equals("gauche")) {
-            spriteActuel = marcheGauche;
+            spriteActuel = createImageView("/Sprite/Chevalier_marcheGauche.gif",width,height);
         } else if (etatActuel.equals("droite")) {
-            spriteActuel = marcheDroite;
+            spriteActuel = createImageView("/Sprite/Chevalier_marcheDroite.gif",width,height);
         } else {
-            spriteActuel = marcheNon;
+            spriteActuel = createImageView("/Sprite/BM_Sac_a_caca.png",width,height);
         }
 
-        spriteActuel.setId(joueur.getNom());
-        spriteActuel.translateXProperty().bind(joueur.xProperty());
-        spriteActuel.translateYProperty().bind(joueur.yProperty());
+        spriteActuel.setId(entite.getNom());
+        spriteActuel.translateXProperty().bind(entite.xProperty());
+        spriteActuel.translateYProperty().bind(entite.yProperty());
         spriteActuel.setFitWidth(54);
         spriteActuel.setFitHeight(64);
         screen.getChildren().add(spriteActuel);
@@ -80,12 +83,3 @@ public class SpriteJoueur extends CreateRessourceVisuel {
     }
 
 }
-
-
-
-
-
-
-
-
-

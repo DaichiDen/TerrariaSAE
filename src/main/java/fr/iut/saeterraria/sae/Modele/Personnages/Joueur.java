@@ -1,19 +1,9 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
-import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 import javafx.geometry.Rectangle2D;
-
-
-import javafx.scene.input.MouseEvent;
-
-
-import java.util.LinkedList;
-import java.util.Queue;
-
-import java.util.HashMap;
 
 
 public class Joueur extends Entite {
@@ -75,12 +65,6 @@ public class Joueur extends Entite {
             super.mettreAJour();
         }
 
-        public boolean getMarcheGauche () {
-            return this.marcheGauche;
-        }
-        public boolean getMarcheDroite () {
-            return this.marcheDroite;
-        }
 
         public int getVitesseY () {
             return vitesseY;
@@ -103,7 +87,7 @@ public class Joueur extends Entite {
         }
     @Override
     public void attaquer(int x, int y, int range) {
-        for (Entite e : jeu.getMobs()) {
+        for (Entite e : jeu.getEnnemis()) {
 
             Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(),taille1bloc,taille1bloc*2);
 
