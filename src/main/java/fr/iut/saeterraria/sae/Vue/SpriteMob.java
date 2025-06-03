@@ -21,8 +21,8 @@ public class SpriteMob extends CreateRessourceVisuel {
     private String dernierEtat = "";
     private Rectangle2D hitboxJoueur;
 
-    private ImageView marcheGauche = createImageView("/Sprite/Chevalier_marcheGauche.gif",width,height);
-    private ImageView marcheDroite = createImageView("/Sprite/Chevalier_marcheDroite.gif",width,height);
+    private ImageView marcheGauche = createImageView("/Sprite/BM_Sac_a_caca.png",width,height);
+    private ImageView marcheDroite = createImageView("/Sprite/BM_Sac_a_caca.png",width,height);
     private ImageView marcheNon = createImageView("/Sprite/BM_Sac_a_caca.png",width,height);
 
     public SpriteMob(Jeu jeu, Pane screen, String nom){

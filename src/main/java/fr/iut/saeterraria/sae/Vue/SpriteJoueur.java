@@ -20,10 +20,6 @@ public class SpriteJoueur extends CreateRessourceVisuel {
     private String dernierEtat = "";
     private ImageView marchedroite= createImageView("/Sprite/Chevalier_marcheDroite_Bon.gif",width,height);
     private ImageView marchegauche=  createImageView("/Sprite/Chevalier_marcheGauche_Bon.gif",width,height);
-
-
-
-
     private ImageView marcheNon = createImageView("/Sprite/Hero_stop.png",width,height);
 
 
@@ -76,7 +72,7 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         } else if (etatActuel.equals("droite")) {
             spriteActuel = marchedroite;
         } else {
-            spriteActuel = statik;
+            spriteActuel = marcheNon;
 
         }
 
