@@ -24,9 +24,9 @@ public class Item {
         this.codeObjet = new SimpleIntegerProperty(0);
     }
 
-    public Item(String nom, String descripcion,int typeItem) {
+    public Item(String nom, String description,int typeItem) {
         this.name = new SimpleStringProperty(nom);
-        this.description = new SimpleStringProperty(descripcion);
+        this.description = new SimpleStringProperty(description);
         this.typeItem = new SimpleIntegerProperty(typeItem);
         this.recette = new Recette();
         this.codeObjet = new SimpleIntegerProperty(id);

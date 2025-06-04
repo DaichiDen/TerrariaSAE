@@ -4,6 +4,7 @@ import fr.iut.saeterraria.sae.Modele.Objets.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.Etabli;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Hache;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pelle;
+import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
 import fr.iut.saeterraria.sae.Modele.Personnages.*;
 import fr.iut.saeterraria.sae.Modele.Map.*;
@@ -23,17 +24,16 @@ public class Jeu {
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
     private ObservableList<Entite> mobs;
 
-
-
     public Jeu(String nomJoueur){
-        carte = new Map();
-        joueur = new Joueur(nomJoueur,carte, this);
-        ennemis = new ArrayList<>();
-        pNJ = new ArrayList<>();
         items = new HashMap<>();
-        mobs = FXCollections.observableArrayList(ennemis);
         initialiseItems();
         initializeRecettes();
+        carte = new Map();
+        joueur = new Joueur(nomJoueur, this, (Pierre_TP) items.get(49));
+        ennemis = new ArrayList<>();
+        pNJ = new ArrayList<>();
+        mobs = FXCollections.observableArrayList(ennemis);
+
     }
 
     public ObservableList<Entite> getMobs() {
@@ -84,6 +84,8 @@ public class Jeu {
     }
 
     private void initialiseItems() {//Ajouter une range d"id pour item pas obtenable
+        items.put(0, new Bloc("Ciel","Ciel du monde",0,0));
+
         // Blocs
         items.put(1, new Bloc("Terre Haute","Bloc commun qui recouvre le monde",1,1));
         items.put(2, new Bloc("Terre Basse","Bloc commun qui recouvre le sol du monde",1,1));
@@ -95,6 +97,7 @@ public class Jeu {
         items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1));
         items.put(9, new Bloc("Glace","",1,2));
         items.put(10, new Item("DELJCCium", "", 1));
+
         //Bloc outil
         items.put(20, new Etabli("Etabli","Un établi qui permet la fabrication d'objets",1,3));
         items.put(21, new Etabli("Forge","Un établi qui permet la fabrication d'objets",1,3));
@@ -103,6 +106,7 @@ public class Jeu {
         items.put(24, new Coffre("Coffre", "", 1, 3));
 
         // Outils
+        items.put(49, new Pierre_TP());
         items.put(50,new Pelle("Pelle de bois","Une pelle en bois ordinaire, accélère la vitesse pour creuser des objets"));
         items.put(51,new Hache("Hache de bois",""));
         items.put(52,new Pioche("Pioche de bois",""));
@@ -118,14 +122,14 @@ public class Jeu {
         items.put(62, new Item("Seau", "", 1));
 
         // Armures
-        items.put(62,new Armure("Casque en fer","",2));
-        items.put(63,new Armure("Casque en DELJCCium","",3));
-        items.put(64,new Armure("Plastron en fer","",6));
-        items.put(65,new Armure("Plastron en DELJCCium","",9));
-        items.put(66,new Armure("Jambière en fer","",4));
-        items.put(67,new Armure("Jambière en DELJCCium","",6));
-        items.put(68,new Armure("Botte en fer","",3));
-        items.put(69,new Armure("Botte en DELJCCium","",5));
+        items.put(63,new Armure("Casque en fer","",2));
+        items.put(64,new Armure("Casque en DELJCCium","",3));
+        items.put(65,new Armure("Plastron en fer","",6));
+        items.put(66,new Armure("Plastron en DELJCCium","",9));
+        items.put(67,new Armure("Jambière en fer","",4));
+        items.put(68,new Armure("Jambière en DELJCCium","",6));
+        items.put(69,new Armure("Botte en fer","",3));
+        items.put(70,new Armure("Botte en DELJCCium","",5));
 
         // Armes
 
@@ -198,7 +202,8 @@ public class Jeu {
     }
 
     public void testCraft() {
-        System.out.println(getJoueur().ajouterItem(items.get(3),128));
+        System.out.println("Item test ID :"+items.get(3).getCodeObjet());
+        getJoueur().ajouterItem(items.get(3),96);
     }
     
 }

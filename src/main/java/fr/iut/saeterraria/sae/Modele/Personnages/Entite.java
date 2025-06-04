@@ -20,14 +20,13 @@ public abstract class Entite {
 
     private BooleanProperty estVivant;
 
-
     public final static int taille1bloc = 32;
 
     private boolean enSaut = false;
-    protected BooleanProperty marcheDroite = new SimpleBooleanProperty(false);
-    protected BooleanProperty marcheGauche = new SimpleBooleanProperty(false);
-    protected int vitesseY = 0;
-    protected Jeu jeu;
+    private BooleanProperty marcheDroite = new SimpleBooleanProperty(false);
+    private BooleanProperty marcheGauche = new SimpleBooleanProperty(false);
+    private int vitesseY = 0;
+    private Jeu jeu;
     //constantes
     private final int gravité = 2;
     protected final int forceSaut = -18;
@@ -66,6 +65,7 @@ public abstract class Entite {
     public int getY() { return y.getValue(); }
     public final void setY(int y) { this.y.setValue(y);}
 
+    public Jeu getJeu() { return jeu; }
 
     public boolean getMarcheGauche() { return marcheGauche.get(); }
     public void setMarcheGauche(boolean val) { marcheGauche.set(val); }
@@ -89,7 +89,7 @@ public abstract class Entite {
 
     public abstract void attaquer(int x, int y, int range);
 
-    public boolean peutEtreAtteint(Map map, int blocX, int blocY,double val) {
+    public boolean peutEtreAtteint(int blocX, int blocY,double val) {
         int joueurX = (this.getX() + 16) / 32;
         int joueurY = (this.getY() + 16) / 32;
 
@@ -106,7 +106,7 @@ public abstract class Entite {
             int xi = (int)Math.round(joueurX + dx * t);
             int yi = (int)Math.round(joueurY + dy * t);
 
-            if ((xi != blocX || yi != blocY) && map.getCase(yi, xi) != 3) { // Si bloc devant (obstacle)
+            if ((xi != blocX || yi != blocY) && map.getCase(yi, xi) != 0) { // Si bloc devant (obstacle)
                 return false;
             }
         }
@@ -180,7 +180,7 @@ public abstract class Entite {
         for (int i = caseY - 1; i <= caseY + 2; i++) { // +2 pour la taille du personnage (2 blocs de hauteur)
             for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
-                    if (this.map.getCase(i, j) != 3) { // si le bloc n'est pas du ciel
+                    if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
                         int xBloc = this.map.getCoordonnéesX(j);
                         int yBloc = this.map.getCoordonnéesY(i);
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, taille1bloc, taille1bloc*2); // création d'un rectangle de hitbox pour le bloc en cours
@@ -226,7 +226,7 @@ public abstract class Entite {
         for (int i = caseY - 1; i <= caseY + 2; i++) {
             for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
-                    if (this.map.getCase(i, j) != 3) {
+                    if (this.map.getCase(i, j) != 0) {
                         int xBloc = this.map.getCoordonnéesX(j);
                         int yBloc = this.map.getCoordonnéesY(i);
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, taille1bloc, taille1bloc);
