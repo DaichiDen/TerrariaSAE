@@ -70,7 +70,7 @@ public class Joueur extends Entite {
     public void mettreAJour () {
         super.mettreAJour();
     }
-    
+
     public boolean miner (Map map,int x, int y){
             boolean miner = false;
             if (peutEtreAtteint(map, x, y, 2.5)) {
