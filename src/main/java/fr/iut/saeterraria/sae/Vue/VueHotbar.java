@@ -10,12 +10,12 @@ import javafx.scene.layout.StackPane;
 
 import java.util.HashMap;
 
-public class vueHotbar extends CreateRessourceVisuel {
+public class VueHotbar extends CreateRessourceVisuel {
     private Jeu jeu;
     private HashMap<Integer, String> items;
     private GridPane hotBar;
 
-    public vueHotbar(Jeu jeu, GridPane hotBar) {
+    public VueHotbar(Jeu jeu, GridPane hotBar) {
         this.jeu = jeu;
         this.items = new HashMap<>();
         initialiseItems();

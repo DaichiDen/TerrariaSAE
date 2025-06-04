@@ -23,7 +23,9 @@ public class Fond extends CreateRessourceVisuel {
         this.tiles = new HashMap<>();
         this.pane = pane;
         initialiseTile();
+        afficherCarte();
     }
+
 
     public void ajoutTile(String imagePath) {
         tiles.put(id, createImage(imagePath));
@@ -46,7 +48,19 @@ public class Fond extends CreateRessourceVisuel {
                 this.pane.getChildren().add(new ImageView(tiles.get(carte.getCase(i, j))));
             }
         }
+        System.out.println(this.pane.getChildren().size());
     }
+
+    public void changeBloc(int x, int y){
+
+    }
+
+    public HashMap<Integer, Image> getTiles() {
+        return tiles;
+    }
+
+
+
 
     public Image createImage(String imagePath) {
 

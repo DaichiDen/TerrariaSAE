@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,6 +16,7 @@ public class Item {
     private IntegerProperty typeItem; // 1=stack 64 / 2= stack 16 / 3=stack 1
     private static int id = 0;
     private Recette recette;
+    private BlocConstruction provenance;
 
     public Item(){
         this.name = new SimpleStringProperty("");
@@ -22,6 +24,7 @@ public class Item {
         this.typeItem = new SimpleIntegerProperty(0);
         this.recette = new Recette();
         this.codeObjet = new SimpleIntegerProperty(0);
+        this.provenance = null;
     }
 
     public Item(String nom, String descripcion,int typeItem) {
@@ -30,6 +33,17 @@ public class Item {
         this.typeItem = new SimpleIntegerProperty(typeItem);
         this.recette = new Recette();
         this.codeObjet = new SimpleIntegerProperty(id);
+        this.provenance = null;
+        id++;
+    }
+
+    public Item(String nom, String descripcion,int typeItem,BlocConstruction provenance) {
+        this.name = new SimpleStringProperty(nom);
+        this.description = new SimpleStringProperty(descripcion);
+        this.typeItem = new SimpleIntegerProperty(typeItem);
+        this.recette = new Recette();
+        this.codeObjet = new SimpleIntegerProperty(id);
+        this.provenance = provenance;
         id++;
     }
 

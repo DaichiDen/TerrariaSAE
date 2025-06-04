@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -11,6 +12,10 @@ public abstract class Outils extends Item{
 
     public Outils (String nom,String description) {
         super(nom,description,3);
+    }
+
+    public Outils (String nom, String description, BlocConstruction blocConstruction) {
+        super(nom,description,3,blocConstruction);
     }
 
     public abstract void action();

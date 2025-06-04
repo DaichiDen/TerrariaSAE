@@ -1,13 +1,15 @@
 package fr.iut.saeterraria.sae.Modele;
 
 import fr.iut.saeterraria.sae.Modele.Objets.*;
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.Etabli;
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Hache;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pelle;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
 import fr.iut.saeterraria.sae.Modele.Personnages.*;
 import fr.iut.saeterraria.sae.Modele.Map.*;
-import javafx.scene.image.Image;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,25 +19,39 @@ public class Jeu {
 
     private Map carte;
     private Joueur joueur;
-    private ArrayList<Ennemi> mobs;
+    private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
+    private ObservableList<Entite> mobs;
+
+
 
     public Jeu(String nomJoueur){
         carte = new Map();
         joueur = new Joueur(nomJoueur,carte, this);
-        mobs = new ArrayList<>();
+        ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         items = new HashMap<>();
+        mobs = FXCollections.observableArrayList(ennemis);
         initialiseItems();
         initializeRecettes();
     }
 
-    public void addMobs(Ennemi ennemi) {
-        mobs.add(ennemi);
+    public ObservableList<Entite> getMobs() {
+        return mobs;
     }
-    public void removemob(Ennemi ennemi){
-        mobs.remove(ennemi);
+    public void addMobs(Entite entite){
+        mobs.add(entite);
+    }
+    public void removeMob(Entite entite){
+        mobs.remove(entite);
+    }
+
+    public void addEnnemis(Ennemi ennemi) {
+        ennemis.add(ennemi);
+    }
+    public void removeEnnemi(Ennemi ennemi){
+        ennemis.remove(ennemi);
     }
 
     public void addPNJ(PNJ pnj) {
@@ -56,8 +72,8 @@ public class Jeu {
         return joueur;
     }
 
-    public ArrayList<Ennemi> getMobs() {
-        return mobs;
+    public ArrayList<Ennemi> getEnnemis() {
+        return ennemis;
     }
 
     public ArrayList<PNJ> getpNJ() {
@@ -68,8 +84,13 @@ public class Jeu {
         return items;
     }
 
-    private void initialiseItems() {//Ajouter une range d"id pour item pas obtenable
+    private void initialiseItems() { //Ajouter une range d"id pour item pas obtenable
         // Blocs
+        items.put(20, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3));
+        items.put(21, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3));
+        items.put(22, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3));
+        items.put(23, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,3));
+
         items.put(1, new Bloc("Terre Haute","Bloc commun qui recouvre le monde",1,1));
         items.put(2, new Bloc("Terre Basse","Bloc commun qui recouvre le sol du monde",1,1));
         items.put(3, new Bloc("Bois","Element indispensable, base de créativité",1,3));
@@ -77,40 +98,37 @@ public class Jeu {
         items.put(5, new Item("Charbon","Permet d'alimenter le four et la forge en chaleur",1));
         items.put(6, new Bloc("Pierre","Bloc basique de pierre commun dans les sous-sol",2,5));
         items.put(7, new Bloc("Minerai Fer","Métal commun de Fer",3,7));
-        items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1));
+        items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1, (BlocConstruction) items.get(23)));
         items.put(9, new Bloc("Glace","",1,2));
-        items.put(10, new Item("DELJCCium", "", 1));
+        items.put(10, new Item("DELJCCium", "", 1,(BlocConstruction) items.get(23)));
+
         //Bloc outil
-        items.put(20, new Etabli("Etabli","Un établi qui permet la fabrication d'objets",1,3));
-        items.put(21, new Etabli("Forge","Un établi qui permet la fabrication d'objets",1,3));
-        items.put(22, new Etabli("Alambique","Un établi qui permet la fabrication d'objets",1,3));
-        items.put(23, new Etabli("Four","Permet de fondre et cuire ses objets",1,3));
         items.put(24, new Coffre("Coffre", "", 1, 3));
 
         // Outils
         items.put(50,new Pelle("Pelle de bois","Une pelle en bois ordinaire, accélère la vitesse pour creuser des objets"));
         items.put(51,new Hache("Hache de bois",""));
         items.put(52,new Pioche("Pioche de bois",""));
-        items.put(53,new Pelle("Pelle de pierre",""));
-        items.put(54,new Hache("Hache de pierre",""));
-        items.put(55,new Pioche("Pioche de pierre",""));
-        items.put(56,new Pelle("Pelle de fer",""));
-        items.put(57,new Hache("Hache de fer",""));
-        items.put(58,new Pioche("Pioche de fer",""));
-        items.put(59,new Pelle("Pelle de DELJCCium","Une pelle en DELJCCium exclusive, accélère fortement la vitesse pour creuser des objets"));
-        items.put(60,new Hache("Hache de DELJCCium",""));
-        items.put(61,new Pioche("Pioche de DELJCCium",""));
-        items.put(62, new Item("Seau", "", 1));
+        items.put(53,new Pelle("Pelle de pierre","", (BlocConstruction) items.get(20)));
+        items.put(54,new Hache("Hache de pierre","",(BlocConstruction) items.get(20)));
+        items.put(55,new Pioche("Pioche de pierre","",(BlocConstruction) items.get(20)));
+        items.put(56,new Pelle("Pelle de fer","",(BlocConstruction) items.get(21)));
+        items.put(57,new Hache("Hache de fer","",(BlocConstruction) items.get(21)));
+        items.put(58,new Pioche("Pioche de fer","",(BlocConstruction) items.get(21)));
+        items.put(59,new Pelle("Pelle de DELJCCium","Une pelle en DELJCCium exclusive, accélère fortement la vitesse pour creuser des objets",(BlocConstruction) items.get(21)));
+        items.put(60,new Hache("Hache de DELJCCium","",(BlocConstruction) items.get(21)));
+        items.put(61,new Pioche("Pioche de DELJCCium","",(BlocConstruction) items.get(21)));
+        items.put(62, new Item("Seau", "", 1,(BlocConstruction) items.get(20)));
 
         // Armures
-        items.put(62,new Armure("Casque en fer","",2));
-        items.put(63,new Armure("Casque en DELJCCium","",3));
-        items.put(64,new Armure("Plastron en fer","",6));
-        items.put(65,new Armure("Plastron en DELJCCium","",9));
-        items.put(66,new Armure("Jambière en fer","",4));
-        items.put(67,new Armure("Jambière en DELJCCium","",6));
-        items.put(68,new Armure("Botte en fer","",3));
-        items.put(69,new Armure("Botte en DELJCCium","",5));
+        items.put(62,new Armure("Casque en fer","",2,(BlocConstruction) items.get(21)));
+        items.put(63,new Armure("Casque en DELJCCium","",3,(BlocConstruction) items.get(21)));
+        items.put(64,new Armure("Plastron en fer","",6,(BlocConstruction) items.get(21)));
+        items.put(65,new Armure("Plastron en DELJCCium","",9,(BlocConstruction) items.get(21)));
+        items.put(66,new Armure("Jambière en fer","",4,(BlocConstruction) items.get(21)));
+        items.put(67,new Armure("Jambière en DELJCCium","",6,(BlocConstruction) items.get(21)));
+        items.put(68,new Armure("Botte en fer","",3,(BlocConstruction) items.get(21)));
+        items.put(69,new Armure("Botte en DELJCCium","",5,(BlocConstruction) items.get(21)));
 
         // Armes
 

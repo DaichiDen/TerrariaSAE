@@ -3,20 +3,28 @@ package fr.iut.saeterraria.sae.Controller;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
 import fr.iut.saeterraria.sae.Modele.Personnages.Ennemi;
+import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
 import fr.iut.saeterraria.sae.Vue.*;
 import javafx.animation.AnimationTimer;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
+
+import javafx.beans.value.ChangeListener;
+
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ListChangeListener;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.input.KeyCode;
@@ -26,15 +34,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
-
-import static javafx.application.Platform.exit;
 
 public class Controller implements Initializable{
 
@@ -82,8 +89,9 @@ public class Controller implements Initializable{
     private Jeu jeu;
     public Fond scene;
     private VueInventaire inventaireVue;
-    private vueHotbar hotBarVue;
+    private VueHotbar hotBarVue;
     private SpriteJoueur vuejoueur;
+    private SpriteMob vueEnnemi;
     private VueSon BiblioSon = new VueSon();
 
     @Override
@@ -94,7 +102,14 @@ public class Controller implements Initializable{
                 confirmerNom();
         }});
         scene = new Fond(fond,jeu.getCarte());// Initialise le fond (décor du jeu)
-        jeu.addMobs(new Ennemi("Pierre",20,20,50,0,0,10,jeu.getCarte(), jeu));
+        vueEnnemi = new SpriteMob(jeu, screen,"Pierre");
+
+        jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
+
+        Ennemi ennemiCaca = new Ennemi("Pierre",20,20,50,0,0,10,jeu.getCarte(), jeu);
+        jeu.addEnnemis(ennemiCaca);
+        jeu.addMobs(ennemiCaca);
+
         imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
         imagefond.fitHeightProperty().bind(imagebloc_death.widthProperty());
 
@@ -104,29 +119,35 @@ public class Controller implements Initializable{
 
         Platform.runLater(() -> fond.requestFocus());
         SpriteVie barre = new SpriteVie(Vie, jeu);
+
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar);
-        Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte());
+
+
+
+
+        Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte(),fond);
+
         inventaireVue = new VueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
-        hotBarVue = new vueHotbar(jeu,hotBar);
+        hotBarVue = new VueHotbar(jeu,hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
+
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
-        VueEnnemi ennemi = new VueEnnemi(jeu, screen);
+        vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
+
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
         screen.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
 
+        ObsJoueur obsJ = new ObsJoueur(jeu,vuejoueur, controlleurJoueur);
+        jeu.getJoueur().yProperty().addListener(obsJ);
+
+        jeu.getJoueur().getBarreVie().vieProperty().addListener((obs, oldVal, newVal) -> {
+            barre.mettreAJourSpriteVie(jeu.getJoueur());
+        });
+
+
         for (int i=0; i<jeu.getJoueur().getInventaire().getInventaireJoueur().length; i++) {
             for(int j=0; j<jeu.getJoueur().getInventaire().getInventaireJoueur()[i].length; j++) {
-                int finalI = i;
-                int finalJ = j;
-                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].changementProperty().addListener((ob,ol,nv) -> {
-                    if(finalI==0 && nv) {
-                        inventaireVue.updateElement(finalI,finalJ);
-                        hotBarVue.updateElement(finalJ);
-                    }
-                    else if(nv) {
-                        inventaireVue.updateElement(finalI,finalJ);
-                    }
-                });
+                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].changementProperty().addListener(new ListenerInventaire(inventaireVue,hotBarVue,i,j));
             }
         }
 
@@ -139,31 +160,31 @@ public class Controller implements Initializable{
             public void handle(long now) {
                 if (now - lastUpdate >= frameInterval) {
 
-                    controlleurJoueur.update();
-                    jeu.getJoueur().mettreAJour();
-                    barre.mettreAJourSpriteVie(jeu.getJoueur());
-                    vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
-                    if(jeu.getMobs().size()>0) {
-                        for (int i = 0; i < jeu.getMobs().size(); i++) {
-                            if(jeu.getMobs().get(i)==null) {
-                                if (!jeu.getMobs().get(i).estVivant()) {
-                                    PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
-                                    int finalI = i;
-                                    int finalI1 = i;
-                                    delay.setOnFinished(event -> {
-                                        screen.getChildren().remove(finalI);
-                                        jeu.getMobs().remove(finalI1);
-
-                                    });
-                                    delay.play();
-
-
-                                }
-                            }
-
-                            jeu.getMobs().get(i).mettreAJour();
-                        }
+                    jeu.getJoueur().mettreAJour(); //Laisser ici ? on tombe tt le temps ect, donc dans tt les cas c a chaque frame non ?
+                    for(int i = 0; i < jeu.getMobs().size(); i++){
+                        jeu.getMobs().get(i).mettreAJour();
                     }
+//                    if(jeu.getEnnemis().size()>0) {
+//                        for (int i = 0; i < jeu.getEnnemis().size(); i++) {
+//                            if(jeu.getEnnemis().get(i)==null) {
+//                                if (!jeu.getEnnemis().get(i).estVivant()) {
+//                                    PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+//                                    int finalI = i;
+//                                    int finalI1 = i;
+//                                    delay.setOnFinished(event -> {
+//                                        screen.getChildren().remove(finalI);
+//                                        jeu.getEnnemis().remove(finalI1);
+//
+//                                    });
+//                                    delay.play();
+//
+//
+//                                }
+//                            }
+//
+//                            jeu.getEnnemis().get(i).mettreAJour();
+//                        }
+//                    }
                     lastUpdate = now;
 
 
@@ -171,8 +192,7 @@ public class Controller implements Initializable{
                         // Le joueur est mort, démarrer le délai de 10 secondes avant rageQuit
                         PauseTransition delay = new PauseTransition(Duration.seconds(1.5)); // Délai de 10 secondes
                         delay.setOnFinished(event ->{
-                            principal.setVisible(false);
-                            death.setVisible(true);
+                            death.toFront();
                             BiblioSon.stop(1);
                             BiblioSon.play(4);
 
@@ -195,36 +215,30 @@ public class Controller implements Initializable{
         // lastUpdate stocke le temps de la dernière màj graphique enregistré
         // La méthode vérifie si entre la dernière update et maintenant il s'est passé 1/60 ème de seconde ( 1 frame), si oui on actualise graphiquement
 
-        scene.afficherCarte();// Affiche le décor dans la vue
 
     }
 
     @FXML
     public void ouvrirInventaire() {
-        hotBar.setVisible(false);
-        openInventaire.setVisible(false);
-        screenInventaire.setVisible(true);
+        screenInventaire.toFront();
         jeu.getJoueur().craftItem(jeu.getItems().get(52));
-        Platform.runLater(() -> fond.requestFocus());
     }
     @FXML
     public void exitInventaire(){
-        hotBar.setVisible(true);
-        screenInventaire.setVisible(false);
-        openInventaire.setVisible(true);
+        screenInventaire.toBack();
         Platform.runLater(() -> fond.requestFocus());
     }
 
     @FXML
     public void startGame(){
-        boxAccueil.setVisible(false);
+        boxAccueil.toBack();
         imagebloc_accueil.toBack();
-        choixNom.setVisible(true);
+        choixNom.toFront();
     }
 
     public void confirmerNom(){
-        menu.setVisible(false);
-        principal.setVisible(true);
+        menu.toBack();
+        principal.toFront();
         jeu.getJoueur().setNom(zoneNom.getText());
         Platform.runLater(() -> fond.requestFocus());
     }

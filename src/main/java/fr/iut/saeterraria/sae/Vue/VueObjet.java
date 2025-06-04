@@ -24,8 +24,8 @@ public class VueObjet extends CreateRessourceVisuel{
         spriteActuel = createImageView("/Sprite_objets/arme_test.png",150,150);
         screen.getChildren().add(spriteActuel);
         spriteActuel.setId("" + this.jeu.getItems().get(1).getCodeObjet());
-        spriteActuel.translateXProperty().bind(jeu.getMobs().get(0).xProperty());
-        spriteActuel.translateYProperty().bind(jeu.getMobs().get(0).yProperty());
+        spriteActuel.translateXProperty().bind(jeu.getEnnemis().get(0).xProperty());
+        spriteActuel.translateYProperty().bind(jeu.getEnnemis().get(0).yProperty());
         spriteActuel.setFitWidth(54);
         spriteActuel.setFitHeight(64);
     }

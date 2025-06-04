@@ -1,11 +1,9 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
+import com.sun.jdi.connect.Connector;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.media.MediaPlayer;
 import org.w3c.dom.css.Rect;
@@ -19,10 +17,15 @@ public abstract class Entite {
     private IntegerProperty energie;
     private IntegerProperty vitesseMax;
     private BarreVie barreVie;
+
+    private BooleanProperty estVivant;
+
+
     public final static int taille1bloc = 32;
+
     private boolean enSaut = false;
-    protected boolean marcheDroite = false;
-    protected boolean marcheGauche = false;
+    protected BooleanProperty marcheDroite = new SimpleBooleanProperty(false);
+    protected BooleanProperty marcheGauche = new SimpleBooleanProperty(false);
     protected int vitesseY = 0;
     protected Jeu jeu;
     //constantes
@@ -50,23 +53,27 @@ public abstract class Entite {
         this.vitesseMax = new SimpleIntegerProperty(vitesseMax);
         this.map = map;
         this.jeu=jeu;
+        this.estVivant= new SimpleBooleanProperty(true);
+
     }
 
+    // Gestion du positionnement horizontal
+    public final IntegerProperty xProperty() {return x;}
+    public int getX() { return x.getValue(); }
+    public final void setX(int x) {this.x.setValue(x);}
+    // Gestion su positionnement vertical
+    public final IntegerProperty yProperty(){ return y; }
+    public int getY() { return y.getValue(); }
+    public final void setY(int y) { this.y.setValue(y);}
 
-    public void setMarcheGauche(boolean marcheGauche) {
-        this.marcheGauche = marcheGauche;
-    }
-    public void setMarcheDroite(boolean marcheDroite) {
-        this.marcheDroite = marcheDroite;
-    }
 
+    public boolean getMarcheGauche() { return marcheGauche.get(); }
+    public void setMarcheGauche(boolean val) { marcheGauche.set(val); }
+    public BooleanProperty marcheGaucheProperty() { return marcheGauche; }
 
-    public boolean getMarcheGauche() {
-        return this.marcheGauche;
-    }
-    public boolean getMarcheDroite() {
-        return this.marcheDroite;
-    }
+    public boolean getMarcheDroite() { return marcheDroite.get(); }
+    public void setMarcheDroite(boolean val) { marcheDroite.set(val); }
+    public BooleanProperty marcheDroiteProperty() { return marcheDroite; }
 
     public int getVitesseY(){
         return vitesseY;
@@ -108,7 +115,7 @@ public abstract class Entite {
     }
 
     public void mettreAJour() {
-        if (estVivant()) {
+        if (estVivant.getValue().equals(true)) {
             // Appliquer gravité
             if (!collisionBas) {
                 vitesseY += gravité;
@@ -135,9 +142,9 @@ public abstract class Entite {
             }
 
             // Gestion de l'accélération
-            if (marcheDroite && !marcheGauche) {
+            if (getMarcheDroite() && !getMarcheGauche()) {
                 vitesseX += accel;
-            } else if (marcheGauche && !marcheDroite) {
+            } else if (getMarcheGauche() && !getMarcheDroite()) {
                 vitesseX -= accel;
             } else {
                 // Si pas de touche appuyée on applique la friction
@@ -255,7 +262,7 @@ public abstract class Entite {
 
 
     // Gestion du nom
-    public StringProperty nomProperty(){
+    public StringProperty getNomProperty(){
         return this.nom;
     }
     public String getNom(){
@@ -281,20 +288,17 @@ public abstract class Entite {
 
         if(barreVie.getVie()-val < 0){
             barreVie.setVie(0);
+            estVivant.set(false);
         }else{
             barreVie.setVie(barreVie.getVie()-val);
-
-        }
-
-    }
-
-    public final boolean estVivant(){
-        if(barreVie.getVie() == 0){
-            return false;
-        }else{
-            return true;
         }
     }
+
+    public final BooleanProperty estVivantProperty() {
+        return estVivant;
+    }
+
+
 
     // Gestion de l'energie
     public final IntegerProperty energieMaxProperty(){return energieMax;}
@@ -317,14 +321,6 @@ public abstract class Entite {
         }
     }
 
-    // Gestion du positionnement horizontal
-    public final IntegerProperty xProperty() {return x;}
-    public int getX() { return x.get(); }
-    public final void setX(int x) { this.x.setValue(x);}
-    // Gestion su positionnement vertical
-    public final IntegerProperty yProperty(){ return y; }
-    public int getY() { return y.get(); }
-    public final void setY(int y) { this.y.setValue(y);}
 
     // Gestion de la defense
     public final IntegerProperty defProperty(){ return def; }

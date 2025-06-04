@@ -1,18 +1,15 @@
 package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Vue.vueHotbar;
+import fr.iut.saeterraria.sae.Vue.VueHotbar;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
 import java.util.HashSet;
@@ -32,7 +29,7 @@ public class Clavier implements EventHandler<KeyEvent> {
     private GridPane hotBarInventaire;
     private final Set<KeyCode> touchesAppuyees = new HashSet<>();
     private boolean inventaireOuvert = false;
-    private vueHotbar vueHotbar;
+    private VueHotbar vueHotbar;
 
 
 
@@ -47,7 +44,7 @@ public class Clavier implements EventHandler<KeyEvent> {
         this.openInventaire=openInventaire;
         this.fond=fond;
         this.hotBarInventaire=hotBarInventaire;
-        this.vueHotbar = new vueHotbar(jeu,hotBarInventaire);
+        this.vueHotbar = new VueHotbar(jeu,hotBarInventaire);
     }
 
 
@@ -112,17 +109,13 @@ public class Clavier implements EventHandler<KeyEvent> {
     @FXML
     public void ouvrirInventaire() {
         jeu.testCraft();
-        openInventaire.setVisible(false);
-        hotBarInventaire.setVisible(false);
+        screenInventaire.toFront();
         jeu.getJoueur().setMarcheDroite(false);
         jeu.getJoueur().setMarcheGauche(false);
-        screenInventaire.setVisible(true);
     }
     @FXML
     public void exitInventaire(){
-        screenInventaire.setVisible(false);
-        hotBarInventaire.setVisible(true);
-        openInventaire.setVisible(true);
+        screenInventaire.toBack();
         Platform.runLater(() -> fond.requestFocus());
     }
 

@@ -18,6 +18,11 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
     private ImageView spriteActuel;
     private String dernierEtat = "";
+    private ImageView marchedroite= createImageView("/Sprite/Chevalier_marcheDroite_Bon.gif",width,height);
+    private ImageView marchegauche=  createImageView("/Sprite/Chevalier_marcheGauche_Bon.gif",width,height);
+    private ImageView marcheNon = createImageView("/Sprite/Hero_stop.png",width,height);
+
+
 
     private Rectangle2D hitboxJoueur;
 
@@ -26,6 +31,11 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         this.screen = screen;
         this.width=150;
         this.height=150;
+        jeu.getJoueur().marcheGaucheProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
+        jeu.getJoueur().marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
+        jeu.getJoueur().xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
+
+
     }
 
     public void mettreAJourSpriteJoueur(Joueur joueur) {
@@ -51,11 +61,19 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
         // Créer le bon sprite
         if (etatActuel.equals("gauche")) {
-            spriteActuel = createImageView("/Sprite/Chevalier_marcheGauche.gif",width,height);
+
+
+
+
+
+
+
+            spriteActuel = marchegauche;
         } else if (etatActuel.equals("droite")) {
-            spriteActuel = createImageView("/Sprite/Chevalier_marcheDroite.gif",width,height);
+            spriteActuel = marchedroite;
         } else {
-            spriteActuel = createImageView("/Sprite/Hero_stop.png",width,height);
+            spriteActuel = marcheNon;
+
         }
 
         spriteActuel.setId(joueur.getNom());
