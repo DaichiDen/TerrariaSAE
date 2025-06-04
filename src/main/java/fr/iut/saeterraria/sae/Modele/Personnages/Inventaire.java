@@ -48,10 +48,9 @@ public class Inventaire {
                 i++;
             }
             i=0;
-            // Si la case est vide
             while(!placer && i < planInventaire.length ) {
                 while (!placer && j < planInventaire[i].length) {
-                    if (planInventaire[i][j] == 2) {
+                    if (planInventaire[i][j] == 2) {              // Si la case est vide
                         this.inventaireJoueur[i][j].ajouterItem(item);
                         if (reste <= this.inventaireJoueur[i][j].getMaxStack()) { // Si l'ajout de l'item va pas dépasser la limite de stack
                             this.inventaireJoueur[i][j].ajouteQuantite(reste);
