@@ -106,7 +106,7 @@ public class Controller implements Initializable{
 
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
 
-        Ennemi ennemiCaca = new Ennemi("Pierre",20,20,50,0,0,10,jeu.getCarte(), jeu);
+        Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0,10,jeu.getCarte(), jeu);
         jeu.addEnnemis(ennemiCaca);
         jeu.addMobs(ennemiCaca);
 
@@ -164,49 +164,18 @@ public class Controller implements Initializable{
                     for(int i = 0; i < jeu.getMobs().size(); i++){
                         jeu.getMobs().get(i).mettreAJour();
                     }
-//                    if(jeu.getEnnemis().size()>0) {
-//                        for (int i = 0; i < jeu.getEnnemis().size(); i++) {
-//                            if(jeu.getEnnemis().get(i)==null) {
-//                                if (!jeu.getEnnemis().get(i).estVivant()) {
-//                                    PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
-//                                    int finalI = i;
-//                                    int finalI1 = i;
-//                                    delay.setOnFinished(event -> {
-//                                        screen.getChildren().remove(finalI);
-//                                        jeu.getEnnemis().remove(finalI1);
-//
-//                                    });
-//                                    delay.play();
-//
-//
-//                                }
-//                            }
-//
-//                            jeu.getEnnemis().get(i).mettreAJour();
-//                        }
-//                    }
+
                     lastUpdate = now;
 
 
-                    if (!jeu.estVivant(jeu.getJoueur())) {
-                        // Le joueur est mort, démarrer le délai de 10 secondes avant rageQuit
-                        PauseTransition delay = new PauseTransition(Duration.seconds(1.5)); // Délai de 10 secondes
+                    if (!jeu.getJoueur().estVivant()) {
+                        PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
                         delay.setOnFinished(event ->{
-                            principal.setVisible(false);
-                            death.setVisible(true);
-                            BiblioSon.stop(1);
-                            BiblioSon.play(4);
-
+                            vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
                         }); // Action à faire après le délai
                         delay.play();
-                        // Démarre le délai
 
-                        PauseTransition delay2 = new PauseTransition(Duration.seconds(16));
-                        delay2.setOnFinished(event ->{
-                            BiblioSon.stop(4);
-                            rageQuit();
-                        });
-                        delay2.play();
+
                         // Démarre le délai
                     }
                 }

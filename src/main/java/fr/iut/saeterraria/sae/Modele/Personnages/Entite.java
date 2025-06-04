@@ -115,7 +115,7 @@ public abstract class Entite {
     }
 
     public void mettreAJour() {
-        if (estVivant.getValue().equals(true)) {
+        if (estVivant()) {
             // Appliquer gravité
             if (!collisionBas) {
                 vitesseY += gravité;
@@ -162,9 +162,6 @@ public abstract class Entite {
             // Appliquer le déplacement
             setX(getX() + vitesseX);
             collisionHorizontale();
-        }else {
-            vitesseY -= gravité;
-            setY(getY() + vitesseY);
         }
 
 
@@ -284,9 +281,9 @@ public abstract class Entite {
         }
     }
 
-    public final void decrementVie(int val) {
+    public void decrementVie(int val) {
 
-        if(barreVie.getVie()-val < 0){
+        if(barreVie.getVie()-val <= 0){
             barreVie.setVie(0);
             estVivant.set(false);
         }else{
@@ -294,8 +291,11 @@ public abstract class Entite {
         }
     }
 
-    public final BooleanProperty estVivantProperty() {
+    public BooleanProperty estVivantProperty() {
         return estVivant;
+    }
+    public boolean estVivant(){
+        return estVivant.getValue();
     }
 
 
