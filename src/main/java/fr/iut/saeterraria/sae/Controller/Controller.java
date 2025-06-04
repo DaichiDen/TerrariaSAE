@@ -192,8 +192,7 @@ public class Controller implements Initializable{
                         // Le joueur est mort, démarrer le délai de 10 secondes avant rageQuit
                         PauseTransition delay = new PauseTransition(Duration.seconds(1.5)); // Délai de 10 secondes
                         delay.setOnFinished(event ->{
-                            principal.setVisible(false);
-                            death.setVisible(true);
+                            death.toFront();
                             BiblioSon.stop(1);
                             BiblioSon.play(4);
 
@@ -221,30 +220,25 @@ public class Controller implements Initializable{
 
     @FXML
     public void ouvrirInventaire() {
-        hotBar.setVisible(false);
-        openInventaire.setVisible(false);
-        screenInventaire.setVisible(true);
+        screenInventaire.toFront();
         jeu.getJoueur().craftItem(jeu.getItems().get(52));
-        Platform.runLater(() -> fond.requestFocus());
     }
     @FXML
     public void exitInventaire(){
-        hotBar.setVisible(true);
-        screenInventaire.setVisible(false);
-        openInventaire.setVisible(true);
+        screenInventaire.toBack();
         Platform.runLater(() -> fond.requestFocus());
     }
 
     @FXML
     public void startGame(){
-        boxAccueil.setVisible(false);
+        boxAccueil.toBack();
         imagebloc_accueil.toBack();
-        choixNom.setVisible(true);
+        choixNom.toFront();
     }
 
     public void confirmerNom(){
-        menu.setVisible(false);
-        principal.setVisible(true);
+        menu.toBack();
+        principal.toFront();
         jeu.getJoueur().setNom(zoneNom.getText());
         Platform.runLater(() -> fond.requestFocus());
     }

@@ -109,17 +109,13 @@ public class Clavier implements EventHandler<KeyEvent> {
     @FXML
     public void ouvrirInventaire() {
         jeu.testCraft();
-        openInventaire.setVisible(false);
-        hotBarInventaire.setVisible(false);
+        screenInventaire.toFront();
         jeu.getJoueur().setMarcheDroite(false);
         jeu.getJoueur().setMarcheGauche(false);
-        screenInventaire.setVisible(true);
     }
     @FXML
     public void exitInventaire(){
-        screenInventaire.setVisible(false);
-        hotBarInventaire.setVisible(true);
-        openInventaire.setVisible(true);
+        screenInventaire.toBack();
         Platform.runLater(() -> fond.requestFocus());
     }
 

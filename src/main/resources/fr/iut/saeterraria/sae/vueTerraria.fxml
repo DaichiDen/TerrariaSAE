@@ -6,9 +6,25 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
    <children>
-      <BorderPane fx:id="principal" prefHeight="220.0" prefWidth="600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="death" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane fx:id="imagebloc_death" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fx:id="imagefond" fitHeight="5.0" fitWidth="5.0" pickOnBounds="true">
+                       <image>
+                           <Image url="@../../../../death_screen.gif" />
+                       </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </children>
+            </StackPane>
+         </children>
+      </AnchorPane>
+      <BorderPane fx:id="principal" prefHeight="220.0" prefWidth="600.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <Pane prefHeight="32.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
@@ -19,7 +35,7 @@
          <center>
             <Pane fx:id="screen" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <children>
-                  <TilePane fx:id="fond" prefColumns="58" prefRows="30" />
+                   <TilePane fx:id="fond" prefColumns="58" prefRows="30" style="-fx-background-color: white;" />
                   <AnchorPane prefHeight="200.0" prefWidth="675.0">
                      <children>
                         <Button fx:id="openInventaire" defaultButton="true" layoutX="20.0" layoutY="45.0" onAction="#ouvrirInventaire" prefHeight="52.0" prefWidth="81.0" text="Inventaire" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="569.0" AnchorPane.topAnchor="25.0"> </Button>
@@ -41,9 +57,10 @@
                         <Insets left="5.0" top="20.0" />
                      </padding>
                   </AnchorPane>
-                  <AnchorPane fx:id="screenInventaire" layoutX="-1.0" visible="false">
+
+                  <AnchorPane fx:id="screenInventaire" layoutX="-1.0">
                      <children>
-                        <Button fx:id="quitterInventaire" defaultButton="true" mnemonicParsing="false" onAction="#exitInventaire" prefHeight="46.0" prefWidth="192.0" text="Quitter" AnchorPane.bottomAnchor="1070.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1700.0" AnchorPane.topAnchor="40.0" />
+                        <Button fx:id="quitterInventaire" defaultButton="true" layoutY="44.0" mnemonicParsing="false" onAction="#exitInventaire" prefHeight="34.0" prefWidth="95.0" text="Quitter" AnchorPane.bottomAnchor="1078.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1797.0" AnchorPane.topAnchor="44.0" />
                         <GridPane fx:id="inventaire" gridLinesVisible="true" layoutX="179.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="432.0" prefWidth="898.0" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="750.0" AnchorPane.topAnchor="100.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" />
@@ -71,8 +88,18 @@
          </center>
       
                   </BorderPane>
-      <AnchorPane fx:id="menu" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="menu" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <VBox fx:id="choixNom" alignment="CENTER" layoutX="50.0" layoutY="450.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="phraseNom" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Entrez votre nom">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="zoneNom" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="1336.0" text="Nom Joueur" />
+               </children>
+            </VBox>
             <StackPane fx:id="imagebloc_accueil" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fx:id="imageaccueil" fitHeight="1080" fitWidth="1920" pickOnBounds="true">
@@ -82,17 +109,7 @@
                   </ImageView>
                </children>
             </StackPane>
-            <VBox fx:id="choixNom" alignment="CENTER" layoutX="50.0" layoutY="450.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label fx:id="phraseNom" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Entrez votre nom">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="zoneNom" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Nom Joueur" />
-               </children>
-            </VBox>
-            <VBox fx:id="boxAccueil" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox fx:id="boxAccueil" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Button fx:id="start" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startGame" prefHeight="59.0" prefWidth="126.0" text="Start" textAlignment="CENTER">
                      <VBox.margin>
@@ -102,22 +119,6 @@
                   <Button fx:id="quit" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#rageQuit" prefHeight="59.0" prefWidth="126.0" text="Quit" textAlignment="CENTER" />
                </children>
             </VBox>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="death" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <StackPane fx:id="imagebloc_death" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ImageView fx:id="imagefond" fitHeight="5.0" fitWidth="5.0" pickOnBounds="true">
-                       <image>
-                           <Image url="@../../../../death_screen.gif" />
-                       </image>
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
-               </children>
-            </StackPane>
          </children>
       </AnchorPane>
    </children>
