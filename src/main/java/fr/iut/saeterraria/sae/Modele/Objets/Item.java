@@ -26,19 +26,30 @@ public class Item {
         this.codeObjet = new SimpleIntegerProperty(0);
         this.provenance = null;
     }
+    public Item(String nom, String description,int typeItem) {
 
 
-
-
-
-
-
-
-
-
+        this.name = new SimpleStringProperty(nom);
+        this.description = new SimpleStringProperty(description);
+        this.typeItem = new SimpleIntegerProperty(typeItem);
+        this.recette = new Recette();
+        this.codeObjet = new SimpleIntegerProperty(id);
+        this.provenance = null;
+        id++;
     }
 
-    public Item(String nom, String descripcion,int typeItem,BlocConstruction provenance) {
+
+
+
+
+
+
+
+
+
+
+
+    public Item(String nom, String description,int typeItem,BlocConstruction provenance) {
 
 
         this.name = new SimpleStringProperty(nom);

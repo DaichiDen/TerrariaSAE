@@ -95,10 +95,6 @@ public class Jeu {
 
 
         // Blocs
-        items.put(20, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3));
-        items.put(21, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3));
-        items.put(22, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3));
-        items.put(23, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,3));
 
         items.put(1, new Bloc("Terre Haute","Bloc commun qui recouvre le monde",1,1));
         items.put(2, new Bloc("Terre Basse","Bloc commun qui recouvre le sol du monde",1,1));
@@ -117,7 +113,10 @@ public class Jeu {
 
 
 
-
+        items.put(20, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3));
+        items.put(21, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3));
+        items.put(22, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3));
+        items.put(23, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,3));
         //Bloc outil
         items.put(24, new Coffre("Coffre", "", 1, 3));
 
@@ -151,14 +150,14 @@ public class Jeu {
 
 
 
-        items.put(63,new Armure("Casque en fer","",2));
-        items.put(64,new Armure("Casque en DELJCCium","",3));
-        items.put(65,new Armure("Plastron en fer","",6));
-        items.put(66,new Armure("Plastron en DELJCCium","",9));
-        items.put(67,new Armure("Jambière en fer","",4));
-        items.put(68,new Armure("Jambière en DELJCCium","",6));
-        items.put(69,new Armure("Botte en fer","",3));
-        items.put(70,new Armure("Botte en DELJCCium","",5));
+        items.put(63,new Armure("Casque en fer","",2, (BlocConstruction) items.get(21)));
+        items.put(64,new Armure("Casque en DELJCCium","",3,(BlocConstruction) items.get(21)));
+        items.put(65,new Armure("Plastron en fer","",6,(BlocConstruction) items.get(21)));
+        items.put(66,new Armure("Plastron en DELJCCium","",9,(BlocConstruction) items.get(21)));
+        items.put(67,new Armure("Jambière en fer","",4,(BlocConstruction) items.get(21)));
+        items.put(68,new Armure("Jambière en DELJCCium","",6,(BlocConstruction) items.get(21)));
+        items.put(69,new Armure("Botte en fer","",3,(BlocConstruction) items.get(21)));
+        items.put(70,new Armure("Botte en DELJCCium","",5,(BlocConstruction) items.get(21)));
 
 
 
