@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
@@ -11,6 +12,12 @@ public class Bloc extends Item{
 
     public Bloc (String nom,String description, int typeBloc, int resistance) {
         super(nom,description,1);
+        this.typeBloc = typeBloc;
+        this.resistance = resistance;
+    }
+
+    public Bloc (String nom, String description, int typeBloc, int resistance, BlocConstruction provenance) {
+        super(nom,description,1,provenance);
         this.typeBloc = typeBloc;
         this.resistance = resistance;
     }

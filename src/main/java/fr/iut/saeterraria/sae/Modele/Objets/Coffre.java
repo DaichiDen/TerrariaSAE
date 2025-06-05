@@ -1,11 +1,12 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Personnages.Case;
 
 public class Coffre extends Bloc{
     private Case[][]contenu;
 
-    public Coffre(String nom, String description, int typeBloc, int resistance) {
+    public Coffre(String nom, String description, int typeBloc, int resistance, BlocConstruction blocConstruction) {
         super(nom, description, typeBloc, resistance);
         this.contenu = new Case[4][4];
     }

@@ -62,7 +62,7 @@ public class VueInventaire extends SpriteItem {
     public void afficheItemQuantite(String path,int quantite, int i, int j, int zoneinventaire){//j la colonne et i la ligne
         HBox hBox = structureGridpane(j,i,zoneinventaire);
         hBox.getChildren().add(super.createImageView(path,50,50));//Item
-        hBox.getChildren().add(createLabel(quantite)); //Quantite
+        hBox.getChildren().add(createLabelQuantite(quantite)); //Quantite
     }
 
     public HBox structureGridpane(int colonne, int ligne, int zoneinventaire){

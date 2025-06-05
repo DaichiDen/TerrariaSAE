@@ -8,6 +8,11 @@ import java.util.HashMap;
 public class BlocConstruction extends Bloc {
     HashMap<Integer, Recette> listeRecettes;
 
+    public BlocConstruction(String nom, String desc, int typeBloc, int resistance, BlocConstruction provenance) {
+        super(nom,desc,typeBloc,resistance,provenance);
+        this.listeRecettes = new HashMap<>();
+    }
+
     public BlocConstruction(String nom, String desc, int typeBloc, int resistance) {
         super(nom,desc,typeBloc,resistance);
         this.listeRecettes = new HashMap<>();
