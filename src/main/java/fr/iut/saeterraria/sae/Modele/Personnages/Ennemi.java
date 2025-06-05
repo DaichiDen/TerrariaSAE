@@ -55,6 +55,7 @@ public class Ennemi extends Entite {
     }
     public void comportementVu(){
         Algo_A_Star pathfinding = new Algo_A_Star(jeu.getCarte());
+        System.out.println();
         List<Node> path = pathfinding.trouverchemin(this.getX()/32, this.getY()/32, jeu.getJoueur().getX()/32, jeu.getJoueur().getY()/32);
 
 
