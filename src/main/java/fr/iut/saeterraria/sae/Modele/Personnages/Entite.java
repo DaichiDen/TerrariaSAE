@@ -117,11 +117,7 @@ public abstract class Entite {
     public void mettreAJour() {
         if (estVivant()) {
             // Appliquer gravité
-            if (!collisionBas) {
-                vitesseY += gravité;
-            }
-            setY(getY() + vitesseY);
-            collisionVerticale();
+
             // Appliquer déplacement vertical, ensuite vérification des collisions, si le setY l'a fait rentrer dans qqch, alors le setY de la méthode collisionVertical le fait rester en dehors du bloc
 
             // inertie
@@ -163,6 +159,11 @@ public abstract class Entite {
             setX(getX() + vitesseX);
             collisionHorizontale();
         }
+        if (!collisionBas) {
+            vitesseY += gravité;
+        }
+        setY(getY() + vitesseY);
+        collisionVerticale();
 
 
     }

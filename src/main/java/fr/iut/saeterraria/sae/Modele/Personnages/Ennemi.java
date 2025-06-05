@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Ennemi extends Entite {
+    private long dernièreAttaque=60;
+    private long cooldown=60;
 
 
     private ArrayList<Item> listDrops;
@@ -32,10 +34,14 @@ public class Ennemi extends Entite {
 
     @Override
     public void attaquer(int x, int y, int range) {
-
-
+        if(dernièreAttaque==cooldown){
+            jeu.getJoueur().decrementVie(2);
+            dernièreAttaque=0;
+        }
+        dernièreAttaque++;
     }
 
+    @Override
     public void mettreAJour(){
         if(!detecterJoueur()){
             comportementPasVu();
@@ -43,12 +49,14 @@ public class Ennemi extends Entite {
         }else{
             comportementVu();
             super.mettreAJour();
+            System.out.println(dernièreAttaque);
 
         }
     }
     public void comportementVu(){
         Algo_A_Star pathfinding = new Algo_A_Star(jeu.getCarte());
         List<Node> path = pathfinding.trouverchemin(this.getX()/32, this.getY()/32, jeu.getJoueur().getX()/32, jeu.getJoueur().getY()/32);
+
 
         if (!path.isEmpty() && path.size()>1) {
             Node nextStep = path.get(1); // [0] = position actuelle
@@ -62,11 +70,14 @@ public class Ennemi extends Entite {
             } else if (dx > 0) {
                 setMarcheGauche(false);
                 setMarcheDroite(true);
-
-
             }
             if(dy < 0) {
                 this.sauter();
+            }
+            System.out.println(dy);
+            System.out.println(dx);
+            if(peutEtreAtteint(jeu.getCarte(), jeu.getJoueur().getX()/32, jeu.getJoueur().getY()/32, 2)){
+                attaquer(jeu.getJoueur().getX(), jeu.getJoueur().getY(), 2);
             }
 
             // Tu peux gérer dy si les ennemis sautent ou volent
@@ -74,6 +85,8 @@ public class Ennemi extends Entite {
         else{
             setMarcheGauche(false);
             setMarcheDroite(false);
+            attaquer(jeu.getJoueur().getX(),jeu.getJoueur().getY(),2);
+
         }
     }
 
