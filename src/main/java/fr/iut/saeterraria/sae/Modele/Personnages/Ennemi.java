@@ -65,7 +65,6 @@ public class Ennemi extends Entite {
             int dy = nextStep.y - (this.getY() / 32);
 
             if (dx < 0) {
-                System.out.println("test1");
                 setMarcheGauche(true);
                 setMarcheDroite(false);
             } else if (dx > 0) {
