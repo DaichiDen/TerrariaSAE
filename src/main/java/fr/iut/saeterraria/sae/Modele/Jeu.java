@@ -91,6 +91,9 @@ public class Jeu {
         items.put(0, new Bloc("Ciel","Ciel du monde",0,0));
 
 
+
+
+
         // Blocs
         items.put(20, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3));
         items.put(21, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3));
@@ -110,6 +113,9 @@ public class Jeu {
 
 
         items.put(10, new Item("DELJCCium", "", 1));
+
+
+
 
 
         //Bloc outil
@@ -142,6 +148,9 @@ public class Jeu {
 
 
 
+
+
+
         items.put(63,new Armure("Casque en fer","",2));
         items.put(64,new Armure("Casque en DELJCCium","",3));
         items.put(65,new Armure("Plastron en fer","",6));
@@ -150,6 +159,9 @@ public class Jeu {
         items.put(68,new Armure("Jambière en DELJCCium","",6));
         items.put(69,new Armure("Botte en fer","",3));
         items.put(70,new Armure("Botte en DELJCCium","",5));
+
+
+
 
 
         // Armes

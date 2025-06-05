@@ -77,6 +77,9 @@ public class Joueur extends Entite {
     
     public boolean miner (int x, int y){
 
+
+
+
             boolean miner = false;
             if (peutEtreAtteint(x, y, 2.5)) {
                 if (map.getCase(y, x) != 0) {
