@@ -36,8 +36,13 @@ public class Souris implements EventHandler<MouseEvent> {
         int y1 = ((int)mouseEvent.getY());
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
             jeu.getJoueur().attaquer(x1, y1, 2);
-            if (jeu.getJoueur().miner(x, y)){
-                this.tp.getChildren().remove((y*58)+x);
+
+
+
+
+            if (jeu.getJoueur().miner(jeu.getCarte(), x, y)){
+                this.tp.getChildren().remove((y*58)+x);// faire de la taille de la map un un getter
+
                 this.tp.getChildren().add( ( ((y*58)+x) ),new ImageView(fond.getTiles().get(map.getCase(y, x)) ) );
             }
 
