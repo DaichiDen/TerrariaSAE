@@ -10,6 +10,10 @@ public class Melee extends Armes {
         super(nom, desc, attaque,blocConstruction);
     }
 
+    public Melee(String nom, String desc, double attaque) {
+        super(nom, desc, attaque);
+    }
+
     @Override
     public void attaquer() {
 

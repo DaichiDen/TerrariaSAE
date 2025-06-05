@@ -12,6 +12,11 @@ public abstract class Armes extends Equipement {
         this.attaque = new SimpleDoubleProperty(attaque);
     }
 
+    public Armes (String nom, String desc, double attaque) {
+        super(nom,desc);
+        this.attaque = new SimpleDoubleProperty(attaque);
+    }
+
     public DoubleProperty attaqueProperty() { return attaque; }
     public double getAttaque(){ return attaque.getValue(); }
 

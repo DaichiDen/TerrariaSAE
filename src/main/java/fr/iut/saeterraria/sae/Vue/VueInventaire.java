@@ -34,7 +34,7 @@ public class VueInventaire extends SpriteItem {
         // Affiche l'hotbar
         for (int j = 0; j < tableauInventaire.getColumnCount(); j++) {
             if ( (player.getInventaire().getInventaireJoueur()[0][j].getItem().getCodeObjet() != 0)) {
-                String URL = "/Tiles/".concat(super.getHmap().get((player.getInventaire().getInventaireJoueur())[0][j].getItem().getCodeObjet())).concat(".png");
+                String URL = super.getHmap().get((player.getInventaire().getInventaireJoueur())[0][j].getItem().getCodeObjet()).concat(".png");
                 System.out.println(URL);
                 int quantite = (player.getInventaire().getInventaireJoueur())[0][j].getQuantite();
                 afficheItemQuantite(URL,quantite, 0, j,0);
@@ -48,7 +48,7 @@ public class VueInventaire extends SpriteItem {
         for (int i = 1; i < tableauInventaire.getRowCount(); i++) {
             for (int j = 0; j < tableauInventaire.getColumnCount(); j++) {
                if (player.getInventaire().getInventaireJoueur()[i][j].getItem().getCodeObjet() != 0) {
-                   String URL = "/Tiles/".concat(super.getHmap().get((player.getInventaire().getInventaireJoueur())[i][j].getItem().getCodeObjet())).concat(".png");
+                   String URL = super.getHmap().get((player.getInventaire().getInventaireJoueur())[i][j].getItem().getCodeObjet()).concat(".png");
                    int quantite = (player.getInventaire().getInventaireJoueur())[i][j].getQuantite();
                    afficheItemQuantite(URL, quantite, i, j, 1);
                 }
@@ -102,7 +102,7 @@ public class VueInventaire extends SpriteItem {
             }
         tableauInventaire.getChildren().remove(caseInventaire);
         if(player.getInventaire().getInventaireJoueur()[ligne][colonne].getItem().getCodeObjet()!= 0) {
-            String URL = "/Tiles/".concat(super.getHmap().get((player.getInventaire().getInventaireJoueur())[ligne][colonne].getItem().getCodeObjet())).concat(".png");
+            String URL = super.getHmap().get((player.getInventaire().getInventaireJoueur())[ligne][colonne].getItem().getCodeObjet()).concat(".png");
             int quantite = player.getInventaire().getInventaireJoueur()[ligne][colonne].getQuantite();
 
             if(ligne==0) {

@@ -12,11 +12,11 @@ public class SpriteItem extends CreateRessourceVisuel{
     }
 
     public void initialiseItems() {
-        items.put(0, "Ciel");
+        items.put(0, "/Tiles/Ciel");
         // Blocs
-        items.put(1, "Dirt_1"); // Terre Haute
-        items.put(2, "Dirt_2"); // Terre Basse
-        items.put(3, "Roche_moche"); // Bois
+        items.put(1, "/Tiles/Dirt_1"); // Terre Haute
+        items.put(2, "/Tiles/Dirt_2"); // Terre Basse
+        items.put(3, "/Tiles/Roche_moche"); // Bois
         items.put(4, ""); // Minerai Charbon
         items.put(5, ""); // Charbon
         items.put(6, ""); // Pierre
@@ -34,7 +34,7 @@ public class SpriteItem extends CreateRessourceVisuel{
         // Outils
         items.put(50, ""); // Pelle de bois
         items.put(51, ""); // Hache de bois
-        items.put(19, "Ciel"); // Pioche de bois
+        items.put(19, "/Tiles/Ciel"); // Pioche de bois
         items.put(53, ""); // Pelle de pierre
         items.put(54, ""); // Hache de pierre
         items.put(55, ""); // Pioche de pierre
@@ -54,6 +54,9 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(67,""); // Jambière en DELJCCium
         items.put(68,""); // Botte en fer
         items.put(69,""); // Botte en DELJCCium
+
+        //Armres
+        items.put(39,"/Sprite/KatanaDash");
     }
 
     public HashMap<Integer,String> getHmap(){

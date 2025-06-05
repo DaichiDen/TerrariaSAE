@@ -8,4 +8,8 @@ public abstract class Equipement extends Item{
     public Equipement(String nom, String desc, BlocConstruction blocConstruction) {
         super(nom, desc,3,blocConstruction);
     }
+
+    public Equipement(String nom, String desc) {
+        super(nom, desc,3);
+    }
 }
