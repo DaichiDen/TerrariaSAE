@@ -35,7 +35,7 @@ public class Ennemi extends Entite {
     @Override
     public void attaquer(int x, int y, int range) {
         if(dernièreAttaque==cooldown){
-            jeu.getJoueur().decrementVie(2);
+            super.getJeu().getJoueur().decrementVie(2);
             dernièreAttaque=0;
         }
         dernièreAttaque++;
@@ -54,9 +54,9 @@ public class Ennemi extends Entite {
         }
     }
     public void comportementVu(){
-        Algo_A_Star pathfinding = new Algo_A_Star(jeu.getCarte());
+        Algo_A_Star pathfinding = new Algo_A_Star(super.getJeu().getCarte());
         System.out.println();
-        List<Node> path = pathfinding.trouverchemin(this.getX()/32, this.getY()/32, jeu.getJoueur().getX()/32, jeu.getJoueur().getY()/32);
+        List<Node> path = pathfinding.trouverchemin(this.getX()/32, this.getY()/32, super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32);
 
 
         if (!path.isEmpty() && path.size()>1) {
@@ -77,8 +77,8 @@ public class Ennemi extends Entite {
             }
             System.out.println(dy);
             System.out.println(dx);
-            if(peutEtreAtteint(jeu.getCarte(), jeu.getJoueur().getX()/32, jeu.getJoueur().getY()/32, 2)){
-                attaquer(jeu.getJoueur().getX(), jeu.getJoueur().getY(), 2);
+            if(peutEtreAtteint(super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32, 2)){
+                attaquer(super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY(), 2);
             }
 
             // Tu peux gérer dy si les ennemis sautent ou volent
@@ -86,7 +86,7 @@ public class Ennemi extends Entite {
         else{
             setMarcheGauche(false);
             setMarcheDroite(false);
-            attaquer(jeu.getJoueur().getX(),jeu.getJoueur().getY(),2);
+            attaquer(super.getJeu().getJoueur().getX(),super.getJeu().getJoueur().getY(),2);
 
         }
     }
@@ -107,7 +107,7 @@ public class Ennemi extends Entite {
 
     public boolean detecterJoueur() {// À définir la distance où il détecte le joueur
         boolean aVuJoueur = false;
-        if (peutEtreAtteint(jeu.getCarte(), jeu.getJoueur().getX()/32, jeu.getJoueur().getY()/32, 5)) {
+        if (peutEtreAtteint(super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32, 5)) {
             aVuJoueur = true;
         }
         return aVuJoueur;
