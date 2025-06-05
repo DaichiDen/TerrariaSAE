@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 
 
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -85,6 +86,8 @@ public class Controller implements Initializable{
     private Label phraseNom;
     @FXML
     private TextField zoneNom;
+    @FXML
+    ScrollPane craftSansBlocConstruction;
 
     private Jeu jeu;
     public Fond scene;
@@ -121,9 +124,6 @@ public class Controller implements Initializable{
         SpriteVie barre = new SpriteVie(Vie, jeu);
 
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar);
-
-
-
 
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte(),fond);
 

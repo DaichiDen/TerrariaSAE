@@ -21,11 +21,24 @@ public abstract class CreateRessourceVisuel {
 
     }
 
-    public Label createLabel(int quantite) {
+    public Label createLabelQuantite(int quantite) {
         Label label = new Label();
         label.setFont(new Font("Times New Roman",18));
         label.setText(""+quantite);
         return label;
     }
 
+    public Label createLabelNom(String nom) {
+        Label label = new Label();
+        label.setFont(new Font("Times New Roman",18));
+        label.setText(nom);
+        return label;
+    }
+
+    public Label createLabel(int quantite) {
+        Label label = new Label();
+        label.setFont(new Font("Times New Roman",18));
+        label.setText(""+quantite);
+        return label;
+    }
 }

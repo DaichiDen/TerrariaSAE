@@ -26,9 +26,8 @@ public class Item {
         this.codeObjet = new SimpleIntegerProperty(0);
         this.provenance = null;
     }
+
     public Item(String nom, String description,int typeItem) {
-
-
         this.name = new SimpleStringProperty(nom);
         this.description = new SimpleStringProperty(description);
         this.typeItem = new SimpleIntegerProperty(typeItem);
@@ -37,17 +36,6 @@ public class Item {
         this.provenance = null;
         id++;
     }
-
-
-
-
-
-
-
-
-
-
-
 
     public Item(String nom, String description,int typeItem,BlocConstruction provenance) {
 
@@ -97,5 +85,12 @@ public class Item {
 
     public ArrayList<ElementRecette> getRecette(){
         return this.recette.getRecette();
+    }
+    public Recette getAttributRecette() {
+        return this.recette;
+    }
+
+    public BlocConstruction getProvenance() {
+        return this.provenance;
     }
 }

@@ -43,7 +43,7 @@ public class VueHotbar extends SpriteItem {
             hBox = structureHotBar(colonne, false);
         }
         hBox.getChildren().add(super.createImageView(path, 50, 50));//Item
-        hBox.getChildren().add(createLabel(quantite)); //Quantite
+        hBox.getChildren().add(createLabelQuantite(quantite)); //Quantite
     }
 
     public HBox structureHotBar(int j, boolean maincourante) {
