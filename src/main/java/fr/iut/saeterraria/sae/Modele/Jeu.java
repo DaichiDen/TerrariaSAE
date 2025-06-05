@@ -5,6 +5,7 @@ import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Hache;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pelle;
+import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
 import fr.iut.saeterraria.sae.Modele.Personnages.*;
 import fr.iut.saeterraria.sae.Modele.Map.*;
@@ -24,17 +25,16 @@ public class Jeu {
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
     private ObservableList<Entite> mobs;
 
-
-
     public Jeu(String nomJoueur){
-        carte = new Map();
-        joueur = new Joueur(nomJoueur,carte, this);
-        ennemis = new ArrayList<>();
-        pNJ = new ArrayList<>();
         items = new HashMap<>();
-        mobs = FXCollections.observableArrayList(ennemis);
         initialiseItems();
         initializeRecettes();
+        carte = new Map();
+        joueur = new Joueur(nomJoueur, this, (Pierre_TP) items.get(49));
+        ennemis = new ArrayList<>();
+        pNJ = new ArrayList<>();
+        mobs = FXCollections.observableArrayList(ennemis);
+
     }
 
     public ObservableList<Entite> getMobs() {
@@ -84,7 +84,13 @@ public class Jeu {
         return items;
     }
 
-    private void initialiseItems() { //Ajouter une range d"id pour item pas obtenable
+
+
+
+    private void initialiseItems() {//Ajouter une range d"id pour item pas obtenable
+        items.put(0, new Bloc("Ciel","Ciel du monde",0,0));
+
+
         // Blocs
         items.put(20, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3));
         items.put(21, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3));
@@ -100,12 +106,17 @@ public class Jeu {
         items.put(7, new Bloc("Minerai Fer","Métal commun de Fer",3,7));
         items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1, (BlocConstruction) items.get(23)));
         items.put(9, new Bloc("Glace","",1,2));
-        items.put(10, new Item("DELJCCium", "", 1,(BlocConstruction) items.get(23)));
+
+
+
+        items.put(10, new Item("DELJCCium", "", 1));
+
 
         //Bloc outil
         items.put(24, new Coffre("Coffre", "", 1, 3));
 
         // Outils
+        items.put(49, new Pierre_TP());
         items.put(50,new Pelle("Pelle de bois","Une pelle en bois ordinaire, accélère la vitesse pour creuser des objets"));
         items.put(51,new Hache("Hache de bois",""));
         items.put(52,new Pioche("Pioche de bois",""));
@@ -121,14 +132,25 @@ public class Jeu {
         items.put(62, new Item("Seau", "", 1,(BlocConstruction) items.get(20)));
 
         // Armures
-        items.put(62,new Armure("Casque en fer","",2,(BlocConstruction) items.get(21)));
-        items.put(63,new Armure("Casque en DELJCCium","",3,(BlocConstruction) items.get(21)));
-        items.put(64,new Armure("Plastron en fer","",6,(BlocConstruction) items.get(21)));
-        items.put(65,new Armure("Plastron en DELJCCium","",9,(BlocConstruction) items.get(21)));
-        items.put(66,new Armure("Jambière en fer","",4,(BlocConstruction) items.get(21)));
-        items.put(67,new Armure("Jambière en DELJCCium","",6,(BlocConstruction) items.get(21)));
-        items.put(68,new Armure("Botte en fer","",3,(BlocConstruction) items.get(21)));
-        items.put(69,new Armure("Botte en DELJCCium","",5,(BlocConstruction) items.get(21)));
+
+
+
+
+
+
+
+
+
+
+        items.put(63,new Armure("Casque en fer","",2));
+        items.put(64,new Armure("Casque en DELJCCium","",3));
+        items.put(65,new Armure("Plastron en fer","",6));
+        items.put(66,new Armure("Plastron en DELJCCium","",9));
+        items.put(67,new Armure("Jambière en fer","",4));
+        items.put(68,new Armure("Jambière en DELJCCium","",6));
+        items.put(69,new Armure("Botte en fer","",3));
+        items.put(70,new Armure("Botte en DELJCCium","",5));
+
 
         // Armes
 
@@ -201,7 +223,8 @@ public class Jeu {
     }
 
     public void testCraft() {
-        System.out.println(getJoueur().ajouterItem(items.get(3),128));
+        System.out.println("Item test ID :"+items.get(3).getCodeObjet());
+        getJoueur().ajouterItem(items.get(3),96);
     }
     
 }

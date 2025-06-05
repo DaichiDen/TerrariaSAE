@@ -28,15 +28,16 @@ public class Fond extends CreateRessourceVisuel {
 
 
     public void ajoutTile(String imagePath) {
+        System.out.println(id);
         tiles.put(id, createImage(imagePath));
         id++;
     }
 
     public void initialiseTile() {
-        ajoutTile("/Tiles/Fond_noir.png");
+        ajoutTile("/Tiles/Ciel.png");
         ajoutTile("/Tiles/Dirt_1.png");
         ajoutTile("/Tiles/Dirt_2.png");
-        ajoutTile("/Tiles/Ciel.png");
+        ajoutTile("/Tiles/Fond_noir.png");
         ajoutTile("/Tiles/piques_vorpales.png");
     }
 
@@ -48,7 +49,6 @@ public class Fond extends CreateRessourceVisuel {
                 this.pane.getChildren().add(new ImageView(tiles.get(carte.getCase(i, j))));
             }
         }
-        System.out.println(this.pane.getChildren().size());
     }
 
     public void changeBloc(int x, int y){
@@ -58,9 +58,6 @@ public class Fond extends CreateRessourceVisuel {
     public HashMap<Integer, Image> getTiles() {
         return tiles;
     }
-
-
-
 
     public Image createImage(String imagePath) {
 

@@ -26,15 +26,14 @@ public class Joueur extends Entite {
     private Map map;
 
 
-    public Joueur(String nom, Map map, Jeu jeu) {
+    public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp) {
 
-
-        super(nom, 20, 100, 20, 0, 0, 1, 10, map, jeu);
+        super(nom, 20, 100, 20, 0, 0, 1, 10, jeu.getCarte(), jeu);
         this.equipement = new int[7];
         this.inventaire = new Inventaire();
-        this.pierreTp = new Pierre_TP();
+        this.pierreTp = pierreTp;
         this.mainCourante = 0;
-        this.map = map;
+        this.map = jeu.getCarte();
 
     }
 
@@ -52,6 +51,7 @@ public class Joueur extends Entite {
             this.mainCourante--;
         }
     }
+
     public void setMainCourante ( int mainCourante){
         this.mainCourante = mainCourante;
     }
@@ -71,26 +71,32 @@ public class Joueur extends Entite {
         super.mettreAJour();
     }
 
-    public boolean miner (Map map,int x, int y){
+
+
+
+    
+    public boolean miner (int x, int y){
+
             boolean miner = false;
-            if (peutEtreAtteint(map, x, y, 2.5)) {
-                map.detruireBloc(x, y);
-                miner = true;
+            if (peutEtreAtteint(x, y, 2.5)) {
+                if (map.getCase(y, x) != 0) {
+                    ajouterItem(super.getJeu().getItems().get(map.detruireBloc(x,y)),1);
+                    miner = true;
+                }
             }
             return miner;
-
         }
-    
 
-    public void poser (Map map,int x, int y, int val){
-        if (peutEtreAtteint(map, x, y, 2.5)) {
-            map.poserBloc(x, y, val);
+    public void poser (int x, int y){
+        if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()!=0 && map.getCase(y,x)==0) {
+            map.poserBloc(x, y, inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet());
+            inventaire.getInventaireJoueur()[0][mainCourante].retireQuantite(1);
         }
     }
 
     @Override
     public void attaquer(int x, int y, int range) {
-        for (Entite e : jeu.getEnnemis()) {
+        for (Entite e : super.getJeu().getEnnemis()) {
 
             Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(),taille1bloc,taille1bloc*2);
 
@@ -98,7 +104,7 @@ public class Joueur extends Entite {
             if (hitboxMob.contains(x,y)) {
                 int ennemiX = (e.getX() + 16) / 32;
                 int ennemiY = (e.getY() + 16) / 32;
-                if (peutEtreAtteint(jeu.getCarte(), ennemiX, ennemiY, range)) {
+                if (peutEtreAtteint(ennemiX, ennemiY, range)) {
                     e.decrementVie(1);
                     System.out.println("Touché !");
                     System.out.println(e.getBarreVie().getVie());
@@ -189,11 +195,6 @@ public class Joueur extends Entite {
             System.out.println("craft pas réussi");
         }
     }
-
-
-
-
-
 
 
 
