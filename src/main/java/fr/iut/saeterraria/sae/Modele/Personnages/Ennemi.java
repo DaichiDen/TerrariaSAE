@@ -18,7 +18,7 @@ public class Ennemi extends Entite {
 
     public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def, int vitesse, Map map, Jeu jeu) {
 
-        super(nom,vieMax,  energieMax, 20, x, y, def, vitesse,map,jeu);
+        super(nom,vieMax,  energieMax, 20, x, y, def, 5,map,jeu);
         listDrops = new ArrayList<>();
     }
 
@@ -37,21 +37,43 @@ public class Ennemi extends Entite {
     }
 
     public void mettreAJour(){
-
         if(!detecterJoueur()){
             comportementPasVu();
             super.mettreAJour();
         }else{
             comportementVu();
+            super.mettreAJour();
+
         }
     }
     public void comportementVu(){
         Algo_A_Star pathfinding = new Algo_A_Star(jeu.getCarte());
-        List<Node> path = pathfinding.trouverchemin(this.getX(), this.getY(), jeu.getJoueur().getX(), jeu.getJoueur().getY());
-        if(detecterJoueur() && !path.isEmpty()){
-            Node next = path.get(1);
-            setMarcheGauche(true);
+        List<Node> path = pathfinding.trouverchemin(this.getX()/32, this.getY()/32, jeu.getJoueur().getX()/32, jeu.getJoueur().getY()/32);
 
+        if (!path.isEmpty() && path.size()>1) {
+            Node nextStep = path.get(1); // [0] = position actuelle
+            int dx = nextStep.x - (this.getX() / 32);
+            int dy = nextStep.y - (this.getY() / 32);
+
+            if (dx < 0) {
+                System.out.println("test1");
+                setMarcheGauche(true);
+                setMarcheDroite(false);
+            } else if (dx > 0) {
+                setMarcheGauche(false);
+                setMarcheDroite(true);
+
+
+            }
+            if(dy < 0) {
+                this.sauter();
+            }
+
+            // Tu peux gérer dy si les ennemis sautent ou volent
+        }
+        else{
+            setMarcheGauche(false);
+            setMarcheDroite(false);
         }
     }
 
@@ -71,7 +93,7 @@ public class Ennemi extends Entite {
 
     public boolean detecterJoueur() {// À définir la distance où il détecte le joueur
         boolean aVuJoueur = false;
-        if (peutEtreAtteint(jeu.getCarte(), this.getX(), this.getY(), 5)) {
+        if (peutEtreAtteint(jeu.getCarte(), jeu.getJoueur().getX()/32, jeu.getJoueur().getY()/32, 5)) {
             aVuJoueur = true;
         }
         return aVuJoueur;

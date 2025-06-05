@@ -29,7 +29,7 @@ public class Joueur extends Entite {
     public Joueur(String nom, Map map, Jeu jeu) {
 
 
-        super(nom, 20, 100, 20, 0, 0, 1, 10, map, jeu);
+        super(nom, 20, 100, 20, 500, 0, 1, 10, map, jeu);
         this.equipement = new int[7];
         this.inventaire = new Inventaire();
         this.pierreTp = new Pierre_TP();

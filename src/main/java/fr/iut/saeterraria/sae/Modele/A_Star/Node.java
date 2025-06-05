@@ -1,8 +1,10 @@
 package fr.iut.saeterraria.sae.Modele.A_Star;
 
+import java.util.Objects;
+
 public class Node {
     public boolean walkable;
-    int x,y;
+    public int x,y;
     Node parent;
     int gCost,hCost;
     boolean atteignable;
@@ -20,6 +22,10 @@ public class Node {
         if (!(o instanceof Node)) return false;
         Node other = (Node) o;
         return this.x == other.x && this.y == other.y;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
 
