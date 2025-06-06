@@ -20,12 +20,7 @@ public class SpriteJoueur extends CreateRessourceVisuel {
     private ImageView marchedroite = createImageView("/Sprite/Chevalier_marcheDroite_Bon.gif", width, height);
     private ImageView marchegauche = createImageView("/Sprite/Chevalier_marcheGauche_Bon.gif", width, height);
     private ImageView marcheNon = createImageView("/Sprite/Hero_stop.png", width, height);
-    private ImageView mort = createImageView("/Sprite/mort_hd.gif", width, height);
 
-
-
-    private Rectangle2D hitboxJoueur;
-    private int numeromort = -1;
 
     public SpriteJoueur(Jeu jeu, Pane screen) {
         this.jeu = jeu;
@@ -51,7 +46,13 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         } else if ((!joueur.getMarcheDroite() && !joueur.getMarcheGauche()) || (joueur.getMarcheDroite() && joueur.getMarcheGauche())) {
             etatActuel = "stop";
         }
-
+        if (joueur.getEnDash()) {
+            if (joueur.getDirectionDash().equals("droite")) {
+                etatActuel = "dash_droit";
+            } else {
+                etatActuel = "dash_gauche";
+            }
+        }
 
         // Si l'état n'a pas changé, ne rien faire
         if (etatActuel.equals(dernierEtat)) {
@@ -70,9 +71,12 @@ public class SpriteJoueur extends CreateRessourceVisuel {
             spriteActuel = marchedroite;
         } else if (etatActuel.equals("stop")) {
             spriteActuel = marcheNon;
-        }
-        else if (etatActuel.equals("mort")) {
-            spriteActuel = mort;
+        } else if (etatActuel.equals("mort")) {
+            spriteActuel = createImageView("/Sprite/mort_hd(1).gif", width, height);
+        } else if (etatActuel.equals("dash_droit")) {
+            spriteActuel = createImageView("/Sprite/Dash-Droite1.gif", width, height);
+        } else if (etatActuel.equals("dash_gauche")) {
+            spriteActuel = createImageView("/Sprite/Dash-Gauche1.gif", width, height);
         }
 
 
@@ -86,12 +90,6 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         dernierEtat = etatActuel;
     }
 
-    public String getEtatActuel() {
-        return dernierEtat;
-    }
-    public void setEtatActuel(String str) {
-        dernierEtat = str;
-    }
 }
 
 

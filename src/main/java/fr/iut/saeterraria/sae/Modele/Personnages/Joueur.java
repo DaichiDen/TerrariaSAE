@@ -20,7 +20,7 @@
         private int mainCourante;
         private boolean enDash = false;
         private int dureeDash = 0;
-        private final int DUREE_DASH_MAX = 15; // environ 15 frames = 250ms à 60fps
+        private final int DUREE_DASH_MAX = 30; // environ 15 frames = 250ms à 60fps
         private int vitesseDash = 10;
         private String directionDash = "droite";// 1 = droite, -1 = gauche
         private String dernierPos = "droite"; // 1 gauche et -1 droite
@@ -310,6 +310,12 @@
         }
         public void setEnDash(boolean val){
             this.enDash=val;
+        }
+        public boolean getEnDash(){
+            return enDash;
+        }
+        public String getDirectionDash(){
+            return directionDash;
         }
     }
 
