@@ -143,15 +143,9 @@ public abstract class Entite {
 
             // Gestion de l'accélération
             if (getMarcheDroite() && !getMarcheGauche()) {
-                if(jeu.getJoueur().getDernierPos().equals("gauche")){
-                    jeu.getJoueur().setDernierPos("droite");
-                }
                 vitesseX += accel;
             }
             else if (getMarcheGauche() && !getMarcheDroite()) {
-                if(jeu.getJoueur().getDernierPos().equals("droite")){
-                    jeu.getJoueur().setDernierPos("gauche");
-                }
                 vitesseX -= accel;
             }
             else {
@@ -176,6 +170,8 @@ public abstract class Entite {
         }
         setY(getY() + vitesseY);
         collisionVerticale();
+
+
 
 
     }

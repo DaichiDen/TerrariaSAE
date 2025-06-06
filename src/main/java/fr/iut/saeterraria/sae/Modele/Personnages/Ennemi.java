@@ -49,13 +49,12 @@ public class Ennemi extends Entite {
         }else{
             comportementVu();
             super.mettreAJour();
-            System.out.println(dernièreAttaque);
 
         }
+
     }
     public void comportementVu(){
         Algo_A_Star pathfinding = new Algo_A_Star(super.getJeu().getCarte());
-        System.out.println();
         List<Node> path = pathfinding.trouverchemin(this.getX()/32, this.getY()/32, super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32);
 
 
@@ -74,8 +73,7 @@ public class Ennemi extends Entite {
             if(dy < 0) {
                 this.sauter();
             }
-            System.out.println(dy);
-            System.out.println(dx);
+
             if(peutEtreAtteint(super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32, 2)){
                 attaquer(super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY(), 2);
             }
@@ -101,7 +99,9 @@ public class Ennemi extends Entite {
         } else if (aleaComp < 9) {
             setMarcheDroite(false);
             setMarcheGauche(false);
+
         }
+
     }
 
     public boolean detecterJoueur() {// À définir la distance où il détecte le joueur
