@@ -81,8 +81,15 @@
         }
 
         public void mettreAJour() {
+            if(getMarcheGauche()){
+                setDernierPos("gauche");
+            }
+            else if(getMarcheDroite()){
+                setDernierPos("droite");
+            }
             if (enDash) {
                 if(directionDash.equals("droite")){
+                    System.out.println("droite");
                     setX(getX() + vitesseDash);
                 }
                 else{
@@ -94,7 +101,8 @@
                     enDash = false;
                 }
             }
-            super.mettreAJour(); // appel normal sinon
+            super.mettreAJour();
+            // appel normal sinon
 
         }
 
@@ -280,9 +288,7 @@
         public void dashKatana() {
             if (enDash && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 39) {
                 dureeDash = DUREE_DASH_MAX;
-                System.out.println(dernierPos);
                 directionDash = dernierPos; // Dash dans la direction actuelle
-                System.out.println("change pose");
             }
         }
         public void setEnDash(boolean val){
