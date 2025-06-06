@@ -18,6 +18,7 @@ import javafx.collections.ListChangeListener;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Camera;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
@@ -87,7 +88,7 @@ public class Controller implements Initializable{
     @FXML
     private TextField zoneNom;
     @FXML
-    ScrollPane craftSansBlocConstruction;
+    private ScrollPane craftSansBlocConstruction;
 
     private Jeu jeu;
     public Fond scene;
@@ -104,7 +105,7 @@ public class Controller implements Initializable{
             if (event.getCode() == KeyCode.ENTER) {
                 confirmerNom();
         }});
-        scene = new Fond(fond,jeu.getCarte());// Initialise le fond (décor du jeu)
+        scene = new Fond(fond,jeu);// Initialise le fond (décor du jeu)
         vueEnnemi = new SpriteMob(jeu, screen,"Pierre");
 
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));

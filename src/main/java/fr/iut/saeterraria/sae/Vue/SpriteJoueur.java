@@ -4,6 +4,7 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Camera;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -14,7 +15,6 @@ public class SpriteJoueur extends CreateRessourceVisuel {
     private Pane screen;
     private Jeu jeu;
     private int width, height;
-
     private ImageView spriteActuel;
     private String dernierEtat = "";
     private ImageView marchedroite = createImageView("/Sprite/Chevalier_marcheDroite_Bon.gif", width, height);
@@ -32,9 +32,13 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         this.screen = screen;
         this.width = 150;
         this.height = 150;
+
         jeu.getJoueur().marcheGaucheProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
         jeu.getJoueur().marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
         jeu.getJoueur().xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
+
+        screen.translateXProperty().bind(jeu.getJoueur().xProperty().multiply(-1).add(200));
+        screen.translateYProperty().bind(jeu.getJoueur().yProperty().multiply(-1).add(12*32));
 
     }
 

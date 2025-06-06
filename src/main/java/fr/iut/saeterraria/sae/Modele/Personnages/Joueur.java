@@ -28,12 +28,7 @@ public class Joueur extends Entite {
 
     public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp) {
 
-
         super(nom, 20, 100, 20, 0, 0, 1, 10, jeu.getCarte(), jeu);
-
-
-
-
         this.equipement = new int[7];
         this.inventaire = new Inventaire();
         this.pierreTp = pierreTp;
@@ -76,15 +71,7 @@ public class Joueur extends Entite {
         super.mettreAJour();
     }
 
-
-
-
-    
     public boolean miner (int x, int y){
-
-
-
-
             boolean miner = false;
             if (peutEtreAtteint(x, y, 2.5)) {
                 if (map.getCase(y, x) != 0) {

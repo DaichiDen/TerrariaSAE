@@ -1,6 +1,5 @@
 package fr.iut.saeterraria.sae.Vue;
-
-import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Jeu;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
@@ -12,14 +11,14 @@ import java.util.HashMap;
 
 public class Fond extends CreateRessourceVisuel {
 
-    private Map carte;
+    private Jeu jeu;
     private HashMap<Integer, Image> tiles;
     private static int id = 0;
     private TilePane pane;
 
 
-    public Fond(TilePane pane,Map carte) {
-        this.carte = carte;
+    public Fond(TilePane pane,Jeu jeu) {
+        this.jeu = jeu;
         this.tiles = new HashMap<>();
         this.pane = pane;
         initialiseTile();
@@ -44,9 +43,9 @@ public class Fond extends CreateRessourceVisuel {
     // Permet d'afficher le terrain dans la scène (Pane principal)
     public void afficherCarte() {
         pane.getChildren().clear();
-        for (int i = 0; i < carte.getLigne(); i++) { //Ligne
-            for (int j = 0; j < carte.getColonne(); j++) { //Colonne
-                this.pane.getChildren().add(new ImageView(tiles.get(carte.getCase(i, j))));
+        for (int i = 0; i < jeu.getCarte().getLigne(); i++) { //Ligne
+            for (int j = 0; j < jeu.getCarte().getColonne(); j++) { //Colonne
+                this.pane.getChildren().add(new ImageView(tiles.get(jeu.getCarte().getCase(i, j))));
             }
         }
     }
