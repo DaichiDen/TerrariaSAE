@@ -152,7 +152,7 @@ public class Controller implements Initializable{
             }
         }
 
-        BiblioSon.play(1);
+        // BiblioSon.play(1);
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
             private final long frameInterval = 16_666_666; // Conversion nano secondes en secondes = 60 FPS
