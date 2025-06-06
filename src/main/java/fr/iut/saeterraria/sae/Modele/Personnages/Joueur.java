@@ -82,6 +82,7 @@
         }
 
         public void mettreAJour() {
+
             if(getMarcheGauche()){
                 setDernierPos("gauche");
             }
@@ -91,8 +92,8 @@
             if (enDash) {
                 Rectangle2D hitboxJoueur = new Rectangle2D(getX(),getY(),taille1bloc,taille1bloc*2);
                 for(int i=0;i<super.getJeu().getEnnemis().size();i++){
-                    Rectangle2D hitboxEnnemi = new Rectangle2D(getX(),getY(),taille1bloc,taille1bloc*2);
-                    if(hitboxEnnemi.intersects(hitboxJoueur) && !ennemis_touchées_dash.contains(super.getJeu().getEnnemis().get(i))){
+                    Rectangle2D hitboxEnnemi = new Rectangle2D(super.getJeu().getEnnemis().get(i).getX(),super.getJeu().getEnnemis().get(i).getY(),taille1bloc,taille1bloc*2);
+                    if(hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(super.getJeu().getEnnemis().get(i))){
                         ennemis_touchées_dash.add(super.getJeu().getEnnemis().get(i));
                         ennemis_touchées_dash.get(i).decrementVie(10);
                     }
