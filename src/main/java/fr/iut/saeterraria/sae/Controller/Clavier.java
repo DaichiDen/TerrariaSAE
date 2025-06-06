@@ -70,7 +70,7 @@ public class Clavier implements EventHandler<KeyEvent> {
                 }
 
             }
-            if(code == KeyCode.E){
+            if(code == KeyCode.E && jeu.getJoueur().katanaEnMain()){
                 jeu.getJoueur().setEnDash(true);
                 jeu.getJoueur().dashKatana();
             }
