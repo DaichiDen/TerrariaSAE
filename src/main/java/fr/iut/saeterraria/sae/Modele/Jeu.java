@@ -102,11 +102,11 @@ public class Jeu {
         items.put(10, new Item("DELJCCium", "", 1));
 
 
-        items.put(19,new BlocConstruction("ConstructionSansBloc","",0,0));
-        items.put(20, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(19)));
-        items.put(21, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(20) ));
-        items.put(22, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3,(BlocConstruction) items.get(20)));
-        items.put(23, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,3,(BlocConstruction) items.get(20)));
+        items.put(11,new BlocConstruction("ConstructionSansBloc","",0,0));
+        items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(19)));
+        items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(20) ));
+        items.put(14, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3,(BlocConstruction) items.get(20)));
+        items.put(15, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,3,(BlocConstruction) items.get(20)));
         //Bloc outil
         items.put(24, new Coffre("Coffre", "", 1, 3,(BlocConstruction) items.get(20)));
 
@@ -150,18 +150,18 @@ public class Jeu {
 
     private void initializeRecettes() {
         //Etabli : 4 bois
-        items.get(20).addInRecette(new ElementRecette(items.get(3),4));
+        items.get(12).addInRecette(new ElementRecette(items.get(3),4));
 
         //Four : 8 Pierre
-        items.get(23).addInRecette(new ElementRecette(items.get(6),8));
+        items.get(15).addInRecette(new ElementRecette(items.get(6),8));
 
         // Forge : 9 fer et 1 seau
-        items.get(21).addInRecette(new ElementRecette(items.get(8),9));
-        items.get(21).addInRecette(new ElementRecette(items.get(62),1));
+        items.get(13).addInRecette(new ElementRecette(items.get(8),9));
+        items.get(13).addInRecette(new ElementRecette(items.get(62),1));
 
         // Alambique : 2 seau et 3 pierres
-        items.get(22).addInRecette(new ElementRecette(items.get(62),2));
-        items.get(22).addInRecette(new ElementRecette(items.get(6),3));
+        items.get(14).addInRecette(new ElementRecette(items.get(62),2));
+        items.get(14).addInRecette(new ElementRecette(items.get(6),3));
 
         // Coffre : 6 bois
         items.get(24).addInRecette(new ElementRecette(items.get(3),6));
@@ -216,28 +216,28 @@ public class Jeu {
         for(int i=0; i<items.size(); i++) {
 
             // Craft Sans Bloc nécessaires
-            if(items.get(i).getProvenance()==items.get(19)) {
-                ((BlocConstruction) items.get(19)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
+            if(items.get(i).getProvenance()==items.get(11)) {
+                ((BlocConstruction) items.get(11)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
             }
 
             // Etabli
-            else if(items.get(i).getProvenance()==items.get(20)) {
-                ((BlocConstruction) items.get(20)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
+            else if(items.get(i).getProvenance()==items.get(12)) {
+                ((BlocConstruction) items.get(12)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
             }
 
             // Forge
-            else if(items.get(i).getProvenance()==items.get(21)) {
-                ((BlocConstruction) items.get(21)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
+            else if(items.get(i).getProvenance()==items.get(13)) {
+                ((BlocConstruction) items.get(13)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
             }
 
             // Alambique
-            else if(items.get(i).getProvenance()==items.get(22)) {
-                ((BlocConstruction) items.get(22)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
+            else if(items.get(i).getProvenance()==items.get(14)) {
+                ((BlocConstruction) items.get(14)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
             }
 
             // Four
-            else if(items.get(i).getProvenance()==items.get(23)) {
-                ((BlocConstruction) items.get(23)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
+            else if(items.get(i).getProvenance()==items.get(15)) {
+                ((BlocConstruction) items.get(15)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
             }
         }
     }
