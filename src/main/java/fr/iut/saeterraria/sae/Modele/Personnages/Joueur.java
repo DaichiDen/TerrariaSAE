@@ -21,7 +21,7 @@
         private boolean enDash = false;
         private int dureeDash = 0;
         private final int DUREE_DASH_MAX = 15; // environ 15 frames = 250ms à 60fps
-        private int vitesseDash = 20;
+        private int vitesseDash = 10;
         private String directionDash = "droite";// 1 = droite, -1 = gauche
         private String dernierPos = "droite"; // 1 gauche et -1 droite
         ArrayList<Ennemi> ennemis_touchées_dash = new ArrayList();
@@ -79,6 +79,9 @@
 
         public Inventaire getInventaire() {
             return inventaire;
+        }
+        public boolean katanaEnMain(){
+            return  inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 39;
         }
 
         public void mettreAJour() {
@@ -298,7 +301,7 @@
 
         public void dashKatana() {
 
-            if (enDash && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 39) {
+            if (enDash) {
                 ennemis_touchées_dash.clear();
                 dureeDash = DUREE_DASH_MAX;
                 directionDash = dernierPos; // Dash dans la direction actuelle
