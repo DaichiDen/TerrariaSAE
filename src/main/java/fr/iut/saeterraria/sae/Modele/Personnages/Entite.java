@@ -290,13 +290,13 @@ public abstract class Entite {
         }
     }
 
-    public void decrementVie(int val) {
+    public void decrementVie(double val) {
 
         if(barreVie.getVie()-val <= 0){
             barreVie.setVie(0);
             estVivant.set(false);
         }else{
-            barreVie.setVie(barreVie.getVie()-val);
+            barreVie.setVie((int) (barreVie.getVie()-val));
         }
     }
 

@@ -24,6 +24,7 @@
         private int vitesseDash = 20;
         private String directionDash = "droite";// 1 = droite, -1 = gauche
         private String dernierPos = "droite"; // 1 gauche et -1 droite
+        ArrayList<Ennemi> ennemis_touchées_dash = new ArrayList();
 
         private Map map;
 
@@ -88,18 +89,27 @@
                 setDernierPos("droite");
             }
             if (enDash) {
-                if(directionDash.equals("droite")){
-                    System.out.println("droite");
-                    setX(getX() + vitesseDash);
+                Rectangle2D hitboxJoueur = new Rectangle2D(getX(),getY(),taille1bloc,taille1bloc*2);
+                for(int i=0;i<super.getJeu().getEnnemis().size();i++){
+                    Rectangle2D hitboxEnnemi = new Rectangle2D(getX(),getY(),taille1bloc,taille1bloc*2);
+                    if(hitboxEnnemi.intersects(hitboxJoueur) && !ennemis_touchées_dash.contains(super.getJeu().getEnnemis().get(i))){
+                        ennemis_touchées_dash.add(super.getJeu().getEnnemis().get(i));
+                        ennemis_touchées_dash.get(i).decrementVie(10);
+                    }
+
+                    if (directionDash.equals("droite")) {
+                        System.out.println("droite");
+                        setX(getX() + vitesseDash);
+                    } else {
+                        System.out.println("gauche");
+                        setX(getX() - vitesseDash);
+                    }
+                    dureeDash--;
+                    if (dureeDash <= 0) {
+                        enDash = false;
+                    }
                 }
-                else{
-                    System.out.println("gauche");
-                    setX(getX() - vitesseDash );
-                }
-                dureeDash--;
-                if (dureeDash <= 0) {
-                    enDash = false;
-                }
+
             }
             super.mettreAJour();
             // appel normal sinon
@@ -286,9 +296,12 @@
         }
 
         public void dashKatana() {
+
             if (enDash && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 39) {
+                ennemis_touchées_dash.clear();
                 dureeDash = DUREE_DASH_MAX;
                 directionDash = dernierPos; // Dash dans la direction actuelle
+
             }
         }
         public void setEnDash(boolean val){
