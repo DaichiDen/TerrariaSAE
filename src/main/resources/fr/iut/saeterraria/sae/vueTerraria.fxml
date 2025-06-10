@@ -81,31 +81,19 @@
                             <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
-                        <ScrollPane fx:id="craftSansBlocConstruction" prefHeight="855.0" prefWidth="369.0" AnchorPane.bottomAnchor="266.0" AnchorPane.rightAnchor="114.0" AnchorPane.topAnchor="35.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="855.0" prefWidth="369.0">
-                                 <children>
-                                    <VBox fx:id="caseRecetteSansBloc" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </ScrollPane>
-                        <ScrollPane fx:id="craftEtabli" layoutX="1429.0" layoutY="45.0" prefHeight="855.0" prefWidth="369.0">
+                        <ScrollPane fx:id="craftSansBlocConstruction" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="1439.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="30.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="855.0" prefWidth="369.0">
-                                 <children>
-                                    <VBox fx:id="caseRecetteEtabli" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                 </children>
-                              </AnchorPane>
+                              <VBox fx:id="caseRecetteSansBloc" />
                            </content>
                         </ScrollPane>
-                        <ScrollPane fx:id="craftForge" layoutX="1439.0" layoutY="55.0" prefHeight="855.0" prefWidth="369.0">
+                        <ScrollPane fx:id="craftEtabli" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="1439.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="30.0">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="855.0" prefWidth="369.0">
-                                 <children>
-                                    <VBox fx:id="caseRecetteForge" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                 </children>
-                              </AnchorPane>
+                              <VBox fx:id="caseRecetteEtabli" />
+                           </content>
+                        </ScrollPane>
+                        <ScrollPane fx:id="craftForge" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="1439.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="30.0">
+                           <content>
+                              <VBox fx:id="caseRecetteForge" />
                            </content>
                         </ScrollPane>
                      </children>

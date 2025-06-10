@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Personnages.Ennemi;
 import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
 import fr.iut.saeterraria.sae.Vue.*;
@@ -87,7 +88,18 @@ public class Controller implements Initializable{
     @FXML
     private TextField zoneNom;
     @FXML
-    ScrollPane craftSansBlocConstruction;
+    private ScrollPane craftSansBlocConstruction;
+    @FXML
+    private ScrollPane craftEtabli;
+    @FXML
+    private ScrollPane craftForge;
+    @FXML
+    private VBox caseRecetteSansBloc;
+    @FXML
+    private VBox caseRecetteEtabli;
+    @FXML
+    private VBox caseRecetteForge;
+
 
     private Jeu jeu;
     public Fond scene;
@@ -96,7 +108,7 @@ public class Controller implements Initializable{
     private SpriteJoueur vuejoueur;
     private SpriteMob vueEnnemi;
     private VueSon BiblioSon = new VueSon();
-    private  
+    private VueCraft vueCraft;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -134,6 +146,7 @@ public class Controller implements Initializable{
 
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
+        vueCraft = new VueCraft(craftSansBlocConstruction,craftEtabli,craftForge,caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge, ((BlocConstruction) jeu.getItems().get(11)).getListeRecette(), ((BlocConstruction) jeu.getItems().get(12)).getListeRecette(),((BlocConstruction) jeu.getItems().get(13)).getListeRecette(),jeu.getItems());
 
         fond.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
         screen.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
