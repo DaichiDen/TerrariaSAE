@@ -112,7 +112,7 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="zoneNom" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="1336.0" text="Nom Joueur" />
+                  <TextField fx:id="zoneNom" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="1336.0" promptText="Nom Joueur" />
                </children>
             </VBox>
             <StackPane fx:id="imagebloc_accueil" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
