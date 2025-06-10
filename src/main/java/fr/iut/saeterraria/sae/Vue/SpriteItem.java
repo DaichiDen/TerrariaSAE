@@ -71,7 +71,7 @@ public class SpriteItem extends CreateRessourceVisuel{
 
 
         //Armes
-        items.put(39,"/Sprite/KatanaDash");
+        items.put(39,"/Sprite/KatanaDash.png");
 
 
     }
