@@ -83,6 +83,9 @@
         public boolean katanaEnMain(){
             return  inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 39;
         }
+        public boolean arcEnMain() {
+            return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == x;
+        }
 
         public void mettreAJour() {
 
@@ -316,6 +319,27 @@
         }
         public String getDirectionDash(){
             return directionDash;
+        }
+
+        public void tirerProjectile(int x,int y){
+            int vitX = 10;
+            int vitY = 10;
+            Rectangle2D hitboxProjectile = new Rectangle2D(this.getX(), this.getY(),taille1bloc,taille1bloc/4);
+
+            int jx = this.getX();
+            int jy= this.getY();
+            int segH = jx + x; // segment horizontal
+            int segHAbs = Math.abs(segH);
+            int segV = jy + y; // segment vertical
+            int segVAbs = Math.abs(segV);
+            double hypo = Math.sqrt((Math.pow(segV,2) + Math.pow(segH, 2))); // besoin ??
+
+            int forceX = vitX * segH / segVAbs;
+            int forceY = vitY * segHAbs / segV;
+
+            if(){
+
+            }
         }
     }
 
