@@ -96,7 +96,7 @@ public class Controller implements Initializable{
     private SpriteJoueur vuejoueur;
     private SpriteMob vueEnnemi;
     private VueSon BiblioSon = new VueSon();
-    private  
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
