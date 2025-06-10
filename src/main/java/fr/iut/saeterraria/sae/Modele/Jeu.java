@@ -2,9 +2,8 @@ package fr.iut.saeterraria.sae.Modele;
 
 import fr.iut.saeterraria.sae.Modele.Objets.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Arme.DashingKatana;
-import fr.iut.saeterraria.sae.Modele.Objets.Arme.Epee;
-import fr.iut.saeterraria.sae.Modele.Objets.Arme.Speciaux;
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
+import fr.iut.saeterraria.sae.Modele.Objets.Arme.Distance;
+import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Hache;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pelle;
@@ -103,16 +102,24 @@ public class Jeu {
         items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1, (BlocConstruction) items.get(23)));
         items.put(9, new Bloc("Glace","",1,2));
         items.put(10, new Item("DELJCCium", "", 1));
+        for (int i = 11; i < 19; i++) {
+            items.put(i,new Item("","",1));
+        }
+
+        items.put(19,new BlocConstruction("ConstructionSansBloc","",0,0));
+        items.put(20, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(19)));
+        items.put(21, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(20) ));
+        items.put(22, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3,(BlocConstruction) items.get(20)));
+        items.put(23, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,3,(BlocConstruction) items.get(20)));
 
 
-        items.put(11,new BlocConstruction("ConstructionSansBloc","",0,0));
-        items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(19)));
-        items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(20) ));
-        items.put(14, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3,(BlocConstruction) items.get(20)));
-        items.put(15, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,3,(BlocConstruction) items.get(20)));
         //Bloc outil
         items.put(24, new Coffre("Coffre", "", 1, 3,(BlocConstruction) items.get(20)));
 
+
+        for (int i = 25; i < 49; i++) {
+            items.put(i,new Item("","",1));
+        }
         // Outils
         items.put(49, new Pierre_TP());
 
@@ -147,9 +154,9 @@ public class Jeu {
 
         // Armes
         items.put(71,new DashingKatana("Katana étrange","Ce Katana semble pouvoir octroyer la capacité à son détenteur de se déplacer à la vitesse du son",10));
-
-
         // Autres items
+        items.put(72, new Item("Flèche","Flèche",1,(BlocConstruction) items.get(20)));
+        items.put(73, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(20)));
     }
 
     private void initializeRecettes() {

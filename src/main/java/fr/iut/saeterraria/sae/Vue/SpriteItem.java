@@ -37,7 +37,7 @@ public class SpriteItem extends CreateRessourceVisuel{
         /* ---------- À ajouter le reste ------------- */
         items.put(16, "/Tiles/Fond_noir.png"); // Coffre
         // Outils
-
+        items.put(17, "/Tiles/Fond_noir.png");
 
 
         items.put(18, "/Sprite_objets/Pelle_pierre.png"); // Pelle de bois
@@ -54,6 +54,10 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(29, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
         items.put(30, "/Sprite_objets/Pioche_pierre.png"); // Seau vide
         items.put(31, "/Sprite_objets/Pioche_pierre.png"); // Sceau d'eau
+
+        for (int i = 32; i < 63; i++) {
+            items.put(i,"/Tiles/Fond_noir.png");
+        }
         // Armures
 
 
@@ -71,7 +75,9 @@ public class SpriteItem extends CreateRessourceVisuel{
 
 
         //Armes
-        items.put(39,"/Sprite/KatanaDash.png");
+        items.put(71, "/Sprite_objets/KatanaDash.png");
+        items.put(72,"/Sprite_objets/Arc_repos.png");
+        items.put(73,"/Sprite_objets/Sceau_eau.png");
 
 
     }

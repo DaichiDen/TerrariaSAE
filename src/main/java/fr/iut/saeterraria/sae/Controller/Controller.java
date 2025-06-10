@@ -194,7 +194,9 @@ public class Controller implements Initializable{
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(71),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(73),1);
+
     }
     @FXML
     public void exitInventaire(){

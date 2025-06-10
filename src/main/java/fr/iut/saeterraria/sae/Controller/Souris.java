@@ -2,6 +2,8 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Objets.Item;
+import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
@@ -35,19 +37,39 @@ public class Souris implements EventHandler<MouseEvent> {
         int x1 = ((int)mouseEvent.getX());
         int y1 = ((int)mouseEvent.getY());
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-            if(jeu.getJoueur().estVivant()){
+            if (jeu.getJoueur().estVivant()) {
                 jeu.getJoueur().attaquer(x1, y1, 2);
-                if (jeu.getJoueur().miner(x, y)){
-                    this.tp.getChildren().remove((y*58)+x);// faire de la taille de la map un un getter
+                if (jeu.getJoueur().miner(x, y)) {
+                    this.tp.getChildren().remove((y * 58) + x);// faire de la taille de la map un un getter
 
-                    this.tp.getChildren().add( ( ((y*58)+x) ),new ImageView(fond.getTiles().get(map.getCase(y, x)) ) );
+                    this.tp.getChildren().add((((y * 58) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+                }
+                if (jeu.getJoueur().arcEnMain() && jeu.getJoueur().getMainCourante() == 73) {
+                    boolean oui = false;
+                    int[] indice = new int[2];
+                    int[][] tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(72));
+                    for (int i = 0; i < tab.length; i++) {
+                        for (int j = 0; j < tab[i].length; j++) {
+                            if (tab[i][j] == 1) {
+                                oui = true;
+                                indice[0]=i;
+                                indice[1]=j;
+                            }
+                        }
+                    }
+                    if (oui) {
+                        jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur()),jeu.getJoueur().getX(),jeu.getJoueur().getY());
+                        jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].retireQuantite(1);
+                    }
                 }
             }
         }
         else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-            jeu.getJoueur().poser(x, y);
-            this.tp.getChildren().remove((y*58)+x);
-            this.tp.getChildren().add(((y*58)+x),new ImageView(fond.getTiles().get(map.getCase(y, x))));
+            if(jeu.getJoueur().estVivant()) {
+                jeu.getJoueur().poser(x, y);
+                this.tp.getChildren().remove((y * 58) + x);
+                this.tp.getChildren().add(((y * 58) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+            }
         }
     }
 }

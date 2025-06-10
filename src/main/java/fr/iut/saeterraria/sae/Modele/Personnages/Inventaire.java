@@ -107,11 +107,11 @@ public class Inventaire {
         int[][] instance = new int[this.inventaireJoueur.length][this.inventaireJoueur[0].length];
         for (int i = 0; i < this.inventaireJoueur.length; i++) {
             for (int j = 0; j < this.inventaireJoueur[i].length; j++) {
-                if (this.inventaireJoueur[i][j].comparerId(item.getCodeObjet()) ) {
+                if (this.inventaireJoueur[i][j].comparerId(item.getCodeObjet()) ) {//Item présent
                     instance[i][j] = 1;
                     presentItemCaseLibre = true;
                 }
-                else if (this.inventaireJoueur[i][j].getItem().getCodeObjet()==0){
+                else if (this.inventaireJoueur[i][j].getItem().getCodeObjet()==0){//Case vide
                     instance[i][j] = 2;
                     presentItemCaseLibre = true;
                 }
