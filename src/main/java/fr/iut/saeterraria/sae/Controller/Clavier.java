@@ -32,10 +32,6 @@ public class Clavier implements EventHandler<KeyEvent> {
     private VueHotbar vueHotbar;
 
 
-
-
-
-
     public Clavier(Jeu jeu, AnchorPane screenInventaire,Button quitterInventaire,Button openInventaire,TilePane fond, GridPane hotBarInventaire) {
 
         this.jeu=jeu;

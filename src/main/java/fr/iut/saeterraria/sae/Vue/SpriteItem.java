@@ -76,8 +76,8 @@ public class SpriteItem extends CreateRessourceVisuel{
 
         //Armes
         items.put(71, "/Sprite_objets/KatanaDash.png");
-        items.put(72,"/Sprite_objets/Arc_repos.png");
-        items.put(73,"/Sprite_objets/Sceau_eau.png");
+        items.put(73,"/Sprite_objets/Arc_repos.png");
+        items.put(72,"/Sprite_objets/Flèche.png");
 
 
     }

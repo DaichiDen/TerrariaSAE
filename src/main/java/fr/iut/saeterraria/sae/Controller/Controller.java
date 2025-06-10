@@ -94,6 +94,7 @@ public class Controller implements Initializable{
     private VueInventaire inventaireVue;
     private VueHotbar hotBarVue;
     private SpriteJoueur vuejoueur;
+    private VueProjectile vueProjectile;
     private SpriteMob vueEnnemi;
     private VueSon BiblioSon = new VueSon();
 
@@ -109,6 +110,7 @@ public class Controller implements Initializable{
         vueEnnemi = new SpriteMob(jeu, screen,"Pierre");
 
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
+        jeu.getJoueur().getListe_projectilesObservable().addListener(new ObsProjectile(jeu,screen));
 
         Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0,10,jeu.getCarte(), jeu);
         jeu.addEnnemis(ennemiCaca);
@@ -129,6 +131,7 @@ public class Controller implements Initializable{
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte(),fond);
 
         inventaireVue = new VueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
+        vueProjectile= new VueProjectile(jeu,screen);
         hotBarVue = new VueHotbar(jeu,hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
 
@@ -160,14 +163,13 @@ public class Controller implements Initializable{
             @Override
             public void handle(long now) {
                 if (now - lastUpdate >= frameInterval) {
-
                     jeu.getJoueur().mettreAJour(); //Laisser ici ? on tombe tt le temps ect, donc dans tt les cas c a chaque frame non ?
                     for(int i = 0; i < jeu.getMobs().size(); i++){
                         jeu.getMobs().get(i).mettreAJour();
                     }
+                    jeu.getJoueur().màjProjectiles();
 
                     lastUpdate = now;
-
 
                     if (!jeu.getJoueur().estVivant()) {
                         PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
@@ -194,8 +196,8 @@ public class Controller implements Initializable{
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(73),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
 
     }
     @FXML

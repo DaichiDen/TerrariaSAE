@@ -44,7 +44,7 @@ public class Souris implements EventHandler<MouseEvent> {
 
                     this.tp.getChildren().add((((y * 58) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
                 }
-                if (jeu.getJoueur().arcEnMain() && jeu.getJoueur().getMainCourante() == 73) {
+                if (jeu.getJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];
                     int[][] tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(72));
@@ -58,8 +58,8 @@ public class Souris implements EventHandler<MouseEvent> {
                         }
                     }
                     if (oui) {
-                        jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur()),jeu.getJoueur().getX(),jeu.getJoueur().getY());
-                        jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].retireQuantite(1);
+                        jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(), "Flèche"), x, y);
+                        jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
                 }
             }

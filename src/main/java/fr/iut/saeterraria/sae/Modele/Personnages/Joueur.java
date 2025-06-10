@@ -83,7 +83,7 @@
             return  inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 39;
         }
         public boolean arcEnMain() {
-            return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 72;
+            return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 73;
         }
 
         public void mettreAJour() {

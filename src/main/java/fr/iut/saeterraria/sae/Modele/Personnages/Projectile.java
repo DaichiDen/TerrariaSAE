@@ -1,19 +1,30 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
-import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.*;
 
 public class Projectile{
-    private IntegerProperty x;
-    private IntegerProperty y;
+    private IntegerProperty x= new SimpleIntegerProperty(0);
+    private IntegerProperty y = new SimpleIntegerProperty(0);
     private Joueur joueur;
+    private StringProperty nom;
     private int gravité = 2;
     private int forceX = 0, forceY = 0;
+    private BooleanProperty estActifProperty = new SimpleBooleanProperty(true);
 
-    public Projectile(Joueur joueur) {
+    public Projectile(Joueur joueur, String nom) {
         this.joueur = joueur;
+        this.nom = new SimpleStringProperty(nom);
         this.x.setValue(joueur.getX());
         this.y.setValue(joueur.getY());
+    }
+
+    public BooleanProperty estActifProperty() {
+        return estActifProperty;
+    }
+
+    public String getNom() {
+        return nom.get();
     }
 
     public int getX() {

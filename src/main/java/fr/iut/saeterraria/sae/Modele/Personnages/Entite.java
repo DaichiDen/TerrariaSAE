@@ -3,6 +3,8 @@ package fr.iut.saeterraria.sae.Modele.Personnages;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
 
 import java.util.ArrayList;
@@ -37,12 +39,14 @@ public abstract class Entite {
     private final static int friction_air = 1;
     private boolean collisionBas = false;
     // projectiles
-    private ArrayList<Projectile> liste_projectiles = new ArrayList<>();
+    private ArrayList<Projectile> projectiles;
+    private ObservableList<Projectile> liste_projectiles;
 //
 //    MediaPlayer damage1 = super.Sonore("/Sound/damage1.wav");
 //    MediaPlayer damage2 = super.Sonore("/Sound/damage2.wav");
 
     public Entite(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Map map, Jeu jeu) {
+        projectiles= new ArrayList<>();
         this.nom = new SimpleStringProperty(nom);
         this.barreVie = new BarreVie(vieMax);
         this.energieMax = new SimpleIntegerProperty(energieMax);
@@ -54,6 +58,7 @@ public abstract class Entite {
         this.map = map;
         this.jeu=jeu;
         this.estVivant= new SimpleBooleanProperty(true);
+        liste_projectiles = FXCollections.observableArrayList(projectiles);
 
     }
 
@@ -81,11 +86,14 @@ public abstract class Entite {
     }
 
     public ArrayList<Projectile> getListe_projectiles() {
+        return projectiles;
+    }
+    public ObservableList<Projectile> getListe_projectilesObservable() {
         return liste_projectiles;
     }
 
     public void sauter() {
-        if (!enSaut && this.estVivant()) {
+        if (!enSaut && this.estVivant() ) {
             enSaut = true;
             vitesseY = forceSaut;
         }
@@ -95,8 +103,9 @@ public abstract class Entite {
     public abstract void attaquer(int x, int y, int range);
 
     public void tirerProjectile(Projectile projectile,int x,int y){
-        int vitX = 10;
-        int vitY = 10;
+        int vitX = 1;
+        int vitY = 1;
+
 
         int jx = this.getX();
         int jy = this.getY();
@@ -107,8 +116,8 @@ public abstract class Entite {
 
         projectile.setForceX(vitX * segH / segVAbs);
         projectile.setForceY(vitY * segHAbs / segV);
-        
-        liste_projectiles.add(projectile);
+
+        projectiles.add(projectile);
     }
 
     public boolean peutEtreAtteint(int blocX, int blocY,double val) {
@@ -196,8 +205,6 @@ public abstract class Entite {
             setY(getY() + vitesseY);
             collisionVerticale();
         }
-        màjProjectiles();
-
     }
     public void màjProjectiles() {
         if (liste_projectiles != null) {
@@ -211,14 +218,19 @@ public abstract class Entite {
                 liste_projectiles.get(i).setY(liste_projectiles.get(i).getY() + liste_projectiles.get(i).getForceY());
                 if (preX < liste_projectiles.get(i).getX()) {
                     collisionProjectileDroite(liste_projectiles.get(i), i);
+                    System.out.println("oe je suis le projectile et je me met à jour");
                 } else {
                     collisionProjectileGauche(liste_projectiles.get(i), i);
+                    System.out.println("oe je suis le projectile et je me met à jour");
                 }
                 if (preY < liste_projectiles.get(i).getY()) {
                     collisionProjectileHaut(liste_projectiles.get(i), i);
+                    System.out.println("oe je suis le projectile et je me met à jour");
                 } else {
                     collisionProjectileBas(liste_projectiles.get(i), i);
+                    System.out.println("oe je suis le projectile et je me met à jour");
                 }
+
             }
         }
     }
