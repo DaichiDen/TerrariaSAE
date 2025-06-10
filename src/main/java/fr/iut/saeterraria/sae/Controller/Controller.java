@@ -173,11 +173,6 @@ public class Controller implements Initializable{
                         PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
                         delay.setOnFinished(event ->{
 
-
-
-
-
-
                             vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
 
                         }); // Action à faire après le délai
@@ -199,7 +194,7 @@ public class Controller implements Initializable{
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
-        jeu.getJoueur().craftItem(jeu.getItems().get(52));
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(71),1);
     }
     @FXML
     public void exitInventaire(){

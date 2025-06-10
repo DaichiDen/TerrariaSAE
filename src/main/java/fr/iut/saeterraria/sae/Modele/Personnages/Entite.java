@@ -113,6 +113,10 @@ public abstract class Entite {
 
         return true;
     }
+    public void setVitesseX(int val){
+        this.vitesseX=val;
+
+    }
 
     public void mettreAJour() {
         if (estVivant()) {
@@ -139,10 +143,18 @@ public abstract class Entite {
 
             // Gestion de l'accélération
             if (getMarcheDroite() && !getMarcheGauche()) {
+                if(jeu.getJoueur().getDernierPos().equals("gauche")){
+                    jeu.getJoueur().setDernierPos("droite");
+                }
                 vitesseX += accel;
-            } else if (getMarcheGauche() && !getMarcheDroite()) {
+            }
+            else if (getMarcheGauche() && !getMarcheDroite()) {
+                if(jeu.getJoueur().getDernierPos().equals("droite")){
+                    jeu.getJoueur().setDernierPos("gauche");
+                }
                 vitesseX -= accel;
-            } else {
+            }
+            else {
                 // Si pas de touche appuyée on applique la friction
                 if (vitesseX > 0) {
                     vitesseX = Math.max(0, vitesseX - friction); // Réduit la vitesseX par la friction et empêche un dépassement de zéro vers le négatif.

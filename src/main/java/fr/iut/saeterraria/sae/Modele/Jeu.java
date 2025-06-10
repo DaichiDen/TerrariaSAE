@@ -1,6 +1,9 @@
 package fr.iut.saeterraria.sae.Modele;
 
 import fr.iut.saeterraria.sae.Modele.Objets.*;
+import fr.iut.saeterraria.sae.Modele.Objets.Arme.DashingKatana;
+import fr.iut.saeterraria.sae.Modele.Objets.Arme.Epee;
+import fr.iut.saeterraria.sae.Modele.Objets.Arme.Speciaux;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Hache;
@@ -143,6 +146,7 @@ public class Jeu {
         items.put(70,new Armure("Botte en DELJCCium","",5,(BlocConstruction) items.get(21)));
 
         // Armes
+        items.put(71,new DashingKatana("Katana étrange","Ce Katana semble pouvoir octroyer la capacité à son détenteur de se déplacer à la vitesse du son",10));
 
 
         // Autres items

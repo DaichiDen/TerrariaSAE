@@ -25,6 +25,7 @@ public class VueHotbar extends SpriteItem {
         // Affiche l'hotbar
         for (int j = 0; j < hotBar.getColumnCount(); j++) {
             if ((jeu.getJoueur().getInventaire().getInventaireJoueur()[0][j].getItem().getCodeObjet() != 0)) {
+
                 String URL = super.getHmap().get((jeu.getJoueur().getInventaire().getInventaireJoueur())[0][j].getItem().getCodeObjet());
 
                 int quantite = (jeu.getJoueur().getInventaire().getInventaireJoueur())[0][j].getQuantite();
@@ -79,7 +80,9 @@ public class VueHotbar extends SpriteItem {
         }
         hotBar.getChildren().remove(caseInventaire);
         if (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][colonne].getItem().getCodeObjet() != 0) { // Si la case a un item
+
             String URL = super.getHmap().get((jeu.getJoueur().getInventaire().getInventaireJoueur())[0][colonne].getItem().getCodeObjet());
+
             int quantite = jeu.getJoueur().getInventaire().getInventaireJoueur()[0][colonne].getQuantite();
                 afficheItemQuantite(URL, quantite,colonne);
         }

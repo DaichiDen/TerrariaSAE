@@ -70,6 +70,10 @@ public class Clavier implements EventHandler<KeyEvent> {
                 }
 
             }
+            if(code == KeyCode.E){
+                jeu.getJoueur().setEnDash(true);
+                jeu.getJoueur().dashKatana();
+            }
             if (code == KeyCode.J) { // à déplacer dans souris quand on aura une hotbar (main courante)
                 if (!jeu.getJoueur().getPierreTp().getEtat_tp()) {
                     jeu.getJoueur().getPierreTp().setX(jeu.getJoueur().getX());
@@ -99,13 +103,13 @@ public class Clavier implements EventHandler<KeyEvent> {
 
         }
 
-
     }
 
     public void update() {
         jeu.getJoueur().setMarcheDroite(touchesAppuyees.contains(KeyCode.RIGHT) || touchesAppuyees.contains(KeyCode.D));
         jeu.getJoueur().setMarcheGauche(touchesAppuyees.contains(KeyCode.LEFT) || touchesAppuyees.contains(KeyCode.Q));
     }
+
     @FXML
     public void ouvrirInventaire() {
         jeu.testCraft();
