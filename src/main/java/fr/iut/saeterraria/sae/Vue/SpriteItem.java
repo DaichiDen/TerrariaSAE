@@ -12,51 +12,68 @@ public class SpriteItem extends CreateRessourceVisuel{
     }
 
     public void initialiseItems() {
-        items.put(0, "/Tiles/Ciel");
+
+
+        items.put(0, "/Tiles/Ciel.png");
         // Blocs
-        items.put(1, "/Tiles/Dirt_1"); // Terre Haute
-        items.put(2, "/Tiles/Dirt_2"); // Terre Basse
-        items.put(3, "/Tiles/Roche_moche"); // Bois
-        items.put(4, ""); // Minerai Charbon
-        items.put(5, ""); // Charbon
-        items.put(6, ""); // Pierre
-        items.put(7, ""); // Minerai Fer
-        items.put(8, ""); // Fer
-        items.put(9, ""); // Glace
+        items.put(1, "/Tiles/Dirt_1.png"); // Terre Haute
+        items.put(2, "/Tiles/Dirt_2.png"); // Terre Basse
+        items.put(3, "/Tiles/Roche_moche.png"); // Bois
+        items.put(4, "/Tiles/Fond_noir.png"); // Minerai Charbon
+        items.put(5, "/Tiles/Fond_noir.png"); // Charbon
+        items.put(6, "/Tiles/Fond_noir.png"); // Pierre
+        items.put(7, "/Tiles/Fond_noir.png"); // Minerai Fer
+        items.put(8, "/Tiles/Fond_noir.png"); // Fer
+        items.put(9, "/Tiles/Fond_noir.png"); // Glace
+        items.put(10, "/Tiles/Fond_noir.png"); // DELJCCium
+
 
         // Blocs à constructions
-        items.put(10, ""); // Etabli
-        items.put(11, ""); // Forge
-        items.put(12, ""); // Alambique
+        items.put(12, "/Tiles/Fond_noir.png"); // Etabli
+        items.put(13, "/Tiles/Fond_noir.png"); // Forge
+        items.put(14, "/Tiles/Fond_noir.png"); // Alambique
+        items.put(15, "/Tiles/Fond_noir.png"); // Four
 
         /* ---------- À ajouter le reste ------------- */
-
+        items.put(16, "/Tiles/Fond_noir.png"); // Coffre
         // Outils
-        items.put(50, ""); // Pelle de bois
-        items.put(51, ""); // Hache de bois
-        items.put(19, "/Tiles/Ciel"); // Pioche de bois
-        items.put(53, ""); // Pelle de pierre
-        items.put(54, ""); // Hache de pierre
-        items.put(55, ""); // Pioche de pierre
-        items.put(56, ""); // Pelle de fer
-        items.put(57, ""); // Hache de fer
-        items.put(58, ""); // Pioche de fer
-        items.put(59, ""); // Pelle de DELJCCium
-        items.put(60,""); // Hache de DELJCCium
-        items.put(61,""); // Pioche de DELJCCium
 
+
+
+        items.put(18, "/Sprite_objets/Pelle_pierre.png"); // Pelle de bois
+        items.put(19, "/Sprite_objets/Hache_pierre.png"); // Hache de bois
+        items.put(20, "/Sprite_objets/Pioche_pierre.png"); // Pioche de bois
+        items.put(21, "/Sprite_objets/Pelle_pierre.png"); // Pelle de pierre
+        items.put(22, "/Sprite_objets/Hache_pierre.png"); // Hache de pierre
+        items.put(23, "/Sprite_objets/Pioche_pierre.png"); // Pioche de pierre
+        items.put(24, "/Sprite_objets/Pelle_pierre.png"); // Pelle de fer
+        items.put(25, "/Sprite_objets/Hache_pierre.png"); // Hache de fer
+        items.put(26, "/Sprite_objets/Pioche_pierre.png"); // Pioche de fer
+        items.put(27, "/Sprite_objets/Pelle_pierre.png"); // Pelle de DELJCCium
+        items.put(28, "/Sprite_objets/Hache_pierre.png"); // Hache de DELJCCium
+        items.put(29, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
+        items.put(30, "/Sprite_objets/Pioche_pierre.png"); // Seau vide
+        items.put(31, "/Sprite_objets/Pioche_pierre.png"); // Sceau d'eau
         // Armures
-        items.put(62,""); // Casque en fer
-        items.put(63,""); // Casque en DELJCCium
-        items.put(64,""); // Plastron en fer
-        items.put(65,""); // Plastron en DELJCCium
-        items.put(66,""); // Jambière en fer
-        items.put(67,""); // Jambière en DELJCCium
-        items.put(68,""); // Botte en fer
-        items.put(69,""); // Botte en DELJCCium
 
-        //Armres
+
+
+
+
+        
+        items.put(63,"/Tiles/Fond_noir.png"); // Casque en fer
+        items.put(64,"/Tiles/Fond_noir.png"); // Casque en DELJCCium
+        items.put(65,"/Tiles/Fond_noir.png"); // Plastron en fer
+        items.put(66,"/Tiles/Fond_noir.png"); // Plastron en DELJCCium
+        items.put(67,"/Tiles/Fond_noir.png"); // Jambière en fer
+        items.put(68,"/Tiles/Fond_noir.png"); // Jambière en DELJCCium
+        items.put(69,"/Tiles/Fond_noir.png"); // Botte en fer
+
+
+        //Armes
         items.put(39,"/Sprite/KatanaDash");
+
+
     }
 
     public HashMap<Integer,String> getHmap(){
