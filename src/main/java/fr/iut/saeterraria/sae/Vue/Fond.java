@@ -1,6 +1,6 @@
 package fr.iut.saeterraria.sae.Vue;
 
-import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Jeu;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
@@ -12,20 +12,19 @@ import java.util.HashMap;
 
 public class Fond extends CreateRessourceVisuel {
 
-    private Map carte;
+    private Jeu jeu;
     private HashMap<Integer, Image> tiles;
     private static int id = 0;
     private TilePane pane;
 
 
-    public Fond(TilePane pane,Map carte) {
-        this.carte = carte;
+    public Fond(TilePane pane,Jeu jeu) {
+       this.jeu = jeu;
         this.tiles = new HashMap<>();
         this.pane = pane;
         initialiseTile();
         afficherCarte();
     }
-
 
     public void ajoutTile(String imagePath) {
         System.out.println(id);
@@ -43,16 +42,12 @@ public class Fond extends CreateRessourceVisuel {
 
     // Permet d'afficher le terrain dans la scène (Pane principal)
     public void afficherCarte() {
-        pane.getChildren().clear();
-        for (int i = 0; i < carte.getLigne(); i++) { //Ligne
-            for (int j = 0; j < carte.getColonne(); j++) { //Colonne
-                this.pane.getChildren().add(new ImageView(tiles.get(carte.getCase(i, j))));
+        for (int i = (this.jeu.getJoueur().getY()/32)-(pane.getPrefRows()/2); i < pane.getPrefRows()+((this.jeu.getJoueur().getY()/32)/2)-1; i++) { //Ligne
+            for (int j = (this.jeu.getJoueur().getX()/32)-(pane.getPrefColumns()/2); j < pane.getPrefColumns()+((this.jeu.getJoueur().getX()/32)/2)-1; j++) { //Colonne
+                System.out.println(pane.getPrefColumns()+(this.jeu.getJoueur().getY()/64)-1-j);
+                this.pane.getChildren().add(new ImageView(tiles.get(this.jeu.getCarte().getCase(i, j))));
             }
         }
-    }
-
-    public void changeBloc(int x, int y){
-
     }
 
     public HashMap<Integer, Image> getTiles() {
@@ -63,7 +58,6 @@ public class Fond extends CreateRessourceVisuel {
 
         URL imageURL = getClass().getResource(imagePath);
         Image image = new Image(String.valueOf(imageURL));
-        ImageView imageView = new ImageView(image);
         return image;
 
     }

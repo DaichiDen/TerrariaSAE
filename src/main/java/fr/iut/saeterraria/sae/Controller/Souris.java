@@ -38,16 +38,16 @@ public class Souris implements EventHandler<MouseEvent> {
             if(jeu.getJoueur().estVivant()){
                 jeu.getJoueur().attaquer(x1, y1, 2);
                 if (jeu.getJoueur().miner(x, y)){
-                    this.tp.getChildren().remove((y*58)+x);// faire de la taille de la map un un getter
+                    this.tp.getChildren().remove((y*tp.getPrefColumns())+x);// faire de la taille de la map un un getter
 
-                    this.tp.getChildren().add( ( ((y*58)+x) ),new ImageView(fond.getTiles().get(map.getCase(y, x)) ) );
+                    this.tp.getChildren().add( ( ((y*tp.getPrefColumns())+x) ),new ImageView(fond.getTiles().get(map.getCase(y, x)) ) );
                 }
             }
         }
         else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             jeu.getJoueur().poser(x, y);
-            this.tp.getChildren().remove((y*58)+x);
-            this.tp.getChildren().add(((y*58)+x),new ImageView(fond.getTiles().get(map.getCase(y, x))));
+            this.tp.getChildren().remove((y*tp.getPrefColumns())+x);
+            this.tp.getChildren().add(((y*tp.getPrefColumns())+x),new ImageView(fond.getTiles().get(map.getCase(y, x))));
         }
     }
 }

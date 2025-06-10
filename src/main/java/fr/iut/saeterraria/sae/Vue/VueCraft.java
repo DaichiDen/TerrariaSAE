@@ -50,10 +50,8 @@ public class VueCraft extends SpriteItem {
 
             sectionItemConstruit.setAlignment(Pos.CENTER);
 
-            System.out.println("keyset craft etabli" + codeObjet);
-            System.out.println(super.getHmap().get(codeObjet));
-
             sectionItemConstruit.getChildren().add(super.createImageView(super.getHmap().get(codeObjet), 70, 70));
+            sectionItemConstruit.getChildren().add(super.createLabelNom(items.get(codeObjet).getName()));
 
             for (int j = 0; j < recetteEtabli.get(codeObjet).getRecette().size(); j++) {
                 HBox elementRecette = new HBox();
@@ -84,9 +82,6 @@ public class VueCraft extends SpriteItem {
 
             sectionItemConstruit.setAlignment(Pos.CENTER);
 
-            System.out.println("keyset craft forge" + codeObjet);
-            System.out.println(super.getHmap().get(codeObjet));
-
             sectionItemConstruit.getChildren().add(super.createImageView(super.getHmap().get(codeObjet), 45, 45));
             sectionItemConstruit.getChildren().add(super.createLabelNom(items.get(codeObjet).getName()));
 
@@ -115,6 +110,7 @@ public class VueCraft extends SpriteItem {
             VBox sectionItemsNecessaires = new VBox();
 
             sectionItemConstruit.getChildren().add(super.createImageView(super.getHmap().get(codeObjet), 45, 45));
+            sectionItemConstruit.getChildren().add(super.createLabelNom(items.get(codeObjet).getName()));
 
             sectionItemConstruit.prefWidthProperty().bind(blocRecette.widthProperty().divide(2));
             sectionItemsNecessaires.prefWidthProperty().bind(blocRecette.widthProperty().divide(2));
@@ -132,7 +128,6 @@ public class VueCraft extends SpriteItem {
             blocRecette.getChildren().add(sectionItemConstruit);
             blocRecette.getChildren().add(sectionItemsNecessaires);
             caseRecetteSansBloc.getChildren().add(blocRecette);
-            System.out.println(caseRecetteSansBloc.getChildren());
         }
     }
 

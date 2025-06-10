@@ -32,7 +32,7 @@
         public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp) {
 
 
-            super(nom, 20, 100, 20, 0, 0, 1, 10, jeu.getCarte(), jeu);
+            super(nom, 20, 100, 20, 30*32, 15*32, 1, 10, jeu.getCarte(), jeu);
 
 
             this.equipement = new int[7];
@@ -122,7 +122,6 @@
 
 
         public boolean miner(int x, int y) {
-
 
             boolean miner = false;
             if (peutEtreAtteint(x, y, 2.5)) {

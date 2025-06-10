@@ -117,7 +117,7 @@ public class Controller implements Initializable{
             if (event.getCode() == KeyCode.ENTER) {
                 confirmerNom();
         }});
-        scene = new Fond(fond,jeu.getCarte());// Initialise le fond (décor du jeu)
+        scene = new Fond(fond,jeu);// Initialise le fond (décor du jeu)
         vueEnnemi = new SpriteMob(jeu, screen,"Pierre");
 
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
@@ -132,7 +132,6 @@ public class Controller implements Initializable{
         imageaccueil.setFitWidth(menu.getWidth());
         imageaccueil.fitWidthProperty().bind(imagebloc_accueil.widthProperty());
         imageaccueil.fitHeightProperty().bind(imagebloc_accueil.widthProperty());
-
         Platform.runLater(() -> fond.requestFocus());
         SpriteVie barre = new SpriteVie(Vie, jeu);
 
