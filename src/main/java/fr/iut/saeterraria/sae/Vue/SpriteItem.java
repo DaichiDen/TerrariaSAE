@@ -1,5 +1,7 @@
 package fr.iut.saeterraria.sae.Vue;
 
+import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pelle;
+
 import java.util.HashMap;
 
 public class SpriteItem extends CreateRessourceVisuel{
@@ -26,8 +28,7 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(8, "/Tiles/Fond_noir.png"); // Fer
         items.put(9, "/Tiles/Fond_noir.png"); // Glace
         items.put(10, "/Tiles/Fond_noir.png"); // DELJCCium
-
-
+        items.put(11, "");
         // Blocs à constructions
         items.put(12, "/Tiles/Fond_noir.png"); // Etabli
         items.put(13, "/Tiles/Fond_noir.png"); // Forge
@@ -36,10 +37,9 @@ public class SpriteItem extends CreateRessourceVisuel{
 
         /* ---------- À ajouter le reste ------------- */
         items.put(16, "/Tiles/Fond_noir.png"); // Coffre
+        items.put(17,"/Tiles/Fond_noir.png");
         // Outils
-
-
-
+        
         items.put(18, "/Sprite_objets/Pelle_pierre.png"); // Pelle de bois
         items.put(19, "/Sprite_objets/Hache_pierre.png"); // Hache de bois
         items.put(20, "/Sprite_objets/Pioche_pierre.png"); // Pioche de bois
@@ -54,11 +54,11 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(29, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
         items.put(30, "/Sprite_objets/Pioche_pierre.png"); // Seau vide
         items.put(31, "/Sprite_objets/Pioche_pierre.png"); // Sceau d'eau
+
+        for( int i=32; i<63; i++){
+                items.put(i, "");
+        }
         // Armures
-
-
-
-
 
         
         items.put(63,"/Tiles/Fond_noir.png"); // Casque en fer
@@ -68,12 +68,15 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(67,"/Tiles/Fond_noir.png"); // Jambière en fer
         items.put(68,"/Tiles/Fond_noir.png"); // Jambière en DELJCCium
         items.put(69,"/Tiles/Fond_noir.png"); // Botte en fer
+        items.put(70,"/Tiles/Fond_noir.png"); // Botte en DELJCCium
 
+        items.put(71, "/Sprite_objets/Pioche_pierre.png"); // Sceau d'eau
 
         //Armes
         items.put(39,"/Sprite/KatanaDash.png");
 
 
+        
     }
 
     public HashMap<Integer,String> getHmap(){

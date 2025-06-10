@@ -30,7 +30,7 @@ public abstract class CreateRessourceVisuel {
 
     public Label createLabelNom(String nom) {
         Label label = new Label();
-        label.setFont(new Font("Times New Roman",18));
+        label.setFont(new Font("Times New Roman",13));
         label.setText(nom);
         return label;
     }
