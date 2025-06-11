@@ -112,6 +112,7 @@ public class Controller implements Initializable{
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
         jeu.getJoueur().getListe_projectilesObservable().addListener(new ObsProjectile(jeu,screen));
 
+
         Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0,10,jeu.getCarte(), jeu);
         jeu.addEnnemis(ennemiCaca);
         jeu.addMobs(ennemiCaca);
@@ -132,6 +133,7 @@ public class Controller implements Initializable{
 
         inventaireVue = new VueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         vueProjectile= new VueProjectile(jeu,screen);
+
         hotBarVue = new VueHotbar(jeu,hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
 
@@ -167,6 +169,7 @@ public class Controller implements Initializable{
                     for(int i = 0; i < jeu.getMobs().size(); i++){
                         jeu.getMobs().get(i).mettreAJour();
                     }
+
                     jeu.getJoueur().màjProjectiles();
 
                     lastUpdate = now;
@@ -197,7 +200,7 @@ public class Controller implements Initializable{
     public void ouvrirInventaire() {
         screenInventaire.toFront();
         jeu.getJoueur().ajouterItem(jeu.getItems().get(73),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),50);
 
     }
     @FXML

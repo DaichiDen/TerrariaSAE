@@ -102,22 +102,42 @@ public abstract class Entite {
 
     public abstract void attaquer(int x, int y, int range);
 
-    public void tirerProjectile(Projectile projectile,int x,int y){
-        int vitX = 1;
-        int vitY = 1;
+    public void tirerProjectile(Projectile projectile, int cibleX, int cibleY) {
+        // Position de l'entité 
+        int ex = this.getX();
+        int ey = this.getY();
+        System.out.println("ex "+ex+", ey "+ey);
 
 
-        int jx = this.getX();
-        int jy = this.getY();
-        int segH = jx + x; // segment horizontal
-        int segHAbs = Math.abs(segH);
-        int segV = jy + y; // segment vertical
-        int segVAbs = Math.abs(segV);
+        // Direction du tir
+        float dx = cibleX - ex;
+        float dy = cibleY - ey;
+        System.out.println("dx "+dx+", dy "+dy);
 
-        projectile.setForceX(vitX * segH / segVAbs);
-        projectile.setForceY(vitY * segHAbs / segV);
+        // Normalisation du vecteur (dx, dy)
+        float distance = (float) Math.sqrt(dx * dx + dy * dy);
+        if (distance == 0) distance = 1; // éviter division par zéro
+        System.out.println(distance +" distance");
 
+        // Vitesse initiale (puissance du tir)
+        float puissance = 20.0f;
+
+        float vx = (dx / distance) * puissance;
+        float vy = (dy / distance) * puissance;
+
+        System.out.println(vx +"vx, vy "+vy);
+
+        // Appliquer la vitesse initiale au projectile
+        projectile.setForceX(vx);
+        projectile.setForceY(vy);
+
+        // Position de départ = entité
+        projectile.setX(ex);
+        projectile.setY(ey);
+
+        // Ajouter aux listes
         projectiles.add(projectile);
+        liste_projectiles.add(projectile);
     }
 
     public boolean peutEtreAtteint(int blocX, int blocY,double val) {
@@ -209,120 +229,37 @@ public abstract class Entite {
     public void màjProjectiles() {
         if (liste_projectiles != null) {
             for (int i = 0; i < liste_projectiles.size(); i++) {
-                int preX = liste_projectiles.get(i).getX();
-                int preY = liste_projectiles.get(i).getY();
                 liste_projectiles.get(i).setX(liste_projectiles.get(i).getX() + liste_projectiles.get(i).getForceX());
 
-                liste_projectiles.get(i).setForceY(liste_projectiles.get(i).getForceY() + liste_projectiles.get(i).getGravité());
+                liste_projectiles.get(i).setForceY((float) (liste_projectiles.get(i).getForceY() + liste_projectiles.get(i).getGravité()));
 
                 liste_projectiles.get(i).setY(liste_projectiles.get(i).getY() + liste_projectiles.get(i).getForceY());
-                if (preX < liste_projectiles.get(i).getX()) {
-                    collisionProjectileDroite(liste_projectiles.get(i), i);
-                    System.out.println("oe je suis le projectile et je me met à jour");
-                } else {
-                    collisionProjectileGauche(liste_projectiles.get(i), i);
-                    System.out.println("oe je suis le projectile et je me met à jour");
-                }
-                if (preY < liste_projectiles.get(i).getY()) {
-                    collisionProjectileHaut(liste_projectiles.get(i), i);
-                    System.out.println("oe je suis le projectile et je me met à jour");
-                } else {
-                    collisionProjectileBas(liste_projectiles.get(i), i);
-                    System.out.println("oe je suis le projectile et je me met à jour");
-                }
 
+                collisionProjectile(liste_projectiles.get(i), i);
             }
         }
     }
 
-    public void collisionProjectileDroite(Projectile projectile, int ind) {
-
+    public void collisionProjectile(Projectile projectile, int ind) {
         Rectangle2D hitboxProjectile = new Rectangle2D(this.getX(), this.getY(), taille1bloc / 4, taille1bloc / 4);
 
-        int caseX = (int) (projectile.getX() / taille1bloc);
-        int caseY = (int) (projectile.getY() / taille1bloc);
+        int j = (int) (projectile.getX() / taille1bloc);
+        int i = (int) (projectile.getY() / taille1bloc);
 
-        for (int i = caseY; i <= caseY; i++) { // stongé !!!!!!!!!!!!!!!!!!!!!!!
-            for (int j = caseX; j <= caseX+1; j++) {
-                if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
-                    if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
-                        int xBloc = this.map.getCoordonnéesX(j);
-                        int yBloc = this.map.getCoordonnéesY(i);
-                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, taille1bloc, taille1bloc * 2);
-                        if(hitboxBloc.intersects(hitboxProjectile)){
-                            liste_projectiles.remove(ind);
-                        }
-                    }
+        if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
+            if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
+                int xBloc = this.map.getCoordonnéesX(j);
+                int yBloc = this.map.getCoordonnéesY(i);
+                Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, taille1bloc, taille1bloc * 2);
+                if(hitboxBloc.intersects(hitboxProjectile)){
+                    liste_projectiles.remove(ind);
+                    System.out.println("je suis plus dans la liste");
                 }
             }
         }
     }
 
 
-
-    public void collisionProjectileGauche(Projectile projectile, int ind) {
-        Rectangle2D hitboxProjectile = new Rectangle2D(this.getX(), this.getY(), taille1bloc / 4, taille1bloc / 4);
-
-        int caseX = (int) (projectile.getX() / taille1bloc);
-        int caseY = (int) (projectile.getY() / taille1bloc);
-
-        for (int i = caseY; i <= caseY; i++) {
-            for (int j = caseX; j <= caseX-1; j--) {
-                if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
-                    if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
-                        int xBloc = this.map.getCoordonnéesX(j);
-                        int yBloc = this.map.getCoordonnéesY(i);
-                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, taille1bloc, taille1bloc * 2);
-                        if(hitboxBloc.intersects(hitboxProjectile)){
-                            liste_projectiles.remove(ind);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public void collisionProjectileHaut(Projectile projectile, int ind) {
-        Rectangle2D hitboxProjectile = new Rectangle2D(this.getX(), this.getY(), taille1bloc / 4, taille1bloc / 4);
-
-        int caseX = (int) (projectile.getX() / taille1bloc);
-        int caseY = (int) (projectile.getY() / taille1bloc);
-
-        for (int i = caseY; i <= caseY +1; i++) {
-            for (int j = caseX; j <= caseX; j++) { // stongé !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
-                    if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
-                        int xBloc = this.map.getCoordonnéesX(j);
-                        int yBloc = this.map.getCoordonnéesY(i);
-                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, taille1bloc, taille1bloc * 2);
-                        if(hitboxBloc.intersects(hitboxProjectile)){
-                            liste_projectiles.remove(ind);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public void collisionProjectileBas(Projectile projectile, int ind) {
-        Rectangle2D hitboxProjectile = new Rectangle2D(this.getX(), this.getY(), taille1bloc / 4, taille1bloc / 4);
-
-        int caseX = (int) (projectile.getX() / taille1bloc);
-        int caseY = (int) (projectile.getY() / taille1bloc);
-
-        for (int i = caseY; i <= caseY -1; i++) {
-            for (int j = caseX; j <= caseX; j++) { // stongé !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
-                    if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
-                        int xBloc = this.map.getCoordonnéesX(j);
-                        int yBloc = this.map.getCoordonnéesY(i);
-                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, taille1bloc, taille1bloc * 2);
-                        if(hitboxBloc.intersects(hitboxProjectile)){
-                            liste_projectiles.remove(ind);
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     public void collisionVerticale() { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
