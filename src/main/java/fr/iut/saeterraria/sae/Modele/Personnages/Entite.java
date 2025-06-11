@@ -103,13 +103,14 @@ public abstract class Entite {
     public abstract void attaquer(int x, int y, int range);
 
     public void tirerProjectile(Projectile projectile, int cibleX, int cibleY) {
-        // Position de l'entité 
+        // Position de l'entité
         int ex = this.getX();
         int ey = this.getY();
         System.out.println("ex "+ex+", ey "+ey);
 
+        System.out.println(cibleX+" cibles "+cibleY);
 
-        // Direction du tir
+        // Direction du tirq
         float dx = cibleX - ex;
         float dy = cibleY - ey;
         System.out.println("dx "+dx+", dy "+dy);

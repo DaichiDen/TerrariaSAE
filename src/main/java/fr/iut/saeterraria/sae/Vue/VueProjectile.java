@@ -10,14 +10,14 @@ public class VueProjectile extends CreateRessourceVisuel{
     private Pane screen;
     private Jeu jeu;
     private int width, height;
-    private ImageView flèche = createImageView("/Sprite_objets/Flèche.png",width,height);
+
     private ImageView spriteActuel;
 
     public VueProjectile(Jeu jeu, Pane screen) {
         this.jeu = jeu;
         this.screen = screen;
-        this.width = 100;
-        this.height = 100;
+        this.width = 10;
+        this.height = 10;
 
         for(int i = 0; i < jeu.getJoueur().getListe_projectiles().size() ; i++) {
             int finalI = i;
@@ -27,12 +27,12 @@ public class VueProjectile extends CreateRessourceVisuel{
     }
 
     public void mettreAJourSpriteProjectile(Projectile projectile) {
-        spriteActuel=flèche;
+        spriteActuel=createImageView("/Sprite_objets/Flèche.png",width,height);
         spriteActuel.setId(projectile.getNom());
         spriteActuel.translateXProperty().bind(projectile.xProperty());
         spriteActuel.translateYProperty().bind(projectile.yProperty());
-        spriteActuel.setFitWidth(30);
-        spriteActuel.setFitHeight(30);
+        spriteActuel.setFitWidth(10);
+        spriteActuel.setFitHeight(10);
         screen.getChildren().add(spriteActuel);
     }
 
