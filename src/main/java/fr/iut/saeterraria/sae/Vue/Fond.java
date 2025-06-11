@@ -61,16 +61,22 @@ public class Fond extends CreateRessourceVisuel {
 
     }
 
-    public void updateMap(int MaxX, int MaxY) {
-        //Y+1 = ajouter 1 colonne et donc ajouter à chaque ligne une case
-        //X+1 = ajouter 1 ligne donc ajouter à chaque colonne une case
-//        for (int x = 0; x < this.environnement.getPrefColumns(); x++) {
-//            this.environnement.getChildren().add((y*tp.getPrefColumns())+x),new ImageView(tiles.get(this.jeu.getCarte().getCase(i, j))));
-//        }
-//        for (int y = 0; y < this.environnement.getPrefRows(); y++) {
-//
-//        }
+    public TilePane getEnvironnement() {
+        return environnement;
+    }
 
+    public void updateMapX() {
+        //X+1 = ajouter 1 colonne et donc ajouter à chaque ligne une case
+        for (int x = 0; x < this.environnement.getPrefRows(); x++) {
+            this.environnement.getChildren().add((x*environnement.getPrefColumns()+environnement.getPrefColumns()+x),new ImageView(tiles.get(this.jeu.getCarte().getCase(x, environnement.getPrefColumns()))));
+        }
+    }
+
+    public void updateMapY() {
+        //Y+1 = ajouter 1 ligne donc ajouter à chaque colonne une case
+        for (int y = 0; y < this.environnement.getPrefColumns(); y++) {
+            this.environnement.getChildren().add(((environnement.getPrefRows()*environnement.getPrefColumns())+y),new ImageView(tiles.get(this.jeu.getCarte().getCase(environnement.getPrefRows(), y))));
+        }
     }
 
 

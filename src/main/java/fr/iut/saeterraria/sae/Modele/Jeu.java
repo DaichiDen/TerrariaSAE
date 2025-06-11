@@ -58,6 +58,15 @@ public class Jeu {
         ennemis.remove(ennemi);
     }
 
+    public Item getItem(String nom){
+        for (Item item : items.values()) {
+            if(item.getName().equals(nom)){
+                return item;
+            }
+        }
+        return null;
+    }
+
     public void addPNJ(PNJ pnj) {
         pNJ.add(pnj);
     }

@@ -4,15 +4,10 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.event.EventHandler;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputEvent;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
-
-import java.util.HashMap;
 
 public class Souris implements EventHandler<MouseEvent> {
     private Jeu jeu;
@@ -49,5 +44,9 @@ public class Souris implements EventHandler<MouseEvent> {
             this.tp.getChildren().remove((y*tp.getPrefColumns())+x);// X = Ligne, Y = Colonne
             this.tp.getChildren().add(((y*tp.getPrefColumns())+x),new ImageView(fond.getTiles().get(map.getCase(y, x))));
         }
+    }
+
+    public void handleCraft(String nom) {
+        jeu.getJoueur().craftItem(jeu.getItem(nom));
     }
 }
