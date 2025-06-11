@@ -151,6 +151,10 @@ public class Controller implements Initializable{
         screen.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
 
         ObsJoueur obsJ = new ObsJoueur(jeu,vuejoueur, controlleurJoueur);
+
+        jeu.getJoueur().getXMaxProperty().addListener(new ObsMap(jeu,scene));
+        jeu.getJoueur().getYMaxProperty().addListener(new ObsMap(jeu,scene));
+
         jeu.getJoueur().yProperty().addListener(obsJ);
 
         jeu.getJoueur().getBarreVie().vieProperty().addListener((obs, oldVal, newVal) -> {

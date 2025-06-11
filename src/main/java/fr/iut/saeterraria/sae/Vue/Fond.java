@@ -15,13 +15,13 @@ public class Fond extends CreateRessourceVisuel {
     private Jeu jeu;
     private HashMap<Integer, Image> tiles;
     private static int id = 0;
-    private TilePane pane;
+    private TilePane environnement;
 
 
-    public Fond(TilePane pane,Jeu jeu) {
+    public Fond(TilePane environnement,Jeu jeu) {
        this.jeu = jeu;
         this.tiles = new HashMap<>();
-        this.pane = pane;
+        this.environnement = environnement;
         initialiseTile();
         afficherCarte();
     }
@@ -42,10 +42,9 @@ public class Fond extends CreateRessourceVisuel {
 
     // Permet d'afficher le terrain dans la scène (Pane principal)
     public void afficherCarte() {
-        for (int i = (this.jeu.getJoueur().getY()/32)-(pane.getPrefRows()/2); i < pane.getPrefRows()+((this.jeu.getJoueur().getY()/32)/2)-1; i++) { //Ligne
-            for (int j = (this.jeu.getJoueur().getX()/32)-(pane.getPrefColumns()/2); j < pane.getPrefColumns()+((this.jeu.getJoueur().getX()/32)/2)-1; j++) { //Colonne
-                System.out.println(pane.getPrefColumns()+(this.jeu.getJoueur().getY()/64)-1-j);
-                this.pane.getChildren().add(new ImageView(tiles.get(this.jeu.getCarte().getCase(i, j))));
+        for (int i = 0; i < environnement.getPrefRows(); i++) {
+            for (int j = 0; j < environnement.getPrefColumns(); j++) {
+                this.environnement.getChildren().add(new ImageView(tiles.get(this.jeu.getCarte().getCase(i, j))));
             }
         }
     }
@@ -59,6 +58,18 @@ public class Fond extends CreateRessourceVisuel {
         URL imageURL = getClass().getResource(imagePath);
         Image image = new Image(String.valueOf(imageURL));
         return image;
+
+    }
+
+    public void updateMap(int MaxX, int MaxY) {
+        //Y+1 = ajouter 1 colonne et donc ajouter à chaque ligne une case
+        //X+1 = ajouter 1 ligne donc ajouter à chaque colonne une case
+//        for (int x = 0; x < this.environnement.getPrefColumns(); x++) {
+//            this.environnement.getChildren().add((y*tp.getPrefColumns())+x),new ImageView(tiles.get(this.jeu.getCarte().getCase(i, j))));
+//        }
+//        for (int y = 0; y < this.environnement.getPrefRows(); y++) {
+//
+//        }
 
     }
 

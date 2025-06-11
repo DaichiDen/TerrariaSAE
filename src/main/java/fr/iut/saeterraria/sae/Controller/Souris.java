@@ -46,7 +46,7 @@ public class Souris implements EventHandler<MouseEvent> {
         }
         else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             jeu.getJoueur().poser(x, y);
-            this.tp.getChildren().remove((y*tp.getPrefColumns())+x);
+            this.tp.getChildren().remove((y*tp.getPrefColumns())+x);// X = Ligne, Y = Colonne
             this.tp.getChildren().add(((y*tp.getPrefColumns())+x),new ImageView(fond.getTiles().get(map.getCase(y, x))));
         }
     }
