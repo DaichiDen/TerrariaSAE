@@ -106,14 +106,10 @@ public abstract class Entite {
         // Position de l'entité
         int ex = this.getX();
         int ey = this.getY();
-        System.out.println("ex "+ex+", ey "+ey);
-
-        System.out.println(cibleX+" cibles "+cibleY);
 
         // Direction du tirq
         float dx = cibleX - ex;
         float dy = cibleY - ey;
-        System.out.println("dx "+dx+", dy "+dy);
 
         // Normalisation du vecteur (dx, dy)
         float distance = (float) Math.sqrt(dx * dx + dy * dy);
@@ -126,7 +122,6 @@ public abstract class Entite {
         float vx = (dx / distance) * puissance;
         float vy = (dy / distance) * puissance;
 
-        System.out.println(vx +"vx, vy "+vy);
 
         // Appliquer la vitesse initiale au projectile
         projectile.setForceX(vx);
@@ -242,23 +237,29 @@ public abstract class Entite {
     }
 
     public void collisionProjectile(Projectile projectile, int ind) {
-        Rectangle2D hitboxProjectile = new Rectangle2D(this.getX(), this.getY(), taille1bloc / 4, taille1bloc / 4);
+        Rectangle2D hitboxProjectile = new Rectangle2D(this.getX(), this.getY(), taille1bloc , taille1bloc);
 
-        int j = (int) (projectile.getX() / taille1bloc);
-        int i = (int) (projectile.getY() / taille1bloc);
+        int i = (int) (projectile.getX() / taille1bloc);
+        int j = (int) (projectile.getY() / taille1bloc);
 
-        if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
-            if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
-                int xBloc = this.map.getCoordonnéesX(j);
-                int yBloc = this.map.getCoordonnéesY(i);
-                Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, taille1bloc, taille1bloc * 2);
-                if(hitboxBloc.intersects(hitboxProjectile)){
-                    liste_projectiles.remove(ind);
-                    System.out.println("je suis plus dans la liste");
-                }
+        if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
+            
+            Rectangle2D hitboxBloc = new Rectangle2D(i,j, taille1bloc, taille1bloc);//Bloc à la position de la flèche
+            System.out.println(hitboxBloc.getMaxX()+"XMax / XMin"+hitboxBloc.getMinX());
+            System.out.println(hitboxBloc.getMaxY()+"YMax / YMin"+hitboxBloc.getMinY());
+            System.out.println(hitboxProjectile.intersects(hitboxBloc));
+            if(hitboxProjectile.intersects(hitboxBloc)){
+                projectiles.remove(ind);
+                liste_projectiles.remove(ind);
+                projectile.estActifProperty().set(false);
+                System.out.println("je suis plus dans la liste");
             }
         }
+        else {
+            System.out.println("je suis dans le ciel là ohéééé");
+        }
     }
+
 
 
 

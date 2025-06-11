@@ -31,8 +31,6 @@ public class VueProjectile extends CreateRessourceVisuel{
         spriteActuel.setId(projectile.getNom());
         spriteActuel.translateXProperty().bind(projectile.xProperty());
         spriteActuel.translateYProperty().bind(projectile.yProperty());
-        spriteActuel.setFitWidth(10);
-        spriteActuel.setFitHeight(10);
         screen.getChildren().add(spriteActuel);
     }
 

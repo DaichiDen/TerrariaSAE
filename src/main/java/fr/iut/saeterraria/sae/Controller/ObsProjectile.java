@@ -68,7 +68,7 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
                                 spriteProjectiles.remove(projectile_aj);
                             }
                             // (Optionnel) on peut aussi le supprimer de la liste de mobs si ce n’est pas déjà fait
-                            jeu.getMobs().remove(projectile_aj);
+                            jeu.getJoueur().getListe_projectilesObservable().remove(projectile_aj);
                         }
                     });
                 }
