@@ -19,10 +19,10 @@ public class VueProjectile extends CreateRessourceVisuel{
         this.width = 10;
         this.height = 10;
 
-        for(int i = 0; i < jeu.getJoueur().getListe_projectiles().size() ; i++) {
+        for(int i = 0; i < jeu.getListe_projectiles().size() ; i++) {
             int finalI = i;
-            jeu.getJoueur().getListe_projectiles().get(i).xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteProjectile(jeu.getJoueur().getListe_projectiles().get(finalI)));
-            jeu.getJoueur().getListe_projectiles().get(i).yProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteProjectile(jeu.getJoueur().getListe_projectiles().get(finalI)));
+            jeu.getListe_projectiles().get(i).xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteProjectile(jeu.getListe_projectiles().get(finalI)));
+            jeu.getListe_projectiles().get(i).yProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteProjectile(jeu.getListe_projectiles().get(finalI)));
         }
     }
 

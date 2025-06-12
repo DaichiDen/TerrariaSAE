@@ -110,7 +110,7 @@ public class Controller implements Initializable{
         vueEnnemi = new SpriteMob(jeu, screen,"Pierre");
 
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
-        jeu.getJoueur().getListe_projectilesObservable().addListener(new ObsProjectile(jeu,screen));
+        jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu,screen));
 
 
         Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0,10,jeu.getCarte(), jeu);
@@ -170,7 +170,7 @@ public class Controller implements Initializable{
                         jeu.getMobs().get(i).mettreAJour();
                     }
 
-                    jeu.getJoueur().màjProjectiles();
+                    jeu.màjProjectiles();
 
                     lastUpdate = now;
 

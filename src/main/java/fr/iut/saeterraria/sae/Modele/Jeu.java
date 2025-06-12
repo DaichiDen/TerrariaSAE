@@ -25,24 +25,59 @@ public class Jeu {
     private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
-    private ObservableList<Entite> mobs;
+    private ObservableList<EntiteVivante> mobs;
+    // projectiles
+    private ArrayList<Projectile> projectiles;
+    private ObservableList<Projectile> liste_projectiles;
+
+    public final static int taille1bloc = 32;
 
     public Jeu(String nomJoueur){
         items = new HashMap<>();
         initialiseItems();
         initializeRecettes();
+        initializeBlocConstruction();
         carte = new Map();
         joueur = new Joueur(nomJoueur, this, (Pierre_TP) items.get(49));
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);
+        projectiles= new ArrayList<>();
+        liste_projectiles = FXCollections.observableArrayList(projectiles);
 
     }
 
-    public ObservableList<Entite> getMobs() {
+    public int getTaille1bloc(){
+        return taille1bloc;
+    }
+
+    public ArrayList<Projectile> getListe_projectiles() {
+        return projectiles;
+    }
+    public ObservableList<Projectile> getListe_projectilesObservable() {
+        return liste_projectiles;
+    }
+
+    public void màjProjectiles() {
+        if (this.getListe_projectiles() != null) {
+            for (int i = 0; i < this.getListe_projectiles().size(); i++) {
+
+                this.getListe_projectiles().get(i).setX(this.getListe_projectiles().get(i).getX() + this.getListe_projectiles().get(i).getForceX());
+
+                this.getListe_projectiles().get(i).setForceY((float) (this.getListe_projectiles().get(i).getForceY() + this.getListe_projectiles().get(i).getGravité()));
+
+                this.getListe_projectiles().get(i).setY(this.getListe_projectiles().get(i).getY() + this.getListe_projectiles().get(i).getForceY());
+
+                //this.getListe_projectiles().get(i).bloquéVertical(taille1bloc, taille1bloc); ajouter la condition pour enlever la flèche
+                System.out.println("je fais la màj");
+            }
+        }
+    }
+
+    public ObservableList<EntiteVivante> getMobs() {
         return mobs;
     }
-    public void addMobs(Entite entite){
+    public void addMobs(EntiteVivante entite){
         mobs.add(entite);
     }
     public void removeMob(Entite entite){
@@ -63,7 +98,7 @@ public class Jeu {
         pNJ.remove(pnj);
     }
 
-    public boolean estVivant(Entite entite){
+    public boolean estVivant(EntiteVivante entite){
         return entite.getBarreVie().getVie()>0;
     }
 

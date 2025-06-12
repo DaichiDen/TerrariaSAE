@@ -3,6 +3,8 @@
     import fr.iut.saeterraria.sae.Modele.Map.Map;
     import fr.iut.saeterraria.sae.Modele.Objets.Item;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
+    import javafx.beans.property.BooleanProperty;
+    import javafx.beans.property.SimpleBooleanProperty;
     import javafx.geometry.Rectangle2D;
 
 
@@ -13,7 +15,7 @@
     import java.util.*;
 
 
-    public class Joueur extends Entite {
+    public class Joueur extends EntiteVivante {
         private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
         private int[] equipement;
         private Pierre_TP pierreTp;
@@ -22,6 +24,7 @@
         private int dureeDash = 0;
         private final int DUREE_DASH_MAX = 30; // environ 15 frames = 250ms à 60fps
         private int vitesseDash = 10;
+
         private String directionDash = "droite";// 1 = droite, -1 = gauche
         private String dernierPos = "droite"; // 1 gauche et -1 droite
         ArrayList<Ennemi> ennemis_touchées_dash = new ArrayList();
@@ -41,6 +44,7 @@
             this.map = jeu.getCarte();
 
         }
+
 
         public void incrementeMainCourante() {
             if (this.mainCourante == 6) {
@@ -95,9 +99,9 @@
                 setDernierPos("droite");
             }
             if (enDash) {
-                Rectangle2D hitboxJoueur = new Rectangle2D(getX(),getY(),taille1bloc,taille1bloc*2);
+                Rectangle2D hitboxJoueur = new Rectangle2D(getX(),getY(), getJeu().getTaille1bloc(),getJeu().getTaille1bloc()*2);
                 for(int i=0;i<super.getJeu().getEnnemis().size();i++){
-                    Rectangle2D hitboxEnnemi = new Rectangle2D(super.getJeu().getEnnemis().get(i).getX(),super.getJeu().getEnnemis().get(i).getY(),taille1bloc,taille1bloc*2);
+                    Rectangle2D hitboxEnnemi = new Rectangle2D(super.getJeu().getEnnemis().get(i).getX(),super.getJeu().getEnnemis().get(i).getY(),getJeu().getTaille1bloc(),getJeu().getTaille1bloc()*2);
                     if(hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(super.getJeu().getEnnemis().get(i))){
                         ennemis_touchées_dash.add(super.getJeu().getEnnemis().get(i));
                         ennemis_touchées_dash.get(i).decrementVie(10);
@@ -145,9 +149,9 @@
 
         @Override
         public void attaquer(int x, int y, int range) {
-            for (Entite e : super.getJeu().getEnnemis()) {
+            for (EntiteVivante e : super.getJeu().getEnnemis()) {
 
-                Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(), taille1bloc, taille1bloc * 2);
+                Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(), getJeu().getTaille1bloc(), (getJeu().getTaille1bloc()) * 2);
 
                 // Si le clic est à l'intérieur de la hitbox du mob
                 if (hitboxMob.contains(x, y)) {

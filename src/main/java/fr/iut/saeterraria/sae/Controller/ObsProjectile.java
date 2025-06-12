@@ -61,6 +61,7 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
                     // 5) **ÉCOUTER la propriété estVivantProperty()**
                     projectile_aj.estActifProperty().addListener((obs, ancienEtat, nouvelEtat) -> {
                         if (!nouvelEtat) {
+
                             // Le mob vient de mourir → on retire son Node à l’écran
                             Node nodeAMettreAJour = spriteProjectiles.get(projectile_aj);
                             if (nodeAMettreAJour != null) {
@@ -68,7 +69,7 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
                                 spriteProjectiles.remove(projectile_aj);
                             }
                             // (Optionnel) on peut aussi le supprimer de la liste de mobs si ce n’est pas déjà fait
-                            jeu.getJoueur().getListe_projectilesObservable().remove(projectile_aj);
+                            jeu.getListe_projectilesObservable().remove(projectile_aj);
                         }
                     });
                 }

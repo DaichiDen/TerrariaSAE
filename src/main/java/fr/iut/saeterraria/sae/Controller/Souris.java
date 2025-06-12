@@ -58,7 +58,7 @@ public class Souris implements EventHandler<MouseEvent> {
                         }
                     }
                     if (oui) {
-                        jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(), "Flèche"), x1, y1);
+                        jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(), "Flèche", map, jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY() ), x1, y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
                 }

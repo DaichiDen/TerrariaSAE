@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class Ennemi extends Entite {
+public class Ennemi extends EntiteVivante {
     private long dernièreAttaque=60;
     private long cooldown=60;
 
