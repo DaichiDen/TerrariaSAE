@@ -206,11 +206,10 @@ public abstract class Entite {
 
         int caseX = (int) (getX() / jeu.getTaille1bloc());
         int caseY = (int) (getY() / jeu.getTaille1bloc());
-        int j = caseX;
 
         //boucle sur les 4 blocs autour du joueur , i+1 i-1 ,j+1 j-1
         for (int i = caseY - 1; i <= caseY + 2; i++) { // +2 pour la taille du personnage (2 blocs de hauteur)
-
+            for (int j = caseX - 1; j <= caseX + 1; j++) {
 
                 if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
                     if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
@@ -225,6 +224,7 @@ public abstract class Entite {
                         }
                     }
                 }
+            }
             }
 
         return false;

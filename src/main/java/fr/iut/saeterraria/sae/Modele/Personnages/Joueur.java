@@ -101,7 +101,7 @@
             if (enDash) {
                 Rectangle2D hitboxJoueur = new Rectangle2D(getX(),getY(), getJeu().getTaille1bloc(),getJeu().getTaille1bloc()*2);
                 for(int i=0;i<super.getJeu().getEnnemis().size();i++){
-                    Rectangle2D hitboxEnnemi = new Rectangle2D(super.getJeu().getEnnemis().get(i).getX(),super.getJeu().getEnnemis().get(i).getY(),getJeu().getTaille1bloc(),getJeu().getTaille1bloc()*2);
+                    Rectangle2D hitboxEnnemi = new Rectangle2D(super.getJeu().getEnnemis().get(i).getX(),super.getJeu().getEnnemis().get(i).getY(),getJeu().getTaille1bloc(),getJeu().getTaille1bloc());
                     if(hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(super.getJeu().getEnnemis().get(i))){
                         ennemis_touchées_dash.add(super.getJeu().getEnnemis().get(i));
                         ennemis_touchées_dash.get(i).decrementVie(10);
@@ -141,9 +141,15 @@
         }
 
         public void poser(int x, int y) {
+            Rectangle2D hitboxJoueur= new Rectangle2D(this.getX()/32,this.getY()/32, getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
+            Rectangle2D hitboxBloc = new  Rectangle2D(x/32,y/32, getJeu().getTaille1bloc(), getJeu().getTaille1bloc());
+            if(hitboxJoueur.intersects(hitboxBloc)){
+
+
             if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() != 0 && map.getCase(y, x) == 0) {
                 map.poserBloc(x, y, inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet());
                 inventaire.getInventaireJoueur()[0][mainCourante].retireQuantite(1);
+            }
             }
         }
 
