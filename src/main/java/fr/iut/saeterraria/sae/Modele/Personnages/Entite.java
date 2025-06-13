@@ -162,7 +162,7 @@ public abstract class Entite {
 
 
     // Niké
-//    public void collisionProjectile(Projectile projectile, int ind) {
+//    public void collision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ectile(Projectile projectile, int ind) {
 //        Rectangle2D hitboxProjectile = new Rectangle2D(projectile.getX(), projectile.getY(), jeu.getTaille1bloc( , jeu.getTaille1bloc();
 //
 //        System.out.println("hitbox fleche : "+projectile.getX()+","+(projectile.getX()+jeu.getTaille1bloc()+" / "+projectile.getY()+","+(projectile.getY()+jeu.getTaille1bloc());
@@ -206,10 +206,11 @@ public abstract class Entite {
 
         int caseX = (int) (getX() / jeu.getTaille1bloc());
         int caseY = (int) (getY() / jeu.getTaille1bloc());
-        
+        int j = caseX;
+
         //boucle sur les 4 blocs autour du joueur , i+1 i-1 ,j+1 j-1
         for (int i = caseY - 1; i <= caseY + 2; i++) { // +2 pour la taille du personnage (2 blocs de hauteur)
-            for (int j = caseX - 1; j <= caseX + 1; j++) {
+
 
                 if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
                     if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
@@ -225,7 +226,7 @@ public abstract class Entite {
                     }
                 }
             }
-        }
+
         return false;
     }
 
@@ -278,9 +279,9 @@ public abstract class Entite {
 //            }
 //        }
 //    }
-    public boolean collisionHorizontale() {
+    public boolean collisionHorizontale(int tailleL, int tailleH) {
 
-        Rectangle2D hitboxJoueur = new Rectangle2D(this.getX(), this.getY(), jeu.getTaille1bloc() - 2, jeu.getTaille1bloc() * 2);
+        Rectangle2D hitboxJoueur = new Rectangle2D(this.getX(), this.getY(), tailleL, tailleH);
 
         int caseX = (int) (this.getX() / jeu.getTaille1bloc());
         int caseY = (int) (this.getY() / jeu.getTaille1bloc());
@@ -290,9 +291,10 @@ public abstract class Entite {
             for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
                     if (this.map.getCase(i, j) != 0) {
-                        int xBloc = this.map.getCoordonnéesX(j);
-                        int yBloc = this.map.getCoordonnéesY(i);
-                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, jeu.getTaille1bloc(), jeu.getTaille1bloc());
+
+                        xBloc = this.map.getCoordonnéesX(j);
+                        yBloc = this.map.getCoordonnéesY(i);
+                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, tailleL, tailleH);
 
                         if (hitboxJoueur.intersects(hitboxBloc)) {
 

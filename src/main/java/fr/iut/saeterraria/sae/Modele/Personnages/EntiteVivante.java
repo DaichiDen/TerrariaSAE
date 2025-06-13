@@ -59,7 +59,7 @@ public abstract class EntiteVivante extends Entite{
 
 
     public abstract void attaquer(int x, int y, int range);
-    @Override
+
     public void bloquéVertical(int tailleL, int tailleH) {
         if(collisionVerticale(tailleL, tailleH)){
             int blocHaut = getyBloc();
@@ -76,18 +76,17 @@ public abstract class EntiteVivante extends Entite{
                 vitesseY = 0;
                 setY(blocBas);
             }
-            if (super.getJeu().getCarte().getCase( (joueurBas/32), (this.getX()/32)) == 4 ) {
+            if (super.getJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 4 ) {
                 System.out.println("true");
                 this.decrementVie(1);
             }
         }
     }
-    @Override
     public void bloquéHorizontal(int tailleL,int tailleH) {
         boolean collisionDroite = false;
         boolean collisionGauche = false;
 
-        if (collisionVerticale(tailleL, tailleH)) {
+        if (collisionHorizontale(tailleL, tailleH)) {
             // Bords du bloc
             int blocGauche = getxBloc();
             int blocDroite = getxBloc() + super.getJeu().getTaille1bloc();
