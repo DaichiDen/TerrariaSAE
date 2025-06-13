@@ -185,7 +185,7 @@ public abstract class EntiteVivante extends Entite{
                 vitesseY += getGravité();
             }
             setY(getY() + vitesseY);
-            bloquéVertical(getJeu().getTaille1bloc()-2, getJeu().getTaille1bloc()*2);
+            bloquéVertical(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
 
             // Appliquer gravité
 
@@ -228,13 +228,13 @@ public abstract class EntiteVivante extends Entite{
 
             // Appliquer le déplacement
             setX(getX() + vitesseX);
-            bloquéHorizontal(getJeu().getTaille1bloc()-2, getJeu().getTaille1bloc()*2);
+            bloquéHorizontal(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
         } else {
             if (!getCollisionBas()) {
                 vitesseY += getGravité();
             }
             setY(getY() + vitesseY);
-            bloquéVertical(getJeu().getTaille1bloc()-2, getJeu().getTaille1bloc()*2);
+            bloquéVertical(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
         }
     }
 
