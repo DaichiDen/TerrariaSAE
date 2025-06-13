@@ -59,7 +59,7 @@ public abstract class EntiteVivante extends Entite{
 
 
     public abstract void attaquer(int x, int y, int range);
-
+    @Override
     public void bloquéVertical(int tailleL, int tailleH) {
         if(collisionVerticale(tailleL, tailleH)){
             int blocHaut = getyBloc();
@@ -76,11 +76,45 @@ public abstract class EntiteVivante extends Entite{
                 vitesseY = 0;
                 setY(blocBas);
             }
-            if (getLa_case() == 4) {
+            if (super.getJeu().getCarte().getCase( (joueurBas/32), (this.getX()/32)) == 4 ) {
+                System.out.println("true");
                 this.decrementVie(1);
             }
         }
     }
+    @Override
+    public void bloquéHorizontal(int tailleL,int tailleH) {
+        boolean collisionDroite = false;
+        boolean collisionGauche = false;
+
+        if (collisionVerticale(tailleL, tailleH)) {
+            // Bords du bloc
+            int blocGauche = getxBloc();
+            int blocDroite = getxBloc() + super.getJeu().getTaille1bloc();
+            // Bords du joueur
+            int joueurGauche = this.getX();
+            int joueurDroite = this.getX() + super.getJeu().getTaille1bloc();
+
+            if (joueurDroite > blocGauche && joueurGauche < blocGauche) {
+                // Collision côté droit du joueur contre gauche du bloc
+                collisionDroite = true;
+                // Repositionner le joueur pile à gauche du bloc
+                this.setX(blocGauche - super.getJeu().getTaille1bloc());
+            } else if (joueurGauche < blocDroite && joueurDroite > blocDroite) {
+                // Collision côté gauche du joueur contre droite du bloc
+                collisionGauche = true;
+                // Repositionner le joueur pile à droite du bloc
+                this.setX(blocDroite);
+            }
+
+
+
+
+        }
+        if (collisionDroite) setMarcheDroite(false);
+        if (collisionGauche) setMarcheGauche(false);
+    }
+
 
     public void tirerProjectile(Projectile projectile, int cibleX, int cibleY) {
         // Position de l'entité
@@ -147,13 +181,13 @@ public abstract class EntiteVivante extends Entite{
     }
 
     public void mettreAJour() {
-        System.out.println(getY());
         if (estVivant()) {
             if (!getCollisionBas()) {
                 vitesseY += getGravité();
             }
             setY(getY() + vitesseY);
             bloquéVertical(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
+
             // Appliquer gravité
 
             // Appliquer déplacement vertical, ensuite vérification des collisions, si le setY l'a fait rentrer dans qqch, alors le setY de la méthode collisionVertical le fait rester en dehors du bloc
@@ -195,7 +229,7 @@ public abstract class EntiteVivante extends Entite{
 
             // Appliquer le déplacement
             setX(getX() + vitesseX);
-            collisionHorizontale();
+            bloquéHorizontal(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
         } else {
             if (!getCollisionBas()) {
                 vitesseY += getGravité();

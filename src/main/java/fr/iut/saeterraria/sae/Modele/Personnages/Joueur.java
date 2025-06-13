@@ -84,7 +84,7 @@
             return inventaire;
         }
         public boolean katanaEnMain(){
-            return  inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 39;
+            return  inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 71;
         }
         public boolean arcEnMain() {
             return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 73;
@@ -109,10 +109,10 @@
 
                     if (directionDash.equals("droite")) {
                         System.out.println("droite");
-                        setX(getX() + vitesseDash);
+                        this.setX(this.getX() + vitesseDash);
                     } else {
                         System.out.println("gauche");
-                        setX(getX() - vitesseDash);
+                        this.setX(this.getX() - vitesseDash);
                     }
                     dureeDash--;
                     if (dureeDash <= 0) {

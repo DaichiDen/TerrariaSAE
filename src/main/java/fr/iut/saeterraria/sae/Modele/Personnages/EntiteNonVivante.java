@@ -38,5 +38,14 @@ public class EntiteNonVivante extends Entite{
         System.out.println("je suis plus dans la liste");
     }
 
+    @Override
+    public void bloquéHorizontal(int tailleL, int tailleH) {
+        getJeu().getListe_projectiles().remove(ind);
+        getJeu().getListe_projectilesObservable().remove(ind);
+        this.estActifProperty().set(false);
+        System.out.println("je suis plus dans la liste");
+
+    }
+
 
 }

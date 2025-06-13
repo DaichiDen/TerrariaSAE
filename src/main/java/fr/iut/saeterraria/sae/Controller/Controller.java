@@ -201,6 +201,8 @@ public class Controller implements Initializable{
         screenInventaire.toFront();
         jeu.getJoueur().ajouterItem(jeu.getItems().get(73),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(72),50);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(71),1);
+
 
     }
     @FXML

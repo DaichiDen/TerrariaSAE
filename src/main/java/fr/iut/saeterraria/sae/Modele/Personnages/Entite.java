@@ -62,19 +62,22 @@ public abstract class Entite {
         return nom.get();
     }
 
-    public StringProperty getNomProperty(){
+    public StringProperty getNomProperty() {
         return nom;
     }
 
     public int getxBloc() {
         return xBloc;
     }
+
     public int getyBloc() {
         return yBloc;
     }
+
     public void setxBloc(int xBloc) {
         this.xBloc = xBloc;
     }
+
     public void setyBloc(int yBloc) {
         this.yBloc = yBloc;
     }
@@ -82,26 +85,46 @@ public abstract class Entite {
     public int getGravité() {
         return gravité;
     }
+
     public int getLa_case() {
         return la_case;
     }
+
     public void setLa_case(int la_case) {
         this.la_case = la_case;
     }
-    public boolean getCollisionBas(){
+
+    public boolean getCollisionBas() {
         return collisionBas;
     }
+
     public void setCollisionBas(boolean collisionBas) {
         this.collisionBas = collisionBas;
     }
-    public BooleanProperty marcheGaucheProperty() { return marcheGauche; }
 
-    public boolean getMarcheDroite() { return marcheDroite.get(); }
-    public void setMarcheDroite(boolean val) { marcheDroite.set(val); }
-    public BooleanProperty marcheDroiteProperty() { return marcheDroite; }
+    public BooleanProperty marcheGaucheProperty() {
+        return marcheGauche;
+    }
 
-    public boolean getMarcheGauche() { return marcheGauche.get(); }
-    public void setMarcheGauche(boolean val) { marcheGauche.set(val); }
+    public boolean getMarcheDroite() {
+        return marcheDroite.get();
+    }
+
+    public void setMarcheDroite(boolean val) {
+        marcheDroite.set(val);
+    }
+
+    public BooleanProperty marcheDroiteProperty() {
+        return marcheDroite;
+    }
+
+    public boolean getMarcheGauche() {
+        return marcheGauche.get();
+    }
+
+    public void setMarcheGauche(boolean val) {
+        marcheGauche.set(val);
+    }
 
     // Gestion du positionnement horizontal
     public final IntegerProperty xProperty() {
@@ -136,9 +159,6 @@ public abstract class Entite {
     public Jeu getJeu() {
         return jeu;
     }
-
-
-
 
 
     // Niké
@@ -186,16 +206,21 @@ public abstract class Entite {
 
         int caseX = (int) (getX() / jeu.getTaille1bloc());
         int caseY = (int) (getY() / jeu.getTaille1bloc());
+        
         //boucle sur les 4 blocs autour du joueur , i+1 i-1 ,j+1 j-1
         for (int i = caseY - 1; i <= caseY + 2; i++) { // +2 pour la taille du personnage (2 blocs de hauteur)
             for (int j = caseX - 1; j <= caseX + 1; j++) {
+
                 if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
                     if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
+
                         xBloc = this.map.getCoordonnéesX(j);
                         yBloc = this.map.getCoordonnéesY(i);
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, jeu.getTaille1bloc(), jeu.getTaille1bloc()); // création d'un rectangle de hitbox pour le bloc en cours
-                        if (hitboxEntite.intersects(hitboxBloc)) { // si le rectangle du joueur se superpose au carré du bloc alors :
+                        if (hitboxEntite.intersects(hitboxBloc)) {// si le rectangle du joueur se superpose au carré du bloc alors :
+                            collisionBas = true;
                             return true;
+
                         }
                     }
                 }
@@ -205,6 +230,7 @@ public abstract class Entite {
     }
 
     public abstract void bloquéVertical(int tailleL, int tailleH);
+    public abstract void bloquéHorizontal(int tailleL, int tailleH);
 
 
     //    public void collisionVerticale(int tailleL,int tailleH) { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
@@ -252,15 +278,13 @@ public abstract class Entite {
 //            }
 //        }
 //    }
-    public void collisionHorizontale() {
+    public boolean collisionHorizontale() {
 
         Rectangle2D hitboxJoueur = new Rectangle2D(this.getX(), this.getY(), jeu.getTaille1bloc() - 2, jeu.getTaille1bloc() * 2);
 
         int caseX = (int) (this.getX() / jeu.getTaille1bloc());
         int caseY = (int) (this.getY() / jeu.getTaille1bloc());
 
-        boolean collisionDroite = false;
-        boolean collisionGauche = false;
 
         for (int i = caseY - 1; i <= caseY + 2; i++) {
             for (int j = caseX - 1; j <= caseX + 1; j++) {
@@ -271,33 +295,18 @@ public abstract class Entite {
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, jeu.getTaille1bloc(), jeu.getTaille1bloc());
 
                         if (hitboxJoueur.intersects(hitboxBloc)) {
-                            // Bords du bloc
-                            int blocGauche = xBloc;
-                            int blocDroite = xBloc + jeu.getTaille1bloc();
-                            // Bords du joueur
-                            int joueurGauche = this.getX();
-                            int joueurDroite = this.getX() + jeu.getTaille1bloc();
 
-                            if (joueurDroite > blocGauche && joueurGauche < blocGauche) {
-                                // Collision côté droit du joueur contre gauche du bloc
-                                collisionDroite = true;
-                                // Repositionner le joueur pile à gauche du bloc
-                                this.setX(blocGauche - jeu.getTaille1bloc());
-                            } else if (joueurGauche < blocDroite && joueurDroite > blocDroite) {
-                                // Collision côté gauche du joueur contre droite du bloc
-                                collisionGauche = true;
-                                // Repositionner le joueur pile à droite du bloc
-                                this.setX(blocDroite);
-                            }
+                            return true;
+
                         }
                     }
                 }
             }
         }
-
-        if (collisionDroite) setMarcheDroite(false);
-        if (collisionGauche) setMarcheGauche(false);
+        return false;
     }
+
+
 
 
 }
