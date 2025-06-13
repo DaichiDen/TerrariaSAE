@@ -287,7 +287,7 @@ public abstract class Entite {
         int caseY = (int) (this.getY() / jeu.getTaille1bloc());
 
 
-        for (int i = caseY - 1; i <= caseY + 2; i++) {
+        for (int i = caseY ; i <= caseY + 2; i++) {
             for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
                     if (this.map.getCase(i, j) != 0) {
