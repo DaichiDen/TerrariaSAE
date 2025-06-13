@@ -68,7 +68,8 @@ public class Jeu {
 
                 this.getListe_projectiles().get(i).setY(this.getListe_projectiles().get(i).getY() + this.getListe_projectiles().get(i).getForceY());
 
-                //this.getListe_projectiles().get(i).bloquéVertical(taille1bloc, taille1bloc); ajouter la condition pour enlever la flèche
+                this.getListe_projectiles().get(i).bloquéVertical(taille1bloc, taille1bloc);
+                this.getListe_projectiles().get(i).bloquéHorizontal(taille1bloc, taille1bloc);
                 System.out.println("je fais la màj");
             }
         }
