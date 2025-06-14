@@ -7,18 +7,18 @@ import javafx.geometry.Rectangle2D;
 
 import java.util.ArrayList;
 
-public class PNJ extends Entite{
+public class PNJ extends EntiteVivante{
 
     private ArrayList<String> dialogue;
     public PNJ(String nom, int x, int y, Map map, Jeu jeu) {
 
-        super(nom,1,1,1,0,x,y,1, map,jeu);
+        super(nom, 20, 20, 10, x, y, 2, 0, map, jeu);
 
         dialogue = new ArrayList<String>();
     }
 
     @Override
-    public void attaquer(int x, int y, int range) {
-        System.out.println("je peux pas attaquer lmao");
+    public void action(int x, int y, int range) {
+
     }
 }

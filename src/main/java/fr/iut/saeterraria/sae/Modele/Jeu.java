@@ -2,9 +2,8 @@ package fr.iut.saeterraria.sae.Modele;
 
 import fr.iut.saeterraria.sae.Modele.Objets.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Arme.DashingKatana;
-import fr.iut.saeterraria.sae.Modele.Objets.Arme.Epee;
-import fr.iut.saeterraria.sae.Modele.Objets.Arme.Speciaux;
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
+import fr.iut.saeterraria.sae.Modele.Objets.Arme.Distance;
+import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Hache;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pelle;
@@ -26,7 +25,12 @@ public class Jeu {
     private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
-    private ObservableList<Entite> mobs;
+    private ObservableList<EntiteVivante> mobs;
+    // projectiles
+    private ArrayList<Projectile> projectiles;
+    private ObservableList<Projectile> liste_projectiles;
+
+    public final static int taille1bloc = 32;
 
     public Jeu(String nomJoueur){
         items = new HashMap<>();
@@ -38,13 +42,44 @@ public class Jeu {
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);
+        projectiles= new ArrayList<>();
+        liste_projectiles = FXCollections.observableArrayList(projectiles);
 
     }
 
-    public ObservableList<Entite> getMobs() {
+    public int getTaille1bloc(){
+        return taille1bloc;
+    }
+
+    public ArrayList<Projectile> getListe_projectiles() {
+        return projectiles;
+    }
+    public ObservableList<Projectile> getListe_projectilesObservable() {
+        return liste_projectiles;
+    }
+
+    public void màjProjectiles() {
+        if (this.getListe_projectiles() != null) {
+            for (int i = 0; i < this.getListe_projectiles().size(); i++) {
+
+                this.getListe_projectiles().get(i).setX(this.getListe_projectiles().get(i).getX() + this.getListe_projectiles().get(i).getForceX());
+
+                this.getListe_projectiles().get(i).setForceY(this.getListe_projectiles().get(i).getForceY() + this.getListe_projectiles().get(i).getGravité());
+
+                this.getListe_projectiles().get(i).setY(this.getListe_projectiles().get(i).getY() + this.getListe_projectiles().get(i).getForceY());
+
+                if(projectiles.get(i).collisionVerticale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH()) || projectiles.get(i).collisionHorizontale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH())) {
+                    getListe_projectiles().get(i).setActif(false);
+                    getListe_projectiles().remove(i);
+                }
+            }
+        }
+    }
+
+    public ObservableList<EntiteVivante> getMobs() {
         return mobs;
     }
-    public void addMobs(Entite entite){
+    public void addMobs(EntiteVivante entite){
         mobs.add(entite);
     }
     public void removeMob(Entite entite){
@@ -65,7 +100,7 @@ public class Jeu {
         pNJ.remove(pnj);
     }
 
-    public boolean estVivant(Entite entite){
+    public boolean estVivant(EntiteVivante entite){
         return entite.getBarreVie().getVie()>0;
     }
 
@@ -106,6 +141,12 @@ public class Jeu {
         items.put(10, new Item("DELJCCium", "", 1));
 
 
+
+
+
+
+
+
         items.put(11,new BlocConstruction("ConstructionSansBloc","",0,0));
         items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(11)));
         items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(12) ));
@@ -114,11 +155,15 @@ public class Jeu {
         for (int i=16; i<=23; i++) {
             items.put(i, new Pelle("",""));
         }
+
+
         //Bloc outil
         items.put(24, new Coffre("Coffre", "", 1, 3,(BlocConstruction) items.get(12)));
 
-        for(int i=25; i<=48; i++) {
-            items.put(i, new Pelle("",""));
+
+        for (int i = 25; i < 49; i++) {
+            items.put(i,new Item("","",1));
+
         }
         // Outils
         items.put(49, new Pierre_TP());
@@ -154,9 +199,9 @@ public class Jeu {
 
         // Armes
         items.put(71,new DashingKatana("Katana étrange","Ce Katana semble pouvoir octroyer la capacité à son détenteur de se déplacer à la vitesse du son",10));
-
-
         // Autres items
+        items.put(72, new Item("Flèche","Flèche",1,(BlocConstruction) items.get(20)));
+        items.put(73, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(20)));
     }
 
     private void initializeRecettes() {

@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
 
+import fr.iut.saeterraria.sae.Modele.Personnages.EntiteVivante;
 import fr.iut.saeterraria.sae.Vue.SpriteMob;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
@@ -15,7 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ObsEnnemi implements ListChangeListener<Entite> {
+public class ObsEnnemi implements ListChangeListener<EntiteVivante> {
     private Jeu jeu;
     private Pane screen;
     private HashMap<Entite, Node> spritesMobs;
@@ -27,10 +28,10 @@ public class ObsEnnemi implements ListChangeListener<Entite> {
     }
 
     @Override
-    public void onChanged(Change<? extends Entite> change) {
+    public void onChanged(Change<? extends EntiteVivante> change) {
             while (change.next()) {
                 if (change.wasAdded()) {
-                    for (Entite mobAjoute : change.getAddedSubList()) {
+                    for (EntiteVivante mobAjoute : change.getAddedSubList()) {
                         // 1) Créer le Node graphique du mob (par ex. un ImageView)
                         URL imageURL = getClass().getResource("/Sprite/BM_Sac_a_caca.png");
                         Image image = new Image(String.valueOf(imageURL));

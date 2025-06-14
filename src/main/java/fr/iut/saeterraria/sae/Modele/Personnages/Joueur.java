@@ -3,6 +3,8 @@
     import fr.iut.saeterraria.sae.Modele.Map.Map;
     import fr.iut.saeterraria.sae.Modele.Objets.Item;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
+    import javafx.beans.property.BooleanProperty;
+    import javafx.beans.property.SimpleBooleanProperty;
     import javafx.geometry.Rectangle2D;
 
 
@@ -13,7 +15,7 @@
     import java.util.*;
 
 
-    public class Joueur extends Entite {
+    public class Joueur extends EntiteVivante {
         private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
         private int[] equipement;
         private Pierre_TP pierreTp;
@@ -22,12 +24,12 @@
         private int dureeDash = 0;
         private final int DUREE_DASH_MAX = 30; // environ 15 frames = 250ms à 60fps
         private int vitesseDash = 10;
+
         private String directionDash = "droite";// 1 = droite, -1 = gauche
         private String dernierPos = "droite"; // 1 gauche et -1 droite
         ArrayList<Ennemi> ennemis_touchées_dash = new ArrayList();
 
         private Map map;
-
 
         public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp) {
 
@@ -42,6 +44,7 @@
             this.map = jeu.getCarte();
 
         }
+
 
         public void incrementeMainCourante() {
             if (this.mainCourante == 6) {
@@ -81,7 +84,10 @@
             return inventaire;
         }
         public boolean katanaEnMain(){
-            return  inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 39;
+            return  inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 71;
+        }
+        public boolean arcEnMain() {
+            return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 73;
         }
 
         public void mettreAJour() {
@@ -93,9 +99,9 @@
                 setDernierPos("droite");
             }
             if (enDash) {
-                Rectangle2D hitboxJoueur = new Rectangle2D(getX(),getY(),taille1bloc,taille1bloc*2);
+                Rectangle2D hitboxJoueur = new Rectangle2D(getX(),getY(), getJeu().getTaille1bloc(),getJeu().getTaille1bloc()*2);
                 for(int i=0;i<super.getJeu().getEnnemis().size();i++){
-                    Rectangle2D hitboxEnnemi = new Rectangle2D(super.getJeu().getEnnemis().get(i).getX(),super.getJeu().getEnnemis().get(i).getY(),taille1bloc,taille1bloc*2);
+                    Rectangle2D hitboxEnnemi = new Rectangle2D(super.getJeu().getEnnemis().get(i).getX(),super.getJeu().getEnnemis().get(i).getY(),getJeu().getTaille1bloc(),getJeu().getTaille1bloc()*2);
                     if(hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(super.getJeu().getEnnemis().get(i))){
                         ennemis_touchées_dash.add(super.getJeu().getEnnemis().get(i));
                         ennemis_touchées_dash.get(i).decrementVie(10);
@@ -103,10 +109,10 @@
 
                     if (directionDash.equals("droite")) {
                         System.out.println("droite");
-                        setX(getX() + vitesseDash);
+                        this.setX(this.getX() + vitesseDash);
                     } else {
                         System.out.println("gauche");
-                        setX(getX() - vitesseDash);
+                        this.setX(this.getX() - vitesseDash);
                     }
                     dureeDash--;
                     if (dureeDash <= 0) {
@@ -134,18 +140,21 @@
             return miner;
         }
 
-        public void poser(int x, int y) {
-            if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() != 0 && map.getCase(y, x) == 0) {
-                map.poserBloc(x, y, inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet());
-                inventaire.getInventaireJoueur()[0][mainCourante].retireQuantite(1);
+        public void poser(int x, int y) {//x = colonne && y = ligne
+
+            if( (this.getX()/32)!=x || this.getY()/32!=y ) {
+                if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() != 0 && map.getCase(y, x) == 0) {
+                    map.poserBloc(x, y, inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet());
+                    inventaire.getInventaireJoueur()[0][mainCourante].retireQuantite(1);
+                }
             }
         }
 
         @Override
-        public void attaquer(int x, int y, int range) {
-            for (Entite e : super.getJeu().getEnnemis()) {
+        public void action(int x, int y, int range) {
+            for (EntiteVivante e : super.getJeu().getEnnemis()) {
 
-                Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(), taille1bloc, taille1bloc * 2);
+                Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(), getJeu().getTaille1bloc(), (getJeu().getTaille1bloc()) * 2);
 
                 // Si le clic est à l'intérieur de la hitbox du mob
                 if (hitboxMob.contains(x, y)) {
@@ -317,6 +326,8 @@
         public String getDirectionDash(){
             return directionDash;
         }
+
+
     }
 
 

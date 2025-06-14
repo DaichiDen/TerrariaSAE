@@ -5,13 +5,11 @@ import fr.iut.saeterraria.sae.Modele.A_Star.Node;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
-import javafx.geometry.Rectangle2D;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
-public class Ennemi extends Entite {
+public class Ennemi extends EntiteVivante {
     private long dernièreAttaque=60;
     private long cooldown=60;
 
@@ -33,7 +31,7 @@ public class Ennemi extends Entite {
 
 
     @Override
-    public void attaquer(int x, int y, int range) {
+    public void action(int x, int y, int range) {
         if(dernièreAttaque==cooldown){
             super.getJeu().getJoueur().decrementVie(2);
             dernièreAttaque=0;
@@ -75,7 +73,7 @@ public class Ennemi extends Entite {
             }
 
             if(peutEtreAtteint(super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32, 2)){
-                attaquer(super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY(), 2);
+                action(super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY(), 2);
             }
 
             // Tu peux gérer dy si les ennemis sautent ou volent
@@ -83,7 +81,7 @@ public class Ennemi extends Entite {
         else{
             setMarcheGauche(false);
             setMarcheDroite(false);
-            attaquer(super.getJeu().getJoueur().getX(),super.getJeu().getJoueur().getY(),2);
+            action(super.getJeu().getJoueur().getX(),super.getJeu().getJoueur().getY(),2);
 
         }
     }
