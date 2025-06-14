@@ -31,13 +31,7 @@ public class Souris implements EventHandler<MouseEvent> {
         int x1 = ((int)mouseEvent.getX());
         int y1 = ((int)mouseEvent.getY());
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-            if (jeu.getJoueur().estVivant()) {
-                jeu.getJoueur().action(x1, y1, 2);
-                if (jeu.getJoueur().miner(x, y)) {
-                    this.tp.getChildren().remove((y * 58) + x);// faire de la taille de la map un un getter
-
-                    this.tp.getChildren().add((((y * 58) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
-                }
+            if(jeu.getJoueur().estVivant()){
                 if (jeu.getJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];
@@ -55,15 +49,28 @@ public class Souris implements EventHandler<MouseEvent> {
                         jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(), "Flèche", map, jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY() ), x1, y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
+
+                
                 }
+                jeu.getJoueur().attaquer(x1, y1, 2);
+                if (jeu.getJoueur().miner(x, y)){
+                    this.tp.getChildren().remove((y*tp.getPrefColumns())+x);// faire de la taille de la map un un getter
+
+                    this.tp.getChildren().add( ( ((y*tp.getPrefColumns())+x) ),new ImageView(fond.getTiles().get(map.getCase(y, x)) ) );
             }
+
         }
         else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-            if(jeu.getJoueur().estVivant()) {
-                jeu.getJoueur().poser(x, y);
-                this.tp.getChildren().remove((y * 58) + x);
-                this.tp.getChildren().add(((y * 58) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+            if(getJoueur.estVivant){
+            jeu.getJoueur().poser(x, y);
+            this.tp.getChildren().remove((y*tp.getPrefColumns())+x);// X = Ligne, Y = Colonne
+            this.tp.getChildren().add(((y*tp.getPrefColumns())+x),new ImageView(fond.getTiles().get(map.getCase(y, x))));
             }
         }
+    }
+        
+
+    public void handleCraft(String nom) {
+        jeu.getJoueur().craftItem(jeu.getItem(nom));
     }
 }

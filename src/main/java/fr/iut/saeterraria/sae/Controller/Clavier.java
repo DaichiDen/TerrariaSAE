@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
 import java.util.HashSet;
@@ -27,6 +28,8 @@ public class Clavier implements EventHandler<KeyEvent> {
     private AnchorPane screenInventaire;
     @FXML
     private GridPane hotBarInventaire;
+
+
     private final Set<KeyCode> touchesAppuyees = new HashSet<>();
     private boolean inventaireOuvert = false;
     private VueHotbar vueHotbar;
@@ -116,7 +119,6 @@ public class Clavier implements EventHandler<KeyEvent> {
     @FXML
     public void exitInventaire(){
         screenInventaire.toBack();
-        Platform.runLater(() -> fond.requestFocus());
     }
 
 }

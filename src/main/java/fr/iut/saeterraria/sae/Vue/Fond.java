@@ -1,6 +1,6 @@
 package fr.iut.saeterraria.sae.Vue;
 
-import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Jeu;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
@@ -12,20 +12,19 @@ import java.util.HashMap;
 
 public class Fond extends CreateRessourceVisuel {
 
-    private Map carte;
+    private Jeu jeu;
     private HashMap<Integer, Image> tiles;
     private static int id = 0;
-    private TilePane pane;
+    private TilePane environnement;
 
 
-    public Fond(TilePane pane,Map carte) {
-        this.carte = carte;
+    public Fond(TilePane environnement,Jeu jeu) {
+       this.jeu = jeu;
         this.tiles = new HashMap<>();
-        this.pane = pane;
+        this.environnement = environnement;
         initialiseTile();
         afficherCarte();
     }
-
 
     public void ajoutTile(String imagePath) {
         System.out.println(id);
@@ -43,16 +42,11 @@ public class Fond extends CreateRessourceVisuel {
 
     // Permet d'afficher le terrain dans la scène (Pane principal)
     public void afficherCarte() {
-        pane.getChildren().clear();
-        for (int i = 0; i < carte.getLigne(); i++) { //Ligne
-            for (int j = 0; j < carte.getColonne(); j++) { //Colonne
-                this.pane.getChildren().add(new ImageView(tiles.get(carte.getCase(i, j))));
+        for (int i = 0; i < environnement.getPrefRows(); i++) {
+            for (int j = 0; j < environnement.getPrefColumns(); j++) {
+                this.environnement.getChildren().add(new ImageView(tiles.get(this.jeu.getCarte().getCase(i, j))));
             }
         }
-    }
-
-    public void changeBloc(int x, int y){
-
     }
 
     public HashMap<Integer, Image> getTiles() {
@@ -63,9 +57,26 @@ public class Fond extends CreateRessourceVisuel {
 
         URL imageURL = getClass().getResource(imagePath);
         Image image = new Image(String.valueOf(imageURL));
-        ImageView imageView = new ImageView(image);
         return image;
 
+    }
+
+    public TilePane getEnvironnement() {
+        return environnement;
+    }
+
+    public void updateMapX() {
+        //X+1 = ajouter 1 colonne et donc ajouter à chaque ligne une case
+        for (int x = 0; x < this.environnement.getPrefRows(); x++) {
+            this.environnement.getChildren().add((x*environnement.getPrefColumns()+environnement.getPrefColumns()+x),new ImageView(tiles.get(this.jeu.getCarte().getCase(x, environnement.getPrefColumns()))));
+        }
+    }
+
+    public void updateMapY() {
+        //Y+1 = ajouter 1 ligne donc ajouter à chaque colonne une case
+        for (int y = 0; y < this.environnement.getPrefColumns(); y++) {
+            this.environnement.getChildren().add(((environnement.getPrefRows()*environnement.getPrefColumns())+y),new ImageView(tiles.get(this.jeu.getCarte().getCase(environnement.getPrefRows(), y))));
+        }
     }
 
 

@@ -3,8 +3,13 @@
     import fr.iut.saeterraria.sae.Modele.Map.Map;
     import fr.iut.saeterraria.sae.Modele.Objets.Item;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
+
     import javafx.beans.property.BooleanProperty;
     import javafx.beans.property.SimpleBooleanProperty;
+
+    import javafx.beans.property.IntegerProperty;
+    import javafx.beans.property.SimpleIntegerProperty;
+
     import javafx.geometry.Rectangle2D;
 
 
@@ -28,13 +33,14 @@
         private String directionDash = "droite";// 1 = droite, -1 = gauche
         private String dernierPos = "droite"; // 1 gauche et -1 droite
         ArrayList<Ennemi> ennemis_touchées_dash = new ArrayList();
+        private IntegerProperty xMax,yMax;
 
         private Map map;
 
         public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp) {
 
 
-            super(nom, 20, 100, 20, 0, 0, 1, 10, jeu.getCarte(), jeu);
+            super(nom, 20, 100, 20, 20*32, 10*32, 1, 10, jeu.getCarte(), jeu);
 
 
             this.equipement = new int[7];
@@ -42,7 +48,8 @@
             this.pierreTp = pierreTp;
             this.mainCourante = 0;
             this.map = jeu.getCarte();
-
+            this.xMax = new SimpleIntegerProperty(getX()/taille1bloc);
+            this.yMax = new SimpleIntegerProperty(getY()/taille1bloc);
         }
 
 
@@ -91,7 +98,12 @@
         }
 
         public void mettreAJour() {
-
+            if (this.getX()/taille1bloc>this.xMax.get()) {
+                setXMax(this.getX());
+            }
+            if (this.getY()/taille1bloc>this.yMax.get()) {
+               setYMax(this.getY());
+            }
             if(getMarcheGauche()){
                 setDernierPos("gauche");
             }
@@ -128,7 +140,6 @@
 
 
         public boolean miner(int x, int y) {
-
 
             boolean miner = false;
             if (peutEtreAtteint(x, y, 2.5)) {
@@ -327,7 +338,17 @@
             return directionDash;
         }
 
+        public int getXMax(){
+            return xMax.getValue();
+        }
+        public IntegerProperty getXMaxProperty(){ return xMax; }
+        public void setXMax(int xMax){ this.xMax.setValue(xMax/taille1bloc); }
 
+        public int getYMax(){
+            return yMax.getValue();
+        }
+        public IntegerProperty getYMaxProperty(){ return yMax; }
+        public void setYMax(int yMax){ this.yMax.setValue(yMax/taille1bloc); }
     }
 
 

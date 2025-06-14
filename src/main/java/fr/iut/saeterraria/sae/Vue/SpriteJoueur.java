@@ -31,6 +31,8 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         jeu.getJoueur().marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
         jeu.getJoueur().xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
 
+        screen.translateXProperty().bind(jeu.getJoueur().xProperty().multiply(-1).add(20*32));
+//        screen.translateYProperty().bind(jeu.getJoueur().yProperty().multiply(-1).add(12*32));
     }
 
     public void mettreAJourSpriteJoueur(Joueur joueur) {

@@ -93,6 +93,15 @@ public class Jeu {
         ennemis.remove(ennemi);
     }
 
+    public Item getItem(String nom){
+        for (Item item : items.values()) {
+            if(item.getName().equals(nom)){
+                return item;
+            }
+        }
+        return null;
+    }
+
     public void addPNJ(PNJ pnj) {
         pNJ.add(pnj);
     }
@@ -269,35 +278,9 @@ public class Jeu {
     }
 
     public void initializeBlocConstruction() {
-        for (int i = 0; i < items.size(); i++) {
-            // Craft Sans Bloc nécessaires
-
-//                if(items.get(i).getProvenance()==items.get(11)) {
-//                    ((BlocConstruction) items.get(11)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
-//                }
-//
-//                // Etabli
-//                else if(items.get(i).getProvenance()==items.get(12)) {
-//                    ((BlocConstruction) items.get(12)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
-//                }
-//
-//                // Forge
-//                else if(items.get(i).getProvenance()==items.get(13)) {
-//                    ((BlocConstruction) items.get(13)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
-//                }
-//
-//                // Alambique
-//                else if(items.get(i).getProvenance()==items.get(14)) {
-//                    ((BlocConstruction) items.get(14)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
-//                }
-//
-//                // Four
-//                else if(items.get(i).getProvenance()==items.get(15)) {
-//                    ((BlocConstruction) items.get(15)).addRecette(items.get(i).getCodeObjet(),items.get(i).getAttributRecette());
-//                }
-//        }
-        }
         for (Integer integer : items.keySet()) {
+
+            // Sans bloc
             if (items.get(integer).getProvenance() == items.get(11)) {
                 ((BlocConstruction) items.get(11)).addRecette(items.get(integer).getCodeObjet(), items.get(integer).getAttributRecette());
             }
@@ -322,20 +305,9 @@ public class Jeu {
                 ((BlocConstruction) items.get(15)).addRecette(items.get(integer).getCodeObjet(), items.get(integer).getAttributRecette());
             }
         }
-        BlocConstruction blocConstruction = (BlocConstruction) items.get(11);
-        System.out.println("taille liste sans bloc" + blocConstruction.getListeRecette().size());
-
-        BlocConstruction blocetabli = (BlocConstruction) items.get(12);
-        System.out.println("taille liste etabli" + blocetabli.getListeRecette().size());
-
-        BlocConstruction blocforge = (BlocConstruction) items.get(13);
-        System.out.println("taille liste forge" + blocforge.getListeRecette().size());
-
-        System.out.println(items.get(32).getName());
     }
 
     public void testCraft() {
-        System.out.println("Item test ID :"+items.get(3).getCodeObjet());
         getJoueur().ajouterItem(items.get(3),96);
     }
     
