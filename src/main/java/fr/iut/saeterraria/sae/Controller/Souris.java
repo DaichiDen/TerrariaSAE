@@ -2,19 +2,13 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
-import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.event.EventHandler;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputEvent;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
-
-import java.util.HashMap;
 
 public class Souris implements EventHandler<MouseEvent> {
     private Jeu jeu;
@@ -38,7 +32,7 @@ public class Souris implements EventHandler<MouseEvent> {
         int y1 = ((int)mouseEvent.getY());
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
             if (jeu.getJoueur().estVivant()) {
-                jeu.getJoueur().attaquer(x1, y1, 2);
+                jeu.getJoueur().action(x1, y1, 2);
                 if (jeu.getJoueur().miner(x, y)) {
                     this.tp.getChildren().remove((y * 58) + x);// faire de la taille de la map un un getter
 

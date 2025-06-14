@@ -3,10 +3,6 @@ package fr.iut.saeterraria.sae.Modele.Personnages;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
 
 public abstract class EntiteVivante extends Entite{
 
@@ -58,7 +54,7 @@ public abstract class EntiteVivante extends Entite{
     }
 
 
-    public abstract void attaquer(int x, int y, int range);
+    public abstract void action(int x, int y, int range);
 
     public void bloquéVertical(int tailleL, int tailleH) {
         if(collisionVerticale(tailleL, tailleH)){
@@ -121,21 +117,22 @@ public abstract class EntiteVivante extends Entite{
         int ey = this.getY();
 
         // Direction du tire
-        float dx = cibleX - ex;
-        float dy = cibleY - ey;
+        int dx = cibleX - ex;
+        int dy = cibleY - ey;
 
         // Normalisation du vecteur (dx, dy)
-        float distance = (float) Math.sqrt(dx * dx + dy * dy);
+        int distance = (int) Math.sqrt(dx * dx + dy * dy);
         if (distance == 0) distance = 1; // éviter division par zéro
 
         // Vitesse initiale (puissance du tir)
-        float puissance = 20.0f;
+        int puissance = 35;
 
-        float vx = (dx / distance) * puissance;
-        float vy = (dy / distance) * puissance;
-
+        int vx = (int) (((float) dx / distance) * puissance);
+        int vy = (int) (((float) dy / distance) * puissance);
 
         // Appliquer la vitesse initiale au projectile
+        System.out.println("forceX : "+vx);
+        System.out.println("forceY : "+vy);
         projectile.setForceX(vx);
         projectile.setForceY(vy);
 
@@ -144,7 +141,7 @@ public abstract class EntiteVivante extends Entite{
         projectile.setY(ey);
 
         // Ajouter aux listes
-        projectile.setInd(getJeu().getListe_projectiles().size());
+
         getJeu().getListe_projectiles().add(projectile);
         getJeu().getListe_projectilesObservable().add(projectile);
     }

@@ -64,13 +64,14 @@ public class Jeu {
 
                 this.getListe_projectiles().get(i).setX(this.getListe_projectiles().get(i).getX() + this.getListe_projectiles().get(i).getForceX());
 
-                this.getListe_projectiles().get(i).setForceY((float) (this.getListe_projectiles().get(i).getForceY() + this.getListe_projectiles().get(i).getGravité()));
+                this.getListe_projectiles().get(i).setForceY(this.getListe_projectiles().get(i).getForceY() + this.getListe_projectiles().get(i).getGravité());
 
                 this.getListe_projectiles().get(i).setY(this.getListe_projectiles().get(i).getY() + this.getListe_projectiles().get(i).getForceY());
 
-                this.getListe_projectiles().get(i).bloquéVertical(taille1bloc, taille1bloc);
-                this.getListe_projectiles().get(i).bloquéHorizontal(taille1bloc, taille1bloc);
-                System.out.println("je fais la màj");
+                if(projectiles.get(i).collisionVerticale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH()) || projectiles.get(i).collisionHorizontale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH())) {
+                    getListe_projectiles().get(i).setActif(false);
+                    getListe_projectiles().remove(i);
+                }
             }
         }
     }

@@ -59,7 +59,7 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
                     });
 
                     // 5) **ÉCOUTER la propriété estVivantProperty()**
-                    projectile_aj.estActifProperty().addListener((obs, ancienEtat, nouvelEtat) -> {
+                    projectile_aj.getActifProperty().addListener((obs, ancienEtat, nouvelEtat) -> {
                         if (!nouvelEtat) {
 
                             // Le mob vient de mourir → on retire son Node à l’écran

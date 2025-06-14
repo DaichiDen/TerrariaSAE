@@ -20,6 +20,8 @@ public abstract class Entite {
     private BooleanProperty marcheDroite = new SimpleBooleanProperty(false);
     private BooleanProperty marcheGauche = new SimpleBooleanProperty(false);
 
+    private int tailleH, tailleL;
+
 
     private final int gravité = 2;
     private final static int accel_sol = 5;
@@ -40,6 +42,19 @@ public abstract class Entite {
         this.y = new SimpleIntegerProperty(y);
         this.map = map;
         this.jeu = jeu;
+    }
+
+    public int getTailleH() {
+        return tailleH;
+    }
+    public int getTailleL() {
+        return tailleL;
+    }
+    public void setTailleH(int tailleH) {
+        this.tailleH = tailleH;
+    }
+    public void setTailleL(int tailleL) {
+        this.tailleL = tailleL;
     }
 
     public static int getAccel_air() {
@@ -202,6 +217,9 @@ public abstract class Entite {
     public boolean collisionVerticale(int tailleL, int tailleH) { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
 
+        setTailleH(tailleH);
+        setTailleL(tailleL);
+
         Rectangle2D hitboxEntite = new Rectangle2D(getX(), getY(), tailleL, tailleH);
 
         int caseX = (int) (getX() / jeu.getTaille1bloc());
@@ -229,9 +247,6 @@ public abstract class Entite {
 
         return false;
     }
-
-    public abstract void bloquéVertical(int tailleL, int tailleH);
-    public abstract void bloquéHorizontal(int tailleL, int tailleH);
 
 
     //    public void collisionVerticale(int tailleL,int tailleH) { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
@@ -282,6 +297,9 @@ public abstract class Entite {
     public boolean collisionHorizontale(int tailleL, int tailleH) {
 
         Rectangle2D hitboxJoueur = new Rectangle2D(this.getX(), this.getY(), tailleL, tailleH);
+
+        setTailleH(tailleH);
+        setTailleL(tailleL);
 
         int caseX = (int) (this.getX() / jeu.getTaille1bloc());
         int caseY = (int) (this.getY() / jeu.getTaille1bloc());

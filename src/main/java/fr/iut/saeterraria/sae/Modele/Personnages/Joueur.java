@@ -151,7 +151,7 @@
         }
 
         @Override
-        public void attaquer(int x, int y, int range) {
+        public void action(int x, int y, int range) {
             for (EntiteVivante e : super.getJeu().getEnnemis()) {
 
                 Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(), getJeu().getTaille1bloc(), (getJeu().getTaille1bloc()) * 2);
