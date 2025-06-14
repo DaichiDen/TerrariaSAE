@@ -200,8 +200,8 @@ public class Jeu {
         // Armes
         items.put(71,new DashingKatana("Katana étrange","Ce Katana semble pouvoir octroyer la capacité à son détenteur de se déplacer à la vitesse du son",10));
         // Autres items
-        items.put(72, new Item("Flèche","Flèche",1,(BlocConstruction) items.get(20)));
-        items.put(73, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(20)));
+        items.put(72, new Item("Flèche","Flèche",1,(BlocConstruction) items.get(12)));
+        items.put(73, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(12)));
     }
 
     private void initializeRecettes() {
