@@ -26,12 +26,12 @@ public class Souris implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent mouseEvent) {
-        int x = ((int)mouseEvent.getX())/32;
-        int y = ((int)mouseEvent.getY())/32;
-        int x1 = ((int)mouseEvent.getX());
-        int y1 = ((int)mouseEvent.getY());
+        int x = ((int) mouseEvent.getX()) / 32;
+        int y = ((int) mouseEvent.getY()) / 32;
+        int x1 = ((int) mouseEvent.getX());
+        int y1 = ((int) mouseEvent.getY());
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-            if(jeu.getJoueur().estVivant()){
+            if (jeu.getJoueur().estVivant()) {
                 if (jeu.getJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];
@@ -40,37 +40,38 @@ public class Souris implements EventHandler<MouseEvent> {
                         for (int j = 0; j < tab[i].length; j++) {
                             if (tab[i][j] == 1) {
                                 oui = true;
-                                indice[0]=i;
-                                indice[1]=j;
+                                indice[0] = i;
+                                indice[1] = j;
                             }
                         }
                     }
                     if (oui) {
-                        jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(), "Flèche", map, jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY() ), x1, y1);
+                        jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(), "Flèche", map, jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY()), x1, y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
 
-                
+
                 }
-                jeu.getJoueur().attaquer(x1, y1, 2);
-                if (jeu.getJoueur().miner(x, y)){
-                    this.tp.getChildren().remove((y*tp.getPrefColumns())+x);// faire de la taille de la map un un getter
+                jeu.getJoueur().action(x1, y1, 2);
+                if (jeu.getJoueur().miner(x, y)) {
+                    this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// faire de la taille de la map un un getter
 
-                    this.tp.getChildren().add( ( ((y*tp.getPrefColumns())+x) ),new ImageView(fond.getTiles().get(map.getCase(y, x)) ) );
-            }
+                    this.tp.getChildren().add((((y * tp.getPrefColumns()) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+                }
 
-        }
-        else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-            if(getJoueur.estVivant){
-            jeu.getJoueur().poser(x, y);
-            this.tp.getChildren().remove((y*tp.getPrefColumns())+x);// X = Ligne, Y = Colonne
-            this.tp.getChildren().add(((y*tp.getPrefColumns())+x),new ImageView(fond.getTiles().get(map.getCase(y, x))));
+            } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                if (jeu.getJoueur().estVivant()) {
+                    jeu.getJoueur().poser(x, y);
+                    this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
+                    this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+                }
             }
         }
     }
-        
 
-    public void handleCraft(String nom) {
-        jeu.getJoueur().craftItem(jeu.getItem(nom));
-    }
+
+        public void handleCraft (String nom){
+            jeu.getJoueur().craftItem(jeu.getItem(nom));
+        }
+
 }

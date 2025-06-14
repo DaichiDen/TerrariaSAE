@@ -48,8 +48,8 @@
             this.pierreTp = pierreTp;
             this.mainCourante = 0;
             this.map = jeu.getCarte();
-            this.xMax = new SimpleIntegerProperty(getX()/taille1bloc);
-            this.yMax = new SimpleIntegerProperty(getY()/taille1bloc);
+            this.xMax = new SimpleIntegerProperty(getX()/super.getJeu().getTaille1bloc());
+            this.yMax = new SimpleIntegerProperty(getY()/super.getJeu().getTaille1bloc());
         }
 
 
@@ -98,10 +98,10 @@
         }
 
         public void mettreAJour() {
-            if (this.getX()/taille1bloc>this.xMax.get()) {
+            if (this.getX()/super.getJeu().getTaille1bloc()>this.xMax.get()) {
                 setXMax(this.getX());
             }
-            if (this.getY()/taille1bloc>this.yMax.get()) {
+            if (this.getY()/super.getJeu().getTaille1bloc()>this.yMax.get()) {
                setYMax(this.getY());
             }
             if(getMarcheGauche()){
@@ -342,13 +342,13 @@
             return xMax.getValue();
         }
         public IntegerProperty getXMaxProperty(){ return xMax; }
-        public void setXMax(int xMax){ this.xMax.setValue(xMax/taille1bloc); }
+        public void setXMax(int xMax){ this.xMax.setValue(xMax/super.getJeu().getTaille1bloc()); }
 
         public int getYMax(){
             return yMax.getValue();
         }
         public IntegerProperty getYMaxProperty(){ return yMax; }
-        public void setYMax(int yMax){ this.yMax.setValue(yMax/taille1bloc); }
+        public void setYMax(int yMax){ this.yMax.setValue(yMax/super.getJeu().getTaille1bloc()); }
     }
 
 
