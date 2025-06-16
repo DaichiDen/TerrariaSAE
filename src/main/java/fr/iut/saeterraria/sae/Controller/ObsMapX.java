@@ -19,8 +19,10 @@ public class ObsMapX implements ChangeListener<Number> {
     public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
         System.out.println(newValue);
         if(!newValue.equals(oldValue) ){
-            fond.updateMapX();
-            fond.getEnvironnement().setPrefColumns(fond.getEnvironnement().getPrefColumns()+1);
+            if (this.jeu.getCarte().getColonne()>fond.getEnvironnement().getPrefRows()) {
+                fond.updateMapX();
+                fond.getEnvironnement().setPrefColumns(fond.getEnvironnement().getPrefColumns()+1);
+            }
         }
     }
 

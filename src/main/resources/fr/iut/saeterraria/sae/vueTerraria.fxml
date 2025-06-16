@@ -38,7 +38,7 @@
                <children>
                   <Pane fx:id="screen" layoutY="-4.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1040.0" prefWidth="1920.0">
                      <children>
-                         <TilePane fx:id="fond" minHeight="-Infinity" minWidth="-Infinity" prefColumns="59" prefRows="29" style="-fx-background-color: white;" />
+                         <TilePane fx:id="fond" minHeight="-Infinity" minWidth="-Infinity" prefColumns="35" prefRows="20" style="-fx-background-color: white;" />
                      </children>
                   </Pane>
                   <AnchorPane prefHeight="200.0" prefWidth="675.0">

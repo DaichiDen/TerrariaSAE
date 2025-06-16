@@ -20,9 +20,9 @@ public class SpriteItem extends CreateRessourceVisuel{
         // Blocs
         items.put(1, "/Tiles/Dirt_1.png"); // Terre Haute
         items.put(2, "/Tiles/Dirt_2.png"); // Terre Basse
-        items.put(3, "/Tiles/Roche_moche.png"); // Bois
-        items.put(4, "/Tiles/Fond_noir.png"); // Minerai Charbon
-        items.put(5, "/Tiles/Fond_noir.png"); // Charbon
+        items.put(3, "/Tiles/Bois.png"); // Bois
+        items.put(4, "/Tiles/Minerais_charbon.png"); // Minerai Charbon
+        items.put(5, "/Tiles/Coal.png"); // Charbon
         items.put(6, "/Tiles/Fond_noir.png"); // Pierre
         items.put(7, "/Tiles/Fond_noir.png"); // Minerai Fer
         items.put(8, "/Tiles/Fond_noir.png"); // Fer
@@ -44,20 +44,20 @@ public class SpriteItem extends CreateRessourceVisuel{
 
 
 
-        items.put(18, "/Sprite_objets/Pelle_pierre.png"); // Pelle de bois
-        items.put(19, "/Sprite_objets/Hache_pierre.png"); // Hache de bois
-        items.put(20, "/Sprite_objets/Pioche_pierre.png"); // Pioche de bois
+        items.put(18, "/Sprite_objets/Pelle_bois.png"); // Pelle de bois
+        items.put(19, "/Sprite_objets/Hache_bois.png"); // Hache de bois
+        items.put(20, "/Sprite_objets/Pioche_bois.png"); // Pioche de bois
         items.put(21, "/Sprite_objets/Pelle_pierre.png"); // Pelle de pierre
         items.put(22, "/Sprite_objets/Hache_pierre.png"); // Hache de pierre
         items.put(23, "/Sprite_objets/Pioche_pierre.png"); // Pioche de pierre
-        items.put(24, "/Sprite_objets/Pelle_pierre.png"); // Pelle de fer
-        items.put(25, "/Sprite_objets/Hache_pierre.png"); // Hache de fer
-        items.put(26, "/Sprite_objets/Pioche_pierre.png"); // Pioche de fer
+        items.put(24, "/Sprite_objets/Pelle_fer.png"); // Pelle de fer
+        items.put(25, "/Sprite_objets/Hache_fer.png"); // Hache de fer
+        items.put(26, "/Sprite_objets/Pioche_fer.png"); // Pioche de fer
         items.put(27, "/Sprite_objets/Pelle_pierre.png"); // Pelle de DELJCCium
         items.put(28, "/Sprite_objets/Hache_pierre.png"); // Hache de DELJCCium
         items.put(29, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
-        items.put(30, "/Sprite_objets/Pioche_pierre.png"); // Seau vide
-        items.put(31, "/Sprite_objets/Pioche_pierre.png"); // Sceau d'eau
+        items.put(30, "/Sprite_objets/Sceau_vide.png"); // Seau vide
+        items.put(31, "/Sprite_objets/Sceau_eau.png"); // Sceau d'eau
 
 
         for (int i = 32; i < 63; i++) {
@@ -80,8 +80,11 @@ public class SpriteItem extends CreateRessourceVisuel{
 
         //Armes
         items.put(71, "/Sprite_objets/KatanaDash.png");
-        items.put(73,"/Sprite_objets/Arc_repos.png");
         items.put(72,"/Sprite_objets/Flèche.png");
+        items.put(73,"/Sprite_objets/Arc_repos.png");
+        items.put(74,"/Sprite_objets/gun_bh.png");
+        items.put(75,"/Sprite_objets/Balle.png");
+
 
 
         

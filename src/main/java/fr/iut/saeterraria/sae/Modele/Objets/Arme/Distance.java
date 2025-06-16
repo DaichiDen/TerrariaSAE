@@ -14,6 +14,9 @@ public class Distance extends Armes {
         super(nom, desc, attaque, blocConstruction);
     }
 
+    public Distance(String nom, String desc, int attaque) {
+        super(nom,desc,attaque);
+    }
 
 
     @Override

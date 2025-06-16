@@ -45,7 +45,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable{
+public class Controller implements Initializable {
 
     @FXML
     private AnchorPane menu;
@@ -113,21 +113,23 @@ public class Controller implements Initializable{
     private VueSon BiblioSon = new VueSon();
     private VueCraft vueCraft;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         jeu = new Jeu("Nom");
         zoneNom.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 confirmerNom();
-        }});
-        scene = new Fond(fond,jeu);// Initialise le fond (décor du jeu)
-        vueEnnemi = new SpriteMob(jeu, screen,"Pierre");
+            }
+        });
+        scene = new Fond(fond, jeu);// Initialise le fond (décor du jeu)
+        vueEnnemi = new SpriteMob(jeu, screen, "Pierre");
 
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
-        jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu,screen));
+        jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu, screen));
 
 
-        Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0,10,jeu.getCarte(), jeu);
+        Ennemi ennemiCaca = new Ennemi("Pierre", 20, 20, 1000, 0, 0, 10, jeu.getCarte(), jeu);
         jeu.addEnnemis(ennemiCaca);
         jeu.addMobs(ennemiCaca);
 
@@ -139,27 +141,27 @@ public class Controller implements Initializable{
         imageaccueil.fitHeightProperty().bind(imagebloc_accueil.widthProperty());
         SpriteVie barre = new SpriteVie(Vie, jeu);
 
-        Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar);
+        Clavier controlleurJoueur = new Clavier(jeu, screenInventaire, quitterInventaire, openInventaire, fond, hotBar);
 
-        Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte(),fond);
+        Souris controlleurSouris = new Souris(jeu, scene, jeu.getCarte(), fond);
 
-        inventaireVue = new VueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
-        vueProjectile= new VueProjectile(jeu,screen);
+        inventaireVue = new VueInventaire(quitterInventaire, screenInventaire, jeu.getJoueur(), inventaire, screen);
+        vueProjectile = new VueProjectile(jeu, screen);
 
-        hotBarVue = new VueHotbar(jeu,hotBar);
+        hotBarVue = new VueHotbar(jeu, hotBar);
         Platform.runLater(() -> screenPrincipal.requestFocus()); // Permet de faire fonctionner la méthode mouvement
 
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
-        vueCraft = new VueCraft(craftSansBlocConstruction,craftEtabli,craftForge,caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge, ((BlocConstruction) jeu.getItems().get(11)).getListeRecette(), ((BlocConstruction) jeu.getItems().get(12)).getListeRecette(),((BlocConstruction) jeu.getItems().get(13)).getListeRecette(),jeu.getItems());
+        vueCraft = new VueCraft(craftSansBlocConstruction, craftEtabli, craftForge, caseRecetteSansBloc, caseRecetteEtabli, caseRecetteForge, ((BlocConstruction) jeu.getItems().get(11)).getListeRecette(), ((BlocConstruction) jeu.getItems().get(12)).getListeRecette(), ((BlocConstruction) jeu.getItems().get(13)).getListeRecette(), jeu.getItems());
 
         screenPrincipal.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
         screen.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
 
-        ObsJoueur obsJ = new ObsJoueur(jeu,vuejoueur, controlleurJoueur);
+        ObsJoueur obsJ = new ObsJoueur(jeu, vuejoueur, controlleurJoueur);
 
-        jeu.getJoueur().getXMaxProperty().addListener(new ObsMapX(jeu,scene));
-        jeu.getJoueur().getYMaxProperty().addListener(new ObsMapY(jeu,scene));
+        jeu.getJoueur().getXMaxProperty().addListener(new ObsMapX(jeu, scene));
+        jeu.getJoueur().getYMaxProperty().addListener(new ObsMapY(jeu, scene));
 
         jeu.getJoueur().yProperty().addListener(obsJ);
 
@@ -168,100 +170,117 @@ public class Controller implements Initializable{
         });
 
 
-        for (int i=0; i<jeu.getJoueur().getInventaire().getInventaireJoueur().length; i++) {
-            for(int j=0; j<jeu.getJoueur().getInventaire().getInventaireJoueur()[i].length; j++) {
-                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].changementProperty().addListener(new ListenerInventaire(inventaireVue,hotBarVue,i,j));
+        for (int i = 0; i < jeu.getJoueur().getInventaire().getInventaireJoueur().length; i++) {
+            for (int j = 0; j < jeu.getJoueur().getInventaire().getInventaireJoueur()[i].length; j++) {
+                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].changementProperty().addListener(new ListenerInventaire(inventaireVue, hotBarVue, i, j));
             }
         }
 
-        for(int i=0; i<caseRecetteSansBloc.getChildren().size(); i++) {
+        for (int i = 0; i < caseRecetteSansBloc.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteSansBloc.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
-                controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI,0));
+                controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI, 0));
             });
         }
-        for(int i=0; i<caseRecetteEtabli.getChildren().size(); i++) {
+        for (int i = 0; i < caseRecetteEtabli.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteEtabli.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
-                controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI,1));
+                controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI, 1));
             });
         }
-        for(int i=0; i<caseRecetteForge.getChildren().size(); i++) {
+        for (int i = 0; i < caseRecetteForge.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteForge.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
-                controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI,2));
+                controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI, 2));
             });
         }
 
         // BiblioSon.play(1);
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
-            private final long frameInterval = 16_666_666; // Conversion nano secondes en secondes = 60 FPS
+            private final long frameInterval = 16_666_666;
+            // Conversion nano secondes en secondes = 60 FPS
+            private boolean timeStopActive = false;
 
             @Override
             public void handle(long now) {
                 if (now - lastUpdate >= frameInterval) {
-                    jeu.getJoueur().mettreAJour(); //Laisser ici ? on tombe tt le temps ect, donc dans tt les cas c a chaque frame non ?
-                    for(int i = 0; i < jeu.getMobs().size(); i++){
-                        jeu.getMobs().get(i).mettreAJour();
-                    }
+                    if (jeu.getJoueur().isTimeStop()) {
+                        jeu.getJoueur().mettreAJour();
 
-                    jeu.màjProjectiles();
+                        if (!timeStopActive) {
+                            timeStopActive = true;
+                            PauseTransition delay = new PauseTransition(Duration.seconds(10));
+                            delay.setOnFinished(event -> {
+                                jeu.getJoueur().setTimeStop(false);
+                                timeStopActive = false;
+                            });
+                            delay.play();
+                        }
+                    } else {
+                        jeu.getJoueur().mettreAJour();
+
+                        for (int i = 0; i < jeu.getMobs().size(); i++) {
+                            jeu.getMobs().get(i).mettreAJour();
+                        }
+
+                        jeu.màjProjectiles();
+                    }
 
                     lastUpdate = now;
 
                     if (!jeu.getJoueur().estVivant()) {
                         PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
-                        delay.setOnFinished(event ->{
-
+                        delay.setOnFinished(event -> {
                             vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
-
-                        }); // Action à faire après le délai
+                        });
                         delay.play();
-
-
-                        // Démarre le délai
                     }
                 }
             }
         };
-        timer.start(); // frameInterval est l'intervalle entre 2 màj graphiques
-        // lastUpdate stocke le temps de la dernière màj graphique enregistré
-        // La méthode vérifie si entre la dernière update et maintenant il s'est passé 1/60 ème de seconde ( 1 frame), si oui on actualise graphiquement
-
-
+        timer.start();
     }
+
+
 
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
 
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(73),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),50);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(71),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(73), 1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(72), 50);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(71), 1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(74), 1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(75), 50);
 
     }
+
     @FXML
-    public void exitInventaire(){
+    public void exitInventaire() {
         screenInventaire.toBack();
         Platform.runLater(() -> screenPrincipal.requestFocus());
     }
 
     @FXML
-    public void startGame(){
+    public void startGame() {
         boxAccueil.toBack();
         imagebloc_accueil.toBack();
         choixNom.toFront();
     }
 
-    public void confirmerNom(){
+    public void confirmerNom() {
         menu.toBack();
         screenPrincipal.toFront();
         jeu.getJoueur().setNom(zoneNom.getText());
         Platform.runLater(() -> screenPrincipal.requestFocus());
     }
+
     @FXML
-    public void rageQuit(){ Platform.exit();}
+    public void rageQuit() {
+        Platform.exit();
+    }
 
 }
+
 //TODO faire des listener pour chaque vue qui fait une màj

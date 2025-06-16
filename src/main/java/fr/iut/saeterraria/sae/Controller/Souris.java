@@ -32,6 +32,11 @@ public class Souris implements EventHandler<MouseEvent> {
         int y1 = ((int) mouseEvent.getY());
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
             if (jeu.getJoueur().estVivant()) {
+                if(jeu.getJoueur().gunEnMain() && !jeu.getJoueur().isTimeStop()){
+                    jeu.getJoueur().setTimeStop(true);
+                    jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(), "Balle en plomb", map, jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY()), x1, y1);
+                }
+
                 if (jeu.getJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];

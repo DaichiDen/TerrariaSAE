@@ -23,6 +23,7 @@
     public class Joueur extends EntiteVivante {
         private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
         private int[] equipement;
+        private BooleanProperty timeStop = new SimpleBooleanProperty(false);
         private Pierre_TP pierreTp;
         private int mainCourante;
         private boolean enDash = false;
@@ -59,6 +60,15 @@
             } else {
                 this.mainCourante++;
             }
+        }
+        public boolean isTimeStop(){
+            return timeStop.getValue();
+        }
+        public BooleanProperty timeStopProperty() {
+            return timeStop;
+        }
+        public void setTimeStop(boolean timeStop) {
+            this.timeStop.setValue(timeStop);
         }
         public void setDernierPos(String val){
             this.dernierPos=val;
@@ -349,6 +359,10 @@
         }
         public IntegerProperty getYMaxProperty(){ return yMax; }
         public void setYMax(int yMax){ this.yMax.setValue(yMax/super.getJeu().getTaille1bloc()); }
+
+        public boolean gunEnMain() {
+            return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 74;
+        }
     }
 
 
