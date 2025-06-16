@@ -101,6 +101,10 @@ public class Controller implements Initializable{
     private VBox caseRecetteForge;
     @FXML
     private Pane screenPrincipal;
+    @FXML
+    private ScrollPane four;
+    @FXML
+    private VBox caseRecetteFour;
 
 
     private Jeu jeu;
@@ -139,7 +143,7 @@ public class Controller implements Initializable{
         imageaccueil.fitHeightProperty().bind(imagebloc_accueil.widthProperty());
         SpriteVie barre = new SpriteVie(Vie, jeu);
 
-        Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar);
+        Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar, screenPrincipal);
 
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte(),fond);
 
@@ -147,11 +151,13 @@ public class Controller implements Initializable{
         vueProjectile= new VueProjectile(jeu,screen);
 
         hotBarVue = new VueHotbar(jeu,hotBar);
-        Platform.runLater(() -> screenPrincipal.requestFocus()); // Permet de faire fonctionner la méthode mouvement
+        Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
 
         vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
-        vueCraft = new VueCraft(craftSansBlocConstruction,craftEtabli,craftForge,caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge, ((BlocConstruction) jeu.getItems().get(11)).getListeRecette(), ((BlocConstruction) jeu.getItems().get(12)).getListeRecette(),((BlocConstruction) jeu.getItems().get(13)).getListeRecette(),jeu.getItems());
+        vueCraft = new VueCraft(craftSansBlocConstruction,craftEtabli,craftForge,caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge,
+                ((BlocConstruction) jeu.getItems().get(11)).getListeRecette(), ((BlocConstruction) jeu.getItems().get(12)).getListeRecette(),
+                ((BlocConstruction) jeu.getItems().get(13)).getListeRecette(),jeu.getItems(), caseRecetteFour, ((BlocConstruction) jeu.getItems().get(15)).getListeRecette());
 
         screenPrincipal.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
         screen.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
@@ -190,6 +196,12 @@ public class Controller implements Initializable{
             int finalI = i;
             caseRecetteForge.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
                 controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI,2));
+            });
+        }
+        for(int i=0; i<caseRecetteFour.getChildren().size(); i++) {
+            int finalI = i;
+            caseRecetteFour.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
+                controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI,3));
             });
         }
 
@@ -235,7 +247,7 @@ public class Controller implements Initializable{
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
-
+        Platform.runLater(() -> screenInventaire.requestFocus());
         jeu.getJoueur().ajouterItem(jeu.getItems().get(73),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(72),50);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(71),1);
@@ -258,7 +270,7 @@ public class Controller implements Initializable{
         menu.toBack();
         screenPrincipal.toFront();
         jeu.getJoueur().setNom(zoneNom.getText());
-        Platform.runLater(() -> screenPrincipal.requestFocus());
+        Platform.runLater(() -> fond.requestFocus());
     }
     @FXML
     public void rageQuit(){ Platform.exit();}

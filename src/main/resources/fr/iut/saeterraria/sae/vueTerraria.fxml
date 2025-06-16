@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
    <children>
       <AnchorPane fx:id="death" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -93,6 +92,11 @@
                         <ScrollPane fx:id="craftForge" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="1439.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="30.0">
                            <content>
                               <VBox fx:id="caseRecetteForge" />
+                           </content>
+                        </ScrollPane>
+                        <ScrollPane fx:id="four" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="1449.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="1439.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="30.0">
+                           <content>
+                              <VBox fx:id="caseRecetteFour" />
                            </content>
                         </ScrollPane>
                         <ScrollPane fx:id="craftSansBlocConstruction" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="1439.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="30.0">

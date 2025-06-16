@@ -151,14 +151,18 @@
             return miner;
         }
 
-        public void poser(int x, int y) {//x = colonne && y = ligne
-
+        public int poser(int x, int y) {//x = colonne && y = ligne
             if( (this.getX()/32)!=x || this.getY()/32!=y ) {
-                if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() != 0 && map.getCase(y, x) == 0) {
+                if(map.getCase(y,x)==11 || map.getCase(y,x)==12 || map.getCase(y,x)==13 || map.getCase(y,x)==15) {
+                    return map.getCase(y,x);
+                }
+                else if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() != 0 && map.getCase(y, x) == 0) {
                     map.poserBloc(x, y, inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet());
                     inventaire.getInventaireJoueur()[0][mainCourante].retireQuantite(1);
+                    return 1;
                 }
             }
+            return -1;
         }
 
         @Override

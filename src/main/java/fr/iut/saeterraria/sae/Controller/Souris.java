@@ -4,10 +4,15 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import fr.iut.saeterraria.sae.Vue.Fond;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
 public class Souris implements EventHandler<MouseEvent> {
@@ -16,12 +21,11 @@ public class Souris implements EventHandler<MouseEvent> {
     private TilePane tp;
     private Map map;
 
-    public Souris(Jeu jeu,Fond fond,Map map,TilePane tp){
+    public Souris(Jeu jeu,Fond fond,Map map,TilePane tp) {
         this.jeu = jeu;
         this.fond = fond;
         this.map = map;
         this.tp = tp;
-
     }
 
     @Override
@@ -69,9 +73,7 @@ public class Souris implements EventHandler<MouseEvent> {
         }
     }
 
-
-        public void handleCraft (String nom){
-            jeu.getJoueur().craftItem(jeu.getItem(nom));
-        }
-
+    public void handleCraft (String nom){
+        jeu.getJoueur().craftItem(jeu.getItem(nom));
+    }
 }
