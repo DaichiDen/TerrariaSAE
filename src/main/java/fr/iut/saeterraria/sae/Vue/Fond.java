@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.HashMap;
 
 
-public class Fond extends CreateRessourceVisuel {
+public class Fond extends SpriteItem {
 
     private Jeu jeu;
     private HashMap<Integer, Image> tiles;
@@ -27,7 +27,6 @@ public class Fond extends CreateRessourceVisuel {
     }
 
     public void ajoutTile(String imagePath) {
-        System.out.println(id);
         tiles.put(id, createImage(imagePath));
         id++;
     }

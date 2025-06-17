@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
+<AnchorPane fx:id="racine" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
    <children>
       <AnchorPane fx:id="death" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -36,34 +35,54 @@
          <center>
             <Pane fx:id="screenPrincipal">
                <children>
+                  <AnchorPane fx:id="menuPause" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1176.0" prefWidth="1902.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <VBox fx:id="choixMenuPause" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Button fx:id="pauseReprendreJeu" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#reprendreJeu" prefHeight="59.0" prefWidth="126.0" text="Reprendre" textAlignment="CENTER">
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button fx:id="pauseQuitterJeu" alignment="CENTER" contentDisplay="CENTER" layoutX="898.0" layoutY="623.0" mnemonicParsing="false" onAction="#rageQuit" prefHeight="59.0" prefWidth="126.0" text="Quit" textAlignment="CENTER">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin></Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
                   <Pane fx:id="screen" layoutY="-4.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1040.0" prefWidth="1920.0">
                      <children>
                          <TilePane fx:id="fond" minHeight="-Infinity" minWidth="-Infinity" prefColumns="35" prefRows="20" style="-fx-background-color: white;" />
+                        <TilePane fx:id="fond1" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefColumns="35" prefRows="20" style="-fx-background-color: white;" />
                      </children>
                   </Pane>
-                  <AnchorPane prefHeight="200.0" prefWidth="675.0">
-                     <children>
-                        <Button fx:id="openInventaire" defaultButton="true" layoutX="20.0" layoutY="45.0" onAction="#ouvrirInventaire" prefHeight="52.0" prefWidth="81.0" text="Inventaire" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="569.0" AnchorPane.topAnchor="25.0"> </Button>
-                        <GridPane fx:id="hotBar" gridLinesVisible="true" layoutX="125.0" layoutY="80.0" prefHeight="91.0" prefWidth="311.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="10.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                     </children>
-                     <padding>
-                        <Insets left="5.0" top="20.0" />
-                     </padding>
-                  </AnchorPane>
+                   <AnchorPane prefHeight="200.0" prefWidth="675.0">
+                       <children>
+                           <Button fx:id="openInventaire" defaultButton="true" layoutX="20.0" layoutY="45.0" onAction="#ouvrirInventaire" prefHeight="52.0" prefWidth="81.0" text="Inventaire" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="569.0" AnchorPane.topAnchor="25.0"> </Button>
+                           <GridPane fx:id="hotBar" gridLinesVisible="true" layoutX="125.0" layoutY="80.0" prefHeight="91.0" prefWidth="311.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="10.0">
+                               <columnConstraints>
+                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
+                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
+                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
+                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
+                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
+                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="16.7" prefWidth="100.0" />
+                               </columnConstraints>
+                               <rowConstraints>
+                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                               </rowConstraints>
+                           </GridPane>
+                        <Button fx:id="pauseJeu" defaultButton="true" layoutX="20.0" layoutY="55.0" onAction="#faireUnePause" prefHeight="52.0" prefWidth="81.0" text="Pause" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="569.0" AnchorPane.topAnchor="65.0" />
+                       </children>
+                       <padding>
+                           <Insets left="5.0" top="20.0" />
+                       </padding>
+                   </AnchorPane>
 
-                                    <AnchorPane fx:id="screenInventaire">
+                   <AnchorPane fx:id="screenInventaire">
                      <children>
                         <Button fx:id="quitterInventaire" defaultButton="true" layoutY="44.0" mnemonicParsing="false" onAction="#exitInventaire" prefHeight="34.0" prefWidth="95.0" text="Quitter" AnchorPane.bottomAnchor="1078.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1797.0" AnchorPane.topAnchor="44.0" />
                         <GridPane fx:id="inventaire" gridLinesVisible="true" layoutX="179.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="432.0" prefWidth="898.0" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="750.0" AnchorPane.topAnchor="115.0">
@@ -101,6 +120,9 @@
                            </content>
                         </ScrollPane>
                      </children>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
                   </AnchorPane>
                </children>
             </Pane>

@@ -17,9 +17,13 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ListChangeListener;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 
@@ -38,8 +42,10 @@ import javafx.scene.layout.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -101,6 +107,10 @@ public class Controller implements Initializable {
     private VBox caseRecetteForge;
     @FXML
     private Pane screenPrincipal;
+    @FXML
+    private AnchorPane menuPause;
+    @FXML
+    private AnchorPane racine;
 
 
     private Jeu jeu;
@@ -289,6 +299,14 @@ public class Controller implements Initializable {
         Platform.exit();
     }
 
+    @FXML
+    public void reprendreJeu() {
+        menuPause.toBack();
+        Platform.runLater(() -> screenPrincipal.requestFocus());
+    }
+    public void faireUnePause() {
+        menuPause.toFront();
+    }
 }
 
-//TODO faire des listener pour chaque vue qui fait une màj
+//TODO faire des listener pour chaque vue qui fait une màjss

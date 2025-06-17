@@ -109,7 +109,6 @@ public class VueCraft extends SpriteItem {
 
             VBox sectionItemConstruit = new VBox();
             VBox sectionItemsNecessaires = new VBox();
-
             sectionItemConstruit.getChildren().add(super.createImageView(super.getHmap().get(codeObjet), 45, 45));
             sectionItemConstruit.getChildren().add(super.createLabelNom(items.get(codeObjet).getName()));
 
