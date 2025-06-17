@@ -325,12 +325,11 @@ public abstract class EntiteVivante extends Entite{
 
     public void resterInBounds(){
         if(this.getX()<=0){
-            vitesseX=0;
+
             setX(0);
-            setMarcheGauche(false);
+
         }
         if(this.getY()<=0){
-            vitesseY=0;
             setY(0);
         }
     }

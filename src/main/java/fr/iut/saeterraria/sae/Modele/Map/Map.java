@@ -69,6 +69,7 @@ public class Map {
 
     }
 
+    
     public int[][] getMap(){
         return map;
     }

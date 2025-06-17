@@ -33,7 +33,6 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(15, "/Tiles/Four.png"); // Four
 
         /* ---------- À ajouter le reste ------------- */
-        items.put(16,"/Tiles/piques_vorpales.png");
         items.put(17,"/Tiles/bedrock.png");
         items.put(24,"/Tiles/Coffre.png");// Coffre
         // Outils

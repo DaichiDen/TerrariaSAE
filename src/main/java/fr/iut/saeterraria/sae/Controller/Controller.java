@@ -222,7 +222,6 @@ public class Controller implements Initializable {
                         jeu.getJoueur().mettreAJour();
 
                         for(int i=0;i<jeu.getListe_projectiles().size();i++){
-                            System.out.println("ziziiiiiiiiii");
                             if(jeu.getListe_projectiles().get(i).getType().equals("balle")){
                                 jeu.màjProjectiles();
                             }

@@ -170,7 +170,7 @@ public class Jeu {
         items.get(10).setProvenance((BlocConstruction) items.get(15));
         items.put(16, new Bloc("Pique","",1,10));
         items.put(17, new Bloc("BedRock","Incassable",1,10));
-        for (int i=17; i<=23; i++) {
+        for (int i=18; i<=23; i++) {
             items.put(i, new Item("","",1));
         }
 
