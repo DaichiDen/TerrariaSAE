@@ -7,19 +7,15 @@ import javafx.geometry.Rectangle2D;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 
 public class Projectile extends Entite{
-    private Joueur joueur;
     private StringProperty nom;
     private int gravité = 1;
     private int forceX = 0, forceY = 0;
     private int xBloc, yBloc;
-    private Map map;
     private BooleanProperty actif;
 
-    public Projectile(Joueur joueur, String nom, Map map, Jeu jeu, int xJoueur, int yJoueur) {
-        super(nom, xJoueur, yJoueur, map, jeu);
-        this.joueur = joueur;
+    public Projectile(String nom, Jeu jeu, int xJoueur, int yJoueur, int attaque) {
+        super(nom, xJoueur, yJoueur, jeu, attaque);
         this.nom = new SimpleStringProperty(nom);
-        this.map = map;
         this.actif = new SimpleBooleanProperty(true);
 
     }

@@ -1,24 +1,24 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Armes extends Equipement {
-    private DoubleProperty attaque; // Valeur d'attaque de l'arme
+    private IntegerProperty attaque; // Valeur d'attaque de l'arme
 
-    public Armes (String nom, String desc, double attaque, BlocConstruction blocConstruction) {
+    public Armes (String nom, String desc, int attaque, BlocConstruction blocConstruction) {
         super(nom,desc,blocConstruction);
-        this.attaque = new SimpleDoubleProperty(attaque);
+        this.attaque = new SimpleIntegerProperty(attaque);
     }
 
-    public Armes (String nom, String desc, double attaque) {
+    public Armes (String nom, String desc, int attaque) {
         super(nom,desc);
-        this.attaque = new SimpleDoubleProperty(attaque);
+        this.attaque = new SimpleIntegerProperty(attaque);
     }
 
-    public DoubleProperty attaqueProperty() { return attaque; }
-    public double getAttaque(){ return attaque.getValue(); }
+    public IntegerProperty attaqueProperty() { return attaque; }
+    public int getAttaque(){ return attaque.getValue(); }
 
     public abstract void attaquer();
 

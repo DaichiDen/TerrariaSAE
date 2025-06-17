@@ -127,7 +127,7 @@ public class Controller implements Initializable{
         jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu,screen));
 
 
-        Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0,10,jeu.getCarte(), jeu);
+        Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0, jeu,4);
         jeu.addEnnemis(ennemiCaca);
         jeu.addMobs(ennemiCaca);
 
@@ -192,6 +192,7 @@ public class Controller implements Initializable{
                 controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI,2));
             });
         }
+        BiblioSon.play(1);
 
         // BiblioSon.play(1);
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
@@ -236,9 +237,11 @@ public class Controller implements Initializable{
     public void ouvrirInventaire() {
         screenInventaire.toFront();
 
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(73),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),50);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(71),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(73),2);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(74),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(75),2);
+
 
     }
     @FXML

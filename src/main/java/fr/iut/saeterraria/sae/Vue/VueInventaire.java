@@ -36,9 +36,6 @@ public class VueInventaire extends SpriteItem {
             if ( (player.getInventaire().getInventaireJoueur()[0][j].getItem().getCodeObjet() != 0)) {
 
                 String URL = super.getHmap().get((player.getInventaire().getInventaireJoueur())[0][j].getItem().getCodeObjet());
-
-
-                System.out.println(URL);
                 int quantite = (player.getInventaire().getInventaireJoueur())[0][j].getQuantite();
                 afficheItemQuantite(URL,quantite, 0, j,0);
             }
@@ -52,9 +49,7 @@ public class VueInventaire extends SpriteItem {
             for (int j = 0; j < tableauInventaire.getColumnCount(); j++) {
                if (player.getInventaire().getInventaireJoueur()[i][j].getItem().getCodeObjet() != 0) {
 
-
                    String URL = super.getHmap().get((player.getInventaire().getInventaireJoueur())[i][j].getItem().getCodeObjet());
-
 
                    int quantite = (player.getInventaire().getInventaireJoueur())[i][j].getQuantite();
                    afficheItemQuantite(URL, quantite, i, j, 1);
@@ -110,6 +105,8 @@ public class VueInventaire extends SpriteItem {
         tableauInventaire.getChildren().remove(caseInventaire);
         if(player.getInventaire().getInventaireJoueur()[ligne][colonne].getItem().getCodeObjet()!= 0) {
             String URL = super.getHmap().get((player.getInventaire().getInventaireJoueur())[ligne][colonne].getItem().getCodeObjet());
+            System.out.println("Code : "+(player.getInventaire().getInventaireJoueur())[ligne][colonne].getItem().getCodeObjet());
+            System.out.println(URL);
             int quantite = player.getInventaire().getInventaireJoueur()[ligne][colonne].getQuantite();
 
             if(ligne==0) {
