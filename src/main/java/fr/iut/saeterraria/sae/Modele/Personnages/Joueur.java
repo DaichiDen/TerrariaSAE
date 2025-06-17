@@ -1,6 +1,7 @@
     package fr.iut.saeterraria.sae.Modele.Personnages;
     import fr.iut.saeterraria.sae.Modele.Jeu;
     import fr.iut.saeterraria.sae.Modele.Map.Map;
+    import fr.iut.saeterraria.sae.Modele.Objets.Armes;
     import fr.iut.saeterraria.sae.Modele.Objets.Item;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 
@@ -11,8 +12,6 @@
     import javafx.beans.property.SimpleIntegerProperty;
 
     import javafx.geometry.Rectangle2D;
-
-
 
     import javafx.scene.input.MouseEvent;
 
@@ -40,10 +39,7 @@
 
         public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp) {
 
-
-            super(nom, 20, 100, 20, 20*32, 10*32, 1, 10, jeu.getCarte(), jeu);
-
-
+            super(nom, 20, 100, 20, 20*32, 10*32, 1, 10, jeu,1);
             this.equipement = new int[7];
             this.inventaire = new Inventaire();
             this.pierreTp = pierreTp;
@@ -70,6 +66,7 @@
         public void setTimeStop(boolean timeStop) {
             this.timeStop.setValue(timeStop);
         }
+
         public void setDernierPos(String val){
             this.dernierPos=val;
         }
@@ -77,16 +74,11 @@
             return this.dernierPos;
         }
 
-        public void decrementeMainCourante() {
-            if (this.mainCourante == 0) {
-                setMainCourante(6);
-            } else {
-                this.mainCourante--;
-            }
-        }
-
         public void setMainCourante(int mainCourante) {
             this.mainCourante = mainCourante;
+            if(inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()>70){
+                setAttaque(1 + ((Armes)(inventaire.getInventaireJoueur()[0][mainCourante].getItem())).getAttaque());
+            }
         }
 
         public int getMainCourante() {
@@ -104,7 +96,7 @@
             return  inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 71;
         }
         public boolean arcEnMain() {
-            return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 73;
+            return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 78;
         }
 
         public void mettreAJour() {
@@ -182,7 +174,7 @@
                     int ennemiX = (e.getX() + 16) / 32;
                     int ennemiY = (e.getY() + 16) / 32;
                     if (peutEtreAtteint(ennemiX, ennemiY, range)) {
-                        e.decrementVie(1);
+                        e.decrementVie(getAttaque());
                         System.out.println("Touché !");
                         System.out.println(e.getBarreVie().getVie());
                     }

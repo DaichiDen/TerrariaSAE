@@ -3,6 +3,7 @@ package fr.iut.saeterraria.sae.Modele;
 import fr.iut.saeterraria.sae.Modele.Objets.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Arme.DashingKatana;
 import fr.iut.saeterraria.sae.Modele.Objets.Arme.Distance;
+import fr.iut.saeterraria.sae.Modele.Objets.Arme.Epee;
 import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.Hache;
@@ -164,15 +165,6 @@ public class Jeu {
         items.put(9, new Bloc("Glace","",1,2));
         items.put(10, new Item("DELJCCium", "", 1));
 
-
-
-
-
-
-
-
-
-
         items.put(11,new BlocConstruction("ConstructionSansBloc","",0,0));
         items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(11)));
         items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(12) ));
@@ -180,14 +172,13 @@ public class Jeu {
         items.put(15, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,3,(BlocConstruction) items.get(12)));
 
         for (int i=16; i<=23; i++) {
-            items.put(i, new Pelle("",""));
+            items.put(i, new Item("","",1));
         }
 
 
 
         //Bloc outil
         items.put(24, new Coffre("Coffre", "", 1, 3,(BlocConstruction) items.get(12)));
-
 
         for (int i = 25; i < 49; i++) {
             items.put(i,new Item("","",1));
@@ -213,27 +204,36 @@ public class Jeu {
         items.put(61,new Pioche("Pioche de DELJCCium","",(BlocConstruction) items.get(13)));
 
         items.put(62, new Item("Seau", "", 1,(BlocConstruction) items.get(13)));
+        items.put(63,new Item("Seau Vide", "", 1,(BlocConstruction) items.get(13)));
 
         // Armures
 
-        items.put(63,new Armure("Casque en fer","",2, (BlocConstruction) items.get(13)));
-        items.put(64,new Armure("Casque en DELJCCium","",3,(BlocConstruction) items.get(13)));
-        items.put(65,new Armure("Plastron en fer","",6,(BlocConstruction) items.get(13)));
-        items.put(66,new Armure("Plastron en DELJCCium","",9,(BlocConstruction) items.get(13)));
-        items.put(67,new Armure("Jambière en fer","",4,(BlocConstruction) items.get(13)));
-        items.put(68,new Armure("Jambière en DELJCCium","",6,(BlocConstruction) items.get(13)));
-        items.put(69,new Armure("Botte en fer","",3,(BlocConstruction) items.get(13)));
-        items.put(70,new Armure("Botte en DELJCCium","",5,(BlocConstruction) items.get(13) ) );
+        items.put(64,new Armure("Casque en fer","",2, (BlocConstruction) items.get(13)));
+        items.put(65,new Armure("Casque en DELJCCium","",3,(BlocConstruction) items.get(13)));
+        items.put(66,new Armure("Plastron en fer","",6,(BlocConstruction) items.get(13)));
+        items.put(67,new Armure("Plastron en DELJCCium","",9,(BlocConstruction) items.get(13)));
+        items.put(68,new Armure("Jambière en fer","",4,(BlocConstruction) items.get(13)));
+        items.put(69,new Armure("Jambière en DELJCCium","",6,(BlocConstruction) items.get(13)));
+        items.put(70,new Armure("Botte en fer","",3,(BlocConstruction) items.get(13)));
+        items.put(71,new Armure("Botte en DELJCCium","",5,(BlocConstruction) items.get(13) ) );
 
         // Armes
-        items.put(71,new DashingKatana("Katana étrange","Ce Katana semble pouvoir octroyer la capacité à son détenteur de se déplacer à la vitesse du son",10));
+        items.put(72,new DashingKatana("Katana étrange","Ce Katana semble pouvoir octroyer la capacité à son détenteur de se déplacer à la vitesse du son",10));
+        items.put(73,new Epee("Epée en Bois","",2,(BlocConstruction) items.get(12)));
+        items.put(74,new Epee("Epée en Pierre","",3,(BlocConstruction) items.get(12)));
+        items.put(75,new Epee("Epée en Fer","",4,(BlocConstruction) items.get(13)));
+        items.put(76,new Epee("Epée en DELJCCium","",6,(BlocConstruction) items.get(13)));
         // Autres items
-        items.put(72, new Item("Flèche","Flèche",1,(BlocConstruction) items.get(12)));
-        items.put(73, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(12)));
-        items.put(74, new Distance("Arquebuse","Etrange objet qui semble ralentir le temps",5));
-        items.put(75, new Item("Balle en plomb","Un projectile qui peut être utlisé ",1));
+      
+        
+      
 
+        items.put(77, new Item("Flèche","Flèche",1,(BlocConstruction) items.get(12)));
+        items.put(78, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(12)));
+        items.put(79, new Distance("Arquebuse","Etrange objet qui semble ralentir le temps",5));
+        items.put(80, new Item("Balle en plomb","Un projectile qui peut être utlisé ",1));
     }
+
 
     private void initializeRecettes() {
         //Etabli : 4 bois

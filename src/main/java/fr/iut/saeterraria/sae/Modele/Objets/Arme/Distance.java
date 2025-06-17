@@ -10,7 +10,7 @@ public class Distance extends Armes {
 
     private ArrayList<Projectile> projectiles;
 
-    public Distance(String nom, String desc, double attaque, BlocConstruction blocConstruction) {
+    public Distance(String nom, String desc, int attaque, BlocConstruction blocConstruction) {
         super(nom, desc, attaque, blocConstruction);
     }
 

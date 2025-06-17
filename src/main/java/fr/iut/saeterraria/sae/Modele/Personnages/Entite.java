@@ -1,27 +1,21 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Map.Map;
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
-
-import java.util.ArrayList;
 
 
 public abstract class Entite {
 
-    private Map map;
     private IntegerProperty x, y;
     private StringProperty nom;
     private Jeu jeu;
+    private int attaque;
 
     private BooleanProperty marcheDroite = new SimpleBooleanProperty(false);
     private BooleanProperty marcheGauche = new SimpleBooleanProperty(false);
 
     private int tailleH, tailleL;
-
 
     private final int gravité = 2;
     private final static int accel_sol = 5;
@@ -36,12 +30,12 @@ public abstract class Entite {
 //    MediaPlayer damage1 = super.Sonore("/Sound/damage1.wav");
 //    MediaPlayer damage2 = super.Sonore("/Sound/damage2.wav");
 
-    public Entite(String nom, int x, int y, Map map, Jeu jeu) {
+    public Entite(String nom, int x, int y, Jeu jeu, int attaque) {
         this.nom = new SimpleStringProperty(nom);
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
-        this.map = map;
         this.jeu = jeu;
+        this.attaque = attaque;
     }
 
     public int getTailleH() {
@@ -166,11 +160,8 @@ public abstract class Entite {
     public final void setY(int y) {
         this.y.setValue(y);
     }
-
-    public Map getMap() {
-        return map;
-    }
-
+    public int getAttaque() { return this.attaque;}
+    public void setAttaque(int attaque) { this.attaque = attaque;}
     public Jeu getJeu() {
         return jeu;
     }
@@ -189,7 +180,7 @@ public abstract class Entite {
 //        int y = (int) (projectile.getY());
 //
 //
-//        if (this.map.getCase(j, i) != 0) { // si le bloc n'est pas du ciel
+//        if (jeu.getCarte().getCase(j, i) != 0) { // si le bloc n'est pas du ciel
 //
 //            Rectangle2D hitboxBloc = new Rectangle2D(x,y, jeu.getTaille1bloc(, jeu.getTaille1bloc();//Bloc à la position de la flèche
 //
@@ -229,11 +220,11 @@ public abstract class Entite {
         for (int i = caseY - 1; i <= caseY + 2; i++) { // +2 pour la taille du personnage (2 blocs de hauteur)
             for (int j = caseX - 1; j <= caseX + 1; j++) {
 
-                if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
-                    if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
+                if (i >= 0 && i < this.jeu.getCarte().getLigne() && j >= 0 && j < jeu.getCarte().getColonne()) {
+                    if (jeu.getCarte().getCase(i, j) != 0) { // si le bloc n'est pas du ciel
 
-                        xBloc = this.map.getCoordonnéesX(j);
-                        yBloc = this.map.getCoordonnéesY(i);
+                        xBloc = jeu.getCarte().getCoordonnéesX(j);
+                        yBloc = jeu.getCarte().getCoordonnéesY(i);
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, jeu.getTaille1bloc(), jeu.getTaille1bloc()); // création d'un rectangle de hitbox pour le bloc en cours
                         if (hitboxEntite.intersects(hitboxBloc)) {// si le rectangle du joueur se superpose au carré du bloc alors :
                             collisionBas = true;
@@ -259,11 +250,11 @@ public abstract class Entite {
 //        //boucle sur les 4 blocs autour du joueur , i+1 i-1 ,j+1 j-1
 //        for (int i = caseY - 1; i <= caseY + 2; i++) { // +2 pour la taille du personnage (2 blocs de hauteur)
 //            for (int j = caseX - 1; j <= caseX + 1; j++) {
-//                if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
-//                    la_case = this.map.getCase(i, j);
-//                    if (this.map.getCase(i, j) != 0) { // si le bloc n'est pas du ciel
-//                        xBloc = this.map.getCoordonnéesX(j);
-//                        yBloc = this.map.getCoordonnéesY(i);
+//                if (i >= 0 && i < jeu.getCarte().getLigne() && j >= 0 && j < jeu.getCarte().getColonne()) {
+//                    la_case = jeu.getCarte().getCase(i, j);
+//                    if (jeu.getCarte().getCase(i, j) != 0) { // si le bloc n'est pas du ciel
+//                        xBloc = jeu.getCarte().getCoordonnéesX(j);
+//                        yBloc = jeu.getCarte().getCoordonnéesY(i);
 //                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, jeu.getTaille1bloc(, jeu.getTaille1bloc(); // création d'un rectangle de hitbox pour le bloc en cours
 //
 //                        if (hitboxEntite.intersects(hitboxBloc)) { // si le rectangle du joueur se superpose au carré du bloc alors :
@@ -282,7 +273,7 @@ public abstract class Entite {
 //                                vitesseY = 0;
 //                                setY(blocBas);
 //                            }
-//                            if(this.map.getCase(i,j) == 4){
+//                            if(jeu.getCarte().getCase(i,j) == 4){
 //                                this.decrementVie(1);
 //
 //
@@ -307,11 +298,11 @@ public abstract class Entite {
 
         for (int i = caseY ; i <= caseY + 2; i++) {
             for (int j = caseX - 1; j <= caseX + 1; j++) {
-                if (i >= 0 && i < this.map.getLigne() && j >= 0 && j < this.map.getColonne()) {
-                    if (this.map.getCase(i, j) != 0) {
+                if (i >= 0 && i < jeu.getCarte().getLigne() && j >= 0 && j < jeu.getCarte().getColonne()) {
+                    if (jeu.getCarte().getCase(i, j) != 0) {
 
-                        xBloc = this.map.getCoordonnéesX(j);
-                        yBloc = this.map.getCoordonnéesY(i);
+                        xBloc = jeu.getCarte().getCoordonnéesX(j);
+                        yBloc = jeu.getCarte().getCoordonnéesY(i);
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, tailleL, tailleH);
 
                         if (hitboxJoueur.intersects(hitboxBloc)) {

@@ -5,7 +5,6 @@ import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pelle;
 import java.util.HashMap;
 
 public class SpriteItem extends CreateRessourceVisuel{
-
     private HashMap<Integer, String> items;
 
     public SpriteItem() {
@@ -39,6 +38,7 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(16, "/Tiles/Fond_noir.png"); // Coffre
         items.put(17,"/Tiles/Fond_noir.png");
         // Outils
+<<<<<<< HEAD
 
         
 
@@ -61,33 +61,50 @@ public class SpriteItem extends CreateRessourceVisuel{
 
 
         for (int i = 32; i < 63; i++) {
+=======
+        for (int i = 18; i < 50; i++) {
+>>>>>>> 48f48c08460b32cb640f7a820d2b523d031921fe
             items.put(i,"/Tiles/Fond_noir.png");
-
         }
+        items.put(50, "/Sprite_objets/Pelle_pierre.png"); // Pelle de bois
+        items.put(51, "/Sprite_objets/Hache_pierre.png"); // Hache de bois
+        items.put(52, "/Sprite_objets/Pioche_pierre.png"); // Pioche de bois
+        items.put(53, "/Sprite_objets/Pelle_pierre.png"); // Pelle de pierre
+        items.put(54, "/Sprite_objets/Hache_pierre.png"); // Hache de pierre
+        items.put(55, "/Sprite_objets/Pioche_pierre.png"); // Pioche de pierre
+        items.put(56, "/Sprite_objets/Pelle_pierre.png"); // Pelle de fer
+        items.put(57, "/Sprite_objets/Hache_pierre.png"); // Hache de fer
+        items.put(58, "/Sprite_objets/Pioche_pierre.png"); // Pioche de fer
+        items.put(59, "/Sprite_objets/Pelle_pierre.png"); // Pelle de DELJCCium
+        items.put(60, "/Sprite_objets/Hache_pierre.png"); // Hache de DELJCCium
+        items.put(61, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
+        items.put(62, "/Sprite_objets/Pioche_pierre.png"); // Seau vide
+        items.put(63, "/Sprite_objets/Pioche_pierre.png"); // Sceau d'eau
+
         // Armures
 
-        
-        items.put(63,"/Tiles/Fond_noir.png"); // Casque en fer
-        items.put(64,"/Tiles/Fond_noir.png"); // Casque en DELJCCium
-        items.put(65,"/Tiles/Fond_noir.png"); // Plastron en fer
-        items.put(66,"/Tiles/Fond_noir.png"); // Plastron en DELJCCium
-        items.put(67,"/Tiles/Fond_noir.png"); // Jambière en fer
-        items.put(68,"/Tiles/Fond_noir.png"); // Jambière en DELJCCium
-        items.put(69,"/Tiles/Fond_noir.png"); // Botte en fer
-        items.put(70,"/Tiles/Fond_noir.png"); // Botte en DELJCCium
-
-        items.put(71, "/Sprite_objets/Pioche_pierre.png"); // Sceau d'eau
+        items.put(64,"/Tiles/Fond_noir.png"); // Casque en fer
+        items.put(65,"/Tiles/Fond_noir.png"); // Casque en DELJCCium
+        items.put(66,"/Tiles/Fond_noir.png"); // Plastron en fer
+        items.put(67,"/Tiles/Fond_noir.png"); // Plastron en DELJCCium
+        items.put(68,"/Tiles/Fond_noir.png"); // Jambière en fer
+        items.put(69,"/Tiles/Fond_noir.png"); // Jambière en DELJCCium
+        items.put(70,"/Tiles/Fond_noir.png"); // Botte en fer
+        items.put(71,"/Tiles/Fond_noir.png"); // Botte en DELJCCium
 
         //Armes
-        items.put(71, "/Sprite_objets/KatanaDash.png");
-        items.put(72,"/Sprite_objets/Flèche.png");
-        items.put(73,"/Sprite_objets/Arc_repos.png");
-        items.put(74,"/Sprite_objets/gun_bh.png");
-        items.put(75,"/Sprite_objets/Balle.png");
+
+        items.put(72, "/Sprite_objets/KatanaDash.png");
+        items.put(73, "/Sprite_objets/Epee_pierre.png");
+        items.put(74, "/Sprite_objets/Epee_pierre.png");
+        items.put(75, "/Sprite_objets/Pioche_pierre.png");
+        items.put(76, "/Sprite_objets/Pioche_pierre.png");
+        items.put(77,"/Sprite_objets/Flèche.png");
+        items.put(78,"/Sprite_objets/Arc_repos.png");
+        items.put(79,"/Sprite_objets/gun_bh.png");
+        items.put(80,"/Sprite_objets/Balle.png");
 
 
-
-        
     }
 
     public HashMap<Integer,String> getHmap(){

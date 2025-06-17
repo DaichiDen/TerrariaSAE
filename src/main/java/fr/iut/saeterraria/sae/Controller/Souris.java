@@ -56,7 +56,7 @@ public class Souris implements EventHandler<MouseEvent> {
                 if (jeu.getJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];
-                    int[][] tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(72));
+                    int[][] tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(77));
                     for (int i = 0; i < tab.length; i++) {
                         for (int j = 0; j < tab[i].length; j++) {
                             if (tab[i][j] == 1) {
@@ -67,7 +67,8 @@ public class Souris implements EventHandler<MouseEvent> {
                         }
                     }
                     if (oui) {
-                        jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(),"flèche",jeu.getCarte(),jeu,jeu.getJoueur().getX(),jeu.getJoueur().getY(),"Flèche"),x1,y1);
+
+                        jeu.getJoueur().tirerProjectile(new Projectile("Flèche", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 4), x1, y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
 

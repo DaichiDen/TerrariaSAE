@@ -13,7 +13,6 @@ public abstract class EntiteVivante extends Entite{
 
     private BooleanProperty estVivant;
 
-
     private boolean enSaut = false;
 
     private int vitesseY = 0;
@@ -25,8 +24,8 @@ public abstract class EntiteVivante extends Entite{
 
 
 
-    public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Map map, Jeu jeu) {
-        super(nom, x, y, map, jeu);
+    public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Jeu jeu, int attaque) {
+        super(nom, x, y, jeu, attaque);
 
         this.barreVie = new BarreVie(vieMax);
         this.energieMax = new SimpleIntegerProperty(energieMax);
@@ -36,8 +35,6 @@ public abstract class EntiteVivante extends Entite{
         this.estVivant= new SimpleBooleanProperty(true);
 
     }
-
-
 
 
     public int getVitesseY(){
@@ -166,7 +163,7 @@ public abstract class EntiteVivante extends Entite{
             int xi = (int)Math.round(joueurX + dx * t);
             int yi = (int)Math.round(joueurY + dy * t);
 
-            if ((xi != blocX || yi != blocY) && getMap().getCase(yi, xi) != 0) { // Si bloc devant (obstacle)
+            if ((xi != blocX || yi != blocY) && getJeu().getCarte().getCase(yi, xi) != 0) { // Si bloc devant (obstacle)
                 return false;
             }
         }
