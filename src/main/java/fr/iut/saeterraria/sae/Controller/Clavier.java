@@ -125,5 +125,4 @@ public class Clavier implements EventHandler<KeyEvent> {
         screenInventaire.toBack();
         Platform.runLater(() -> screenPrincipal.requestFocus());
     }
-
 }

@@ -188,22 +188,22 @@ public class Jeu {
         items.put(57,new Hache("Hache de fer","",(BlocConstruction) items.get(13)));
         items.put(58,new Pioche("Pioche de fer","",(BlocConstruction) items.get(13)));
 
-        items.put(59,new Pelle("Pelle de DELJCCium","Une pelle en DELJCCium exclusive, accélère fortement la vitesse pour creuser des objets",(BlocConstruction) items.get(13)));
-        items.put(60,new Hache("Hache de DELJCCium","",(BlocConstruction) items.get(13)));
-        items.put(61,new Pioche("Pioche de DELJCCium","",(BlocConstruction) items.get(13)));
+        items.put(59,new Pelle("Pelle DELJCCium","Une pelle en DELJCCium exclusive, accélère fortement la vitesse pour creuser des objets",(BlocConstruction) items.get(13)));
+        items.put(60,new Hache("Hache DELJCCium","",(BlocConstruction) items.get(13)));
+        items.put(61,new Pioche("Pioche DELJCCium","",(BlocConstruction) items.get(13)));
 
         items.put(62, new Item("Seau", "", 1,(BlocConstruction) items.get(13)));
 
         // Armures
 
         items.put(63,new Armure("Casque en fer","",2, (BlocConstruction) items.get(13)));
-        items.put(64,new Armure("Casque en DELJCCium","",3,(BlocConstruction) items.get(13)));
+        items.put(64,new Armure("Casque DELJCCium","",3,(BlocConstruction) items.get(13)));
         items.put(65,new Armure("Plastron en fer","",6,(BlocConstruction) items.get(13)));
-        items.put(66,new Armure("Plastron en DELJCCium","",9,(BlocConstruction) items.get(13)));
+        items.put(66,new Armure("Plastron DELJCCium","",9,(BlocConstruction) items.get(13)));
         items.put(67,new Armure("Jambière en fer","",4,(BlocConstruction) items.get(13)));
-        items.put(68,new Armure("Jambière en DELJCCium","",6,(BlocConstruction) items.get(13)));
+        items.put(68,new Armure("Jambière DELJCCium","",6,(BlocConstruction) items.get(13)));
         items.put(69,new Armure("Botte en fer","",3,(BlocConstruction) items.get(13)));
-        items.put(70,new Armure("Botte en DELJCCium","",5,(BlocConstruction) items.get(13) ) );
+        items.put(70,new Armure("Botte DELJCCium","",5,(BlocConstruction) items.get(13) ) );
 
         // Armes
         items.put(71,new DashingKatana("Katana étrange","Ce Katana semble pouvoir octroyer la capacité à son détenteur de se déplacer à la vitesse du son",10));

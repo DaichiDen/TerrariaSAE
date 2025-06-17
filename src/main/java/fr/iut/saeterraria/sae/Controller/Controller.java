@@ -145,7 +145,7 @@ public class Controller implements Initializable{
 
         Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar, screenPrincipal);
 
-        Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte(),fond);
+        Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte(),fond,screenInventaire,craftSansBlocConstruction,craftEtabli,craftForge,four);
 
         inventaireVue = new VueInventaire(quitterInventaire,screenInventaire,jeu.getJoueur(),inventaire,screen);
         vueProjectile= new VueProjectile(jeu,screen);
@@ -271,6 +271,11 @@ public class Controller implements Initializable{
         screenPrincipal.toFront();
         jeu.getJoueur().setNom(zoneNom.getText());
         Platform.runLater(() -> fond.requestFocus());
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(12),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(13),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(15),1);
+
+
     }
     @FXML
     public void rageQuit(){ Platform.exit();}
