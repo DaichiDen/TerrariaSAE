@@ -128,7 +128,6 @@ public class Controller implements Initializable {
         });
         scene = new Fond(fond, jeu);// Initialise le fond (décor du jeu)
         vueEnnemi = new SpriteMob(jeu, screen, "Pierre");
-
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
         jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu, screen));
 

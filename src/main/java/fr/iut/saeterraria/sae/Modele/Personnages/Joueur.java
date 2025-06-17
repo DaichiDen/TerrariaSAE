@@ -38,16 +38,14 @@
         ArrayList<Ennemi> ennemis_touchées_dash = new ArrayList();
         private IntegerProperty xMax,yMax;
 
-        private Map map;
 
         public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp) {
 
-            super(nom, 20, 100, 20, 20*32, 10*32, 1, 10, jeu,1);
+            super(nom, 20, 100, 20, 20*32, 14*32, 1, 10, jeu,1);
             this.equipement = new int[7];
             this.inventaire = new Inventaire();
             this.pierreTp = pierreTp;
             this.mainCourante = 0;
-            this.map = jeu.getCarte();
             this.xMax = new SimpleIntegerProperty(getX()/super.getJeu().getTaille1bloc());
             this.yMax = new SimpleIntegerProperty(getY()/super.getJeu().getTaille1bloc());
         }
@@ -82,6 +80,9 @@
             if(inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()>=72 && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()<77){
                 setAttaque(1 + ((Armes)(inventaire.getInventaireJoueur()[0][mainCourante].getItem())).getAttaque());
             }
+            else {
+                setAttaque(1);
+            }
         }
 
         public int getMainCourante() {
@@ -107,7 +108,7 @@
                 setXMax(this.getX());
             }
             if (this.getY()/super.getJeu().getTaille1bloc()>this.yMax.get()) {
-               setYMax(this.getY());
+                setYMax(this.getY());
             }
             if(getMarcheGauche()){
                 setDernierPos("gauche");
@@ -139,16 +140,17 @@
 
             }
             super.mettreAJour();
+
             // appel normal sinon
 
         }
 
-
         public boolean miner(int x, int y) {
             boolean miner = false;
             if (peutEtreAtteint(x, y, 2.5)) {
-                if ( ((Bloc) super.getJeu().getItems().get(map.getCase(y,x))).getResistance() == 1 || map.getCase(y, x) != 0 && compareResistance(((Bloc) super.getJeu().getItems().get(map.getCase(y,x)))) ) {
-                    ajouterItem(super.getJeu().getItems().get(map.detruireBloc(x, y)), 1);
+                if ( ((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x))).getResistance() == 1 || getJeu().getCarte().getCase(y, x) != 0 && compareResistance(((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x)))) ) {
+                    int[] bloc = getJeu().getCarte().detruireBloc(x, y);
+                    ajouterItem(super.getJeu().getItems().get(bloc[0]), bloc[1]);
                     miner = true;
                 }
             }
@@ -161,8 +163,8 @@
 
         public void poser(int x, int y) {//x = colonne && y = ligne
             if( (this.getX()/32)!=x || this.getY()/32!=y ) {
-                 if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() != 0 && map.getCase(y, x) == 0) {
-                    map.poserBloc(x, y, inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet());
+                 if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() != 0 && getJeu().getCarte().getCase(y, x) == 0) {
+                    getJeu().getCarte().poserBloc(x, y, inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet());
                     inventaire.getInventaireJoueur()[0][mainCourante].retireQuantite(1);
                 }
             }
@@ -268,7 +270,6 @@
                 System.out.println("craft pas réussi");
             }
         }
-
 
     //    public int[][][] dansZone(Map map) {
     //        int caseX = (int) (getX() / taille1bloc);

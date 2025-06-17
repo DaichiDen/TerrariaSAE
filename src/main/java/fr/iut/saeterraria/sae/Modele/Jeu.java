@@ -158,19 +158,18 @@ public class Jeu {
         items.put(6, new Bloc("Pierre","Bloc basique de pierre commun dans les sous-sol",2,2));
         items.put(7, new Bloc("Minerai Fer","Métal commun de Fer",3,4));
         items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1));
-        items.put(9, new Bloc("Glace","",1,2));
-        items.put(10, new Item(" Minerai DELJCCium", "", 1));
+        items.put(9, new Bloc("Minerai DELJCCium","",3,4));
+        items.put(10, new Item("DELJCCium", "", 1));
         items.put(11,new BlocConstruction("ConstructionSansBloc","",0,0));
         items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,1, (BlocConstruction) items.get(11)));
         items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(12) ));
         items.put(14, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3,(BlocConstruction) items.get(12)));
         items.put(15, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,2,(BlocConstruction) items.get(12)));
 
-        items.put(16, new Bloc("Minerai DELJCCium", "", 3, 9));
-
         items.get(8).setProvenance((BlocConstruction) items.get(15));
         items.get(10).setProvenance((BlocConstruction) items.get(15));
-
+        items.put(16, new Bloc("Pique","",1,10));
+        items.put(17, new Bloc("BedRock","Incassable",1,10));
         for (int i=17; i<=23; i++) {
             items.put(i, new Item("","",1));
         }

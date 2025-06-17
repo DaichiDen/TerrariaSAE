@@ -19,22 +19,23 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(2, "/Tiles/Dirt_2.png"); // Terre Basse
         items.put(3, "/Tiles/Bois.png"); // Bois
         items.put(4, "/Tiles/Minerais_charbon.png"); // Minerai Charbon
-        items.put(5, "/Tiles/Coal.png"); // Charbon // déc
-        items.put(6, "/Tiles/Fond_noir.png"); // Pierre
-        items.put(7, "/Tiles/Fond_noir.png"); // Minerai Fer
-        items.put(8, "/Tiles/Fond_noir.png"); // Fer
-        items.put(9, "/Tiles/Fond_noir.png"); // Glace
-        items.put(10, "/Tiles/Fond_noir.png"); // DELJCCium
-        items.put(11, "");
+        items.put(5, "/Sprite_objets/Coal.png"); // Charbon
+        items.put(6, "/Tiles/Roche_moche.png"); // Pierre
+        items.put(7, "/Tiles/Minerais_fer.png"); // Minerai Fer
+        items.put(8, "/Sprite_objets/Iron_ingot.png"); // Fer
+        items.put(9, "/Tiles/Minerais_DELJCCium.png"); //Minerai DELJCCIUM
+        items.put(10, "/Sprite_objets/DELJCCIUM_ingot.png"); // DELJCCium
+        items.put(16, "/Tiles/piques_vorpales.png");
         // Blocs à constructions
-        items.put(12, "/Tiles/Fond_noir.png"); // Etabli
-        items.put(13, "/Tiles/Fond_noir.png"); // Forge
+        items.put(12, "/Tiles/Etabli.png"); // Etabli
+        items.put(13, "/Tiles/Forge.png"); // Forge
         items.put(14, "/Tiles/Fond_noir.png"); // Alambique
-        items.put(15, "/Tiles/Fond_noir.png"); // Four
+        items.put(15, "/Tiles/Four.png"); // Four
 
         /* ---------- À ajouter le reste ------------- */
-        items.put(16, "/Tiles/Fond_noir.png"); // Coffre
-        items.put(17,"/Tiles/Fond_noir.png");
+        items.put(16,"/Tiles/piques_vorpales.png");
+        items.put(17,"/Tiles/bedrock.png");
+        items.put(24,"/Tiles/Coffre.png");// Coffre
         // Outils
 
         items.put(51, "/Sprite_objets/Pioche_bois.png"); // Pioche de bois
@@ -46,14 +47,14 @@ public class SpriteItem extends CreateRessourceVisuel{
 
         // Armures
 
-        items.put(64,"/Tiles/Fond_noir.png"); // Casque en fer
-        items.put(65,"/Tiles/Fond_noir.png"); // Casque en DELJCCium
-        items.put(66,"/Tiles/Fond_noir.png"); // Plastron en fer
-        items.put(67,"/Tiles/Fond_noir.png"); // Plastron en DELJCCium
-        items.put(68,"/Tiles/Fond_noir.png"); // Jambière en fer
-        items.put(69,"/Tiles/Fond_noir.png"); // Jambière en DELJCCium
-        items.put(70,"/Tiles/Fond_noir.png"); // Botte en fer
-        items.put(71,"/Tiles/Fond_noir.png"); // Botte en DELJCCium
+        items.put(64,"/Sprite_objets/Casque_fer.png"); // Casque en fer
+        items.put(65,"/Sprite_objets/Casque_DELJCCium.png"); // Casque en DELJCCium
+        items.put(66,"/Sprite_objets/Plastron_fer.png"); // Plastron en fer
+        items.put(67,"/Sprite_objets/Plastron_DELJCCium.png"); // Plastron en DELJCCium
+        items.put(68,"/Sprite_objets/Jambieres_fer.png"); // Jambière en fer
+        items.put(69,"/Sprite_objets/Jambieres_DELJCCium.png"); // Jambière en DELJCCium
+        items.put(70,"/Sprite_objets/Bottes_fer.png"); // Botte en fer
+        items.put(71,"/Sprite_objets/Bottes_DELJCCium.png"); // Botte en DELJCCium
 
         //Armes
 
@@ -62,10 +63,10 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(74, "/Sprite_objets/Epee_pierre.png");
         items.put(75, "/Sprite_objets/Pioche_pierre.png");
         items.put(76, "/Sprite_objets/Pioche_pierre.png");
-        items.put(77,"/Sprite_objets/Flèche.png");
-        items.put(78,"/Sprite_objets/Arc_repos.png");
-        items.put(79,"/Sprite_objets/gun_bh.png");
-        items.put(80,"/Sprite_objets/Balle.png");
+        items.put(77, "/Sprite_objets/Flèche.png");
+        items.put(78, "/Sprite_objets/Arc_repos.png");
+        items.put(79, "/Sprite_objets/gun_bh.png");
+        items.put(80, "/Sprite_objets/Balle.png");
 
 
     }

@@ -177,6 +177,7 @@ public abstract class EntiteVivante extends Entite{
 
     public void mettreAJour() {
         if (estVivant()) {
+
             if (!getCollisionBas()) {
                 vitesseY += getGravité();
             }
@@ -225,6 +226,8 @@ public abstract class EntiteVivante extends Entite{
             // Appliquer le déplacement
             setX(getX() + vitesseX);
             bloquéHorizontal(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
+
+
         } else {
             if (!getCollisionBas()) {
                 vitesseY += getGravité();
@@ -232,6 +235,8 @@ public abstract class EntiteVivante extends Entite{
             setY(getY() + vitesseY);
             bloquéVertical(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
         }
+
+        resterInBounds();
     }
 
     // Gestion du nom
@@ -317,6 +322,18 @@ public abstract class EntiteVivante extends Entite{
     public final IntegerProperty vitesseMaxProperty(){return vitesseMax;}
     public final int getVitesseMax() {return vitesseMax.getValue();}
     public void setVitesseMax(int vitesse) {this.vitesseMax.setValue(vitesse);}
+
+    public void resterInBounds(){
+        if(this.getX()<=0){
+            vitesseX=0;
+            setX(0);
+            setMarcheGauche(false);
+        }
+        if(this.getY()<=0){
+            vitesseY=0;
+            setY(0);
+        }
+    }
 
 }
 

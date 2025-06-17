@@ -47,6 +47,8 @@ public class Souris implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         int x = ((int) mouseEvent.getX()) / 32;
         int y = ((int) mouseEvent.getY()) / 32;
+        System.out.println("Y modèle : " + x);
+        System.out.println("X modèle : " + y);
         int x1 = ((int) mouseEvent.getX());
         int y1 = ((int) mouseEvent.getY());
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {

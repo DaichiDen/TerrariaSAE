@@ -17,6 +17,8 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
     private ImageView spriteActuel;
     private String dernierEtat = "";
+    private boolean bindXActif = true;
+    private boolean bindYActif = true;
     private ImageView marchedroite = createImageView("/Sprite/Chevalier_marcheDroite_Bon.gif", width, height);
     private ImageView marchegauche = createImageView("/Sprite/Chevalier_marcheGauche_Bon.gif", width, height);
     private ImageView marcheNon = createImageView("/Sprite/Hero_stop.png", width, height);
@@ -31,14 +33,39 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         jeu.getJoueur().marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
         jeu.getJoueur().xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
 
-        screen.translateXProperty().bind(jeu.getJoueur().xProperty().multiply(-1).add(20*32));
-        screen.translateYProperty().bind(jeu.getJoueur().yProperty().multiply(-1).add(12*32));
+        bindAll();
     }
 
     public void mettreAJourSpriteJoueur(Joueur joueur) {
+
+        if (bindXActif && joueur.xProperty().getValue() <= 20*32) { //unbind gauche
+            System.out.println("undbindX gauche");
+            unbindX();
+            bindXActif = false;
+        }
+        else if (bindXActif && joueur.xProperty().getValue() >= 100*32){ //unbind droite 40 sera remplacé par la map final
+            unbindX();
+            bindXActif = false;
+        }
+        else if (!bindXActif && joueur.xProperty().getValue() > 20*32 && joueur.xProperty().getValue() < 100*32) {
+            System.out.println("bindX");
+            bindX();
+            bindXActif = true;
+        }
+
+        if (bindYActif && joueur.yProperty().getValue()<=14*32){ // unbind haut
+            unbindY();
+            bindYActif = false;
+        }
+        else if (bindYActif && joueur.yProperty().getValue()>=(80-8)*32){ //unbind bas 50 est le nombre max de ligne
+            unbindY();
+            bindYActif = false;
+        }
+        else if (!bindYActif && joueur.yProperty().getValue() > 14*32 && joueur.yProperty().getValue() < (80-8)*32) {
+            bindY();
+            bindYActif = true;
+        }
         String etatActuel = "";
-
-
         if (!joueur.estVivant()) {
             etatActuel = "mort";
         } else if (joueur.getMarcheGauche()) {
@@ -92,6 +119,23 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         dernierEtat = etatActuel;
     }
 
+    public void unbindX(){
+        screen.translateXProperty().unbind();
+    }
+    public void unbindY(){
+        screen.translateYProperty().unbind();
+    }
+
+    public void bindAll(){
+        bindX();
+        bindY();
+    }
+    public void bindX(){
+        screen.translateXProperty().bind(jeu.getJoueur().xProperty().multiply(-1).add(20*32));
+    }
+    public void bindY(){
+        screen.translateYProperty().bind(jeu.getJoueur().yProperty().multiply(-1).add(14*32));
+    }
 }
 
 
