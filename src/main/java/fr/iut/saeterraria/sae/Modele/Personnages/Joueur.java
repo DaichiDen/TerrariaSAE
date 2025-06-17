@@ -1,9 +1,11 @@
     package fr.iut.saeterraria.sae.Modele.Personnages;
     import fr.iut.saeterraria.sae.Modele.Jeu;
     import fr.iut.saeterraria.sae.Modele.Map.Map;
+    import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
     import fr.iut.saeterraria.sae.Modele.Objets.Item;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 
+    import fr.iut.saeterraria.sae.Modele.Objets.Outils;
     import javafx.beans.property.BooleanProperty;
     import javafx.beans.property.SimpleBooleanProperty;
 
@@ -140,10 +142,9 @@
 
 
         public boolean miner(int x, int y) {
-
             boolean miner = false;
             if (peutEtreAtteint(x, y, 2.5)) {
-                if (map.getCase(y, x) != 0) {
+                if ( ((Bloc) super.getJeu().getItems().get(map.getCase(y,x))).getResistance() == 1 || map.getCase(y, x) != 0 && ((Bloc) super.getJeu().getItems().get(map.getCase(y,x))).getResistance() <= ((Outils)inventaire.getInventaireJoueur()[0][mainCourante].getItem()).getEfficacite()) {
                     ajouterItem(super.getJeu().getItems().get(map.detruireBloc(x, y)), 1);
                     miner = true;
                 }

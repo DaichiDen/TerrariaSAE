@@ -49,15 +49,15 @@ public class Souris implements EventHandler<MouseEvent> {
                         jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(), "Flèche", map, jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY()), x1, y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
-
-
                 }
-                jeu.getJoueur().action(x1, y1, 2);
-                if (jeu.getJoueur().miner(x, y)) {
+                else if (jeu.getJoueur().miner(x, y)) {
                     this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// faire de la taille de la map un un getter
-
                     this.tp.getChildren().add((((y * tp.getPrefColumns()) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
                 }
+                else {
+                    jeu.getJoueur().action(x1, y1, 2);
+                }
+
 
             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 if (jeu.getJoueur().estVivant()) {

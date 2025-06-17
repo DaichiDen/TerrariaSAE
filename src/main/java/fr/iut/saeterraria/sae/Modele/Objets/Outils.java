@@ -9,14 +9,17 @@ import java.util.HashMap;
 
 // Classe pour les sceau, canne à pèche, Coffres...
 public abstract class Outils extends Item{
-
-    public Outils (String nom,String description) {
+    private int efficacite;
+    public Outils (String nom,String description, int efficacite) {
         super(nom,description,3);
+        efficacite = efficacite;
     }
 
-    public Outils (String nom, String description, BlocConstruction blocConstruction) {
+    public Outils (String nom, String description, int efficacite, BlocConstruction blocConstruction) {
         super(nom,description,3,blocConstruction);
+        efficacite = efficacite;
     }
 
+    public int getEfficacite(){ return efficacite;}
     public abstract void action();
 }

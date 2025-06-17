@@ -13,7 +13,6 @@ public class Ennemi extends EntiteVivante {
     private long dernièreAttaque=60;
     private long cooldown=60;
 
-
     private ArrayList<Item> listDrops;
 
     public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def, int vitesse, Map map, Jeu jeu) {

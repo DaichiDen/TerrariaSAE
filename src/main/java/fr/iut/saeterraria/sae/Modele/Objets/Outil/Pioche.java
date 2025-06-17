@@ -5,12 +5,12 @@ import fr.iut.saeterraria.sae.Modele.Objets.Outils;
 
 public class Pioche extends Outils {
 
-    public Pioche(String nom,String description) {
-        super(nom,description);
+    public Pioche(String nom,String description, int efficacite) {
+        super(nom,description,efficacite);
     }
 
-    public Pioche(String nom, String description, BlocConstruction blocConstruction) {
-        super(nom,description, blocConstruction);
+    public Pioche(String nom, String description, int efficacite, BlocConstruction blocConstruction) {
+        super(nom,description, efficacite, blocConstruction);
     }
 
     @Override

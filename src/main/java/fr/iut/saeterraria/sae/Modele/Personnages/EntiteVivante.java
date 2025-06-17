@@ -24,7 +24,6 @@ public abstract class EntiteVivante extends Entite{
     private int vitesseX = 0;
 
 
-
     public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Map map, Jeu jeu) {
         super(nom, x, y, map, jeu);
 
@@ -36,9 +35,6 @@ public abstract class EntiteVivante extends Entite{
         this.estVivant= new SimpleBooleanProperty(true);
 
     }
-
-
-
 
     public int getVitesseY(){
         return vitesseY;

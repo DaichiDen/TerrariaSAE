@@ -133,34 +133,27 @@ public class Jeu {
     }
 
     private void initialiseItems() {//Ajouter une range d"id pour item pas obtenable
-        items.put(0, new Bloc("Ciel","Ciel du monde",0,0));
+        items.put(0, new Bloc("Ciel","Ciel du monde",0));
 
 
         // Blocs
 
-        items.put(1, new Bloc("Terre Haute","Bloc commun qui recouvre le monde",1,1));
-        items.put(2, new Bloc("Terre Basse","Bloc commun qui recouvre le sol du monde",1,1));
-        items.put(3, new Bloc("Bois","Element indispensable, base de créativité",1,3));
-        items.put(4, new Bloc("Minerai Charbon","Bloc contenant plusieurs charbons",2,3));
+        items.put(1, new Bloc("Terre Haute","Bloc commun qui recouvre le monde",1));
+        items.put(2, new Bloc("Terre Basse","Bloc commun qui recouvre le sol du monde",1));
+        items.put(3, new Bloc("Bois","Element indispensable, base de créativité",1));
+        items.put(4, new Bloc("Minerai Charbon","Bloc contenant plusieurs charbons",2));
         items.put(5, new Item("Charbon","Permet d'alimenter le four et la forge en chaleur",1));
-        items.put(6, new Bloc("Pierre","Bloc basique de pierre commun dans les sous-sol",2,5));
-        items.put(7, new Bloc("Minerai Fer","Métal commun de Fer",3,7));
+        items.put(6, new Bloc("Pierre","Bloc basique de pierre commun dans les sous-sol",5));
+        items.put(7, new Bloc("Minerai Fer","Métal commun de Fer",3));
         items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1, (BlocConstruction) items.get(15)));
-        items.put(9, new Bloc("Glace","",1,2));
+        items.put(9, new Bloc("Glace","",1));
         items.put(10, new Item("DELJCCium", "", 1));
 
-
-
-
-
-
-
-
         items.put(11,new BlocConstruction("ConstructionSansBloc","",0,0));
-        items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(11)));
+        items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,1, (BlocConstruction) items.get(11)));
         items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(12) ));
-        items.put(14, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3,(BlocConstruction) items.get(12)));
-        items.put(15, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,3,(BlocConstruction) items.get(12)));
+        items.put(14, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,1,(BlocConstruction) items.get(12)));
+        items.put(15, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,2,(BlocConstruction) items.get(12)));
         for (int i=16; i<=23; i++) {
             items.put(i, new Pelle("",""));
         }
@@ -177,21 +170,21 @@ public class Jeu {
         // Outils
         items.put(49, new Pierre_TP());
 
-        items.put(50,new Pelle("Pelle de bois","Une pelle en bois ordinaire, accélère la vitesse pour creuser des objets",(BlocConstruction) items.get(12)));
-        items.put(51,new Hache("Hache de bois","",(BlocConstruction) items.get(12)));
-        items.put(52,new Pioche("Pioche de bois","",(BlocConstruction) items.get(12)));
+        items.put(50,new Item("","",1));
+        items.put(51,new Item("","",1));
+        items.put(52,new Pioche("Pioche de bois","",2,(BlocConstruction) items.get(12)));
 
-        items.put(53,new Pelle("Pelle de pierre","", (BlocConstruction) items.get(12)));
-        items.put(54,new Hache("Hache de pierre","",(BlocConstruction) items.get(12)));
-        items.put(55,new Pioche("Pioche de pierre","",(BlocConstruction) items.get(12)));
+        items.put(53,new Item("","",1));
+        items.put(54,new Item("","",1));
+        items.put(55,new Pioche("Pioche de pierre","",3,(BlocConstruction) items.get(12)));
 
-        items.put(56,new Pelle("Pelle de fer","",(BlocConstruction) items.get(13)));
-        items.put(57,new Hache("Hache de fer","",(BlocConstruction) items.get(13)));
-        items.put(58,new Pioche("Pioche de fer","",(BlocConstruction) items.get(13)));
+        items.put(56,new Item("","",1));
+        items.put(57,new Item("","",1));
+        items.put(58,new Pioche("Pioche de fer","",4,(BlocConstruction) items.get(13)));
 
-        items.put(59,new Pelle("Pelle de DELJCCium","Une pelle en DELJCCium exclusive, accélère fortement la vitesse pour creuser des objets",(BlocConstruction) items.get(13)));
-        items.put(60,new Hache("Hache de DELJCCium","",(BlocConstruction) items.get(13)));
-        items.put(61,new Pioche("Pioche de DELJCCium","",(BlocConstruction) items.get(13)));
+        items.put(59,new Item("","",1));
+        items.put(60,new Item("","",1));
+        items.put(61,new Pioche("Pioche de DELJCCium","",5,(BlocConstruction) items.get(13)));
 
         items.put(62, new Item("Seau", "", 1,(BlocConstruction) items.get(13)));
 
