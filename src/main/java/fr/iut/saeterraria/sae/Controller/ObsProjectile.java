@@ -33,13 +33,24 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
     public void onChanged(Change<? extends Projectile> c) {
         while (c.next()) {
             if (c.wasAdded()) {
+                ImageView sprite;
                 for (Projectile projectile_aj : c.getAddedSubList()) {
                     // 1) Créer le Node graphique du mob (par ex. un ImageView)
-                    URL imageURL = getClass().getResource("/Sprite_objets/Flèche.png");
-                    Image image = new Image(String.valueOf(imageURL));
-                    ImageView sprite = new ImageView(image);
-                    sprite.setFitWidth(54);
-                    sprite.setFitHeight(64);
+                    if (projectile_aj.getType().equals("Flèche")){
+                        URL imageURL = getClass().getResource("/Sprite_objets/Flèche.png");
+                        Image image = new Image(String.valueOf(imageURL));
+                        sprite = new ImageView(image);
+                        sprite.setFitWidth(54);
+                        sprite.setFitHeight(64);
+                    }
+                    else{
+                        URL imageURL = getClass().getResource("/Sprite_objets/Balle.png");
+                        Image image = new Image(String.valueOf(imageURL));
+                        sprite = new ImageView(image);
+                        sprite.setFitWidth(54);
+                        sprite.setFitHeight(64);
+                    }
+
                     // Positionner au bon endroit, ex. :
                     sprite.setLayoutX(projectile_aj.getX());
                     sprite.setLayoutY(projectile_aj.getY());
@@ -51,11 +62,13 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
                     screen.getChildren().add(sprite);
 
                     // 4) Mettre à jour la position à chaque frame (si tu utilises yProperty/xProperty)
+                    ImageView finalSprite = sprite;
                     projectile_aj.xProperty().addListener((obs, oldX, newX) -> {
-                        sprite.setLayoutX(newX.doubleValue());
+                        finalSprite.setLayoutX(newX.doubleValue());
                     });
+                    ImageView finalSprite1 = sprite;
                     projectile_aj.yProperty().addListener((obs, oldY, newY) -> {
-                        sprite.setLayoutY(newY.doubleValue());
+                        finalSprite1.setLayoutY(newY.doubleValue());
                     });
 
                     // 5) **ÉCOUTER la propriété estVivantProperty()**

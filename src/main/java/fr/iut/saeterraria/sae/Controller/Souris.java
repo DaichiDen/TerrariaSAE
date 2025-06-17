@@ -32,9 +32,25 @@ public class Souris implements EventHandler<MouseEvent> {
         int y1 = ((int) mouseEvent.getY());
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
             if (jeu.getJoueur().estVivant()) {
-                if(jeu.getJoueur().gunEnMain() && !jeu.getJoueur().isTimeStop()){
+                if (jeu.getJoueur().gunEnMain() && !jeu.getJoueur().isTimeStop()) {
                     jeu.getJoueur().setTimeStop(true);
-                    jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(), "Balle en plomb", map, jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY()), x1, y1);
+
+                    boolean oui = false;
+                    int[] indice = new int[2];
+                    int[][] tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(75));
+                    for (int i = 0; i < tab.length; i++) {
+                        for (int j = 0; j < tab[i].length; j++) {
+                            if (tab[i][j] == 1) {
+                                oui = true;
+                                indice[0] = i;
+                                indice[1] = j;
+                            }
+                        }
+                    }
+                    if (oui) {
+                        jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(),"balle",jeu.getCarte(),jeu,jeu.getJoueur().getX(),jeu.getJoueur().getY(),"balle"),x1,y1);
+                        jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
+                    }
                 }
 
                 if (jeu.getJoueur().arcEnMain()) {
@@ -51,7 +67,7 @@ public class Souris implements EventHandler<MouseEvent> {
                         }
                     }
                     if (oui) {
-                        jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(), "Flèche", map, jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY()), x1, y1);
+                        jeu.getJoueur().tirerProjectile(new Projectile(jeu.getJoueur(),"flèche",jeu.getCarte(),jeu,jeu.getJoueur().getX(),jeu.getJoueur().getY(),"Flèche"),x1,y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
 
@@ -63,15 +79,16 @@ public class Souris implements EventHandler<MouseEvent> {
 
                     this.tp.getChildren().add((((y * tp.getPrefColumns()) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
                 }
-
-            } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                if (jeu.getJoueur().estVivant()) {
-                    jeu.getJoueur().poser(x, y);
-                    this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
-                    this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
-                }
             }
         }
+        else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+            if (jeu.getJoueur().estVivant()) {
+                jeu.getJoueur().poser(x, y);
+                this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
+                this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+            }
+        }
+
     }
 
 

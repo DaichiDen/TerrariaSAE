@@ -14,13 +14,15 @@ public class Projectile extends Entite{
     private int xBloc, yBloc;
     private Map map;
     private BooleanProperty actif;
+    private String type;
 
-    public Projectile(Joueur joueur, String nom, Map map, Jeu jeu, int xJoueur, int yJoueur) {
+    public Projectile(Joueur joueur, String nom, Map map, Jeu jeu, int xJoueur, int yJoueur,String type) {
         super(nom, xJoueur, yJoueur, map, jeu);
         this.joueur = joueur;
         this.nom = new SimpleStringProperty(nom);
         this.map = map;
         this.actif = new SimpleBooleanProperty(true);
+        this.type=type;
 
     }
 
@@ -46,6 +48,13 @@ public class Projectile extends Entite{
     public void setyBloc(int yBloc) {
         this.yBloc = yBloc;
     }
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+
 
     @Override
     public int getGravité() {

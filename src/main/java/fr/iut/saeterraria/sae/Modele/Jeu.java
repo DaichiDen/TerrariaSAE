@@ -61,18 +61,31 @@ public class Jeu {
     public void màjProjectiles() {
         if (this.getListe_projectiles() != null) {
             for (int i = 0; i < this.getListe_projectiles().size(); i++) {
+                if (!getJoueur().isTimeStop()) {
 
-                this.getListe_projectiles().get(i).setX(this.getListe_projectiles().get(i).getX() + this.getListe_projectiles().get(i).getForceX());
+                    this.getListe_projectiles().get(i).setX(this.getListe_projectiles().get(i).getX() + this.getListe_projectiles().get(i).getForceX());
 
-                if(!this.getListe_projectiles().get(i).getNom().equals("Balle en plomb")){
-                    this.getListe_projectiles().get(i).setForceY(this.getListe_projectiles().get(i).getForceY() + this.getListe_projectiles().get(i).getGravité());
-                }
+                    if (!this.getListe_projectiles().get(i).getNom().equals("Balle en plomb")) {
+                        this.getListe_projectiles().get(i).setForceY(this.getListe_projectiles().get(i).getForceY() + this.getListe_projectiles().get(i).getGravité());
+                    }
 
-                this.getListe_projectiles().get(i).setY(this.getListe_projectiles().get(i).getY() + this.getListe_projectiles().get(i).getForceY());
+                    this.getListe_projectiles().get(i).setY(this.getListe_projectiles().get(i).getY() + this.getListe_projectiles().get(i).getForceY());
 
-                if(projectiles.get(i).collisionVerticale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH()) || projectiles.get(i).collisionHorizontale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH())) {
-                    getListe_projectiles().get(i).setActif(false);
-                    getListe_projectiles().remove(i);
+                    if (projectiles.get(i).collisionVerticale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH()) || projectiles.get(i).collisionHorizontale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH())) {
+                        getListe_projectiles().get(i).setActif(false);
+                        getListe_projectiles().remove(i);
+                    }
+                }else{
+                    if(this.getListe_projectiles().get(i).getNom().equals("Balle en plomb")){
+                        this.getListe_projectiles().get(i).setX(this.getListe_projectiles().get(i).getX() + this.getListe_projectiles().get(i).getForceX());
+
+                        this.getListe_projectiles().get(i).setY(this.getListe_projectiles().get(i).getY() + this.getListe_projectiles().get(i).getForceY());
+
+                        if (projectiles.get(i).collisionVerticale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH()) || projectiles.get(i).collisionHorizontale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH())) {
+                            getListe_projectiles().get(i).setActif(false);
+                            getListe_projectiles().remove(i);
+                        }
+                    }
                 }
             }
         }
@@ -214,7 +227,7 @@ public class Jeu {
         items.put(72, new Item("Flèche","Flèche",1,(BlocConstruction) items.get(12)));
         items.put(73, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(12)));
         items.put(74, new Distance("Arquebuse","Etrange objet qui semble ralentir le temps",5));
-        items.put(75, new Item("Balle en plomb","Un projectile qui peut être utlisé ",5));
+        items.put(75, new Item("Balle en plomb","Un projectile qui peut être utlisé ",1));
     }
 
     private void initializeRecettes() {

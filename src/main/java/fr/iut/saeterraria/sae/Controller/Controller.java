@@ -208,9 +208,16 @@ public class Controller implements Initializable {
                     if (jeu.getJoueur().isTimeStop()) {
                         jeu.getJoueur().mettreAJour();
 
+                        for(int i=0;i<jeu.getListe_projectiles().size();i++){
+                            System.out.println("ziziiiiiiiiii");
+                            if(jeu.getListe_projectiles().get(i).getType().equals("balle")){
+                                jeu.màjProjectiles();
+                            }
+                        }
+
                         if (!timeStopActive) {
                             timeStopActive = true;
-                            PauseTransition delay = new PauseTransition(Duration.seconds(10));
+                            PauseTransition delay = new PauseTransition(Duration.seconds(5));
                             delay.setOnFinished(event -> {
                                 jeu.getJoueur().setTimeStop(false);
                                 timeStopActive = false;
@@ -219,6 +226,7 @@ public class Controller implements Initializable {
                         }
                     } else {
                         jeu.getJoueur().mettreAJour();
+
 
                         for (int i = 0; i < jeu.getMobs().size(); i++) {
                             jeu.getMobs().get(i).mettreAJour();
@@ -247,12 +255,12 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
-
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(74), 1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(75), 50);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(73), 1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(72), 50);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(71), 1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(74), 1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(75), 50);
+
 
     }
 
