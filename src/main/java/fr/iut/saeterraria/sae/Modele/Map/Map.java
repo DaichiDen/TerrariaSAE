@@ -102,9 +102,18 @@ public class Map {
     }
 
     public int detruireBloc(int x,int y){
-        int blocDetruit = map[y][x];
-        map[y][x]=0;
-        return blocDetruit;
+        int blocRecup = map[y][x];
+        switch (blocRecup){
+            case 1:
+                blocRecup = 2;
+                break;
+            case 4:
+                blocRecup = 5;
+                break;
+            default:
+                break;
+        }
+        return blocRecup;
     }
     public void poserBloc(int x,int y,int val){
         map[y][x]=val;

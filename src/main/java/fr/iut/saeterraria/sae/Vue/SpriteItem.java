@@ -1,7 +1,5 @@
 package fr.iut.saeterraria.sae.Vue;
 
-import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pelle;
-
 import java.util.HashMap;
 
 public class SpriteItem extends CreateRessourceVisuel{
@@ -39,47 +37,12 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(17,"/Tiles/Fond_noir.png");
         // Outils
 
-
-        
-
-
-
-        items.put(18, "/Sprite_objets/Pelle_bois.png"); // Pelle de bois
-        items.put(19, "/Sprite_objets/Hache_bois.png"); // Hache de bois
-        items.put(20, "/Sprite_objets/Pioche_bois.png"); // Pioche de bois
-        items.put(21, "/Sprite_objets/Pelle_pierre.png"); // Pelle de pierre
-        items.put(22, "/Sprite_objets/Hache_pierre.png"); // Hache de pierre
-        items.put(23, "/Sprite_objets/Pioche_pierre.png"); // Pioche de pierre
-        items.put(24, "/Sprite_objets/Pelle_fer.png"); // Pelle de fer
-        items.put(25, "/Sprite_objets/Hache_fer.png"); // Hache de fer
-        items.put(26, "/Sprite_objets/Pioche_fer.png"); // Pioche de fer
-        items.put(27, "/Sprite_objets/Pelle_pierre.png"); // Pelle de DELJCCium
-        items.put(28, "/Sprite_objets/Hache_pierre.png"); // Hache de DELJCCium
-        items.put(29, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
-        items.put(30, "/Sprite_objets/Sceau_vide.png"); // Seau vide
-        items.put(31, "/Sprite_objets/Sceau_eau.png"); // Sceau d'eau
-
-
-
-
-        for (int i = 32; i < 50; i++) {
-
-            items.put(i,"/Tiles/Fond_noir.png");
-        }
-        items.put(50, "/Sprite_objets/Pelle_pierre.png"); // Pelle de bois
-        items.put(51, "/Sprite_objets/Hache_pierre.png"); // Hache de bois
-        items.put(52, "/Sprite_objets/Pioche_pierre.png"); // Pioche de bois
-        items.put(53, "/Sprite_objets/Pelle_pierre.png"); // Pelle de pierre
-        items.put(54, "/Sprite_objets/Hache_pierre.png"); // Hache de pierre
-        items.put(55, "/Sprite_objets/Pioche_pierre.png"); // Pioche de pierre
-        items.put(56, "/Sprite_objets/Pelle_pierre.png"); // Pelle de fer
-        items.put(57, "/Sprite_objets/Hache_pierre.png"); // Hache de fer
-        items.put(58, "/Sprite_objets/Pioche_pierre.png"); // Pioche de fer
-        items.put(59, "/Sprite_objets/Pelle_pierre.png"); // Pelle de DELJCCium
-        items.put(60, "/Sprite_objets/Hache_pierre.png"); // Hache de DELJCCium
-        items.put(61, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
-        items.put(62, "/Sprite_objets/Pioche_pierre.png"); // Seau vide
-        items.put(63, "/Sprite_objets/Pioche_pierre.png"); // Sceau d'eau
+        items.put(51, "/Sprite_objets/Pioche_bois.png"); // Pioche de bois
+        items.put(52, "/Sprite_objets/Pioche_pierre.png"); // Pioche de pierre
+        items.put(53, "/Sprite_objets/Pioche_fer.png"); // Pioche de fer
+        items.put(54, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
+        items.put(62, "/Sprite_objets/Sceau_vide.png"); // Seau vide
+        items.put(63, "/Sprite_objets/Sceau_eau.png"); // Sceau d'eau
 
         // Armures
 

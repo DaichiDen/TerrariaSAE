@@ -18,5 +18,7 @@ public abstract class Outils extends Item{
         super(nom,description,3,blocConstruction);
     }
 
+
+
     public abstract void action();
 }

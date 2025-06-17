@@ -2,6 +2,9 @@
     import fr.iut.saeterraria.sae.Modele.Jeu;
     import fr.iut.saeterraria.sae.Modele.Map.Map;
     import fr.iut.saeterraria.sae.Modele.Objets.Armes;
+    import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
+    import fr.iut.saeterraria.sae.Modele.Objets.Outils;
+    import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
     import fr.iut.saeterraria.sae.Modele.Objets.Item;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 
@@ -142,15 +145,18 @@
 
 
         public boolean miner(int x, int y) {
-
             boolean miner = false;
             if (peutEtreAtteint(x, y, 2.5)) {
-                if (map.getCase(y, x) != 0) {
+                if ( ((Bloc) super.getJeu().getItems().get(map.getCase(y,x))).getResistance() == 1 || map.getCase(y, x) != 0 && compareResistance(((Bloc) super.getJeu().getItems().get(map.getCase(y,x)))) ) {
                     ajouterItem(super.getJeu().getItems().get(map.detruireBloc(x, y)), 1);
                     miner = true;
                 }
             }
             return miner;
+        }
+
+        public boolean compareResistance(Bloc bloc){
+            return bloc.getResistance()<=((Pioche)inventaire.getInventaireJoueur()[0][mainCourante].getItem()).getEfficacite();
         }
 
         public void poser(int x, int y) {//x = colonne && y = ligne
