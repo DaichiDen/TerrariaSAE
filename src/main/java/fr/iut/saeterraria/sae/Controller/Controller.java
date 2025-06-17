@@ -201,16 +201,13 @@ public class Controller implements Initializable {
                 controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI, 2));
             });
         }
-<<<<<<< HEAD
         BiblioSon.play(1);
-=======
         for(int i=0; i<caseRecetteFour.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteFour.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
                 controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI,3));
             });
         }
->>>>>>> craft
 
         // BiblioSon.play(1);
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
@@ -272,7 +269,6 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
-<<<<<<< HEAD
         jeu.getJoueur().ajouterItem(jeu.getItems().get(80), 1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(79), 1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(78), 1);
@@ -285,14 +281,6 @@ public class Controller implements Initializable {
         jeu.getJoueur().ajouterItem(jeu.getItems().get(74),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(75),2);
 
-=======
-        Platform.runLater(() -> screenInventaire.requestFocus());
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(74), 1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(75), 50);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(73), 1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(72), 50);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(71), 1);
->>>>>>> craft
 
 
     }
