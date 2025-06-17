@@ -171,14 +171,18 @@ public class Jeu {
 
 
 
+
+
         items.put(11,new BlocConstruction("ConstructionSansBloc","",0,0));
         items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(11)));
         items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(12) ));
         items.put(14, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3,(BlocConstruction) items.get(12)));
         items.put(15, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,3,(BlocConstruction) items.get(12)));
+
         for (int i=16; i<=23; i++) {
             items.put(i, new Pelle("",""));
         }
+
 
 
         //Bloc outil
@@ -228,6 +232,7 @@ public class Jeu {
         items.put(73, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(12)));
         items.put(74, new Distance("Arquebuse","Etrange objet qui semble ralentir le temps",5));
         items.put(75, new Item("Balle en plomb","Un projectile qui peut être utlisé ",1));
+
     }
 
     private void initializeRecettes() {

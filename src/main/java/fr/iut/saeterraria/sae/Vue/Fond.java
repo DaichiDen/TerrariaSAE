@@ -33,11 +33,12 @@ public class Fond extends CreateRessourceVisuel {
     }
 
     public void initialiseTile() {
-        ajoutTile("/Tiles/Ciel.png");
+        ajoutTile("/Tiles/Ciel.png"); // 0 et ensuite dcp +1
         ajoutTile("/Tiles/Dirt_1.png");
         ajoutTile("/Tiles/Dirt_2.png");
-        ajoutTile("/Tiles/Fond_noir.png");
+        ajoutTile("/Tiles/Bois.png");
         ajoutTile("/Tiles/piques_vorpales.png");
+        ajoutTile("/Tiles/feuilles1.png");
     }
 
     // Permet d'afficher le terrain dans la scène (Pane principal)
