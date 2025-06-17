@@ -27,11 +27,20 @@ public class VueProjectile extends CreateRessourceVisuel{
     }
 
     public void mettreAJourSpriteProjectile(Projectile projectile) {
-        spriteActuel=createImageView("/Sprite_objets/Flèche.png",width,height);
-        spriteActuel.setId(projectile.getNom());
-        spriteActuel.translateXProperty().bind(projectile.xProperty());
-        spriteActuel.translateYProperty().bind(projectile.yProperty());
-        screen.getChildren().add(spriteActuel);
+        if (jeu.getJoueur().arcEnMain()){
+            spriteActuel = createImageView("/Sprite_objets/Flèche.png", width, height);
+            spriteActuel.setId(projectile.getNom());
+            spriteActuel.translateXProperty().bind(projectile.xProperty());
+            spriteActuel.translateYProperty().bind(projectile.yProperty());
+            screen.getChildren().add(spriteActuel);
+        }
+        else if (jeu.getJoueur().gunEnMain()){
+            spriteActuel = createImageView("/Sprite_objets/Balle.png", width, height);
+            spriteActuel.setId(projectile.getNom());
+            spriteActuel.translateXProperty().bind(projectile.xProperty());
+            spriteActuel.translateYProperty().bind(projectile.yProperty());
+            screen.getChildren().add(spriteActuel);
+        }
     }
 
 }
