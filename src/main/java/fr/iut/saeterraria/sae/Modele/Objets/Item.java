@@ -90,6 +90,10 @@ public class Item {
         return this.recette;
     }
 
+    public void setProvenance(BlocConstruction provenance) {
+        this.provenance = provenance;
+    }
+
     public BlocConstruction getProvenance() {
         return this.provenance;
     }

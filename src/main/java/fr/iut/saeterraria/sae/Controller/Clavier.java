@@ -28,6 +28,8 @@ public class Clavier implements EventHandler<KeyEvent> {
     private AnchorPane screenInventaire;
     @FXML
     private GridPane hotBarInventaire;
+    @FXML
+    private Pane screenPrincipal;
 
 
     private final Set<KeyCode> touchesAppuyees = new HashSet<>();
@@ -35,7 +37,7 @@ public class Clavier implements EventHandler<KeyEvent> {
     private VueHotbar vueHotbar;
 
 
-    public Clavier(Jeu jeu, AnchorPane screenInventaire,Button quitterInventaire,Button openInventaire,TilePane fond, GridPane hotBarInventaire) {
+    public Clavier(Jeu jeu, AnchorPane screenInventaire,Button quitterInventaire,Button openInventaire,TilePane fond, GridPane hotBarInventaire, Pane pane) {
 
         this.jeu=jeu;
         this.screenInventaire=screenInventaire;
@@ -43,6 +45,7 @@ public class Clavier implements EventHandler<KeyEvent> {
         this.openInventaire=openInventaire;
         this.fond=fond;
         this.hotBarInventaire=hotBarInventaire;
+        this.screenPrincipal=pane;
         this.vueHotbar = new VueHotbar(jeu,hotBarInventaire);
     }
 
@@ -111,6 +114,7 @@ public class Clavier implements EventHandler<KeyEvent> {
 
     @FXML
     public void ouvrirInventaire() {
+        Platform.runLater(() -> screenInventaire.requestFocus());
         jeu.testCraft();
         screenInventaire.toFront();
         jeu.getJoueur().setMarcheDroite(false);
@@ -119,6 +123,6 @@ public class Clavier implements EventHandler<KeyEvent> {
     @FXML
     public void exitInventaire(){
         screenInventaire.toBack();
+        Platform.runLater(() -> screenPrincipal.requestFocus());
     }
-
 }

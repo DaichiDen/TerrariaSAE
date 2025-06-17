@@ -161,18 +161,22 @@ public class Jeu {
         items.put(5, new Item("Charbon","Permet d'alimenter le four et la forge en chaleur",1));
         items.put(6, new Bloc("Pierre","Bloc basique de pierre commun dans les sous-sol",2,5));
         items.put(7, new Bloc("Minerai Fer","Métal commun de Fer",3,7));
-        items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1, (BlocConstruction) items.get(15)));
+        items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1));
         items.put(9, new Bloc("Glace","",1,2));
-        items.put(10, new Item("DELJCCium", "", 1));
-
+        items.put(10, new Item(" Minerai DELJCCium", "", 1));
         items.put(11,new BlocConstruction("ConstructionSansBloc","",0,0));
         items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(11)));
         items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(12) ));
         items.put(14, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3,(BlocConstruction) items.get(12)));
         items.put(15, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,3,(BlocConstruction) items.get(12)));
 
-        for (int i=16; i<=23; i++) {
-            items.put(i, new Item("","",1));
+        items.put(16, new Bloc("Minerai DELJCCium", "", 3, 9));
+
+        items.get(8).setProvenance((BlocConstruction) items.get(15));
+        items.get(10).setProvenance((BlocConstruction) items.get(15));
+
+        for (int i=17; i<=23; i++) {
+            items.put(i, new Pelle("",""));
         }
 
 
@@ -184,6 +188,7 @@ public class Jeu {
             items.put(i,new Item("","",1));
 
         }
+
         // Outils
         items.put(49, new Pierre_TP());
 
@@ -199,9 +204,9 @@ public class Jeu {
         items.put(57,new Hache("Hache de fer","",(BlocConstruction) items.get(13)));
         items.put(58,new Pioche("Pioche de fer","",(BlocConstruction) items.get(13)));
 
-        items.put(59,new Pelle("Pelle de DELJCCium","Une pelle en DELJCCium exclusive, accélère fortement la vitesse pour creuser des objets",(BlocConstruction) items.get(13)));
-        items.put(60,new Hache("Hache de DELJCCium","",(BlocConstruction) items.get(13)));
-        items.put(61,new Pioche("Pioche de DELJCCium","",(BlocConstruction) items.get(13)));
+        items.put(59,new Pelle("Pelle DELJCCium","Une pelle en DELJCCium exclusive, accélère fortement la vitesse pour creuser des objets",(BlocConstruction) items.get(13)));
+        items.put(60,new Hache("Hache DELJCCium","",(BlocConstruction) items.get(13)));
+        items.put(61,new Pioche("Pioche DELJCCium","",(BlocConstruction) items.get(13)));
 
         items.put(62, new Item("Seau", "", 1,(BlocConstruction) items.get(13)));
         items.put(63,new Item("Seau Vide", "", 1,(BlocConstruction) items.get(13)));
@@ -236,6 +241,16 @@ public class Jeu {
 
 
     private void initializeRecettes() {
+
+        // Lingot de fer : 1 Minérai de fer et 1 charbon et 1 four
+        items.get(8).addInRecette(new ElementRecette(items.get(7),1));
+        items.get(8).addInRecette(new ElementRecette(items.get(4),1));
+
+        // Lingot de DELJCCium : 1 Minérai de DELJCCium et 1 charbon et 1 four
+        items.get(10).addInRecette(new ElementRecette(items.get(16),1));
+        items.get(10).addInRecette(new ElementRecette(items.get(4),1));
+
+
         //Etabli : 4 bois
         items.get(12).addInRecette(new ElementRecette(items.get(3),4));
 
@@ -301,7 +316,6 @@ public class Jeu {
 
     public void initializeBlocConstruction() {
         for (Integer integer : items.keySet()) {
-
             // Sans bloc
             if (items.get(integer).getProvenance() == items.get(11)) {
                 ((BlocConstruction) items.get(11)).addRecette(items.get(integer).getCodeObjet(), items.get(integer).getAttributRecette());
@@ -321,12 +335,16 @@ public class Jeu {
             else if (items.get(integer).getProvenance() == items.get(14)) {
                 ((BlocConstruction) items.get(14)).addRecette(items.get(integer).getCodeObjet(), items.get(integer).getAttributRecette());
             }
-
             // Four
             else if (items.get(integer).getProvenance() == items.get(15)) {
+                System.out.println("Rentré ici four haha");
                 ((BlocConstruction) items.get(15)).addRecette(items.get(integer).getCodeObjet(), items.get(integer).getAttributRecette());
             }
         }
+
+        System.out.println(items.get(15).getName());
+
+        System.out.println("Liste recette four" + ((BlocConstruction) items.get(15)).getListeRecette().size());
     }
 
     public void testCraft() {

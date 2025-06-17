@@ -13,12 +13,14 @@ import javafx.scene.layout.VBox;
 import java.util.HashMap;
 
 public class VueCraft extends SpriteItem {
-    private ScrollPane craftSansBlocConstruction,craftEtabli,craftForge;
-    private VBox caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge;
-    private HashMap<Integer, Recette> recetteSansBloc,recetteEtabli,recetteForge;
+    private ScrollPane craftSansBlocConstruction,craftEtabli,craftForge, four;
+    private VBox caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge, caseRecetteFour;
+    private HashMap<Integer, Recette> recetteSansBloc,recetteEtabli,recetteForge, recetteFour;
     private HashMap<Integer, Item> items;
 
-    public VueCraft(ScrollPane craftSansBlocConstruction,ScrollPane craftEtabli,ScrollPane craftForge,VBox caseRecetteSansBloc,VBox caseRecetteEtabli,VBox caseRecetteForge, HashMap<Integer,Recette> recetteSansBloc,HashMap<Integer, Recette> recetteEtabli,HashMap<Integer, Recette> recetteForge, HashMap<Integer,Item> items) {
+    public VueCraft(ScrollPane craftSansBlocConstruction,ScrollPane craftEtabli,ScrollPane craftForge,VBox caseRecetteSansBloc,VBox caseRecetteEtabli,VBox caseRecetteForge,
+                    HashMap<Integer,Recette> recetteSansBloc,HashMap<Integer, Recette> recetteEtabli,HashMap<Integer, Recette> recetteForge, HashMap<Integer,Item> items,
+                    VBox caseRecetteFour, HashMap<Integer, Recette> recetteFour) {
         this.craftSansBlocConstruction = craftSansBlocConstruction;
         this.craftEtabli = craftEtabli;
         this.craftForge = craftForge;
@@ -28,6 +30,8 @@ public class VueCraft extends SpriteItem {
         this.recetteSansBloc = recetteSansBloc;
         this.recetteEtabli = recetteEtabli;
         this.recetteForge = recetteForge;
+        this.caseRecetteFour = caseRecetteFour;
+        this.recetteFour = recetteFour;
         this.items = items;
 
         craftSansBlocConstruction.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -37,73 +41,10 @@ public class VueCraft extends SpriteItem {
         initialize();
     }
 
-    public void afficherCraftEtabli() {
-        for (Integer codeObjet : recetteEtabli.keySet()) {
+    public void afficherCraft(HashMap<Integer, Recette> recette, VBox caseRecette) {
+        for (Integer codeObjet : recette.keySet()) {
             HBox blocRecette = new HBox();
-            blocRecette.prefWidthProperty().bind(caseRecetteEtabli.widthProperty());
-            blocRecette.setStyle("-fx-border-color: black; -fx-border-width: 2px");
-            blocRecette.setPadding(new Insets(50));
-            VBox sectionItemConstruit = new VBox();
-            VBox sectionItemsNecessaires = new VBox();
-
-            sectionItemConstruit.prefWidthProperty().bind(blocRecette.widthProperty().divide(2));
-            sectionItemsNecessaires.prefWidthProperty().bind(blocRecette.widthProperty().divide(2));
-
-            sectionItemConstruit.setAlignment(Pos.CENTER);
-
-            sectionItemConstruit.getChildren().add(super.createImageView(super.getHmap().get(codeObjet), 70, 70));
-            sectionItemConstruit.getChildren().add(super.createLabelNom(items.get(codeObjet).getName()));
-
-            for (int j = 0; j < recetteEtabli.get(codeObjet).getRecette().size(); j++) {
-                HBox elementRecette = new HBox();
-                elementRecette.setAlignment(Pos.CENTER);
-                elementRecette.getChildren().add(super.createImageView(super.getHmap().get(recetteEtabli.get(codeObjet).getRecette().get(j).getItem().getCodeObjet()), 30, 30));
-                elementRecette.getChildren().add(createLabelQuantite(recetteEtabli.get(codeObjet).getRecette().get(j).getQuantite()));
-                sectionItemsNecessaires.getChildren().add(elementRecette);
-            }
-
-            blocRecette.getChildren().add(sectionItemConstruit);
-            blocRecette.getChildren().add(sectionItemsNecessaires);
-            caseRecetteEtabli.getChildren().add(blocRecette);
-        }
-    }
-
-    public void afficherCraftForge() {
-        for (Integer codeObjet : recetteForge.keySet()) {
-            HBox blocRecette = new HBox();
-            blocRecette.prefWidthProperty().bind(caseRecetteForge.widthProperty());
-            blocRecette.setStyle("-fx-border-color: black; -fx-border-width: 2px");
-            blocRecette.setPadding(new Insets(25));
-
-            VBox sectionItemConstruit = new VBox();
-            VBox sectionItemsNecessaires = new VBox();
-
-            sectionItemConstruit.prefWidthProperty().bind(blocRecette.widthProperty().divide(2));
-            sectionItemsNecessaires.prefWidthProperty().bind(blocRecette.widthProperty().divide(2));
-
-            sectionItemConstruit.setAlignment(Pos.CENTER);
-
-            sectionItemConstruit.getChildren().add(super.createImageView(super.getHmap().get(codeObjet), 45, 45));
-            sectionItemConstruit.getChildren().add(super.createLabelNom(items.get(codeObjet).getName()));
-
-            for (int j = 0; j < recetteForge.get(codeObjet).getRecette().size(); j++) {
-                HBox elementRecette = new HBox();
-                elementRecette.setAlignment(Pos.CENTER);
-                elementRecette.getChildren().add(super.createImageView(super.getHmap().get(recetteForge.get(codeObjet).getRecette().get(j).getItem().getCodeObjet()), 25, 25));
-                elementRecette.getChildren().add(createLabelQuantite(recetteForge.get(codeObjet).getRecette().get(j).getQuantite()));
-                sectionItemsNecessaires.getChildren().add(elementRecette);
-            }
-
-            blocRecette.getChildren().add(sectionItemConstruit);
-            blocRecette.getChildren().add(sectionItemsNecessaires);
-            caseRecetteForge.getChildren().add(blocRecette);
-        }
-    }
-
-    public void afficherCraftSansBlocConstruction() {
-        for (Integer codeObjet : recetteSansBloc.keySet()) {
-            HBox blocRecette = new HBox();
-            blocRecette.prefWidthProperty().bind(caseRecetteSansBloc.widthProperty());
+            blocRecette.prefWidthProperty().bind(caseRecette.widthProperty());
             blocRecette.setStyle("-fx-border-color: black; -fx-border-width: 2px");
             blocRecette.setPadding(new Insets(40));
 
@@ -118,24 +59,31 @@ public class VueCraft extends SpriteItem {
 
             sectionItemConstruit.setAlignment(Pos.CENTER);
 
-            for (int j = 0; j < recetteSansBloc.get(codeObjet).getRecette().size(); j++) {
+            for (int j = 0; j < recette.get(codeObjet).getRecette().size(); j++) {
+                VBox vbox = new VBox();
                 HBox elementRecette = new HBox();
+
+                vbox.setAlignment(Pos.CENTER);
                 elementRecette.setAlignment(Pos.CENTER);
-                elementRecette.getChildren().add(super.createImageView(super.getHmap().get(recetteSansBloc.get(codeObjet).getRecette().get(j).getItem().getCodeObjet()), 15, 15));
-                elementRecette.getChildren().add(createLabelQuantite(recetteSansBloc.get(codeObjet).getRecette().get(j).getQuantite()));
-                sectionItemsNecessaires.getChildren().add(elementRecette);
+                elementRecette.getChildren().add(super.createImageView(super.getHmap().get(recette.get(codeObjet).getRecette().get(j).getItem().getCodeObjet()), 20, 20));
+                elementRecette.getChildren().add(createLabelQuantite(recette.get(codeObjet).getRecette().get(j).getQuantite()));
+
+                vbox.getChildren().add(elementRecette);
+                vbox.getChildren().add(super.createLabelNom((recette.get(codeObjet).getRecette().get(j).getItem().getName())));
+                sectionItemsNecessaires.getChildren().add(vbox);
             }
 
             blocRecette.getChildren().add(sectionItemConstruit);
             blocRecette.getChildren().add(sectionItemsNecessaires);
-            caseRecetteSansBloc.getChildren().add(blocRecette);
+            caseRecette.getChildren().add(blocRecette);
         }
     }
 
     public void initialize() {
-        afficherCraftSansBlocConstruction();
-        afficherCraftEtabli();
-        afficherCraftForge();
+        afficherCraft(recetteSansBloc, caseRecetteSansBloc);
+        afficherCraft(recetteEtabli, caseRecetteEtabli);
+        afficherCraft(recetteForge, caseRecetteForge);
+        afficherCraft(recetteFour, caseRecetteFour);
     }
 
     public String getCodeObjetLigne(int numeroLigne, int typeConstruction) {
@@ -153,8 +101,13 @@ public class VueCraft extends SpriteItem {
                 vBox = (VBox) hBox.getChildren().get(0);
                 label = (Label) vBox.getChildren().get(1);
                 break;
-            case 3 :
+            case 2 :
                 hBox = (HBox) caseRecetteForge.getChildren().get(numeroLigne);
+                vBox = (VBox) hBox.getChildren().get(0);
+                label = (Label) vBox.getChildren().get(1);
+                break;
+            case 3 :
+                hBox = (HBox) caseRecetteFour.getChildren().get(numeroLigne);
                 vBox = (VBox) hBox.getChildren().get(0);
                 label = (Label) vBox.getChildren().get(1);
                 break;

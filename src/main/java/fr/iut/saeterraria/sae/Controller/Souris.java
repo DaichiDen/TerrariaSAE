@@ -4,10 +4,15 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import fr.iut.saeterraria.sae.Vue.Fond;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
 public class Souris implements EventHandler<MouseEvent> {
@@ -15,13 +20,27 @@ public class Souris implements EventHandler<MouseEvent> {
     private Fond fond;
     private TilePane tp;
     private Map map;
+    @FXML
+    private AnchorPane screenInventaire;
+    @FXML
+    private ScrollPane craftSansBlocConstruction;
+    @FXML
+    private ScrollPane craftEtabli;
+    @FXML
+    private ScrollPane craftForge;
+    @FXML
+    private ScrollPane four;
 
-    public Souris(Jeu jeu,Fond fond,Map map,TilePane tp){
+    public Souris(Jeu jeu,Fond fond,Map map,TilePane tp, AnchorPane screenInventaire, ScrollPane craftSansBlocConstruction, ScrollPane craftEtabli, ScrollPane craftForge, ScrollPane four) {
         this.jeu = jeu;
         this.fond = fond;
         this.map = map;
         this.tp = tp;
-
+        this.screenInventaire = screenInventaire;
+        this.craftSansBlocConstruction = craftSansBlocConstruction;
+        this.craftEtabli = craftEtabli;
+        this.craftForge = craftForge;
+        this.four = four;
     }
 
     @Override
@@ -81,20 +100,41 @@ public class Souris implements EventHandler<MouseEvent> {
                     this.tp.getChildren().add((((y * tp.getPrefColumns()) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
                 }
             }
-        }
-        else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-            if (jeu.getJoueur().estVivant()) {
-                jeu.getJoueur().poser(x, y);
-                this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
-                this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+            } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                if (jeu.getJoueur().estVivant()) {
+                    if((map.getCase(y,x)==12 || map.getCase(y,x)==13 || map.getCase(y,x)==15) && jeu.getJoueur().peutEtreAtteint(x,y,2.5)){
+                        ouvrirInventaire();
+                        switch (map.getCase(y,x)) {
+                            case 12 :
+                                craftEtabli.toFront();
+                                break;
+                            case 13 :
+                                craftForge.toFront();
+                                break;
+                            case 15 :
+                                four.toFront();
+                                break;
+                        }
+                    }
+                    else {
+                        jeu.getJoueur().poser(x, y);
+                        this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
+                        this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+                    }
+                }
             }
-        }
 
     }
+    @FXML
+    public void ouvrirInventaire() {
+        Platform.runLater(() -> screenInventaire.requestFocus());
+        jeu.testCraft();
+        screenInventaire.toFront();
+        jeu.getJoueur().setMarcheDroite(false);
+        jeu.getJoueur().setMarcheGauche(false);
+    }
 
-
-        public void handleCraft (String nom){
-            jeu.getJoueur().craftItem(jeu.getItem(nom));
-        }
-
+    public void handleCraft (String nom){
+        jeu.getJoueur().craftItem(jeu.getItem(nom));
+    }
 }
