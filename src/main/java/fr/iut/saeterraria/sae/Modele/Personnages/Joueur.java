@@ -76,7 +76,7 @@
 
         public void setMainCourante(int mainCourante) {
             this.mainCourante = mainCourante;
-            if(inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()>70){
+            if(inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()>=72 && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()<77){
                 setAttaque(1 + ((Armes)(inventaire.getInventaireJoueur()[0][mainCourante].getItem())).getAttaque());
             }
         }
@@ -93,7 +93,7 @@
             return inventaire;
         }
         public boolean katanaEnMain(){
-            return  inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 71;
+            return  inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 72;
         }
         public boolean arcEnMain() {
             return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 78;
@@ -353,7 +353,7 @@
         public void setYMax(int yMax){ this.yMax.setValue(yMax/super.getJeu().getTaille1bloc()); }
 
         public boolean gunEnMain() {
-            return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 74;
+            return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 79;
         }
     }
 

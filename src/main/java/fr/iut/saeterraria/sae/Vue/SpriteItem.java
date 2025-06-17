@@ -38,7 +38,7 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(16, "/Tiles/Fond_noir.png"); // Coffre
         items.put(17,"/Tiles/Fond_noir.png");
         // Outils
-<<<<<<< HEAD
+
 
         
 
@@ -60,10 +60,10 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(31, "/Sprite_objets/Sceau_eau.png"); // Sceau d'eau
 
 
-        for (int i = 32; i < 63; i++) {
-=======
-        for (int i = 18; i < 50; i++) {
->>>>>>> 48f48c08460b32cb640f7a820d2b523d031921fe
+
+
+        for (int i = 32; i < 50; i++) {
+
             items.put(i,"/Tiles/Fond_noir.png");
         }
         items.put(50, "/Sprite_objets/Pelle_pierre.png"); // Pelle de bois
