@@ -92,7 +92,7 @@ public class Controller implements Initializable {
     @FXML
     private VBox caseRecetteForge;
     @FXML
-    private Pane screenPrincipal;
+    private AnchorPane screenPrincipal;
     @FXML
     private ScrollPane four;
     @FXML
