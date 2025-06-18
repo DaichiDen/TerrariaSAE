@@ -69,7 +69,7 @@ public abstract class EntiteVivante extends Entite{
                 vitesseY = 0;
                 setY(blocBas);
             }
-            if (super.getJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 4 ) {
+            if (super.getJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 17 ) {
 
                 this.decrementVie(1);
             }

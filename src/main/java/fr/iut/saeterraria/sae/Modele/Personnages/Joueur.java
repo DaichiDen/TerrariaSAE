@@ -78,7 +78,7 @@
                 setAttaque(1 + ((Armes)(inventaire.getInventaireJoueur()[0][mainCourante].getItem())).getAttaque());
             }
             else {
-                setAttaque(1);
+                setAttaque(2);
             }
         }
 
@@ -179,7 +179,9 @@
                     int ennemiX = (e.getX() + 16) / 32;
                     int ennemiY = (e.getY() + 16) / 32;
                     if (peutEtreAtteint(ennemiX, ennemiY, range)) {
-                        e.decrementVie(getAttaque());
+                        if (this.getAttaque() - e.getDef()>0){
+                            e.decrementVie(getAttaque() - e.getDef());
+                        }
                         System.out.println("Touché !");
                         System.out.println(e.getBarreVie().getVie());
                     }
