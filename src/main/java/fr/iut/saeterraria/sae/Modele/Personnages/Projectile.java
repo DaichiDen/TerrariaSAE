@@ -9,7 +9,7 @@ import fr.iut.saeterraria.sae.Modele.Map.Map;
 public class Projectile extends Entite{
     private StringProperty nom;
     private int gravité = 1;
-    private int forceX = 0, forceY = 0;
+    private DoubleProperty forceX = new SimpleDoubleProperty(0), forceY = new SimpleDoubleProperty(0);
     private int xBloc, yBloc;
     private BooleanProperty actif;
     private String type;
@@ -62,15 +62,22 @@ public class Projectile extends Entite{
         return nom.get();
     }
 
-    public int getForceX() {return forceX;}
-    public int getForceY() {
+    public DoubleProperty forceXProperty() {
+        return forceX;
+    }
+    public DoubleProperty forceYProperty() {
         return forceY;
     }
-    public void setForceX(int forceX) {
-        this.forceX = forceX;
+    public double getForceX() {return forceX.getValue();}
+    public double getForceY() {
+        return forceY.getValue();
     }
-    public void setForceY(int forceY) {
-        this.forceY = forceY;
+
+    public void setForceX(double forceX) {
+        this.forceX.setValue(forceX);
+    }
+    public void setForceY(double forceY) {
+        this.forceY.setValue(forceY);
     }
 
 }

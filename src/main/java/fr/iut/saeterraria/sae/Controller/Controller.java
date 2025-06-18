@@ -237,7 +237,6 @@ public class Controller implements Initializable {
                     } else {
                         jeu.getJoueur().mettreAJour();
 
-
                         for (int i = 0; i < jeu.getMobs().size(); i++) {
                             jeu.getMobs().get(i).mettreAJour();
                         }
@@ -269,9 +268,12 @@ public class Controller implements Initializable {
         jeu.getJoueur().ajouterItem(jeu.getItems().get(77),50);
 
         jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(74),1);
+
         jeu.getJoueur().ajouterItem(jeu.getItems().get(52),1);
 
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(79),1);
+
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(80),5);
 
 
 

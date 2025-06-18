@@ -57,38 +57,45 @@ public class Jeu {
         return liste_projectiles;
     }
 
-    public void màjProjectiles() { // Schtongé en sah donc belek
+    public void màjProjectiles() {
         if (this.getListe_projectiles() != null) {
-            for (int i = 0; i < this.getListe_projectiles().size(); i++) {
-                if (!getJoueur().isTimeStop()) {
 
-                    this.getListe_projectiles().get(i).setX(this.getListe_projectiles().get(i).getX() + this.getListe_projectiles().get(i).getForceX());
+            for (int i = getListe_projectiles().size() - 1; i >= 0; i--) {
+                Projectile p = getListe_projectiles().get(i);
 
-                    if (!this.getListe_projectiles().get(i).getNom().equals("Balle en plomb")) {
-                        this.getListe_projectiles().get(i).setForceY(this.getListe_projectiles().get(i).getForceY() + this.getListe_projectiles().get(i).getGravité());
-                    }
+                if (getJoueur().isTimeStop()) {
+                    // Si timeStop activé, on met à jour uniquement les balles
+                    if (p.getType().equals("balle")) {
 
-                    this.getListe_projectiles().get(i).setY(this.getListe_projectiles().get(i).getY() + this.getListe_projectiles().get(i).getForceY());
+                        p.setX(p.getX() + (int) p.getForceX());
 
-                    if (projectiles.get(i).collisionVerticale() || projectiles.get(i).collisionHorizontale()) {
-                        getListe_projectiles().get(i).setActif(false);
-                        getListe_projectiles().remove(i);
-                    }
-                }else{
-                    if(this.getListe_projectiles().get(i).getNom().equals("Balle en plomb")){
-                        this.getListe_projectiles().get(i).setX(this.getListe_projectiles().get(i).getX() + this.getListe_projectiles().get(i).getForceX());
+                        p.setY(p.getY() + (int) p.getForceY());
 
-                        this.getListe_projectiles().get(i).setY(this.getListe_projectiles().get(i).getY() + this.getListe_projectiles().get(i).getForceY());
-
-                        if ((projectiles.get(i).collisionVerticale()) || (projectiles.get(i).collisionHorizontale())) {
-                            getListe_projectiles().get(i).setActif(false);
+                        if (p.collisionVerticale() || p.collisionHorizontale()) {
+                            p.setActif(false);
                             getListe_projectiles().remove(i);
                         }
+                    }
+
+                } else {
+                    // timeStop désactivé, on met à jour tous les projectiles normalement
+                    p.setX(p.getX() + (int) p.getForceX());
+
+                    if (!p.getNom().equals("Balle en plomb")) {
+                        p.setForceY(p.getForceY() + p.getGravité());
+                    }
+
+                    p.setY(p.getY() + (int) p.getForceY());
+
+                    if (p.collisionVerticale() || p.collisionHorizontale()) {
+                        p.setActif(false);
+                        getListe_projectiles().remove(i);
                     }
                 }
             }
         }
     }
+
 
     public ObservableList<EntiteVivante> getMobs() {
         return mobs;
