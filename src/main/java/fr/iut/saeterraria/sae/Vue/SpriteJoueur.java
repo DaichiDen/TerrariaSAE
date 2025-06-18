@@ -45,7 +45,6 @@ public class SpriteJoueur extends CreateRessourceVisuel {
     public void mettreAJourSpriteJoueur(Joueur joueur) {
 
         if (bindXActif && joueur.xProperty().getValue() <= 20*32) { //unbind gauche
-            System.out.println("undbindX gauche");
             unbindX();
             bindXActif = false;
         }
@@ -54,7 +53,6 @@ public class SpriteJoueur extends CreateRessourceVisuel {
             bindXActif = false;
         }
         else if (!bindXActif && joueur.xProperty().getValue() > 20*32 && joueur.xProperty().getValue() < 100*32) {
-            System.out.println("bindX");
             bindX();
             bindXActif = true;
         }

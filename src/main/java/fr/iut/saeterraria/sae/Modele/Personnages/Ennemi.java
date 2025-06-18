@@ -32,8 +32,10 @@ public class Ennemi extends EntiteVivante {
 
     @Override
     public void action(int x, int y, int range) {
-        if(dernièreAttaque==cooldown){
-            super.getJeu().getJoueur().decrementVie(2);
+        if(dernièreAttaque==cooldown) {
+            if (this.getAttaque() - getJeu().getJoueur().getDef() > 0){
+                super.getJeu().getJoueur().decrementVie(this.getAttaque() - getJeu().getJoueur().getDef());
+            }
             dernièreAttaque=0;
         }
         dernièreAttaque++;

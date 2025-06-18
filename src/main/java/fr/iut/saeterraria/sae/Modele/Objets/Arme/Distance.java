@@ -23,6 +23,6 @@ public class Distance extends Armes {
     public void attaquer() {
         System.out.println("le caca est cuit");
 
-        }
     }
+}
 

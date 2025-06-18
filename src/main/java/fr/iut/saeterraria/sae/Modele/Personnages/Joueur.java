@@ -1,11 +1,8 @@
     package fr.iut.saeterraria.sae.Modele.Personnages;
     import fr.iut.saeterraria.sae.Modele.Jeu;
     import fr.iut.saeterraria.sae.Modele.Map.Map;
-    import fr.iut.saeterraria.sae.Modele.Objets.Armes;
+    import fr.iut.saeterraria.sae.Modele.Objets.*;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
-    import fr.iut.saeterraria.sae.Modele.Objets.Outils;
-    import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
-    import fr.iut.saeterraria.sae.Modele.Objets.Item;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 
     import javafx.beans.property.BooleanProperty;
@@ -81,7 +78,7 @@
                 setAttaque(1 + ((Armes)(inventaire.getInventaireJoueur()[0][mainCourante].getItem())).getAttaque());
             }
             else {
-                setAttaque(1);
+                setAttaque(2);
             }
         }
 
@@ -182,7 +179,9 @@
                     int ennemiX = (e.getX() + 16) / 32;
                     int ennemiY = (e.getY() + 16) / 32;
                     if (peutEtreAtteint(ennemiX, ennemiY, range)) {
-                        e.decrementVie(getAttaque());
+                        if (this.getAttaque() - e.getDef()>0){
+                            e.decrementVie(getAttaque() - e.getDef());
+                        }
                         System.out.println("Touché !");
                         System.out.println(e.getBarreVie().getVie());
                     }
@@ -361,6 +360,43 @@
 
         public boolean gunEnMain() {
             return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 79;
+        }
+
+        public void equiper(Armure armure) {
+            switch (armure.getTypeArmure()){
+                case 1:
+                    if (equipement[0]==64 || equipement[0]==65) {
+                       inventaire.ajoutInventaire(getJeu().getItems().get(equipement[0]), 1);
+                    }
+                    equipement[0]=armure.getCodeObjet();
+                    break;
+                case 2:
+                    if (equipement[1]==66 || equipement[1]==67) {
+                        inventaire.ajoutInventaire(getJeu().getItems().get(equipement[1]), 1);
+                    }
+                    equipement[1]=armure.getCodeObjet();
+                    break;
+                case 3:
+                    if (equipement[2]==68 || equipement[2]==69) {
+                        inventaire.ajoutInventaire(getJeu().getItems().get(equipement[2]), 1);
+                    }
+                    equipement[2]=armure.getCodeObjet();
+                    break;
+                case 4:
+                    if (equipement[3]==70 || equipement[3]==71) {
+                        inventaire.ajoutInventaire(getJeu().getItems().get(equipement[3]), 1);
+                    }
+                    equipement[3]=armure.getCodeObjet();
+                    break;
+            }
+            inventaire.getInventaireJoueur()[0][mainCourante].retireQuantite(1);
+            updateDefense();
+        }
+
+        public void updateDefense(){
+            for ( int piece : equipement){
+                this.defProperty().setValue(this.defProperty().getValue() + ((Armure)getJeu().getItems().get(piece)).getDefense());
+            }
         }
     }
 

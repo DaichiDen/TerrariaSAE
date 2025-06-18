@@ -27,15 +27,13 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
         this.spriteProjectiles = new HashMap<>();
     }
 
-
-
     @Override
     public void onChanged(Change<? extends Projectile> c) {
         while (c.next()) {
             if (c.wasAdded()) {
                 ImageView sprite;
                 for (Projectile projectile_aj : c.getAddedSubList()) {
-                    // 1) Créer le Node graphique du mob (par ex. un ImageView)
+                    // 1) Créer le Node graphique du projectile (par ex. un ImageView)
                     if (projectile_aj.getType().equals("Flèche")){
                         URL imageURL = getClass().getResource("/Sprite_objets/Flèche.png");
                         Image image = new Image(String.valueOf(imageURL));
@@ -61,7 +59,7 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
                     // 3) Ajouter le sprite dans le Pane
                     screen.getChildren().add(sprite);
 
-                    // 4) Mettre à jour la position à chaque frame (si tu utilises yProperty/xProperty)
+                    // 4) Mettre à jour la position à chaque frame
                     ImageView finalSprite = sprite;
                     projectile_aj.xProperty().addListener((obs, oldX, newX) -> {
                         finalSprite.setLayoutX(newX.doubleValue());
@@ -71,11 +69,10 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
                         finalSprite1.setLayoutY(newY.doubleValue());
                     });
 
-                    // 5) **ÉCOUTER la propriété estVivantProperty()**
+                    // 5) **ÉCOUTER la propriété ActifProperty**
                     projectile_aj.getActifProperty().addListener((obs, ancienEtat, nouvelEtat) -> {
                         if (!nouvelEtat) {
-
-                            // Le mob vient de mourir → on retire son Node à l’écran
+                            // Le projectile vient de toucher un obstacle → on retire son Node de l’écran
                             Node nodeAMettreAJour = spriteProjectiles.get(projectile_aj);
                             if (nodeAMettreAJour != null) {
                                 screen.getChildren().remove(nodeAMettreAJour);

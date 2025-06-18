@@ -199,14 +199,14 @@ public class Jeu {
 
         // Armures
 
-        items.put(64, new Armure("Casque en fer","",2, (BlocConstruction) items.get(13)));
-        items.put(65, new Armure("Casque en DELJCCium","",3,(BlocConstruction) items.get(13)));
-        items.put(66, new Armure("Plastron en fer","",6,(BlocConstruction) items.get(13)));
-        items.put(67, new Armure("Plastron en DELJCCium","",9,(BlocConstruction) items.get(13)));
-        items.put(68, new Armure("Jambière en fer","",4,(BlocConstruction) items.get(13)));
-        items.put(69, new Armure("Jambière en DELJCCium","",6,(BlocConstruction) items.get(13)));
-        items.put(70, new Armure("Botte en fer","",3,(BlocConstruction) items.get(13)));
-        items.put(71, new Armure("Botte en DELJCCium","",5,(BlocConstruction) items.get(13) ) );
+        items.put(64, new Armure("Casque en fer","",2, (BlocConstruction) items.get(13),1));
+        items.put(65, new Armure("Casque en DELJCCium","",3,(BlocConstruction) items.get(13),1));
+        items.put(66, new Armure("Plastron en fer","",6,(BlocConstruction) items.get(13),2));
+        items.put(67, new Armure("Plastron en DELJCCium","",9,(BlocConstruction) items.get(13),2));
+        items.put(68, new Armure("Jambière en fer","",4,(BlocConstruction) items.get(13),3));
+        items.put(69, new Armure("Jambière en DELJCCium","",6,(BlocConstruction) items.get(13),3));
+        items.put(70, new Armure("Botte en fer","",3,(BlocConstruction) items.get(13),4));
+        items.put(71, new Armure("Botte en DELJCCium","",5,(BlocConstruction) items.get(13),4) );
 
         // Armes
         items.put(72, new DashingKatana("Katana étrange","Ce Katana semble pouvoir octroyer la capacité à son détenteur de se déplacer à la vitesse du son",10));
