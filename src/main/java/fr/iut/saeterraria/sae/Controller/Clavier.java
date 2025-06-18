@@ -27,28 +27,21 @@ public class Clavier implements EventHandler<KeyEvent> {
     @FXML
     private AnchorPane screenInventaire;
     @FXML
-    private GridPane hotBarInventaire;
-    @FXML
     private Pane screenPrincipal;
-
 
     private final Set<KeyCode> touchesAppuyees = new HashSet<>();
     private boolean inventaireOuvert = false;
     private VueHotbar vueHotbar;
 
-
     public Clavier(Jeu jeu, AnchorPane screenInventaire,Button quitterInventaire,Button openInventaire,TilePane fond, GridPane hotBarInventaire, Pane pane) {
-
         this.jeu=jeu;
         this.screenInventaire=screenInventaire;
         this.quitterInventaire=quitterInventaire;
         this.openInventaire=openInventaire;
         this.fond=fond;
-        this.hotBarInventaire=hotBarInventaire;
         this.screenPrincipal=pane;
         this.vueHotbar = new VueHotbar(jeu,hotBarInventaire);
     }
-
 
     public void handle(KeyEvent event) { //
         KeyCode code = event.getCode(); // le code de la touche de l'event
@@ -58,34 +51,38 @@ public class Clavier implements EventHandler<KeyEvent> {
             if (code == KeyCode.SPACE || code == KeyCode.UP) {
                 jeu.getJoueur().sauter();
             }
+
             if (code == KeyCode.NUMPAD5) {
                 jeu.getJoueur().estVivantProperty().set(false);
             }
+
             if(code == KeyCode.I ) {
                 if (!inventaireOuvert){
-
                     ouvrirInventaire();
                     inventaireOuvert = true;
                 } else {
                     exitInventaire();
                     inventaireOuvert = false;
                 }
-
             }
+
             if(code == KeyCode.E && jeu.getJoueur().katanaEnMain()){
                 jeu.getJoueur().setEnDash(true);
                 jeu.getJoueur().dashKatana();
             }
+
             if (code == KeyCode.J) { // à déplacer dans souris quand on aura une hotbar (main courante)
                 if (!jeu.getJoueur().getPierreTp().getEtat_tp()) {
                     jeu.getJoueur().getPierreTp().setX(jeu.getJoueur().getX());
                     jeu.getJoueur().getPierreTp().setY(jeu.getJoueur().getY());
                     jeu.getJoueur().getPierreTp().setEtat_tp(true);
-                } else {
+                }
+                else {
                     jeu.getJoueur().tp(jeu.getJoueur().getPierreTp().getX(), jeu.getJoueur().getPierreTp().getY());
                     jeu.getJoueur().getPierreTp().setEtat_tp(false);
                 }
             }
+
             String keyText = event.getText();
             if (keyText.equals("&") || keyText.equals("\"") || keyText.equals("é") || keyText.equals("'") || keyText.equals("(") || keyText.equals("-")) {
             int mainCourante = jeu.getJoueur().getMainCourante();
@@ -99,12 +96,10 @@ public class Clavier implements EventHandler<KeyEvent> {
             }
                 vueHotbar.updateElement(mainCourante);
             }
-
-        } else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
-            touchesAppuyees.remove(code);// touche retirée de la liste car relâchée
-
         }
-
+        else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
+            touchesAppuyees.remove(code);// touche retirée de la liste car relâchée
+        }
     }
 
     public void update() {

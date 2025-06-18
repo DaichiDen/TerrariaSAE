@@ -66,15 +66,7 @@ public class Controller implements Initializable {
     @FXML
     private Pane Vie;
     @FXML
-    private BorderPane principal;
-    @FXML
-    private AnchorPane death;
-    @FXML
-    private ImageView imagefond;
-    @FXML
     private ImageView imageaccueil;
-    @FXML
-    private StackPane imagebloc_death;
     @FXML
     private StackPane imagebloc_accueil;
     @FXML
@@ -126,19 +118,14 @@ public class Controller implements Initializable {
                 confirmerNom();
             }
         });
+
         scene = new Fond(fond, jeu);// Initialise le fond (décor du jeu)
-        vueEnnemi = new SpriteMob(jeu, screen, "Pierre");
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
         jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu, screen));
-
-
 
         Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0, jeu,4);
         jeu.addEnnemis(ennemiCaca);
         jeu.addMobs(ennemiCaca);
-
-        imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
-        imagefond.fitHeightProperty().bind(imagebloc_death.widthProperty());
 
         imageaccueil.setFitWidth(menu.getWidth());
         imageaccueil.fitWidthProperty().bind(imagebloc_accueil.widthProperty());
@@ -301,11 +288,6 @@ public class Controller implements Initializable {
         screenPrincipal.toFront();
         jeu.getJoueur().setNom(zoneNom.getText());
         Platform.runLater(() -> fond.requestFocus());
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(12),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(13),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(15),1);
-
-
     }
 
     @FXML

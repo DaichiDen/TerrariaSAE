@@ -1,11 +1,11 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
 public abstract class Consommables extends Item {
-    private int efficacite;
+    private int valeur;
 
-    public Consommables(String nom, String description, int efficacite) {
+    public Consommables(String nom, String description, int valeur) {
         super(nom, description,3);
-        this.efficacite=efficacite;
+        this.valeur=valeur;
     }
 
     public abstract void actionJoueur();

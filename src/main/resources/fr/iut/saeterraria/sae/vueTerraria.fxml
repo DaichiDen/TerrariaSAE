@@ -8,22 +8,7 @@
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.saeterraria.sae.Controller.Controller">
    <children>
-      <AnchorPane fx:id="death" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <StackPane fx:id="imagebloc_death" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ImageView fx:id="imagefond" fitHeight="5.0" fitWidth="5.0" pickOnBounds="true">
-                       <image>
-                           <Image url="@../../../../death_screen.gif" />
-                       </image>
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
-               </children>
-            </StackPane>
-         </children>
-      </AnchorPane>
+      <AnchorPane fx:id="death" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
       <BorderPane fx:id="principal" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <top>
               <Pane prefHeight="32.0" prefWidth="600.0" BorderPane.alignment="CENTER">
@@ -37,7 +22,7 @@
                <children>
                   <Pane fx:id="screen" layoutY="-4.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1040.0" prefWidth="1920.0">
                      <children>
-                         <TilePane fx:id="fond" minHeight="-Infinity" minWidth="-Infinity" prefColumns="35" prefRows="20" style="-fx-background-color: white;" />
+                         <TilePane fx:id="fond" minHeight="-Infinity" minWidth="-Infinity" prefColumns="44" prefRows="25" style="-fx-background-color: white;" />
                      </children>
                   </Pane>
                   <AnchorPane prefHeight="200.0" prefWidth="675.0">

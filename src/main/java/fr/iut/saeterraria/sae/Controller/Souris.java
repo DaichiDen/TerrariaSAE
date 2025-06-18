@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Objets.Armure;
 import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.application.Platform;
@@ -45,12 +46,10 @@ public class Souris implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent mouseEvent) {
-        int x = ((int) mouseEvent.getX()) / 32;
-        int y = ((int) mouseEvent.getY()) / 32;
-        System.out.println("Y modèle : " + x);
-        System.out.println("X modèle : " + y);
-        int x1 = ((int) mouseEvent.getX());
-        int y1 = ((int) mouseEvent.getY());
+        int x = ((int) mouseEvent.getX()) / 32; // position colonne dans le modèle
+        int y = ((int) mouseEvent.getY()) / 32; // position ligne dans le modèle
+        int x1 = ((int) mouseEvent.getX()); // position x dans le FX
+        int y1 = ((int) mouseEvent.getY()); // position y dans le FX
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
             if (jeu.getJoueur().estVivant()) {
                 if (jeu.getJoueur().gunEnMain() && !jeu.getJoueur().isTimeStop()) {
@@ -117,6 +116,9 @@ public class Souris implements EventHandler<MouseEvent> {
                                 four.toFront();
                                 break;
                         }
+                    }
+                    else if (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet()>=64 &&jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet()<=71){
+                        jeu.getJoueur().equiper((Armure) (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem()));
                     }
                     else {
                         jeu.getJoueur().poser(x, y);
