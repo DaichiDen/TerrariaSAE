@@ -154,9 +154,9 @@ public class Jeu {
         items.put(2, new Bloc("Terre Basse","Bloc commun qui recouvre le sol du monde",1,1));
         items.put(3, new Bloc("Bois","Element indispensable, base de créativité",1,1));
         items.put(4, new Bloc("Minerai Charbon","Bloc contenant plusieurs charbons",2,3));
-        items.put(5, new Item("Charbon","Permet d'alimenter le four et la forge en chaleur",1));
-        items.put(6, new Bloc("Pierre","Bloc basique de pierre commun dans les sous-sol",2,2));
-        items.put(7, new Bloc("Minerai Fer","Métal commun de Fer",3,4));
+        items.put(5, new Bloc("Pierre","Bloc basique de pierre commun dans les sous-sol",2,2));
+        items.put(6, new Item("Charbon","Permet d'alimenter le four et la forge en chaleur",1));
+        items.put(7, new Bloc("Minerai Fer","Métal commun de Fer",3,3));
         items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1));
         items.put(9, new Bloc("Minerai DELJCCium","",3,4));
         items.put(10, new Item("DELJCCium", "", 1));
@@ -225,7 +225,7 @@ public class Jeu {
     private void initializeRecettes() {
 
         // Lingot de fer : 1 Minérai de fer et 1 charbon et 1 four
-        items.get(8).addInRecette(new ElementRecette(items.get(7),1));
+        items.get(8).addInRecette(new ElementRecette(items.get(6),1));
         items.get(8).addInRecette(new ElementRecette(items.get(4),1));
 
         // Lingot de DELJCCium : 1 Minérai de DELJCCium et 1 charbon et 1 four

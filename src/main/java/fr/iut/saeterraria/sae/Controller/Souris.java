@@ -72,8 +72,7 @@ public class Souris implements EventHandler<MouseEvent> {
                         jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
                 }
-
-                if (jeu.getJoueur().arcEnMain()) {
+                else if (jeu.getJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];
                     int[][] tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(77));
@@ -93,11 +92,13 @@ public class Souris implements EventHandler<MouseEvent> {
                     }
 
                 }
-                jeu.getJoueur().action(x1, y1, 2);
-                if (jeu.getJoueur().miner(x, y)) {
+                else if (jeu.getJoueur().miner(x, y)) {
                     this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// faire de la taille de la map un un getter
 
                     this.tp.getChildren().add((((y * tp.getPrefColumns()) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+                }
+                else {
+                    jeu.getJoueur().action(x1, y1, 2);
                 }
             }
         }

@@ -39,9 +39,13 @@ public class Fond extends CreateRessourceVisuel {
         ajoutTile("/Tiles/Dirt_1.png");
         ajoutTile("/Tiles/Dirt_2.png");
         ajoutTile("/Tiles/Bois.png");
-        ajoutTile("/Tiles/piques_vorpales.png");
-        ajoutTile("/Tiles/feuilles.png");
-        for(int i=6;i<17;i++){
+        ajoutTile("/Tiles/Minerais_charbon.png");
+        ajoutTile("/Tiles/Roche_moche.png");
+        ajoutTile("/Tiles/Fond_noir.png");
+        ajoutTile("/Tiles/Minerais_fer.png");
+        ajoutTile("/Tiles/Fond_noir.png");
+        ajoutTile("/Tiles/Minerais_DELJCCium.png");
+        for (int i = 10; i < 17; i++) {
             ajoutTile("/Tiles/Fond_noir.png");
         }
         ajoutTile("/Tiles/bedrock.png");
