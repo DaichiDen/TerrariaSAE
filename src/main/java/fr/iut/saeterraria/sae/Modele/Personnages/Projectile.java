@@ -15,8 +15,8 @@ public class Projectile extends Entite{
     private String type;
 
 
-    public Projectile(String nom, Jeu jeu, int xJoueur, int yJoueur, int attaque,String type) {
-        super(nom, xJoueur, yJoueur, jeu, attaque);
+    public Projectile(String nom, Jeu jeu, int xJoueur, int yJoueur, int attaque,String type, int tailleL, int tailleH) {
+        super(nom, xJoueur, yJoueur, jeu, attaque, tailleL, tailleH);
         this.nom = new SimpleStringProperty(nom);
         this.actif = new SimpleBooleanProperty(true);
         this.type=type;

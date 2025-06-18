@@ -16,9 +16,9 @@ public class Ennemi extends EntiteVivante {
 
     private ArrayList<Item> listDrops;
 
-    public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def,Jeu jeu, int attaque) {
+    public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def,Jeu jeu, int attaque, int tailleL, int tailleH) {
 
-        super(nom,vieMax,  energieMax, 20, x, y, def, 5,jeu,attaque);
+        super(nom,vieMax,  energieMax, 20, x, y, def, 5,jeu,attaque, tailleL, tailleH);
         listDrops = new ArrayList<>();
     }
 

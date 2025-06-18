@@ -68,7 +68,7 @@ public class Souris implements EventHandler<MouseEvent> {
                         }
                     }
                     if (oui) {
-                        jeu.getJoueur().tirerProjectile(new Projectile("balle",jeu,jeu.getJoueur().getX(),jeu.getJoueur().getY(),5,"balle"),x1,y1);
+                        jeu.getJoueur().tirerProjectile(new Projectile("balle",jeu,jeu.getJoueur().getX(),jeu.getJoueur().getY(),5,"balle", jeu.getTaille1bloc(), jeu.getTaille1bloc()),x1,y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
                 }
@@ -87,7 +87,7 @@ public class Souris implements EventHandler<MouseEvent> {
                     }
                     if (oui) {
 
-                        jeu.getJoueur().tirerProjectile(new Projectile("Flèche", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 4,"Flèche"), x1, y1);
+                        jeu.getJoueur().tirerProjectile(new Projectile("Flèche", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 4,"Flèche", jeu.getTaille1bloc(), jeu.getTaille1bloc()), x1, y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
 

@@ -36,15 +36,16 @@
         private IntegerProperty xMax,yMax;
 
 
-        public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp) {
+        public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp, int tailleL, int tailleH) {
 
-            super(nom, 20, 100, 20, 20*32, 14*32, 1, 10, jeu,1);
+            super(nom, 20, 100, 20, 20*32, 14*32, 1, 10, jeu,1, tailleL, tailleH);
             this.equipement = new int[7];
             this.inventaire = new Inventaire();
             this.pierreTp = pierreTp;
             this.mainCourante = 0;
             this.xMax = new SimpleIntegerProperty(getX()/super.getJeu().getTaille1bloc());
             this.yMax = new SimpleIntegerProperty(getY()/super.getJeu().getTaille1bloc());
+
         }
 
 

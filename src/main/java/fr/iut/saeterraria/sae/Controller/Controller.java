@@ -128,7 +128,13 @@ public class Controller implements Initializable {
         jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu, screen));
     
 
-        Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,1, jeu, 3);
+
+
+
+
+
+        Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2);
+
         jeu.addEnnemis(ennemiCaca);
         jeu.addMobs(ennemiCaca);
 
