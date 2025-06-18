@@ -8,9 +8,11 @@ import javafx.geometry.Rectangle2D;
 public abstract class Entite {
 
     private IntegerProperty x, y;
+    private IntegerProperty hitboxX, hitboxY;
     private StringProperty nom;
     private Jeu jeu;
     private int attaque;
+    private Rectangle2D hitbox;
 
     private BooleanProperty marcheDroite = new SimpleBooleanProperty(false);
     private BooleanProperty marcheGauche = new SimpleBooleanProperty(false);
@@ -30,12 +32,48 @@ public abstract class Entite {
 //    MediaPlayer damage1 = super.Sonore("/Sound/damage1.wav");
 //    MediaPlayer damage2 = super.Sonore("/Sound/damage2.wav");
 
-    public Entite(String nom, int x, int y, Jeu jeu, int attaque) {
+    public Entite(String nom, int x, int y, Jeu jeu, int attaque, int tailleL, int tailleH) {
         this.nom = new SimpleStringProperty(nom);
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.jeu = jeu;
         this.attaque = attaque;
+        this.tailleL = tailleL;
+        this.tailleH = tailleH;
+        this.hitboxX = new SimpleIntegerProperty();
+        this.hitboxY = new SimpleIntegerProperty();
+        this.hitboxX.bind(this.x);
+        this.hitboxY.bind(this.y);
+        this.hitbox = new Rectangle2D(getHitboxX(), getHitboxY(), this.tailleL, this.tailleH);
+    }
+
+    public IntegerProperty HitboxXProperty(){
+        return hitboxX;
+    }
+    public IntegerProperty HitboxYProperty(){
+        return hitboxY;
+    }
+
+    public void setHitboxX(int hitboxX) {
+        this.hitboxX.setValue(hitboxX);
+    }
+    public void setHitboxY(int hitboxY) {
+        this.hitboxY.setValue(hitboxY);
+    }
+
+    public int getHitboxX(){
+        return this.hitboxX.getValue();
+    }
+    public int getHitboxY(){
+        return this.hitboxY.getValue();
+    }
+
+    public Rectangle2D getHitbox() {
+        return hitbox;
+    }
+
+    public void setHitbox(Rectangle2D hitbox) {
+        this.hitbox = hitbox;
     }
 
     public int getTailleH() {
@@ -205,13 +243,13 @@ public abstract class Entite {
 //    }
 
 
-    public boolean collisionVerticale(int tailleL, int tailleH) { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
+    public boolean collisionVerticale() { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
 
         setTailleH(tailleH);
         setTailleL(tailleL);
 
-        Rectangle2D hitboxEntite = new Rectangle2D(getX(), getY(), tailleL, tailleH);
+        Rectangle2D hitboxEntite = getHitbox();
 
         int caseX = (int) (getX() / jeu.getTaille1bloc());
         int caseY = (int) (getY() / jeu.getTaille1bloc());
@@ -285,9 +323,9 @@ public abstract class Entite {
 //            }
 //        }
 //    }
-    public boolean collisionHorizontale(int tailleL, int tailleH) {
+    public boolean collisionHorizontale() {
 
-        Rectangle2D hitboxJoueur = new Rectangle2D(this.getX(), this.getY(), tailleL, tailleH);
+        Rectangle2D hitboxEntite = getHitbox();
 
         setTailleH(tailleH);
         setTailleL(tailleL);
@@ -305,7 +343,7 @@ public abstract class Entite {
                         yBloc = jeu.getCarte().getCoordonnéesY(i);
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, tailleL, tailleH);
 
-                        if (hitboxJoueur.intersects(hitboxBloc)) {
+                        if (hitboxEntite.intersects(hitboxBloc)) {
 
                             return true;
 

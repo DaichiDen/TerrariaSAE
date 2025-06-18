@@ -24,8 +24,8 @@ public abstract class EntiteVivante extends Entite{
 
 
 
-    public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Jeu jeu, int attaque) {
-        super(nom, x, y, jeu, attaque);
+    public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Jeu jeu, int attaque, int tailleL, int tailleH) {
+        super(nom, x, y, jeu, attaque, tailleL, tailleH);
 
         this.barreVie = new BarreVie(vieMax);
         this.energieMax = new SimpleIntegerProperty(energieMax);
@@ -44,7 +44,7 @@ public abstract class EntiteVivante extends Entite{
 
 
     public void sauter() {
-        if (!enSaut && this.estVivant() ) {
+        if (!enSaut && this.estVivant() && this.getCollisionBas()) {
             enSaut = true;
             vitesseY = forceSaut;
         }
@@ -53,8 +53,8 @@ public abstract class EntiteVivante extends Entite{
 
     public abstract void action(int x, int y, int range);
 
-    public void bloquéVertical(int tailleL, int tailleH) {
-        if(collisionVerticale(tailleL, tailleH)){
+    public void bloquéVertical() {
+        if(collisionVerticale()){
             int blocHaut = getyBloc();
             int blocBas = getyBloc() + getJeu().getTaille1bloc();
             int joueurHaut = getY();
@@ -75,11 +75,11 @@ public abstract class EntiteVivante extends Entite{
             }
         }
     }
-    public void bloquéHorizontal(int tailleL,int tailleH) {
+    public void bloquéHorizontal() {
         boolean collisionDroite = false;
         boolean collisionGauche = false;
 
-        if (collisionHorizontale(tailleL, tailleH)) {
+        if (collisionHorizontale()) {
             // Bords du bloc
             int blocGauche = getxBloc();
             int blocDroite = getxBloc() + super.getJeu().getTaille1bloc();
@@ -182,7 +182,7 @@ public abstract class EntiteVivante extends Entite{
                 vitesseY += getGravité();
             }
             setY(getY() + vitesseY);
-            bloquéVertical(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
+            bloquéVertical();
 
             // Appliquer gravité
 
@@ -225,7 +225,7 @@ public abstract class EntiteVivante extends Entite{
 
             // Appliquer le déplacement
             setX(getX() + vitesseX);
-            bloquéHorizontal(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
+            bloquéHorizontal();
 
 
         } else {
@@ -233,7 +233,7 @@ public abstract class EntiteVivante extends Entite{
                 vitesseY += getGravité();
             }
             setY(getY() + vitesseY);
-            bloquéVertical(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
+            bloquéVertical();
         }
 
         resterInBounds();

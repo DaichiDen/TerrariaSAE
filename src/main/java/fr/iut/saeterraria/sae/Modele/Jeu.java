@@ -37,7 +37,7 @@ public class Jeu {
         initializeRecettes();
         initializeBlocConstruction();
         carte = new Map();
-        joueur = new Joueur(nomJoueur, this, (Pierre_TP) items.get(49));
+        joueur = new Joueur(nomJoueur, this, (Pierre_TP) items.get(49), taille1bloc, taille1bloc*2-2);
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);
@@ -70,7 +70,7 @@ public class Jeu {
 
                     this.getListe_projectiles().get(i).setY(this.getListe_projectiles().get(i).getY() + this.getListe_projectiles().get(i).getForceY());
 
-                    if (projectiles.get(i).collisionVerticale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH()) || projectiles.get(i).collisionHorizontale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH())) {
+                    if (projectiles.get(i).collisionVerticale() || projectiles.get(i).collisionHorizontale()) {
                         getListe_projectiles().get(i).setActif(false);
                         getListe_projectiles().remove(i);
                     }
@@ -80,7 +80,7 @@ public class Jeu {
 
                         this.getListe_projectiles().get(i).setY(this.getListe_projectiles().get(i).getY() + this.getListe_projectiles().get(i).getForceY());
 
-                        if (projectiles.get(i).collisionVerticale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH()) || projectiles.get(i).collisionHorizontale(getListe_projectiles().get(i).getTailleL(), getListe_projectiles().get(i).getTailleH())) {
+                        if (projectiles.get(i).collisionVerticale() || projectiles.get(i).collisionHorizontale()) {
                             getListe_projectiles().get(i).setActif(false);
                             getListe_projectiles().remove(i);
                         }
