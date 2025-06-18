@@ -8,9 +8,11 @@ import javafx.geometry.Rectangle2D;
 public abstract class Entite {
 
     private IntegerProperty x, y;
+    private IntegerProperty xHitbox, yHitbox;
     private StringProperty nom;
     private Jeu jeu;
     private int attaque;
+    private Rectangle2D hitbox;
 
     private BooleanProperty marcheDroite = new SimpleBooleanProperty(false);
     private BooleanProperty marcheGauche = new SimpleBooleanProperty(false);
@@ -38,6 +40,36 @@ public abstract class Entite {
         this.attaque = attaque;
         this.tailleL = tailleL;
         this.tailleH = tailleH;
+
+        this.xHitbox = new SimpleIntegerProperty(x);
+        this.yHitbox = new SimpleIntegerProperty(y);
+        this.xHitbox.bind(this.x);
+        this.yHitbox.bind(this.y);
+        this.hitbox = new Rectangle2D(getxHitbox(), getyHitbox(), tailleL, tailleH);
+    }
+
+    public Rectangle2D getHitbox() {
+        return new Rectangle2D(getxHitbox(), getyHitbox(), tailleL, tailleH);
+    }
+
+    public IntegerProperty xHitboxProperty(){
+        return this.xHitbox;
+    }
+    public int getxHitbox() {
+        return this.xHitbox.getValue();
+    }
+    public void setxHitbox(int xHitbox) {
+        this.xHitbox.set(xHitbox);
+    }
+
+    public IntegerProperty yHitboxProperty(){
+        return this.yHitbox;
+    }
+    public int getyHitbox(){
+        return this.yHitbox.getValue();
+    }
+    public void setyHitbox(int yHitbox) {
+        this.yHitbox.set(yHitbox);
     }
 
     public int getTailleH() {
@@ -213,7 +245,7 @@ public abstract class Entite {
         setTailleH(tailleH);
         setTailleL(tailleL);
 
-        Rectangle2D hitboxEntite = new Rectangle2D(getX(), getY(), tailleL, tailleH);
+        Rectangle2D hitboxEntite = getHitbox();
 
         int caseX = (int) (getX() / jeu.getTaille1bloc());
         int caseY = (int) (getY() / jeu.getTaille1bloc());
@@ -289,7 +321,7 @@ public abstract class Entite {
 //    }
     public boolean collisionHorizontale() {
 
-        Rectangle2D hitboxEntite = new Rectangle2D(this.getX(), this.getY(), tailleL, tailleH);
+        Rectangle2D hitboxEntite = getHitbox();
 
         setTailleH(tailleH);
         setTailleL(tailleL);
