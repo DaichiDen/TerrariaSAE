@@ -66,7 +66,7 @@ public class Controller implements Initializable {
     @FXML
     private Pane Vie;
     @FXML
-    private BorderPane principal;
+    private AnchorPane principal;
     @FXML
     private AnchorPane death;
     @FXML
@@ -105,6 +105,10 @@ public class Controller implements Initializable {
     private ScrollPane four;
     @FXML
     private VBox caseRecetteFour;
+    @FXML
+    private TilePane background;
+    @FXML
+    private Pane opaciteBackground;
 
 
     private Jeu jeu;
@@ -131,14 +135,10 @@ public class Controller implements Initializable {
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
         jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu, screen));
 
-
-
         Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0, jeu,4);
         jeu.addEnnemis(ennemiCaca);
         jeu.addMobs(ennemiCaca);
 
-        imagefond.fitWidthProperty().bind(imagebloc_death.widthProperty());
-        imagefond.fitHeightProperty().bind(imagebloc_death.widthProperty());
 
         imageaccueil.setFitWidth(menu.getWidth());
         imageaccueil.fitWidthProperty().bind(imagebloc_accueil.widthProperty());
@@ -155,7 +155,7 @@ public class Controller implements Initializable {
         hotBarVue = new VueHotbar(jeu,hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
 
-        vuejoueur = new SpriteJoueur(jeu, screen); // Appelle la classe de la vue pour l'initialiser
+        vuejoueur = new SpriteJoueur(jeu, screen, background,opaciteBackground); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
         vueCraft = new VueCraft(craftSansBlocConstruction,craftEtabli,craftForge,caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge,
                 ((BlocConstruction) jeu.getItems().get(11)).getListeRecette(), ((BlocConstruction) jeu.getItems().get(12)).getListeRecette(),

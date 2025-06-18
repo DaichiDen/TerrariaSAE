@@ -6,6 +6,7 @@ import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 
 
 public class SpriteJoueur extends CreateRessourceVisuel {
@@ -14,6 +15,8 @@ public class SpriteJoueur extends CreateRessourceVisuel {
     private Pane screen;
     private Jeu jeu;
     private int width, height;
+    private TilePane background;
+    private Pane opacite;
 
     private ImageView spriteActuel;
     private String dernierEtat = "";
@@ -24,7 +27,7 @@ public class SpriteJoueur extends CreateRessourceVisuel {
     private ImageView marcheNon = createImageView("/Sprite/Hero_stop.png", width, height);
 
 
-    public SpriteJoueur(Jeu jeu, Pane screen) {
+    public SpriteJoueur(Jeu jeu, Pane screen,TilePane background, Pane opacite) {
         this.jeu = jeu;
         this.screen = screen;
         this.width = 150;
@@ -32,6 +35,9 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         jeu.getJoueur().marcheGaucheProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
         jeu.getJoueur().marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
         jeu.getJoueur().xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
+        this.background = background;
+        this.opacite = opacite;
+        background.getChildren().add(createImageView("/Backgrounds/background.jpg",2000,1120));
 
         bindAll();
     }
@@ -129,6 +135,10 @@ public class SpriteJoueur extends CreateRessourceVisuel {
     public void bindAll(){
         bindX();
         bindY();
+        background.translateXProperty().bind(screen.translateXProperty().multiply(-0.4));
+        background.translateYProperty().bind(screen.translateYProperty().multiply(-1));
+        opacite.translateXProperty().bind(screen.translateXProperty().multiply(-0.4));
+        opacite.translateYProperty().bind(screen.translateYProperty().multiply(-1));
     }
     public void bindX(){
         screen.translateXProperty().bind(jeu.getJoueur().xProperty().multiply(-1).add(20*32));

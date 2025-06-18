@@ -18,12 +18,14 @@ public class Fond extends CreateRessourceVisuel {
     private TilePane environnement;
 
 
+
     public Fond(TilePane environnement,Jeu jeu) {
        this.jeu = jeu;
         this.tiles = new HashMap<>();
         this.environnement = environnement;
         initialiseTile();
         afficherCarte();
+
     }
 
     public void ajoutTile(String imagePath) {
@@ -50,7 +52,7 @@ public class Fond extends CreateRessourceVisuel {
     public void afficherCarte() {
         for (int i = 0; i < environnement.getPrefRows(); i++) {
             for (int j = 0; j < environnement.getPrefColumns(); j++) {
-                this.environnement.getChildren().add(new ImageView(tiles.get(this.jeu.getCarte().getCase(i, j))));
+                    this.environnement.getChildren().add(new ImageView(tiles.get(this.jeu.getCarte().getCase(i, j))));
             }
         }
     }
