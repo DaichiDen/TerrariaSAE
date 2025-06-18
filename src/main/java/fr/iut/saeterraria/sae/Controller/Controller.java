@@ -133,7 +133,7 @@ public class Controller implements Initializable {
 
 
 
-        Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0, jeu,4);
+        Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2);
         jeu.addEnnemis(ennemiCaca);
         jeu.addMobs(ennemiCaca);
 

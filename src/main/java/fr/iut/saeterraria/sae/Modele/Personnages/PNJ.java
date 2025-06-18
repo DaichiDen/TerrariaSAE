@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class PNJ extends EntiteVivante{
 
     private ArrayList<String> dialogue;
-    public PNJ(String nom, int x, int y, Map map, Jeu jeu) {
+    public PNJ(String nom, int x, int y, Map map, Jeu jeu, int tailleL, int tailleH) {
 
-        super(nom, 20, 20, 10, x, y, 2, 0, jeu,0);
+        super(nom, 20, 20, 10, x, y, 2, 0, jeu,0, tailleL, tailleH);
 
         dialogue = new ArrayList<String>();
     }

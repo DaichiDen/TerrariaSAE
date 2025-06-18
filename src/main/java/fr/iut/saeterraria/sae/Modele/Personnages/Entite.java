@@ -30,12 +30,14 @@ public abstract class Entite {
 //    MediaPlayer damage1 = super.Sonore("/Sound/damage1.wav");
 //    MediaPlayer damage2 = super.Sonore("/Sound/damage2.wav");
 
-    public Entite(String nom, int x, int y, Jeu jeu, int attaque) {
+    public Entite(String nom, int x, int y, Jeu jeu, int attaque, int tailleL, int tailleH) {
         this.nom = new SimpleStringProperty(nom);
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.jeu = jeu;
         this.attaque = attaque;
+        this.tailleL = tailleL;
+        this.tailleH = tailleH;
     }
 
     public int getTailleH() {
@@ -205,7 +207,7 @@ public abstract class Entite {
 //    }
 
 
-    public boolean collisionVerticale(int tailleL, int tailleH) { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
+    public boolean collisionVerticale() { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
 
         setTailleH(tailleH);
@@ -285,9 +287,9 @@ public abstract class Entite {
 //            }
 //        }
 //    }
-    public boolean collisionHorizontale(int tailleL, int tailleH) {
+    public boolean collisionHorizontale() {
 
-        Rectangle2D hitboxJoueur = new Rectangle2D(this.getX(), this.getY(), tailleL, tailleH);
+        Rectangle2D hitboxEntite = new Rectangle2D(this.getX(), this.getY(), tailleL, tailleH);
 
         setTailleH(tailleH);
         setTailleL(tailleL);
@@ -305,7 +307,7 @@ public abstract class Entite {
                         yBloc = jeu.getCarte().getCoordonnéesY(i);
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, tailleL, tailleH);
 
-                        if (hitboxJoueur.intersects(hitboxBloc)) {
+                        if (hitboxEntite.intersects(hitboxBloc)) {
 
                             return true;
 

@@ -24,8 +24,8 @@ public abstract class EntiteVivante extends Entite{
 
 
 
-    public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Jeu jeu, int attaque) {
-        super(nom, x, y, jeu, attaque);
+    public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Jeu jeu, int attaque, int tailleL, int tailleH) {
+        super(nom, x, y, jeu, attaque, tailleL, tailleH);
 
         this.barreVie = new BarreVie(vieMax);
         this.energieMax = new SimpleIntegerProperty(energieMax);
@@ -54,7 +54,7 @@ public abstract class EntiteVivante extends Entite{
     public abstract void action(int x, int y, int range);
 
     public void bloquéVertical(int tailleL, int tailleH) {
-        if(collisionVerticale(tailleL, tailleH)){
+        if(collisionVerticale()){
             int blocHaut = getyBloc();
             int blocBas = getyBloc() + getJeu().getTaille1bloc();
             int joueurHaut = getY();
@@ -79,7 +79,7 @@ public abstract class EntiteVivante extends Entite{
         boolean collisionDroite = false;
         boolean collisionGauche = false;
 
-        if (collisionHorizontale(tailleL, tailleH)) {
+        if (collisionHorizontale()) {
             // Bords du bloc
             int blocGauche = getxBloc();
             int blocDroite = getxBloc() + super.getJeu().getTaille1bloc();
