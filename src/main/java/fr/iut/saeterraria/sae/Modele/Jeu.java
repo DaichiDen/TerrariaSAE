@@ -92,6 +92,14 @@ public class Jeu {
                         getListe_projectiles().remove(i);
                     }
                 }
+
+                for(int j = 0; j < mobs.size(); j++ ){ //dégâts sur les entités vivantes
+                    if(mobs.get(j).getHitbox().intersects(p.getHitbox())){
+                        mobs.get(j).decrementVie(p.getAttaque());
+                        p.setActif(false);
+                        getListe_projectiles().remove(i);
+                    }
+                }
             }
         }
     }
