@@ -12,6 +12,7 @@ import fr.iut.saeterraria.sae.Modele.Personnages.*;
 import fr.iut.saeterraria.sae.Modele.Map.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.layout.TilePane;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 public class Jeu {
 
     private Map carte;
+    private TilePane tp;
     private Joueur joueur;
     private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
@@ -87,7 +89,12 @@ public class Jeu {
 
                     p.setY(p.getY() + (int) p.getForceY());
 
+                    if(p.getNom().equals(" Boule de feu")){
+                        p.explosion();
+                    }
+
                     if (p.collisionVerticale() || p.collisionHorizontale()) {
+                        p.explosion();
                         p.setActif(false);
                         getListe_projectiles().remove(i);
                     }
@@ -96,6 +103,7 @@ public class Jeu {
                 for(int j = 0; j < mobs.size(); j++ ){ //dégâts sur les entités vivantes
                     if(mobs.get(j).getHitbox().intersects(p.getHitbox())){
                         mobs.get(j).decrementVie(p.getAttaque());
+                        p.explosion();
                         p.setActif(false);
                         getListe_projectiles().remove(i);
                     }
@@ -235,6 +243,7 @@ public class Jeu {
         items.put(78, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(12)));
         items.put(79, new Distance("Arquebuse","Etrange objet qui semble ralentir le temps",5));
         items.put(80, new Item("Balle en plomb","Un projectile qui peut être utlisé ",1));
+        items.put(81, new Item("Boule de feu","Une boule de feu qui explose à l'impact",1));
     }
 
     private void initializeRecettes() {

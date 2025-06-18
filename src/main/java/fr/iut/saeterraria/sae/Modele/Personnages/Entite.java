@@ -201,44 +201,6 @@ public abstract class Entite {
     }
 
 
-    // Niké
-//    public void collision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ectile(Projectile projectile, int ind) {
-//        Rectangle2D hitboxProjectile = new Rectangle2D(projectile.getX(), projectile.getY(), jeu.getTaille1bloc( , jeu.getTaille1bloc();
-//
-//        System.out.println("hitbox fleche : "+projectile.getX()+","+(projectile.getX()+jeu.getTaille1bloc()+" / "+projectile.getY()+","+(projectile.getY()+jeu.getTaille1bloc());
-//
-//        int i = (int) (projectile.getX() / jeu.getTaille1bloc();
-//        int j = (int) (projectile.getY() / jeu.getTaille1bloc();
-//
-//        int x = (int) (projectile.getX());
-//        int y = (int) (projectile.getY());
-//
-//
-//        if (jeu.getCarte().getCase(j, i) != 0) { // si le bloc n'est pas du ciel
-//
-//            Rectangle2D hitboxBloc = new Rectangle2D(x,y, jeu.getTaille1bloc(, jeu.getTaille1bloc();//Bloc à la position de la flèche
-//
-//            System.out.println("hitbox bloc : "+x+","+(x+jeu.getTaille1bloc()+" / "+y+","+(y+jeu.getTaille1bloc());
-//
-//            System.out.println("coordonnées de la flèche : "+projectile.getX()+", "+projectile.getY());
-//
-//            System.out.println("coordonnées du bloc  : "+j+", "+i);
-//
-//            System.out.println("la fleche touche ! : "+hitboxProjectile.intersects(hitboxBloc));
-//
-//            if(hitboxProjectile.intersects(hitboxBloc)){
-//                projectiles.remove(ind);
-//                liste_projectiles.remove(ind);
-//                projectile.estActifProperty().set(false);
-//                System.out.println("je suis plus dans la liste");
-//            }
-//        }
-//        else {
-//            System.out.println("je suis dans le ciel là ohéééé");
-//        }
-//    }
-
-
     public boolean collisionVerticale() { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
 

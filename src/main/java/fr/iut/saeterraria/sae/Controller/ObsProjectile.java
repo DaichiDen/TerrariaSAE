@@ -41,8 +41,14 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
                         sprite.setFitWidth(54);
                         sprite.setFitHeight(64);
                     }
-                    else{
+                    else if (projectile_aj.getType().equals("balle")){
                         URL imageURL = getClass().getResource("/Sprite_objets/Balle.png");
+                        Image image = new Image(String.valueOf(imageURL));
+                        sprite = new ImageView(image);
+                        sprite.setFitWidth(54);
+                        sprite.setFitHeight(64);
+                    }else{
+                        URL imageURL = getClass().getResource("/Sprite_objets/Boule_de_feu.png");
                         Image image = new Image(String.valueOf(imageURL));
                         sprite = new ImageView(image);
                         sprite.setFitWidth(54);

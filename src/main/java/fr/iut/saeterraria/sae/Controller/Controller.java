@@ -126,12 +126,6 @@ public class Controller implements Initializable {
         scene = new Fond(fond, jeu);// Initialise le fond (décor du jeu)
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
         jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu, screen));
-    
-
-
-
-
-
 
         Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2);
 
@@ -148,7 +142,7 @@ public class Controller implements Initializable {
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte(),fond,screenInventaire,craftSansBlocConstruction,craftEtabli,craftForge,four);
 
         inventaireVue = new VueInventaire(quitterInventaire, screenInventaire, jeu.getJoueur(), inventaire, screen);
-        vueProjectile = new VueProjectile(jeu, screen);
+        vueProjectile = new VueProjectile(jeu, screen, fond, scene);
 
         hotBarVue = new VueHotbar(jeu,hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
@@ -265,6 +259,7 @@ public class Controller implements Initializable {
     public void ouvrirInventaire() {
         screenInventaire.toFront();
         jeu.getJoueur().ajouterItem(jeu.getItems().get(78),1);
+
         jeu.getJoueur().ajouterItem(jeu.getItems().get(77),50);
 
         jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
@@ -273,7 +268,7 @@ public class Controller implements Initializable {
 
         jeu.getJoueur().ajouterItem(jeu.getItems().get(79),1);
 
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(80),5);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(81),1);
 
 
 
