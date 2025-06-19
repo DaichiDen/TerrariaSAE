@@ -206,7 +206,7 @@ public class Controller implements Initializable {
                 controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI, 2));
             });
         }
-        BiblioSon.play(1);
+        //BiblioSon.play(1);
         for(int i=0; i<caseRecetteFour.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteFour.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
