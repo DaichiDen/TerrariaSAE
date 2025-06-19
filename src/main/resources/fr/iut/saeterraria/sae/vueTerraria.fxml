@@ -65,6 +65,85 @@
                             <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="1200.0" AnchorPane.topAnchor="250.0">
+                           <children>
+                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label text="Case 1">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label prefHeight="16.0" prefWidth="67.0" text="Ligne" textAlignment="CENTER">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="ligneCase1" prefHeight="26.0" prefWidth="101.0">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="36.0" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label prefHeight="16.0" prefWidth="67.0" text="Colonne" textAlignment="CENTER">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="colonneCase1" prefHeight="26.0" prefWidth="101.0">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: lightblue;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+                                 <children>
+                                    <Label text="Case 2">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label prefHeight="16.0" prefWidth="67.0" text="Ligne" textAlignment="CENTER">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="ligneCase2" prefHeight="26.0" prefWidth="101.0">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label prefHeight="16.0" prefWidth="67.0" text="Colonne" textAlignment="CENTER">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="colonneCase2" prefHeight="26.0" prefWidth="101.0">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <Button mnemonicParsing="false" onAction="#activerSwitch" text="Switch" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="420.0" />
+                           </children>
+                        </AnchorPane>
                         <ScrollPane fx:id="craftEtabli" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="1439.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="30.0">
                            <content>
                               <VBox fx:id="caseRecetteEtabli" />

@@ -29,6 +29,7 @@
         private int dureeDash = 0;
         private final int DUREE_DASH_MAX = 30; // environ 15 frames = 250ms à 60fps
         private int vitesseDash = 10;
+        private int[] stockItem;
 
         private String directionDash = "droite";// 1 = droite, -1 = gauche
         private String dernierPos = "droite"; // 1 gauche et -1 droite
@@ -45,6 +46,7 @@
             this.mainCourante = 0;
             this.xMax = new SimpleIntegerProperty(getX()/super.getJeu().getTaille1bloc());
             this.yMax = new SimpleIntegerProperty(getY()/super.getJeu().getTaille1bloc());
+            this.stockItem = new int[2];
         }
 
 
@@ -397,6 +399,13 @@
             for ( int piece : equipement){
                 this.defProperty().setValue(this.defProperty().getValue() + ((Armure)getJeu().getItems().get(piece)).getDefense());
             }
+        }
+
+        public void swapItem(int ligneDep, int colonneDep, int ligneFin, int colonneFin) {
+            stockItem[0] = inventaire.getInventaireJoueur()[ligneDep][colonneDep].getItem().getCodeObjet();
+            stockItem[1] = inventaire.getInventaireJoueur()[ligneDep][colonneDep].getQuantite();
+            inventaire.getInventaireJoueur()[ligneDep][colonneDep].setCase(getJeu().getItems().get(inventaire.getInventaireJoueur()[ligneFin][colonneFin].getItem().getCodeObjet()),inventaire.getInventaireJoueur()[ligneFin][colonneFin].getQuantite());
+            inventaire.getInventaireJoueur()[ligneFin][colonneFin].setCase(getJeu().getItems().get(stockItem[0]), stockItem[1]);
         }
     }
 

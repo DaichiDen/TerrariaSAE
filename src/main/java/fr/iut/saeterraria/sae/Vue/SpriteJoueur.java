@@ -135,7 +135,7 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         bindY();
         background.translateXProperty().bind(screen.translateXProperty().multiply(-0.4));
         background.translateYProperty().bind(screen.translateYProperty().multiply(-1));
-        opacite.translateXProperty().bind(screen.translateXProperty().multiply(-0.4));
+        opacite.translateXProperty().bind(screen.translateXProperty().multiply(-1));
         opacite.translateYProperty().bind(screen.translateYProperty().multiply(-1));
     }
     public void bindX(){

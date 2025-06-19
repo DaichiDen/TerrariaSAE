@@ -101,6 +101,14 @@ public class Controller implements Initializable {
     private TilePane background;
     @FXML
     private Pane opaciteBackground;
+    @FXML
+    private TextField ligneCase1;
+    @FXML
+    private TextField colonneCase1;
+    @FXML
+    private TextField ligneCase2;
+    @FXML
+    private TextField colonneCase2;
 
 
     private Jeu jeu;
@@ -294,6 +302,11 @@ public class Controller implements Initializable {
     @FXML
     public void rageQuit() {
         Platform.exit();
+    }
+
+    @FXML
+    public void activerSwitch(){
+        jeu.getJoueur().swapItem(Integer.parseInt(ligneCase1.getText())-1,Integer.parseInt(colonneCase1.getText())-1,Integer.parseInt(ligneCase2.getText())-1,Integer.parseInt(colonneCase2.getText())-1);
     }
 
 }
