@@ -20,12 +20,9 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 
 
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -102,13 +99,13 @@ public class Controller implements Initializable {
     @FXML
     private Pane opaciteBackground;
     @FXML
-    private TextField ligneCase1;
+    private Spinner<Integer> ligneCase1;
     @FXML
-    private TextField colonneCase1;
+    private Spinner<Integer> colonneCase1;
     @FXML
-    private TextField ligneCase2;
+    private Spinner<Integer> ligneCase2;
     @FXML
-    private TextField colonneCase2;
+    private Spinner<Integer> colonneCase2;
 
 
     private Jeu jeu;
@@ -214,6 +211,12 @@ public class Controller implements Initializable {
             });
         }
 
+        setupSpinner(ligneCase1, 1, 6, 1);
+        setupSpinner(colonneCase1, 1, 7, 1);
+        setupSpinner(ligneCase2, 1, 6, 1);
+        setupSpinner(colonneCase2, 1, 7, 1);
+
+
         // BiblioSon.play(1);
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
             private long lastUpdate = 0;
@@ -316,8 +319,13 @@ public class Controller implements Initializable {
 
     @FXML
     public void activerSwitch(){
-        jeu.getJoueur().swapItem(Integer.parseInt(ligneCase1.getText())-1,Integer.parseInt(colonneCase1.getText())-1,Integer.parseInt(ligneCase2.getText())-1,Integer.parseInt(colonneCase2.getText())-1);
+        jeu.getJoueur().swapItem(ligneCase1.getValue()-1,colonneCase1.getValue()-1,ligneCase2.getValue()-1,colonneCase2.getValue()-1);
     }
+
+    private void setupSpinner(Spinner<Integer> spinner, int min, int max, int initialValue) {
+        spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(min, max, initialValue));
+    }
+
 
 }
 
