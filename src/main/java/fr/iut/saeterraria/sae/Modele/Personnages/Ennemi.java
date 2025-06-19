@@ -74,7 +74,7 @@ public class Ennemi extends EntiteVivante {
                 this.sauter();
             }
 
-            if(peutEtreAtteint(super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32, 2)){
+            if(peutEtreAtteint(super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32, 5)){
                 action(super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY(), 2);
             }
 

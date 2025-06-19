@@ -201,44 +201,6 @@ public abstract class Entite {
     }
 
 
-    // Niké
-//    public void collision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ectile(Projectile projectile, int ind) {
-//        Rectangle2D hitboxProjectile = new Rectangle2D(projectile.getX(), projectile.getY(), jeu.getTaille1bloc( , jeu.getTaille1bloc();
-//
-//        System.out.println("hitbox fleche : "+projectile.getX()+","+(projectile.getX()+jeu.getTaille1bloc()+" / "+projectile.getY()+","+(projectile.getY()+jeu.getTaille1bloc());
-//
-//        int i = (int) (projectile.getX() / jeu.getTaille1bloc();
-//        int j = (int) (projectile.getY() / jeu.getTaille1bloc();
-//
-//        int x = (int) (projectile.getX());
-//        int y = (int) (projectile.getY());
-//
-//
-//        if (jeu.getCarte().getCase(j, i) != 0) { // si le bloc n'est pas du ciel
-//
-//            Rectangle2D hitboxBloc = new Rectangle2D(x,y, jeu.getTaille1bloc(, jeu.getTaille1bloc();//Bloc à la position de la flèche
-//
-//            System.out.println("hitbox bloc : "+x+","+(x+jeu.getTaille1bloc()+" / "+y+","+(y+jeu.getTaille1bloc());
-//
-//            System.out.println("coordonnées de la flèche : "+projectile.getX()+", "+projectile.getY());
-//
-//            System.out.println("coordonnées du bloc  : "+j+", "+i);
-//
-//            System.out.println("la fleche touche ! : "+hitboxProjectile.intersects(hitboxBloc));
-//
-//            if(hitboxProjectile.intersects(hitboxBloc)){
-//                projectiles.remove(ind);
-//                liste_projectiles.remove(ind);
-//                projectile.estActifProperty().set(false);
-//                System.out.println("je suis plus dans la liste");
-//            }
-//        }
-//        else {
-//            System.out.println("je suis dans le ciel là ohéééé");
-//        }
-//    }
-
-
     public boolean collisionVerticale() { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
 
@@ -273,52 +235,6 @@ public abstract class Entite {
         return false;
     }
 
-
-    //    public void collisionVerticale(int tailleL,int tailleH) { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
-//        collisionBas = false;
-//
-//        Rectangle2D hitboxEntite = new Rectangle2D(getX(),getY(),tailleL,tailleH);
-//
-//        int caseX = (int) (getX() / jeu.getTaille1bloc();
-//        int caseY = (int) (getY() / jeu.getTaille1bloc();
-//        //boucle sur les 4 blocs autour du joueur , i+1 i-1 ,j+1 j-1
-//        for (int i = caseY - 1; i <= caseY + 2; i++) { // +2 pour la taille du personnage (2 blocs de hauteur)
-//            for (int j = caseX - 1; j <= caseX + 1; j++) {
-//                if (i >= 0 && i < jeu.getCarte().getLigne() && j >= 0 && j < jeu.getCarte().getColonne()) {
-//                    la_case = jeu.getCarte().getCase(i, j);
-//                    if (jeu.getCarte().getCase(i, j) != 0) { // si le bloc n'est pas du ciel
-//                        xBloc = jeu.getCarte().getCoordonnéesX(j);
-//                        yBloc = jeu.getCarte().getCoordonnéesY(i);
-//                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, jeu.getTaille1bloc(, jeu.getTaille1bloc(); // création d'un rectangle de hitbox pour le bloc en cours
-//
-//                        if (hitboxEntite.intersects(hitboxBloc)) { // si le rectangle du joueur se superpose au carré du bloc alors :
-//                            int blocHaut = yBloc;
-//                            int blocBas = yBloc + jeu.getTaille1bloc(;
-//                            int joueurHaut = getY();
-//                            int joueurBas = getY() + (jeu.getTaille1bloc(*2);
-//
-//                            if (joueurBas >= blocHaut && vitesseY >= 0 && joueurHaut < blocHaut) { //vitesseY >=0 vérifie si le joueur est entrain de tomber
-//                                collisionBas = true;
-//                                enSaut = false;
-//                                vitesseY = 0;
-//                                setY(blocHaut - (jeu.getTaille1bloc(*2));
-//                            }
-//                            else if (joueurHaut <= blocBas && vitesseY < 0 && joueurBas > blocBas) {
-//                                vitesseY = 0;
-//                                setY(blocBas);
-//                            }
-//                            if(jeu.getCarte().getCase(i,j) == 4){
-//                                this.decrementVie(1);
-//
-//
-//                            }
-//                        }
-//                    }
-//
-//                }
-//            }
-//        }
-//    }
     public boolean collisionHorizontale() {
 
         Rectangle2D hitboxEntite = getHitbox();

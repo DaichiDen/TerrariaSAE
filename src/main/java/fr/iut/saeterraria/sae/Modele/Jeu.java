@@ -227,6 +227,7 @@ public class Jeu {
         items.put(78, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(12)));
         items.put(79, new Distance("Arquebuse","Etrange objet qui semble ralentir le temps",5));
         items.put(80, new Item("Balle en plomb","Un projectile qui peut être utlisé ",1));
+        items.put(81, new Distance("Grappin" ,"Cet objet sert à s'accrocher et se ramener à un bloc",0,(BlocConstruction) items.get(12)));
     }
 
     private void initializeRecettes() {

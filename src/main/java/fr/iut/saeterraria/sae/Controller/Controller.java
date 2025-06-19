@@ -226,8 +226,6 @@ public class Controller implements Initializable {
 
             @Override
             public void handle(long now) {
-                System.out.println(jeu.getJoueur().getY() +"y");
-                System.out.println(jeu.getJoueur().getX() +"x");
                 if (now - lastUpdate >= frameInterval) {
                     if (jeu.getJoueur().isTimeStop()) {
                         jeu.getJoueur().mettreAJour();
@@ -277,16 +275,9 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(78),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(77),50);
 
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
 
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(52),1);
-
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(79),1);
-
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(80),5);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(81),1);
 
 
 

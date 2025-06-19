@@ -40,6 +40,7 @@ public abstract class EntiteVivante extends Entite{
     public int getVitesseY(){
         return vitesseY;
     }
+    public int getVitesseX() { return vitesseX; }
 
 
 
@@ -167,7 +168,6 @@ public abstract class EntiteVivante extends Entite{
                 return false;
             }
         }
-
         return true;
     }
     public void setVitesseX(int val){

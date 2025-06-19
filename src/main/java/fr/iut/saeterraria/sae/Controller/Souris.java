@@ -51,8 +51,8 @@ public class Souris implements EventHandler<MouseEvent> {
         int x1 = ((int) mouseEvent.getX()); // position x dans le FX
         int y1 = ((int) mouseEvent.getY()); // position y dans le FX
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-            System.out.println(x1 + "x" + y1 + "y1");
             if (jeu.getJoueur().estVivant()) {
+
                 if (jeu.getJoueur().gunEnMain() && !jeu.getJoueur().isTimeStop()) {
                     jeu.getJoueur().setTimeStop(true);
 
@@ -93,11 +93,32 @@ public class Souris implements EventHandler<MouseEvent> {
                     }
 
                 }
+
+                else if(jeu.getJoueur().grappinEnMain()){
+                    System.out.println(x1+"x1" +y1+"y1");
+                    System.out.println(x+"y2" +y+"y1");
+
+                    if(jeu.getJoueur().peutEtreAtteint(x,y,100)){
+                        System.out.println("zizi1");
+                        if(jeu.getCarte().getCase(y,x)!=0){
+                            System.out.println("caqcaaaa");
+                            jeu.getJoueur().grappiner(x1, y1);
+                        }
+                    }
+
+
+                }
+
+
+
+
                 else if (jeu.getJoueur().miner(x, y)) {
                     this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// faire de la taille de la map un un getter
 
                     this.tp.getChildren().add((((y * tp.getPrefColumns()) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
                 }
+
+
                 else {
                     jeu.getJoueur().action(x1, y1, 2);
                 }

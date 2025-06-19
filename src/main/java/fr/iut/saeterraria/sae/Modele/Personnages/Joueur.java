@@ -194,6 +194,9 @@
                 }
             }
         }
+        public boolean grappinEnMain() {
+            return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 81;
+        }
 
         // Vérifie si la quantité d'items nécessaires sont suffisants pour construire, puis craft l'item si les ressources sont suffisantes
         public void craftItem(Item item) {
@@ -275,53 +278,6 @@
                 System.out.println("craft pas réussi");
             }
         }
-
-    //    public int[][][] dansZone(Map map) {
-    //        int caseX = (int) (getX() / taille1bloc);
-    //        int caseY = (int) (getY() / taille1bloc);
-    //
-    //        int[][][] tab = new int[6][5][2]; // 6 lignes visibles (Y), 5 colonnes (X)
-    //        for (int dy = -2; dy <= 3; dy++) { // hauteur : 6 cases (y -2 à y +3)
-    //            for (int dx = -2; dx <= 2; dx++) { // largeur : 5 cases (x -2 à x +2)
-    //
-    //                int x = caseX + dx;
-    //                int y = caseY + dy;
-    //
-    //                int i = dy + 2; // Pour que dy = -2 commence à l'indice 0
-    //                int j = dx + 2; // Pour que dx = -2 commence à l'indice 0
-    //
-    //                if (y >= 0 && y < map.getLigne() && x >= 0 && x < map.getColonne()) {
-    //                    if (map.getCase(y, x) != 3) {
-    //                        tab[i][j][0] = (map.getCoordonnéesX(x));
-    //                        tab[i][j][1] = (map.getCoordonnéesY(y));
-    //                    } else {
-    //                        tab[i][j][0] = -1;
-    //                        tab[i][j][1] = -1;
-    //                    }
-    //                } else {
-    //                    tab[i][j][0] = -1;
-    //                    tab[i][j][1] = -1;
-    //                }
-    //            }
-    //        }
-    //
-    //        return tab;
-    //    }
-
-
-    //    public void afficheInRange(int[][][] tab){
-    //        for(int i = 0; i < tab.length; i++){
-    //            for(int j = 0; j < tab[i].length; j++){
-    //                if (tab[i][j][0] != -1) {
-    //                    System.out.print("[x=" + tab[i][j][0] + ", y=" + tab[i][j][1] + "] ");
-    //                } else {
-    //                    System.out.print("[ -- ] ");
-    //                }
-    //            }
-    //            System.out.println();
-    //        }
-    //        System.out.println("------------------");
-    //    }
 
 
         public void tp(int x, int y) {
@@ -410,6 +366,29 @@
             stockItem[1] = inventaire.getInventaireJoueur()[ligneDep][colonneDep].getQuantite();
             inventaire.getInventaireJoueur()[ligneDep][colonneDep].setCase(getJeu().getItems().get(inventaire.getInventaireJoueur()[ligneFin][colonneFin].getItem().getCodeObjet()),inventaire.getInventaireJoueur()[ligneFin][colonneFin].getQuantite());
             inventaire.getInventaireJoueur()[ligneFin][colonneFin].setCase(getJeu().getItems().get(stockItem[0]), stockItem[1]);
+        }
+
+        public void grappiner(int cibleX, int cibleY){
+            // Position de l'entité
+            int ex = this.getX();
+            int ey = this.getY();
+
+            // Direction du tir
+            int dx = cibleX - ex;
+            int dy = cibleY - ey;
+
+            // Normalisation du vecteur (dx, dy)
+            int distance = (int) Math.sqrt(dx * dx + dy * dy);
+            if (distance == 0) distance = 1; // éviter division par zéro
+
+            // Vitesse initiale (puissance du tir)
+            int puissance = 50;
+
+            int vx = (int) (((float) dx / distance) * puissance);
+            int vy = (int) (((float) dy / distance) * puissance);
+
+            this.setVitesseY(this.getVitesseY() + vy);
+            this.setVitesseX(this.getVitesseX() + vx);
         }
     }
 
