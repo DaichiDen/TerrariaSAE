@@ -19,8 +19,6 @@ public class Fond extends CreateRessourceVisuel {
     private static int id = 0;
     private TilePane environnement;
 
-
-
     public Fond(TilePane environnement,Jeu jeu) {
         this.jeu = jeu;
         this.tiles = new HashMap<>();
@@ -96,8 +94,9 @@ public class Fond extends CreateRessourceVisuel {
 
     public void updateMapX() {
         //X+1 = ajouter 1 colonne et donc ajouter à chaque ligne une case
-        for (int x = 0; x < this.environnement.getPrefRows(); x++) {
-            this.environnement.getChildren().add((x*environnement.getPrefColumns()+environnement.getPrefColumns()+x),new ImageView(tiles.get(this.jeu.getCarte().getCase(x, environnement.getPrefColumns()))));
+        for (int x = 0; x < this.environnement.getPrefRows(); x++) {//Ajout à la fin +1 puis enlever le début
+            this.environnement.getChildren().add((x*environnement.getPrefColumns()+environnement.getPrefColumns()),new ImageView(tiles.get(this.jeu.getCarte().getCase(x, this.environnement.getPrefColumns()+jeu.getJoueur().getXMarche()))));
+            this.environnement.getChildren().remove((x*environnement.getPrefColumns()));
         }
     }
 

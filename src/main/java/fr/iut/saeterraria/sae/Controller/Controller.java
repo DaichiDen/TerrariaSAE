@@ -131,12 +131,6 @@ public class Controller implements Initializable {
         scene = new Fond(fond, jeu);// Initialise le fond (décor du jeu)
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
         jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu, screen));
-    
-
-
-
-
-
 
         Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2);
 
@@ -169,7 +163,7 @@ public class Controller implements Initializable {
 
         ObsJoueur obsJ = new ObsJoueur(jeu, vuejoueur, controlleurJoueur);
 
-        jeu.getJoueur().getXMaxProperty().addListener(new ObsMapX(jeu, scene));
+        jeu.getJoueur().getXMarcheProperty().addListener(new ObsMapX(jeu, scene));
         jeu.getJoueur().getYMaxProperty().addListener(new ObsMapY(jeu, scene));
 
         jeu.getJoueur().yProperty().addListener(obsJ);
@@ -226,6 +220,7 @@ public class Controller implements Initializable {
 
             @Override
             public void handle(long now) {
+                System.out.println(jeu.getJoueur().getY());
                 if (now - lastUpdate >= frameInterval) {
                     if (jeu.getJoueur().isTimeStop()) {
                         jeu.getJoueur().mettreAJour();
@@ -275,6 +270,9 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(52),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(51),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
 
 
         jeu.getJoueur().ajouterItem(jeu.getItems().get(81),1);

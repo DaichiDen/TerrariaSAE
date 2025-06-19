@@ -19,8 +19,8 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(2, "/Tiles/Dirt_2.png"); // Terre Basse
         items.put(3, "/Tiles/Bois.png"); // Bois
         items.put(4, "/Tiles/Minerais_charbon.png"); // Minerai Charbon
-        items.put(5, "/Sprite_objets/Coal.png"); // Charbon
-        items.put(6, "/Tiles/Roche_moche.png"); // Pierre
+        items.put(5, "/Tiles/Roche_moche.png"); // Pierre
+        items.put(6, "/Sprite_objets/Coal.png"); // Charbon
         items.put(7, "/Tiles/Minerais_fer.png"); // Minerai Fer
         items.put(8, "/Sprite_objets/Iron_ingot.png"); // Fer
         items.put(9, "/Tiles/Minerais_DELJCCium.png"); //Minerai DELJCCIUM

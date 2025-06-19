@@ -34,7 +34,8 @@
         private String directionDash = "droite";// 1 = droite, -1 = gauche
         private String dernierPos = "droite"; // 1 gauche et -1 droite
         ArrayList<Ennemi> ennemis_touchées_dash = new ArrayList();
-        private IntegerProperty xMax,yMax;
+        private int xPrec;
+        private IntegerProperty xMarche,yMax;
 
 
         public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp, int tailleL, int tailleH) {
@@ -44,15 +45,22 @@
             this.inventaire = new Inventaire();
             this.pierreTp = pierreTp;
             this.mainCourante = 0;
-            this.xMax = new SimpleIntegerProperty(getX()/super.getJeu().getTaille1bloc());
+            this.xPrec = super.getX()/32;
+            this.xMarche = new SimpleIntegerProperty(0); //nb bloc traversé horizontal
             this.yMax = new SimpleIntegerProperty(getY()/super.getJeu().getTaille1bloc());
-
-
-
             this.stockItem = new int[2];
 
         }
 
+        public int getxMarche(){
+            return xMarche.get();
+        }
+        public void setxMarche(int xMarche){
+            this.xMarche.set(xMarche);
+        }
+        public IntegerProperty getxMarcheProperty(){
+            return xMarche;
+        }
 
         public void incrementeMainCourante() {
             if (this.mainCourante == 6) {
@@ -107,8 +115,10 @@
         }
 
         public void mettreAJour() {
-            if (this.getX()/super.getJeu().getTaille1bloc()>this.xMax.get()) {
-                setXMax(this.getX());
+            if (xPrec<super.getX()/32){
+                System.out.println("Il avance");
+                xPrec+=1;
+                setXMarche(xMarche.getValue()+1);
             }
             if (this.getY()/super.getJeu().getTaille1bloc()>this.yMax.get()) {
                 setYMax(this.getY());
@@ -151,7 +161,7 @@
         public boolean miner(int x, int y) {
             boolean miner = false;
             if (peutEtreAtteint(x, y, 2.5)) {
-                if ( ((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x))).getResistance() == 1 || getJeu().getCarte().getCase(y, x) != 0 || getJeu().getCarte().getCase(y, x) != 18 || getJeu().getCarte().getCase(y, x) != 22 && this.inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()<55 &&this.inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()>50 &&compareResistance(((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x)))) ) {
+                if ( ((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x))).getResistance() == 1 || getJeu().getCarte().getCase(y, x) != 0 && getJeu().getCarte().getCase(y, x) != 18 && getJeu().getCarte().getCase(y, x) != 22 && this.inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()<55 &&this.inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()>50 && compareResistance(((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x)))) ) {
                     int[] bloc = getJeu().getCarte().detruireBloc(x, y);
                     ajouterItem(super.getJeu().getItems().get(bloc[0]), bloc[1]);
                     miner = true;
@@ -308,11 +318,11 @@
             return directionDash;
         }
 
-        public int getXMax(){
-            return xMax.getValue();
+        public int getXMarche(){
+            return xMarche.getValue();
         }
-        public IntegerProperty getXMaxProperty(){ return xMax; }
-        public void setXMax(int xMax){ this.xMax.setValue(xMax/super.getJeu().getTaille1bloc()); }
+        public IntegerProperty getXMarcheProperty(){ return xMarche; }
+        public void setXMarche(int xMarche){ this.xMarche.setValue(xMarche/super.getJeu().getTaille1bloc()); }
 
         public int getYMax(){
             return yMax.getValue();

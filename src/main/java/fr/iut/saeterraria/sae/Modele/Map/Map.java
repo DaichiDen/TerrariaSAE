@@ -114,13 +114,19 @@ public class Map {
         int[] blocRecup = new int[2];
         blocRecup[0] = getCase(y,x);
         blocRecup[1] = 1;
-        map[y][x]=0;
+        if (y>32){
+            map[y][x]=18;
+        }
+        else {
+            map[y][x]=0;
+        }
+
         switch (blocRecup[0]){
             case 1:
                 blocRecup[0] = 2;
                 break;
             case 4:
-                blocRecup[0] = 5;
+                blocRecup[0] = 6;
                 blocRecup[1] = 4;
                 break;
             case 9:

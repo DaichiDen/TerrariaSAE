@@ -20,7 +20,7 @@ class EntiteVivanteTest {
 
 
         var joueur = jeu.getJoueur();
-        joueur.setX(0);
+        joueur.setX(64);
         joueur.setY(0);
         System.out.println(joueur.getVitesseY() + "vitesseY");
         System.out.println(joueur.getY() +"y");
@@ -32,7 +32,7 @@ class EntiteVivanteTest {
         }
        // applique les mouvements + collision
 
-        assertEquals(736, joueur.getY(), "Le joueur devrait être posé sur le bloc."); // 736 c'est le seuil du sol quand le joueur spawn en 0,0 (en l'air coin gauche haut)
+        assertEquals(832, joueur.getY(), "Le joueur devrait être posé sur le bloc."); // 832 c'est le seuil du sol quand le joueur spawn en 0,2 (en l'air coin gauche haut)
         assertEquals(0,joueur.getVitesseY());
 
     }

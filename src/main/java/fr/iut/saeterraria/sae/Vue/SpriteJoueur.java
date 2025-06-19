@@ -48,11 +48,11 @@ public class SpriteJoueur extends CreateRessourceVisuel {
             unbindX();
             bindXActif = false;
         }
-        else if (bindXActif && joueur.xProperty().getValue() >= 100*32){ //unbind droite 40 sera remplacé par la map final
+        else if (bindXActif && joueur.xProperty().getValue() >= (416-20)*32){ //unbind droite
             unbindX();
             bindXActif = false;
         }
-        else if (!bindXActif && joueur.xProperty().getValue() > 20*32 && joueur.xProperty().getValue() < 100*32) {
+        else if (!bindXActif && joueur.xProperty().getValue() > 20*32 && joueur.xProperty().getValue() < (416-20)*32) {
             bindX();
             bindXActif = true;
         }

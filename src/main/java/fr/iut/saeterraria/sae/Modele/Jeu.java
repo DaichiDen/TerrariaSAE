@@ -96,7 +96,6 @@ public class Jeu {
         }
     }
 
-
     public ObservableList<EntiteVivante> getMobs() {
         return mobs;
     }
@@ -289,11 +288,15 @@ public class Jeu {
         // Botte en DELJCCnium + forge
         items.get(70).addInRecette(new ElementRecette(items.get(10),4));
 
-        // Flèche : 1 Bois 1 fer
+        // Flèche : 1 Bois 1 fer + forge
         items.get(77).addInRecette(new ElementRecette(items.get(3),1));
         items.get(77).addInRecette(new ElementRecette(items.get(8),1));
 
-        // Balle en plomb : 2 fer
+        // Arc : 3 bois 2 fer + forge
+        items.get(78).addInRecette(new ElementRecette(items.get(3),3));
+        items.get(78).addInRecette(new ElementRecette(items.get(8),2));
+
+        // Balle en plomb : 2 fer + forge
         items.get(80).addInRecette(new ElementRecette(items.get(8),2));
     }
 
