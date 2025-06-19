@@ -25,22 +25,39 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(8, "/Sprite_objets/Iron_ingot.png"); // Fer
         items.put(9, "/Tiles/Minerais_DELJCCium.png"); //Minerai DELJCCIUM
         items.put(10, "/Sprite_objets/DELJCCIUM_ingot.png"); // DELJCCium
-        items.put(16, "/Tiles/piques_vorpales.png");
+        items.put(11, "/Tiles/Fond_noir.png"); // Construction Sans bloc
         // Blocs à constructions
         items.put(12, "/Tiles/Etabli.png"); // Etabli
         items.put(13, "/Tiles/Forge.png"); // Forge
         items.put(14, "/Tiles/Fond_noir.png"); // Alambique
         items.put(15, "/Tiles/Four.png"); // Four
+        items.put(16, "/Tiles/piques_vorpales.png"); // Pique
 
         /* ---------- À ajouter le reste ------------- */
-        items.put(17,"/Tiles/bedrock.png");
+        items.put(17,"/Tiles/bedrock.png"); // Bedrock
+        items.put(18,"/Tiles/Fond_noir.png");
+        items.put(19,"/Tiles/planche_bois.png");
+        items.put(20, "/Tiles/toit_bois_gauche");
+        items.put(21,"/Tiles/toit_bois_droit.png");
+        items.put(22, "Tiles/Fonce_mur_bois.png");
+        items.put(23,"/Tiles/feuilles.png");
         items.put(24,"/Tiles/Coffre.png");// Coffre
+
+        for(int i=25; i<51; i++) {
+            items.put(i, "/Tiles/Fond_noir.png");
+        }
+
         // Outils
 
         items.put(51, "/Sprite_objets/Pioche_bois.png"); // Pioche de bois
         items.put(52, "/Sprite_objets/Pioche_pierre.png"); // Pioche de pierre
         items.put(53, "/Sprite_objets/Pioche_fer.png"); // Pioche de fer
         items.put(54, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
+
+        for(int i=55; i<62; i++) {
+            items.put(i, "/Tiles/Fond_noir.png");
+        }
+
         items.put(62, "/Sprite_objets/Sceau_vide.png"); // Seau vide
         items.put(63, "/Sprite_objets/Sceau_eau.png"); // Sceau d'eau
 

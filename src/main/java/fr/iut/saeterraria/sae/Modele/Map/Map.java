@@ -19,6 +19,76 @@ public class Map {
                 map[y][x] = tiles[index];
             }
         }
+        reloadMap();
+    }
+
+    public void reloadMap(){
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[0].length; j++) {
+                switch (map[i][j]){
+                    case 1:
+                        map[i][j] = 17;
+                        break;
+                    case 2:
+                        map[i][j] = 1;
+                        break;
+                    case 3:
+                        map[i][j] = 5;
+                        break;
+                    case 4:
+                        map[i][j] = 2;
+                        break;
+                    case 5:
+                        map[i][j] = 0;
+                        break;
+                    case 6:
+                        map[i][j] = 18;
+                        break;
+                    case 7:
+                        map[i][j] = 19;
+                        break;
+                    case 8:
+                        map[i][j] = 20;
+                        break;
+                    case 9:
+                        map[i][j] = 21;
+                        break;
+                    case 10:
+                        map[i][j] = 22;
+                        break;
+                    case 11:
+                        map[i][j] = 13;
+                        break;
+                    case 12:
+                        map[i][j] = 12;
+                        break;
+                    case 13:
+                        map[i][j] = 15;
+                        break;
+                    case 14:
+                        map[i][j] = 3;
+                        break;
+                    case 15:
+                        map[i][j] = 23;
+                        break;
+                    case 16:
+                        map[i][j] = 16;
+                        break;
+                    case 17:
+                        map[i][j] = 24;
+                        break;
+                    case 18:
+                        map[i][j] = 4;
+                        break;
+                    case 19:
+                        map[i][j] = 7;
+                        break;
+                    case 20:
+                        map[i][j] = 9;
+                        break;
+                }
+            }
+        }
     }
     public int[][] getMap(){
         return map;

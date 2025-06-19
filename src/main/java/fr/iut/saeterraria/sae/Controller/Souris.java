@@ -99,9 +99,7 @@ public class Souris implements EventHandler<MouseEvent> {
                     System.out.println(x+"y2" +y+"y1");
 
                     if(jeu.getJoueur().peutEtreAtteint(x,y,100)){
-                        System.out.println("zizi1");
-                        if(jeu.getCarte().getCase(y,x)!=0){
-                            System.out.println("caqcaaaa");
+                        if(jeu.getCarte().getCase(x, y) != 0 || jeu.getCarte().getCase(x, y) != 18 || jeu.getCarte().getCase(x, y) != 22 ){
                             jeu.getJoueur().grappiner(x1, y1);
                         }
                     }

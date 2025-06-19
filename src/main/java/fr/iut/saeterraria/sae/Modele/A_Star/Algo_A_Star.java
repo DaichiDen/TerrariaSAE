@@ -85,7 +85,7 @@ public class Algo_A_Star {
         }
 
         int val = map.getCase(y, x); // attention, map[y][x] est l'ordre ligne-colonne
-        return val == 5; // Seul le ciel est considéré comme marchable
+        return val == 0; // Seul le ciel est considéré comme marchable
     }
     private int heuristic(Node a, Node b) {
         return Math.abs(a.x - b.x) + Math.abs(a.y - b.y); // Manhattan

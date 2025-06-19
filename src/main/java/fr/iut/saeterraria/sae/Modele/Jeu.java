@@ -153,43 +153,41 @@ public class Jeu {
         return items;
     }
 
-    private void initialiseItems() {
-        items.put(0, new Item("","",1));//Ajouter une range d"id pour item pas obtenable
-        items.put(1, new Bloc("BedRock","Incassable",1,10));
-        items.put(2, new Bloc("Terre Haute","Bloc commun qui recouvre le monde",1,1));
-        items.put(3, new Bloc("Pierre","Bloc basique de pierre commun dans les sous-sol",2,2));
-        items.put(4, new Bloc("Terre Basse","Bloc commun qui recouvre le sol du monde",1,1));
-        items.put(5, new Bloc("Ciel","Ciel du monde",0,0));
-        items.put(6, new Bloc("Noir","Noir",0,0));
-        items.put(7, new Bloc("Planche bois","",1,1));
-        items.put(8, new Bloc("Toit bois gauche","Toit bois gauche",1,1));
-        items.put(9, new Bloc("Toit bois droit","Toit bois droit",1,1));
-        items.put(10, new Bloc("Fonce mur bois","Fonce mur bois",0,0));
-        items.put(11, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(12) ));
+    private void initialiseItems() {//Ajouter une range d"id pour item pas obtenable
+        items.put(0, new Bloc("Ciel","Ciel du monde",0,0));
+        // Blocs
+
+        items.put(1, new Bloc("Terre Haute","Bloc commun qui recouvre le monde",1,1));
+        items.put(2, new Bloc("Terre Basse","Bloc commun qui recouvre le sol du monde",1,1));
+        items.put(3, new Bloc("Bois","Element indispensable, base de créativité",1,1));
+        items.put(4, new Bloc("Minerai Charbon","Bloc contenant plusieurs charbons",2,3));
+        items.put(5, new Bloc("Pierre","Bloc basique de pierre commun dans les sous-sol",2,2));
+        items.put(6, new Item("Charbon","Permet d'alimenter le four et la forge en chaleur",1));
+        items.put(7, new Bloc("Minerai Fer","Métal commun de Fer",3,3));
+        items.put(8, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1));
+        items.put(9, new Bloc("Minerai DELJCCium","",3,4));
+        items.put(10, new Item("DELJCCium", "", 1));
+        items.put(11,new BlocConstruction("ConstructionSansBloc","",0,0));
         items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,1, (BlocConstruction) items.get(11)));
-        items.put(13, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,2,(BlocConstruction) items.get(12)));
-        items.put(14, new Bloc("Bois","Element indispensable, base de créativité",1,1));
-        items.put(15, new Bloc("Feuilles","Des feuilles",1,1));
+        items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(12) ));
+        items.put(14, new Item("","",1));
+        items.put(15, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,2,(BlocConstruction) items.get(12)));
+
+        items.get(8).setProvenance((BlocConstruction) items.get(15));
+        items.get(10).setProvenance((BlocConstruction) items.get(15));
         items.put(16, new Bloc("Pique","",1,10));
+        items.put(17, new Bloc("BedRock","Incassable",1,10));
+        items.put(18,new Bloc("FondNoir","Incassable+traversable fond",1,10));
+        items.put(19, new Bloc("Planche de bois","",1,1));
+        items.put(20, new Bloc("Toit_bois_gauche","",1,1));
+        items.put(21, new Bloc("Toit bois droite", "", 1, 1));
+        items.put(22, new Bloc("Fonce bois mur", "", 0, 0));
+        items.put(23, new Bloc("Feuilles", "", 1, 1));
+
         //Bloc outil
-        items.put(17, new Coffre("Coffre", "", 1, 3,(BlocConstruction) items.get(12)));
-        items.put(18, new Bloc("Minerai Charbon","Bloc contenant plusieurs charbons",2,3));
-        items.put(19, new Bloc("Minerai Fer","Métal commun de Fer",3,3));
-        items.put(20, new Bloc("Minerai DELJCCium","",3,4));
+        items.put(24, new Coffre("Coffre", "", 1, 3,(BlocConstruction) items.get(12)));
 
-        items.put(21,new BlocConstruction("ConstructionSansBloc","",0,0));
-
-        items.put(22, new BlocConstruction("Alambique","Un établi qui permet la fabrication d'objets",1,3,(BlocConstruction) items.get(12)));
-
-
-        items.put(23, new Item("Charbon","Permet d'alimenter le four et la forge en chaleur",1));
-        items.put(24, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1));
-        items.put(25, new Item("DELJCCium", "", 1));
-
-        items.get(24).setProvenance((BlocConstruction) items.get(13));
-        items.get(25).setProvenance((BlocConstruction) items.get(13));
-
-        for (int i = 26; i < 49; i++) {
+        for (int i = 25; i < 49; i++) {
             items.put(i,new Item("","",1));
 
         }
@@ -206,8 +204,8 @@ public class Jeu {
             items.put(i, new Item("","",1));
         }
 
-        items.put(62, new Item("Seau", "", 1,(BlocConstruction) items.get(13)));
-        items.put(63, new Item("Seau Vide", "", 1,(BlocConstruction) items.get(13)));
+        items.put(62, new Item("Seau vide", "", 1,(BlocConstruction) items.get(13)));
+        items.put(63, new Item("Seau eau", "", 1,(BlocConstruction) items.get(13)));
 
         // Armures
 
@@ -228,11 +226,10 @@ public class Jeu {
         items.put(76, new Epee("Epée en DELJCCium","",5,(BlocConstruction) items.get(13)));
         // Autres items
 
-        items.put(77, new Item("Flèche","Flèche",1,(BlocConstruction) items.get(12)));
+        items.put(77, new Item("Flèche","Flèche",1,(BlocConstruction) items.get(13)));
         items.put(78, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(12)));
         items.put(79, new Distance("Arquebuse","Etrange objet qui semble ralentir le temps",5));
-        items.put(80, new Item("Balle en plomb","Un projectile qui peut être utlisé ",1));
-        items.put(81 , new Distance("Grappin","Grappin",0));
+        items.put(80, new Item("Balle en plomb","Un projectile qui peut être utlisé ",1, (BlocConstruction) items.get(13)));
     }
 
     private void initializeRecettes() {
@@ -291,6 +288,13 @@ public class Jeu {
         items.get(68).addInRecette(new ElementRecette(items.get(10),6));
         // Botte en DELJCCnium + forge
         items.get(70).addInRecette(new ElementRecette(items.get(10),4));
+
+        // Flèche : 1 Bois 1 fer
+        items.get(77).addInRecette(new ElementRecette(items.get(3),1));
+        items.get(77).addInRecette(new ElementRecette(items.get(8),1));
+
+        // Balle en plomb : 2 fer
+        items.get(80).addInRecette(new ElementRecette(items.get(8),2));
     }
 
     public void initializeBlocConstruction() {
@@ -329,5 +333,5 @@ public class Jeu {
     public void testCraft() {
         getJoueur().ajouterItem(items.get(3),96);
     }
-    
+
 }

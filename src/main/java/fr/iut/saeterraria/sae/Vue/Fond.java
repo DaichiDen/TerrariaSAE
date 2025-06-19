@@ -1,6 +1,8 @@
+
 package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Modele.Objets.Coffre;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
@@ -20,7 +22,7 @@ public class Fond extends CreateRessourceVisuel {
 
 
     public Fond(TilePane environnement,Jeu jeu) {
-       this.jeu = jeu;
+        this.jeu = jeu;
         this.tiles = new HashMap<>();
         this.environnement = environnement;
         initialiseTile();
@@ -35,31 +37,35 @@ public class Fond extends CreateRessourceVisuel {
     }
 
     public void initialiseTile() {
-        ajoutTile("");
-        ajoutTile("/Tiles/bedrock.png"); // 0 et ensuite dcp +1
+        ajoutTile("/Tiles/Ciel.png"); // 0 et ensuite dcp +1
         ajoutTile("/Tiles/Dirt_1.png");
-        ajoutTile("/Tiles/Roche_moche.png");
         ajoutTile("/Tiles/Dirt_2.png");
-        ajoutTile("/Tiles/Ciel.png");
+        ajoutTile("/Tiles/Bois.png");
+        ajoutTile("/Tiles/Minerais_charbon.png");
+        ajoutTile("/Tiles/Roche_moche.png");//5
+
+        ajoutTile("/Tiles/Fond_noir.png");
+        ajoutTile("/Tiles/Minerais_fer.png");
+        ajoutTile("/Tiles/Fond_noir.png");
+        ajoutTile("/Tiles/Minerais_DELJCCium.png");
+        ajoutTile("/Tiles/Fond_noir.png"); //10
+
+        ajoutTile("/Tiles/Fond_noir.png");
+        ajoutTile("/Tiles/Etabli.png");
+        ajoutTile("/Tiles/Forge.png");
+        ajoutTile("/Tiles/Fond_noir.png");
+        ajoutTile("/Tiles/Four.png"); // 15
+
+        ajoutTile("/Tiles/piques_vorpales.png");
+        ajoutTile("/Tiles/bedrock.png");
         ajoutTile("/Tiles/Noir.png");
         ajoutTile("/Tiles/planche_bois.png");
-        ajoutTile("/Tiles/toit_bois_gauche.png");
-        ajoutTile("/Tiles/toit_bois_gauche.png");
+        ajoutTile("/Tiles/toit_bois_gauche.png"); // 20
+
+        ajoutTile("/Tiles/toit_bois_droit.png");
         ajoutTile("/Tiles/Fonce_mur_bois.png");
-        ajoutTile("/Tiles/Forge.png");
-        ajoutTile("/Tiles/Etabli.png");
-        ajoutTile("/Tiles/Four.png");
-        ajoutTile("/Tiles/Bois.png");
         ajoutTile("/Tiles/feuilles.png");
-        ajoutTile("/Tiles/piques_vorpales.png");
-        ajoutTile("/Tiles/Coffre.png");
-        ajoutTile("/Tiles/Minerais_charbon.png");
-        ajoutTile("/Tiles/Minerais_fer.png");
-        ajoutTile("/Tiles/Minerais_DELJCCium.png");
-
-
-
-
+        ajoutTile("/Tiles/Coffre.png"); // 24
 
     }
 
@@ -67,7 +73,7 @@ public class Fond extends CreateRessourceVisuel {
     public void afficherCarte() {
         for (int i = 0; i < environnement.getPrefRows(); i++) {
             for (int j = 0; j < environnement.getPrefColumns(); j++) {
-                    this.environnement.getChildren().add(new ImageView(tiles.get(this.jeu.getCarte().getCase(i, j))));
+                this.environnement.getChildren().add(new ImageView(tiles.get(this.jeu.getCarte().getCase(i, j))));
             }
         }
     }

@@ -151,7 +151,7 @@
         public boolean miner(int x, int y) {
             boolean miner = false;
             if (peutEtreAtteint(x, y, 2.5)) {
-                if ( ((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x))).getResistance() == 1 || getJeu().getCarte().getCase(y, x) != 6 && this.inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()<55 &&this.inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()>50 &&compareResistance(((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x)))) ) {
+                if ( ((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x))).getResistance() == 1 || getJeu().getCarte().getCase(y, x) != 0 || getJeu().getCarte().getCase(y, x) != 18 || getJeu().getCarte().getCase(y, x) != 22 && this.inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()<55 &&this.inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet()>50 &&compareResistance(((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x)))) ) {
                     int[] bloc = getJeu().getCarte().detruireBloc(x, y);
                     ajouterItem(super.getJeu().getItems().get(bloc[0]), bloc[1]);
                     miner = true;
@@ -166,7 +166,7 @@
 
         public void poser(int x, int y) {//x = colonne && y = ligne
             if( (this.getX()/32)!=x || this.getY()/32!=y ) {
-                 if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() != 0 && getJeu().getCarte().getCase(y, x) == 0) {
+                 if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() != 0 && (getJeu().getCarte().getCase(y, x) == 0 || getJeu().getCarte().getCase(y, x) == 18 || getJeu().getCarte().getCase(y, x) == 22)) {
                     getJeu().getCarte().poserBloc(x, y, inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet());
                     inventaire.getInventaireJoueur()[0][mainCourante].retireQuantite(1);
                 }

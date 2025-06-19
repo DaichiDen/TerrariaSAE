@@ -42,15 +42,12 @@ public abstract class EntiteVivante extends Entite{
     }
     public int getVitesseX() { return vitesseX; }
 
-
-
     public void sauter() {
         if (!enSaut && this.estVivant() ) {
             enSaut = true;
             vitesseY = forceSaut;
         }
     }
-
 
     public abstract void action(int x, int y, int range);
 
@@ -70,7 +67,7 @@ public abstract class EntiteVivante extends Entite{
                 vitesseY = 0;
                 setY(blocBas);
             }
-            if (super.getJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 17 ) {
+            if (super.getJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 16 ) {
 
                 this.decrementVie(1);
             }
@@ -107,7 +104,6 @@ public abstract class EntiteVivante extends Entite{
         if (collisionDroite) setMarcheDroite(false);
         if (collisionGauche) setMarcheGauche(false);
     }
-
 
     public void tirerProjectile(Projectile projectile, int cibleX, int cibleY) {
         // Position de l'entité
@@ -164,7 +160,7 @@ public abstract class EntiteVivante extends Entite{
             int xi = (int)Math.round(joueurX + dx * t);
             int yi = (int)Math.round(joueurY + dy * t);
 
-            if ((xi != blocX || yi != blocY) && getJeu().getCarte().getCase(yi, xi) != 0) { // Si bloc devant (obstacle)
+            if ((xi != blocX || yi != blocY) && getJeu().getCarte().getCase(yi, xi) != 0 && getJeu().getCarte().getCase(yi, xi) != 18 && getJeu().getCarte().getCase(yi, xi) != 22) { // Si bloc devant (obstacle)
                 return false;
             }
         }
@@ -290,20 +286,6 @@ public abstract class EntiteVivante extends Entite{
     public final void setEnergieMax(int energieMax) {this.energieMax.set(energieMax);}
     public final int getEnergie() {return energie.get();}
     public final void setEnergie(int energie) {this.energie.set(energie);}
-    public final void incrementEnergie(int val) {
-        if(getEnergie()+val > getEnergieMax()){
-            setEnergie(getEnergieMax());
-        }else{
-            setEnergie(getEnergie()+val);
-        }
-    }
-    public final void decrementEnergie(int val) {
-        if(getEnergie()-val < 0){
-            setEnergie(0);
-        }else{
-            setEnergie(getEnergie()-val);
-        }
-    }
 
 
     // Gestion de la defense
