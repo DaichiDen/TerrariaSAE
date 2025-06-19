@@ -20,32 +20,25 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(3, "/Tiles/Bois.png"); // Bois
         items.put(4, "/Tiles/Minerais_charbon.png"); // Minerai Charbon
         items.put(5, "/Tiles/Roche_moche.png"); // Pierre
-        items.put(6, "/Sprite_objets/Coal.png"); // Charbon
-        items.put(7, "/Tiles/Minerais_fer.png"); // Minerai Fer
-        items.put(8, "/Sprite_objets/Iron_ingot.png"); // Fer
-        items.put(9, "/Tiles/Minerais_DELJCCium.png"); //Minerai DELJCCIUM
-        items.put(10, "/Sprite_objets/DELJCCIUM_ingot.png"); // DELJCCium
-        items.put(11, "/Tiles/Fond_noir.png"); // Construction Sans bloc
+        items.put(6, "/Tiles/Minerais_fer.png"); // Minerai Fer
+        items.put(7, "/Tiles/Minerais_DELJCCium.png"); //Minerai DELJCCIUM
         // Blocs à constructions
         items.put(12, "/Tiles/Etabli.png"); // Etabli
         items.put(13, "/Tiles/Forge.png"); // Forge
-        items.put(14, "/Tiles/Fond_noir.png"); // Alambique
         items.put(15, "/Tiles/Four.png"); // Four
-        items.put(16, "/Tiles/piques_vorpales.png"); // Pique
-
-        /* ---------- À ajouter le reste ------------- */
-        items.put(17,"/Tiles/bedrock.png"); // Bedrock
-        items.put(18,"/Tiles/Fond_noir.png");
-        items.put(19,"/Tiles/planche_bois.png");
-        items.put(20, "/Tiles/toit_bois_gauche");
-        items.put(21,"/Tiles/toit_bois_droit.png");
-        items.put(22, "Tiles/Fonce_mur_bois.png");
-        items.put(23,"/Tiles/feuilles.png");
+        items.put(8, "/Tiles/piques_vorpales.png"); // Pique
+        items.put(9,"/Tiles/bedrock.png"); // Bedrock
+        items.put(10,"/Tiles/Noir.png");
+        items.put(15,"/Tiles/planche_bois.png");
+        items.put(16, "/Tiles/toit_bois_gauche");
+        items.put(17,"/Tiles/toit_bois_droit.png");
+        items.put(18, "Tiles/Fonce_mur_bois.png");
+        items.put(,"/Tiles/feuilles.png");
         items.put(24,"/Tiles/Coffre.png");// Coffre
 
-        for(int i=25; i<51; i++) {
-            items.put(i, "/Tiles/Fond_noir.png");
-        }
+        items.put(21, "/Sprite_objets/Coal.png"); // Charbon
+        items.put(22, "/Sprite_objets/Iron_ingot.png"); // Fer
+        items.put(23, "/Sprite_objets/DELJCCIUM_ingot.png"); // DELJCCium
 
         // Outils
 

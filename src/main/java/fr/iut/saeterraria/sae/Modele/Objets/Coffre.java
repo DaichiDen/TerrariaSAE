@@ -6,7 +6,7 @@ import fr.iut.saeterraria.sae.Modele.Personnages.Case;
 public class Coffre extends Bloc{
     private Case[][]contenu;
 
-    public Coffre(String nom, String description, int typeBloc, int resistance, BlocConstruction blocConstruction) {
+    public Coffre(String nom, String description, int typeBloc, int resistance) {
         super(nom, description, typeBloc, resistance);
         this.contenu = new Case[4][4];
     }

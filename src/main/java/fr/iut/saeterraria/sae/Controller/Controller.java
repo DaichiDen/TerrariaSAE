@@ -163,7 +163,7 @@ public class Controller implements Initializable {
 
         ObsJoueur obsJ = new ObsJoueur(jeu, vuejoueur, controlleurJoueur);
 
-        jeu.getJoueur().getXMarcheProperty().addListener(new ObsMapX(jeu, scene));
+        jeu.getJoueur().getXMaxProperty().addListener(new ObsMapX(jeu, scene));
         jeu.getJoueur().getYMaxProperty().addListener(new ObsMapY(jeu, scene));
 
         jeu.getJoueur().yProperty().addListener(obsJ);
@@ -220,7 +220,6 @@ public class Controller implements Initializable {
 
             @Override
             public void handle(long now) {
-                System.out.println(jeu.getJoueur().getY());
                 if (now - lastUpdate >= frameInterval) {
                     if (jeu.getJoueur().isTimeStop()) {
                         jeu.getJoueur().mettreAJour();

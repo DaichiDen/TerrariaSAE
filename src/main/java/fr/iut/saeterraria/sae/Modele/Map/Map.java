@@ -115,7 +115,7 @@ public class Map {
         blocRecup[0] = getCase(y,x);
         blocRecup[1] = 1;
         if (y>32){
-            map[y][x]=18;
+            map[y][x]=180;
         }
         else {
             map[y][x]=0;
@@ -126,11 +126,9 @@ public class Map {
                 blocRecup[0] = 2;
                 break;
             case 4:
-                blocRecup[0] = 6;
+                blocRecup[0] = 21;
                 blocRecup[1] = 4;
                 break;
-            case 9:
-                blocRecup[0] = 10;
             default:
                 break;
         }

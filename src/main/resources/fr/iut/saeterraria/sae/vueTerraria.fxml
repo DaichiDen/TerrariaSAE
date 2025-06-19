@@ -16,7 +16,7 @@
                   <Pane fx:id="screen" layoutY="-4.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1040.0" prefWidth="1920.0">
                      <children>
                         <Pane fx:id="opaciteBackground" prefHeight="1040.0" prefWidth="1920.0" style="-fx-background-color: white;" />
-                        <TilePane fx:id="background" opacity="0.8" prefColumns="58" prefRows="1" />
+                        <TilePane fx:id="background" opacity="0.8" prefColumns="1" prefRows="1" />
                          <TilePane fx:id="fond" minHeight="-Infinity" minWidth="-Infinity" prefColumns="54" prefRows="34" />
                      </children>
                   </Pane>

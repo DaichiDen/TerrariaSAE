@@ -35,7 +35,7 @@
         private String dernierPos = "droite"; // 1 gauche et -1 droite
         ArrayList<Ennemi> ennemis_touchées_dash = new ArrayList();
         private int xPrec;
-        private IntegerProperty xMarche,yMax;
+        private IntegerProperty xMax,yMax;
 
 
         public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp, int tailleL, int tailleH) {
@@ -46,20 +46,10 @@
             this.pierreTp = pierreTp;
             this.mainCourante = 0;
             this.xPrec = super.getX()/32;
-            this.xMarche = new SimpleIntegerProperty(0); //nb bloc traversé horizontal
+            this.xMax = new SimpleIntegerProperty(getX()/super.getJeu().getTaille1bloc());
             this.yMax = new SimpleIntegerProperty(getY()/super.getJeu().getTaille1bloc());
             this.stockItem = new int[2];
 
-        }
-
-        public int getxMarche(){
-            return xMarche.get();
-        }
-        public void setxMarche(int xMarche){
-            this.xMarche.set(xMarche);
-        }
-        public IntegerProperty getxMarcheProperty(){
-            return xMarche;
         }
 
         public void incrementeMainCourante() {
@@ -115,10 +105,8 @@
         }
 
         public void mettreAJour() {
-            if (xPrec<super.getX()/32){
-                System.out.println("Il avance");
-                xPrec+=1;
-                setXMarche(xMarche.getValue()+1);
+            if (this.getX()/super.getJeu().getTaille1bloc()>this.xMax.get()) {
+                setXMax(this.getX());
             }
             if (this.getY()/super.getJeu().getTaille1bloc()>this.yMax.get()) {
                 setYMax(this.getY());
@@ -318,11 +306,11 @@
             return directionDash;
         }
 
-        public int getXMarche(){
-            return xMarche.getValue();
+        public int getXMax(){
+            return xMax.getValue();
         }
-        public IntegerProperty getXMarcheProperty(){ return xMarche; }
-        public void setXMarche(int xMarche){ this.xMarche.setValue(xMarche/super.getJeu().getTaille1bloc()); }
+        public IntegerProperty getXMaxProperty(){ return xMax; }
+        public void setXMax(int xMax){ this.xMax.setValue(xMax/super.getJeu().getTaille1bloc()); }
 
         public int getYMax(){
             return yMax.getValue();
