@@ -226,8 +226,6 @@ public class Controller implements Initializable {
 
             @Override
             public void handle(long now) {
-                System.out.println(jeu.getJoueur().getY() +"y");
-                System.out.println(jeu.getJoueur().getX() +"x");
                 if (now - lastUpdate >= frameInterval) {
                     if (jeu.getJoueur().isTimeStop()) {
                         jeu.getJoueur().mettreAJour();

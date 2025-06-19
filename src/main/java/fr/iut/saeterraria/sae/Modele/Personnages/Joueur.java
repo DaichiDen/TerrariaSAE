@@ -129,10 +129,8 @@
                     }
 
                     if (directionDash.equals("droite")) {
-                        System.out.println("droite");
                         this.setX(this.getX() + vitesseDash);
                     } else {
-                        System.out.println("gauche");
                         this.setX(this.getX() - vitesseDash);
                     }
                     dureeDash--;
@@ -189,7 +187,7 @@
                             e.decrementVie(getAttaque() - e.getDef());
                         }
                         System.out.println("Touché !");
-                        System.out.println(e.getBarreVie().getVie());
+                        System.out.println("Vie restante : dddddd" +e.getBarreVie().getVie());
                     }
                 }
             }

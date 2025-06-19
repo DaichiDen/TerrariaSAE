@@ -28,12 +28,12 @@ public class SpriteVie extends CreateRessourceVisuel {
 
 
     public void mettreAJourSpriteVie(Joueur joueur) {
-        vieAct = joueur.getBarreVie().getVie();
+        vieAct = (int)Math.round(joueur.getBarreVie().getVie());
 
         // Nettoyer tous les anciens cœurs
         screen.getChildren().clear();
 
-        int maxVie = joueur.getBarreVie().getVieMax();
+        int maxVie = (int)Math.round(joueur.getBarreVie().getVieMax());
         int nbCoeurs = maxVie / 2;
 
         int hpRestant = vieAct;
