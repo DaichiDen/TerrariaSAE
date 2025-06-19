@@ -35,20 +35,31 @@ public class Fond extends CreateRessourceVisuel {
     }
 
     public void initialiseTile() {
-        ajoutTile("/Tiles/Ciel.png"); // 0 et ensuite dcp +1
+        ajoutTile("");
+        ajoutTile("/Tiles/bedrock.png"); // 0 et ensuite dcp +1
         ajoutTile("/Tiles/Dirt_1.png");
-        ajoutTile("/Tiles/Dirt_2.png");
-        ajoutTile("/Tiles/Bois.png");
-        ajoutTile("/Tiles/Minerais_charbon.png");
         ajoutTile("/Tiles/Roche_moche.png");
-        ajoutTile("/Tiles/Fond_noir.png");
+        ajoutTile("/Tiles/Dirt_2.png");
+        ajoutTile("/Tiles/Ciel.png");
+        ajoutTile("/Tiles/Noir.png");
+        ajoutTile("/Tiles/planche_bois.png");
+        ajoutTile("/Tiles/toit_bois_gauche.png");
+        ajoutTile("/Tiles/toit_bois_gauche.png");
+        ajoutTile("/Tiles/Fonce_mur_bois.png");
+        ajoutTile("/Tiles/Forge.png");
+        ajoutTile("/Tiles/Etabli.png");
+        ajoutTile("/Tiles/Four.png");
+        ajoutTile("/Tiles/Bois.png");
+        ajoutTile("/Tiles/feuilles.png");
+        ajoutTile("/Tiles/piques_vorpales.png");
+        ajoutTile("/Tiles/Coffre.png");
+        ajoutTile("/Tiles/Minerais_charbon.png");
         ajoutTile("/Tiles/Minerais_fer.png");
-        ajoutTile("/Tiles/Fond_noir.png");
         ajoutTile("/Tiles/Minerais_DELJCCium.png");
-        for (int i = 10; i < 17; i++) {
-            ajoutTile("/Tiles/Fond_noir.png");
-        }
-        ajoutTile("/Tiles/bedrock.png");
+
+
+
+
 
     }
 

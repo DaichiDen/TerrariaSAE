@@ -217,7 +217,7 @@ public abstract class Entite {
             for (int j = caseX - 1; j <= caseX + 1; j++) {
 
                 if (i >= 0 && i < this.jeu.getCarte().getLigne() && j >= 0 && j < jeu.getCarte().getColonne()) {
-                    if (jeu.getCarte().getCase(i, j) != 0) { // si le bloc n'est pas du ciel
+                    if (jeu.getCarte().getCase(i, j) != 5) { // si le bloc n'est pas du ciel
 
                         xBloc = jeu.getCarte().getCoordonnéesX(j);
                         yBloc = jeu.getCarte().getCoordonnéesY(i);
@@ -249,7 +249,7 @@ public abstract class Entite {
         for (int i = caseY ; i <= caseY + 2; i++) {
             for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (i >= 0 && i < jeu.getCarte().getLigne() && j >= 0 && j < jeu.getCarte().getColonne()) {
-                    if (jeu.getCarte().getCase(i, j) != 0) {
+                    if (jeu.getCarte().getCase(i, j) != 5) {
 
                         xBloc = jeu.getCarte().getCoordonnéesX(j);
                         yBloc = jeu.getCarte().getCoordonnéesY(i);
