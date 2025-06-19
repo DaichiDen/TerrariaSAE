@@ -174,6 +174,10 @@ public abstract class EntiteVivante extends Entite{
         this.vitesseX=val;
 
     }
+    public void setVitesseY(int val){
+        this.vitesseY=val;
+
+    }
 
     public void mettreAJour() {
         if (estVivant()) {

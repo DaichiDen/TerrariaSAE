@@ -51,6 +51,7 @@ public class Souris implements EventHandler<MouseEvent> {
         int x1 = ((int) mouseEvent.getX()); // position x dans le FX
         int y1 = ((int) mouseEvent.getY()); // position y dans le FX
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+            System.out.println(x1 + "x" + y1 + "y1");
             if (jeu.getJoueur().estVivant()) {
                 if (jeu.getJoueur().gunEnMain() && !jeu.getJoueur().isTimeStop()) {
                     jeu.getJoueur().setTimeStop(true);
