@@ -6,10 +6,16 @@
     import javafx.scene.image.ImageView;
     import javafx.scene.layout.Pane;
 
+    import javafx.beans.value.ChangeListener;
+    import java.util.HashMap;
+    import java.util.Map;
+
     public class VueProjectile extends CreateRessourceVisuel {
         private Pane screen;
         private Jeu jeu;
         private int width, height;
+        private Map<Projectile, ImageView> sprites = new HashMap<>();
+
 
         private ImageView spriteActuel = new ImageView();
 
@@ -27,18 +33,25 @@
         }
 
         public void mettreAJourSpriteProjectile(Projectile projectile) {
-            String type = projectile.getType();
-            if (type.equals("fleche")) {
-                spriteActuel = createImageView("/Sprite_objets/Flèche.png", width, height);
-            } else if (type.equals("balle")) {
-                spriteActuel = createImageView("/Sprite_objets/Balle.png", width, height);
-            } else {
-                return; // Si on ne connaît pas le type, on n'affiche rien
-            }
+            // Vérifier si un sprite existe déjà pour ce projectile
+            ImageView sprite = sprites.get(projectile);
 
-            spriteActuel.setId(projectile.getNom());
-            spriteActuel.translateXProperty().bind(projectile.xProperty());
-            spriteActuel.translateYProperty().bind(projectile.yProperty());
-            screen.getChildren().add(spriteActuel);
+            if (sprite == null) {
+                // Si pas existant, créer et configurer le sprite une fois
+                if (projectile.getType().equals("fleche")) {
+                    sprite = createImageView("/Sprite_objets/Flèche.png", width, height);
+                } else if (projectile.getType().equals("balle")) {
+                    sprite = createImageView("/Sprite_objets/Balle.png", width, height);
+                }
+
+                sprite.setId(projectile.getNom());
+                sprite.translateXProperty().bind(projectile.xProperty());
+                sprite.translateYProperty().bind(projectile.yProperty());
+
+                screen.getChildren().add(sprite);
+                sprites.put(projectile, sprite);
+            }
+            // Sinon, le sprite existe déjà, il est déjà lié aux propriétés : pas besoin de recréer ni d'ajouter
         }
+
     }
