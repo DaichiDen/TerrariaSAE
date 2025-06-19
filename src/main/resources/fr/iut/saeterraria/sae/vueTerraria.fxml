@@ -81,11 +81,11 @@
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <TextField fx:id="ligneCase1" prefHeight="26.0" prefWidth="101.0">
+                                          <Spinner fx:id="ligneCase1" prefHeight="26.0" prefWidth="101.0">
                                              <HBox.margin>
                                                 <Insets left="20.0" />
                                              </HBox.margin>
-                                          </TextField>
+                                          </Spinner>
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="36.0" prefHeight="100.0" prefWidth="200.0">
@@ -95,11 +95,11 @@
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <TextField fx:id="colonneCase1" prefHeight="26.0" prefWidth="101.0">
+                                          <Spinner fx:id="colonneCase1" prefHeight="26.0" prefWidth="101.0">
                                              <HBox.margin>
                                                 <Insets left="20.0" />
                                              </HBox.margin>
-                                          </TextField>
+                                          </Spinner>
                                        </children>
                                     </HBox>
                                  </children>
@@ -118,11 +118,11 @@
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <TextField fx:id="ligneCase2" prefHeight="26.0" prefWidth="101.0">
+                                          <Spinner fx:id="ligneCase2" prefHeight="26.0" prefWidth="101.0">
                                              <HBox.margin>
                                                 <Insets left="20.0" />
                                              </HBox.margin>
-                                          </TextField>
+                                          </Spinner>
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -132,11 +132,11 @@
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <TextField fx:id="colonneCase2" prefHeight="26.0" prefWidth="101.0">
+                                          <Spinner fx:id="colonneCase2" prefHeight="26.0" prefWidth="101.0">
                                              <HBox.margin>
                                                 <Insets left="20.0" />
                                              </HBox.margin>
-                                          </TextField>
+                                          </Spinner>
                                        </children>
                                     </HBox>
                                  </children>
