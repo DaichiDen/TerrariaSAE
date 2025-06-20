@@ -4,9 +4,11 @@ import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
 
 import fr.iut.saeterraria.sae.Modele.Personnages.EntiteVivante;
 import fr.iut.saeterraria.sae.Vue.SpriteMob;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import fr.iut.saeterraria.sae.Modele.Jeu;
@@ -20,11 +22,13 @@ public class ObsEnnemi implements ListChangeListener<EntiteVivante> {
     private Jeu jeu;
     private Pane screen;
     private HashMap<Entite, Node> spritesMobs;
+    private HashMap<Entite, ProgressBar> barreVie;
 
     public ObsEnnemi(Jeu jeu, Pane screen){
         this.jeu = jeu;
         this.screen = screen;
         this.spritesMobs = new HashMap<>();
+        this.barreVie = new HashMap<>();
     }
 
     @Override
@@ -39,30 +43,29 @@ public class ObsEnnemi implements ListChangeListener<EntiteVivante> {
                         sprite.setFitWidth(54);
                         sprite.setFitHeight(64);
                         // Positionner au bon endroit, ex. :
-                        sprite.setLayoutX(mobAjoute.getX());
-                        sprite.setLayoutY(mobAjoute.getY());
-
+                        sprite.translateXProperty().bind(mobAjoute.xProperty());
+                        sprite.translateYProperty().bind(mobAjoute.yProperty());
+                        ProgressBar progressBar = new ProgressBar();
+                        progressBar.progressProperty().bind(mobAjoute.getBarreVie().vieProperty().divide(mobAjoute.getBarreVie().getVieMax()));
+                        progressBar.translateXProperty().bind(mobAjoute.xProperty().subtract(20));
+                        progressBar.translateYProperty().bind(mobAjoute.yProperty().subtract(20));
                         // 2) Conserver la correspondance Entite → Node
                         spritesMobs.put(mobAjoute, sprite);
+                        barreVie.put(mobAjoute, progressBar);
 
                         // 3) Ajouter le sprite dans le Pane
                         screen.getChildren().add(sprite);
+                        screen.getChildren().add(progressBar);
 
-                        // 4) Mettre à jour la position à chaque frame (si tu utilises yProperty/xProperty)
-                        mobAjoute.xProperty().addListener((obs, oldX, newX) -> {
-                            sprite.setLayoutX(newX.doubleValue());
-                        });
-                        mobAjoute.yProperty().addListener((obs, oldY, newY) -> {
-                            sprite.setLayoutY(newY.doubleValue());
-                        });
-
-                        // 5) **ÉCOUTER la propriété estVivantProperty()**
+                        // 4) **ÉCOUTER la propriété estVivantProperty()**
                         mobAjoute.estVivantProperty().addListener((obs, ancienEtat, nouvelEtat) -> {
                             if (!nouvelEtat) {
                                 // Le mob vient de mourir → on retire son Node à l’écran
                                 Node nodeAMettreAJour = spritesMobs.get(mobAjoute);
+                                ProgressBar vieMob = barreVie.get(mobAjoute);
                                 if (nodeAMettreAJour != null) {
                                     screen.getChildren().remove(nodeAMettreAJour);
+                                    screen.getChildren().remove(vieMob);
                                     spritesMobs.remove(mobAjoute);
                                 }
                                 // (Optionnel) on peut aussi le supprimer de la liste de mobs si ce n’est pas déjà fait

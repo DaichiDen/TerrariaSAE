@@ -185,7 +185,7 @@
                             e.decrementVie(getAttaque() - e.getDef());
                         }
                         System.out.println("Touché !");
-                        System.out.println(e.getBarreVie().getVie());
+                        System.out.println("Vie restante : dddddd" +e.getBarreVie().getVie());
                     }
                 }
             }
