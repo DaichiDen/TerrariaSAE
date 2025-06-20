@@ -9,7 +9,7 @@ import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ennemi extends EntiteVivante {
+public abstract class Ennemi extends EntiteVivante {
     private long dernièreAttaque=60;
     private long cooldown=60;
 
@@ -30,16 +30,10 @@ public class Ennemi extends EntiteVivante {
     }
 
 
-    @Override
-    public void action(int x, int y, int range) {
-        if(dernièreAttaque==cooldown) {
-            if (this.getAttaque() - getJeu().getJoueur().getDef() > 0){
-                super.getJeu().getJoueur().decrementVie(this.getAttaque() - getJeu().getJoueur().getDef());
-            }
-            dernièreAttaque=0;
-        }
-        dernièreAttaque++;
-    }
+
+    public abstract void action(int x, int y, int range);
+
+
 
     @Override
     public void mettreAJour(){
@@ -110,5 +104,18 @@ public class Ennemi extends EntiteVivante {
             aVuJoueur = true;
         }
         return aVuJoueur;
+    }
+    public long getDernièreAttaque(){
+        return dernièreAttaque;
+    }
+    public long getCooldown(){
+        return cooldown;
+    }
+    public void setDernièreAttaque(long val){
+        this.dernièreAttaque=val;
+
+    }
+    public void setCooldown(long val){
+        this.cooldown=val;
     }
 }

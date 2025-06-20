@@ -3,6 +3,8 @@ package fr.iut.saeterraria.sae.Controller;
 import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
 
 import fr.iut.saeterraria.sae.Modele.Personnages.EntiteVivante;
+import fr.iut.saeterraria.sae.Modele.Personnages.Goblin;
+import fr.iut.saeterraria.sae.Modele.Personnages.Ogre;
 import fr.iut.saeterraria.sae.Vue.SpriteMob;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ObservableValue;
@@ -24,7 +26,7 @@ public class ObsEnnemi implements ListChangeListener<EntiteVivante> {
     private HashMap<Entite, Node> spritesMobs;
     private HashMap<Entite, ProgressBar> barreVie;
 
-    public ObsEnnemi(Jeu jeu, Pane screen){
+    public ObsEnnemi(Jeu jeu, Pane screen) {
         this.jeu = jeu;
         this.screen = screen;
         this.spritesMobs = new HashMap<>();
@@ -35,13 +37,30 @@ public class ObsEnnemi implements ListChangeListener<EntiteVivante> {
     public void onChanged(Change<? extends EntiteVivante> change) {
             while (change.next()) {
                 if (change.wasAdded()) {
+                    ImageView sprite;
                     for (EntiteVivante mobAjoute : change.getAddedSubList()) {
                         // 1) Créer le Node graphique du mob (par ex. un ImageView)
-                        URL imageURL = getClass().getResource("/Sprite/BM_Sac_a_caca.png");
-                        Image image = new Image(String.valueOf(imageURL));
-                        ImageView sprite = new ImageView(image);
-                        sprite.setFitWidth(54);
-                        sprite.setFitHeight(64);
+                        if(mobAjoute.getClass().equals(Ogre.class)){
+                            URL imageURL = getClass().getResource("/Sprite/ogre.png");
+                            Image image = new Image(String.valueOf(imageURL));
+                            sprite = new ImageView(image);
+                            sprite.setFitWidth(54);
+                            sprite.setFitHeight(64);
+                        }
+                        else if(mobAjoute.getClass().equals(Goblin.class)){
+                            URL imageURL = getClass().getResource("/Sprite/BM_Sac_a_caca.png");
+                            Image image = new Image(String.valueOf(imageURL));
+                            sprite = new ImageView(image);
+                            sprite.setFitWidth(54);
+                            sprite.setFitHeight(64);
+                        }else{
+                            URL imageURL = getClass().getResource("/Sprite/MH.png");
+                            Image image = new Image(String.valueOf(imageURL));
+                            sprite = new ImageView(image);
+                            sprite.setFitWidth(54);
+                            sprite.setFitHeight(64);
+                        }
+
                         // Positionner au bon endroit, ex. :
                         sprite.translateXProperty().bind(mobAjoute.xProperty());
                         sprite.translateYProperty().bind(mobAjoute.yProperty());

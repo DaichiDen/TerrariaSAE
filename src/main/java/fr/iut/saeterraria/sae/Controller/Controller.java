@@ -4,26 +4,19 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Personnages.Ennemi;
-import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
+import fr.iut.saeterraria.sae.Modele.Personnages.Goblin;
+import fr.iut.saeterraria.sae.Modele.Personnages.Ogre;
 import fr.iut.saeterraria.sae.Vue.*;
 import javafx.animation.AnimationTimer;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 
-import javafx.beans.value.ChangeListener;
-
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ListChangeListener;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.input.KeyCode;
@@ -38,8 +31,6 @@ import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -132,10 +123,13 @@ public class Controller implements Initializable {
         jeu.getMobs().addListener(new ObsEnnemi(jeu, screen));
         jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu, screen));
 
-        Ennemi ennemiCaca = new Ennemi("Pierre",20,20,1000,0,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2);
+        Ennemi ogre = new Ogre("Pierre l'ogre vert",20,20,1000,0,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2);
+        Ennemi goblin = new Goblin("Pierre l'ogre vert",20,20,1000,0,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2);
 
-        jeu.addEnnemis(ennemiCaca);
-        jeu.addMobs(ennemiCaca);
+        jeu.addEnnemis(ogre);
+        jeu.addMobs(ogre);
+        jeu.addEnnemis(goblin);
+        jeu.addMobs(goblin);
 
         imageaccueil.setFitWidth(menu.getWidth());
         imageaccueil.fitWidthProperty().bind(imagebloc_accueil.widthProperty());
