@@ -103,6 +103,8 @@ public class Jeu {
                         mobs.get(j).decrementVie(p.getAttaque());
                         p.setActif(false);
                         getListe_projectiles().remove(i);
+                    }else if (joueur.getHitbox().intersects(p.getHitbox())){
+                        joueur.decrementVie(p.getAttaque());
                     }
                 }
             }

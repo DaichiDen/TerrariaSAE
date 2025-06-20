@@ -103,6 +103,9 @@ public abstract class EntiteVivante extends Entite{
     }
 
     public void tirerProjectile(Projectile projectile, int cibleX, int cibleY) {
+        setMarcheGauche(false);
+        setMarcheDroite(false);
+
         // Position de l'entité
         int ex = this.getX();
         int ey = this.getY();

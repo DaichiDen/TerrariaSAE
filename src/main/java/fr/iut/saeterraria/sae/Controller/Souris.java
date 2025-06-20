@@ -124,7 +124,6 @@ public class Souris implements EventHandler<MouseEvent> {
                 } else if (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet() >= 64 && jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet() <= 71) {
                     jeu.getJoueur().equiper((Armure) (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem()));
                 } else {
-                    System.out.println("je m'apprète à poser là");
                     jeu.getJoueur().poser(x, y);
                     this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
                     this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));

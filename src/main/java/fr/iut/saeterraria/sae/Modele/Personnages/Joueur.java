@@ -28,7 +28,7 @@
         private boolean enDash = false;
         private int dureeDash = 0;
         private final int DUREE_DASH_MAX = 30; // environ 15 frames = 250ms à 60fps
-        private int vitesseDash = 10;
+        private int vitesseDash = 5;
         private int[] stockItem;
 
         private String directionDash = "droite";// 1 = droite, -1 = gauche
@@ -126,7 +126,7 @@
                     Rectangle2D hitboxEnnemi = new Rectangle2D(super.getJeu().getEnnemis().get(i).getX(),super.getJeu().getEnnemis().get(i).getY(),getJeu().getTaille1bloc(),getJeu().getTaille1bloc()*2);
                     if(hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(super.getJeu().getEnnemis().get(i))){
                         ennemis_touchées_dash.add(super.getJeu().getEnnemis().get(i));
-                        ennemis_touchées_dash.get(i).decrementVie(10);
+                        super.getJeu().getEnnemis().get(i).decrementVie(10);
                     }
 
                     if (directionDash.equals("droite")) {

@@ -10,13 +10,15 @@ public class MH extends Ennemi{
 
     @Override
     public void action(int x, int y, int range) {
-        boolean inRangeAa = peutEtreAtteint(super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY(), 3);
+       int attaque = (int) (Math.random() * 10);
         if (getDernièreAttaque() == getCooldown()) {
             if (this.getAttaque() - getJeu().getJoueur().getDef() > 0) {
-                if (inRangeAa) {
+                if (attaque<6) {
                     getJeu().getJoueur().decrementVie(getAttaque());
+                    System.out.println("Mandale");
                 } else {
                     tirerProjectile(new Projectile("bdf", getJeu(), this.getX(), this.getY(), 5, "boule_de_feu", 16, 16), super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY());
+                    System.out.println("BDF");
                 }
             }
             setDernièreAttaque(0);

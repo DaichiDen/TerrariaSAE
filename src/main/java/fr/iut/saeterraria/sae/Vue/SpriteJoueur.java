@@ -44,15 +44,15 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
     public void mettreAJourSpriteJoueur(Joueur joueur) {
 
-        if (bindXActif && joueur.xProperty().getValue() <= 20*32) { //unbind gauche
+        if (bindXActif && joueur.xProperty().getValue() <= 21*32) { //unbind gauche
             unbindX();
             bindXActif = false;
         }
-        else if (bindXActif && joueur.xProperty().getValue() >= (416-20)*32){ //unbind droite
+        else if (bindXActif && joueur.xProperty().getValue() >= (192-1)*32){ //unbind droite
             unbindX();
             bindXActif = false;
         }
-        else if (!bindXActif && joueur.xProperty().getValue() > 20*32 && joueur.xProperty().getValue() < (416-20)*32) {
+        else if (!bindXActif && joueur.xProperty().getValue() > 21*32 && joueur.xProperty().getValue() < (192-1)*32) {
             bindX();
             bindXActif = true;
         }
@@ -133,13 +133,13 @@ public class SpriteJoueur extends CreateRessourceVisuel {
     public void bindAll(){
         bindX();
         bindY();
-        background.translateXProperty().bind(screen.translateXProperty().multiply(-0.4));
+        background.translateXProperty().bind(screen.translateXProperty().multiply(-0.9));
         background.translateYProperty().bind(screen.translateYProperty().multiply(-1));
         opacite.translateXProperty().bind(screen.translateXProperty().multiply(-1));
         opacite.translateYProperty().bind(screen.translateYProperty().multiply(-1));
     }
     public void bindX(){
-        screen.translateXProperty().bind(jeu.getJoueur().xProperty().multiply(-1).add(20*32));
+        screen.translateXProperty().bind(jeu.getJoueur().xProperty().multiply(-1).add(19*32));
     }
     public void bindY(){
         screen.translateYProperty().bind(jeu.getJoueur().yProperty().multiply(-1).add(14*32));
