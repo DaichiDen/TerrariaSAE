@@ -182,9 +182,9 @@ public class Jeu {
         items.put(9, new Bloc("BedRock","Incassable",1,10));
         items.put(10, new Bloc("Noir","Incassable+traversable fond",1,10));
         items.put(11, new BlocConstruction("ConstructionSansBloc","",0,0));
-        items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,1, (BlocConstruction) items.get(11)));
-        items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(12) ));
-        items.put(14, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,2,(BlocConstruction) items.get(12)));
+        items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",3,1, (BlocConstruction) items.get(11)));
+        items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",3,3, (BlocConstruction) items.get(12) ));
+        items.put(14, new BlocConstruction("Four","Permet de fondre et cuire ses objets",3,2,(BlocConstruction) items.get(12)));
 
         items.put(15, new Bloc("Planche de bois","",1,1));
         items.put(16, new Bloc("Toit_bois_gauche","",1,1));
@@ -193,7 +193,7 @@ public class Jeu {
         items.put(19, new Bloc("Feuilles", "", 1, 1));
 
         //Bloc outil
-        items.put(20, new Coffre("Coffre", "", 1, 3));
+        items.put(20, new Coffre("Coffre", "", 3, 3));
         items.put(21, new Item("Charbon","Permet d'alimenter le four et la forge en chaleur",1));
         items.put(22, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1));
         items.put(23, new Item("DELJCCium", "", 1));

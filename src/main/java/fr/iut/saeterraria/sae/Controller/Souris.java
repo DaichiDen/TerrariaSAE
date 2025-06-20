@@ -107,8 +107,8 @@ public class Souris implements EventHandler<MouseEvent> {
                 }
             }
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-            if (jeu.getJoueur().estVivant()) {
-                if ((map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 14) && jeu.getJoueur().peutEtreAtteint(y, x, 2.5)) {
+            if (jeu.getJoueur().estVivant()){
+                if ((map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 14) && jeu.getJoueur().peutEtreAtteint(x, y, 2.5)) {
                     ouvrirInventaire();
                     switch (map.getCase(y, x)) {
                         case 12:
