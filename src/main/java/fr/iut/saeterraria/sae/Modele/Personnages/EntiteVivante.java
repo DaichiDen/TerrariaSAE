@@ -154,7 +154,7 @@ public abstract class EntiteVivante extends Entite{
             int xi = (int)Math.round(joueurX + dx * t);
             int yi = (int)Math.round(joueurY + dy * t);
 
-            if ((xi != blocX || yi != blocY) && getJeu().getCarte().getCase(yi, xi) != 0 && getJeu().getCarte().getCase(yi, xi) != 18 && getJeu().getCarte().getCase(yi, xi) != 22) { // Si bloc devant (obstacle)
+            if ((xi != blocX || yi != blocY) && getJeu().getCarte().getCase(yi, xi) != 0 && getJeu().getCarte().getCase(yi, xi) != 10 && getJeu().getCarte().getCase(yi, xi) != 18) { // Si bloc devant (obstacle)
                 return false;
             }
         }

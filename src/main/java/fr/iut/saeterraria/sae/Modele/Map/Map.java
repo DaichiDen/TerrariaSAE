@@ -129,8 +129,12 @@ public class Map {
                 blocRecup[0] = 21;
                 blocRecup[1] = 4;
                 break;
+            case 20:
+                blocRecup[0] = 72;
+                break;
             default:
                 break;
+
         }
         return blocRecup;
     }
