@@ -164,8 +164,8 @@
         }
 
         public void poser(int x, int y) {//x = colonne && y = ligne
-            if( (this.getX()/32)!=x || this.getY()/32!=y ) {
-                 if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() != 0 && (getJeu().getCarte().getCase(y, x) == 0 || getJeu().getCarte().getCase(y, x) == 10 || getJeu().getCarte().getCase(y, x) == 18)) {
+            if( ((this.getX()/32)!=x) || ((this.getY()/32)!=y) ) {
+                 if (peutEtreAtteint(x, y, 2.5) && inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() < 20 && (getJeu().getCarte().getCase(y, x) == 0 || getJeu().getCarte().getCase(y, x) == 10 || getJeu().getCarte().getCase(y, x) == 18)) {
                     getJeu().getCarte().poserBloc(x, y, inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet());
                     inventaire.getInventaireJoueur()[0][mainCourante].retireQuantite(1);
                 }

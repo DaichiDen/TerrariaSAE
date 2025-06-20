@@ -106,34 +106,33 @@ public class Souris implements EventHandler<MouseEvent> {
                     jeu.getJoueur().action(x1, y1, 2);
                 }
             }
-            else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                if (jeu.getJoueur().estVivant()) {
-                    if ((map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 15) && jeu.getJoueur().peutEtreAtteint(y, x, 2.5)) {
-                        ouvrirInventaire();
-                        switch (map.getCase(y, x)) {
-                            case 12:
-                                craftEtabli.toFront();
-                                break;
-                            case 13:
-                                craftForge.toFront();
-                                break;
-                            case 15:
-                                four.toFront();
-                                break;
-                        }
-                    } else if (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet() >= 64 && jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet() <= 71) {
-                        jeu.getJoueur().equiper((Armure) (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem()));
-                    } else {
-                        jeu.getJoueur().poser(x, y);
-                        this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
-                        this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+        } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+            if (jeu.getJoueur().estVivant()) {
+                if ((map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 14) && jeu.getJoueur().peutEtreAtteint(y, x, 2.5)) {
+                    ouvrirInventaire();
+                    switch (map.getCase(y, x)) {
+                        case 12:
+                            craftEtabli.toFront();
+                            break;
+                        case 13:
+                            craftForge.toFront();
+                            break;
+                        case 14:
+                            four.toFront();
+                            break;
                     }
+                } else if (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet() >= 64 && jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet() <= 71) {
+                    jeu.getJoueur().equiper((Armure) (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem()));
+                } else {
+                    System.out.println("je m'apprète à poser là");
+                    jeu.getJoueur().poser(x, y);
+                    this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
+                    this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
                 }
             }
-
-
         }
     }
+
     @FXML
     public void ouvrirInventaire() {
         Platform.runLater(() -> screenInventaire.requestFocus());

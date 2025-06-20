@@ -137,7 +137,7 @@ public abstract class EntiteVivante extends Entite{
         getJeu().getListe_projectilesObservable().add(projectile);
     }
 
-    public boolean peutEtreAtteint(int blocX, int blocY,double val) {
+    public boolean peutEtreAtteint(int blocX, int blocY, double val) {
         int joueurX = (this.getX() + 16) / 32;
         int joueurY = (this.getY() + 16) / 32;
 

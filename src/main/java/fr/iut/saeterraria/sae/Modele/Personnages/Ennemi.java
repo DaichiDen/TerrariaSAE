@@ -3,7 +3,6 @@ package fr.iut.saeterraria.sae.Modele.Personnages;
 import fr.iut.saeterraria.sae.Modele.A_Star.Algo_A_Star;
 import fr.iut.saeterraria.sae.Modele.A_Star.Node;
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 
 import java.util.ArrayList;
@@ -12,14 +11,24 @@ import java.util.List;
 public abstract class Ennemi extends EntiteVivante {
     private long dernièreAttaque=60;
     private long cooldown=60;
-
+    private int rangeVue;
+    private int rangeAttaque;
 
     private ArrayList<Item> listDrops;
 
-    public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def,Jeu jeu, int attaque, int tailleL, int tailleH) {
+    public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def,Jeu jeu, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
 
         super(nom,vieMax,  energieMax, 20, x, y, def, 5,jeu,attaque, tailleL, tailleH);
         listDrops = new ArrayList<>();
+        this.rangeVue = rangeVue;
+        this.rangeAttaque = rangeAttaque;
+    }
+
+    public int getRangeVue() {
+        return rangeVue;
+    }
+    public int getRangeAttaque() {
+        return rangeAttaque;
     }
 
     public ArrayList<Item> getListDrops() {
@@ -30,9 +39,7 @@ public abstract class Ennemi extends EntiteVivante {
     }
 
 
-
     public abstract void action(int x, int y, int range);
-
 
 
     @Override
@@ -68,7 +75,7 @@ public abstract class Ennemi extends EntiteVivante {
                 this.sauter();
             }
 
-            if(peutEtreAtteint(super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32, 5)){
+            if(peutEtreAtteint(super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32, getRangeVue())){
                 action(super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY(), 2);
             }
 
@@ -77,7 +84,7 @@ public abstract class Ennemi extends EntiteVivante {
         else{
             setMarcheGauche(false);
             setMarcheDroite(false);
-            action(super.getJeu().getJoueur().getX(),super.getJeu().getJoueur().getY(),2);
+            action(super.getJeu().getJoueur().getX(),super.getJeu().getJoueur().getY(), getRangeAttaque());
 
         }
     }
