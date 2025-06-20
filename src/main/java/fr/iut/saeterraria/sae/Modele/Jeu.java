@@ -89,12 +89,10 @@ public class Jeu {
 
                     p.setY(p.getY() + (int) p.getForceY());
 
-                    if(p.getNom().equals(" Boule de feu")){
-                        p.explosion();
-                    }
-
                     if (p.collisionVerticale() || p.collisionHorizontale()) {
-                        p.explosion();
+                        if(p.getNom().equals(" Boule de feu")){
+                            p.explosion();
+                        }
                         p.setActif(false);
                         getListe_projectiles().remove(i);
                     }
@@ -103,7 +101,6 @@ public class Jeu {
                 for(int j = 0; j < mobs.size(); j++ ){ //dégâts sur les entités vivantes
                     if(mobs.get(j).getHitbox().intersects(p.getHitbox())){
                         mobs.get(j).decrementVie(p.getAttaque());
-                        p.explosion();
                         p.setActif(false);
                         getListe_projectiles().remove(i);
                     }
