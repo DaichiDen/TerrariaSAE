@@ -17,7 +17,7 @@
                      <children>
                         <Pane fx:id="opaciteBackground" prefHeight="1040.0" prefWidth="1920.0" style="-fx-background-color: white;" />
                         <TilePane fx:id="background" opacity="0.8" prefColumns="1" prefRows="1" />
-                         <TilePane fx:id="fond" minHeight="-Infinity" minWidth="-Infinity" prefColumns="50" prefRows="25" />
+                         <TilePane fx:id="fond" minHeight="-Infinity" minWidth="-Infinity" prefColumns="60" prefRows="35" />
                      </children>
                   </Pane>
                   <AnchorPane prefHeight="200.0" prefWidth="675.0">

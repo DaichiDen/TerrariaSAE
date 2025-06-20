@@ -124,7 +124,7 @@ public class Controller implements Initializable {
         jeu.getListe_projectilesObservable().addListener(new ObsProjectile(jeu, screen));
 
         Ennemi ogre = new Ogre("Pierre l'ogre vert",50,20,2500,0,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2);
-        Ennemi goblin = new Goblin("Pierre l'ogre vert",20,20,1000,0,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2);
+        Ennemi goblin = new Goblin("Pierre l'ogre vert",20,20,1000,0,0, jeu,2, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2);
         Ennemi mh = new MH("Monsieur Homps", 250, 20, 4500, 0, 5, jeu, 5, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2);
 
         jeu.addEnnemis(ogre);

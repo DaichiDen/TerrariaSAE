@@ -48,10 +48,6 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(53, "/Sprite_objets/Pioche_fer.png"); // Pioche de fer
         items.put(54, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
 
-        for(int i=55; i<62; i++) {
-            items.put(i,"/Tiles/Fond_noir.png");
-        }
-
         items.put(62, "/Sprite_objets/Sceau_vide.png"); // Seau vide
         items.put(63, "/Sprite_objets/Sceau_eau.png"); // Sceau d'eau
 
@@ -79,8 +75,6 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(80, "/Sprite_objets/Balle.png");
         items.put(81, "/Sprite_objets/Grappin.png");
         items.put(82, "/Sprite_Objets/Boule_de_feu");
-
-
 
     }
 

@@ -67,9 +67,6 @@ public class Inventaire {
                 j=0;
                 i++;
             }
-            if (placer) {
-                System.out.println("Ajout dans l'inventaire");
-            }
         }
         return placer;
     }
@@ -104,14 +101,13 @@ public class Inventaire {
     // Trouve toutes les instances de l'item dans l'inventaire ainsi que les cases vides, retourne null si pas de place
     public int[][] findItem(Item item) {
         boolean presentItemCaseLibre = false;
-        int[][] instance = new int[this.inventaireJoueur.length][this.inventaireJoueur[0].length];
+        int[][] instance = new int[this.inventaireJoueur.length][this.inventaireJoueur[0].length];//Taille 7 ligne & 6 colonne
         for (int i = 0; i < this.inventaireJoueur.length; i++) {
             for (int j = 0; j < this.inventaireJoueur[i].length; j++) {
-                if (this.inventaireJoueur[i][j].comparerId(item.getCodeObjet()) ) {//Item présent
+                if (this.inventaireJoueur[i][j].comparerId(item.getCodeObjet())) {//Item présent
                     instance[i][j] = 1;
                     presentItemCaseLibre = true;
-                }
-                else if (this.inventaireJoueur[i][j].getItem().getCodeObjet()==0){//Case vide
+                } else if (this.inventaireJoueur[i][j].getItem().getCodeObjet() == 0) {//Case vide
                     instance[i][j] = 2;
                     presentItemCaseLibre = true;
                 }

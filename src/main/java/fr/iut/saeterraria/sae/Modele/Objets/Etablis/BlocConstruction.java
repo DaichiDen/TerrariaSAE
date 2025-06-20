@@ -9,12 +9,12 @@ public class BlocConstruction extends Bloc {
     HashMap<Integer, Recette> listeRecettes;
 
     public BlocConstruction(String nom, String desc, int typeBloc, int resistance, BlocConstruction provenance) {
-        super(nom,desc,typeBloc,resistance,provenance);
+        super(nom,desc, resistance,provenance);
         this.listeRecettes = new HashMap<>();
     }
 
     public BlocConstruction(String nom, String desc, int typeBloc, int resistance) {
-        super(nom,desc,typeBloc,resistance);
+        super(nom,desc, resistance);
         this.listeRecettes = new HashMap<>();
     }
 

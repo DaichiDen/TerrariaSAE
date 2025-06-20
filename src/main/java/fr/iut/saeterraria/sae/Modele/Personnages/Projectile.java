@@ -99,17 +99,17 @@ public class Projectile extends Entite{
         Map map = getJeu().getCarte();
         for (int j = x - 1; j <= x + 1; j++) {
             for (int i = y - 1; i <= y + 1; i++) {
-                if (map.getCase(i, j) != 0) {
+                if (map.getCase(i, j) != 0 && map.getCase(j, i) != 10 && map.getCase(j, i) != 18) {
                     map.detruireBloc(j,i); // faire avec la resistance comme pour la pioche et la roche (voir avec luc et dedou) + mettre à jour la map héhé
                 }
                 Rectangle2D touché = new Rectangle2D(j*32, i*32,getJeu().getTaille1bloc(), getJeu().getTaille1bloc());
                 for (int e = 0; e < getJeu().getMobs().size(); e++) {
-                    if (touché.intersects(getJeu().getMobs().get(e).getHitbox())) {
-                        getJeu().getMobs().get(e).decrementVie(10);
+                    if (touché.intersects(getJeu().getMobs().get(e).getHitbox()) && getJeu().getMobs().get(e).getDef()<8) {
+                        getJeu().getMobs().get(e).decrementVie(8-getJeu().getMobs().get(e).getDef());
                     }
                 }
-                if(getJeu().getJoueur().getHitbox().intersects(touché)){
-                    getJeu().getJoueur().decrementVie(5);
+                if(getJeu().getJoueur().getHitbox().intersects(touché) && getJeu().getJoueur().getDef()<5){
+                    getJeu().getJoueur().decrementVie(5-getJeu().getJoueur().getDef());
                 }
                 xExplosion = x;
                 yExplosion = y;

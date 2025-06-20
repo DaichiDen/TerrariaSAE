@@ -105,8 +105,6 @@ public class VueInventaire extends SpriteItem {
         tableauInventaire.getChildren().remove(caseInventaire);
         if(player.getInventaire().getInventaireJoueur()[ligne][colonne].getItem().getCodeObjet()!= 0) {
             String URL = super.getHmap().get((player.getInventaire().getInventaireJoueur())[ligne][colonne].getItem().getCodeObjet());
-            System.out.println("Code : "+(player.getInventaire().getInventaireJoueur())[ligne][colonne].getItem().getCodeObjet());
-            System.out.println(URL);
             int quantite = player.getInventaire().getInventaireJoueur()[ligne][colonne].getQuantite();
 
             if(ligne==0) {

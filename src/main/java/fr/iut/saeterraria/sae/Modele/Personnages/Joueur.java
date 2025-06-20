@@ -208,24 +208,25 @@
 
             boolean[] craftable = new boolean[necessaire[0].length];//Indique si l'objet est en quantité suffisante
             boolean craftableFin = true;
-            for (int i = 0; i < craftable.length; i++) {
-                craftable[i] = false;
+            for (int j = 0; j < craftable.length; j++) {
+                craftable[j] = false;
             }
+
             ArrayList<Case> position = new ArrayList<>();
-
+            int quantite;
             // Vérifie si les quantités sont suffisantes côté joueur
-            for (int i = 0; i < necessaire[0].length; i++) {
+            for (int i = 0; i < craftable.length; i++) {
                 int[][] tabResult;
+                craftableFin = true;
                 tabResult = inventaire.findItem(item.getRecette().get(i).getItem());
-
                 if (tabResult != null) {
-                    int quantite = 0;
+                    quantite = 0;
                     int o = 0;
                     int p = 0;
                     while (!craftable[i] && o < tabResult.length) {//Ligne
                         while (!craftable[i] && p < tabResult[o].length) {//Colonne
                             if (tabResult[o][p] == 1) {
-                                quantite += inventaire.getInventaireJoueur()[o][p].getQuantite();
+                                quantite = quantite + inventaire.getInventaireJoueur()[o][p].getQuantite();
                                 position.add(inventaire.getInventaireJoueur()[o][p]);
                             }
                             if (quantite >= necessaire[1][i]) {
@@ -233,6 +234,7 @@
                             }
                             p++;
                         }
+                        p=0;
                         o++;
                     }
                 } else {

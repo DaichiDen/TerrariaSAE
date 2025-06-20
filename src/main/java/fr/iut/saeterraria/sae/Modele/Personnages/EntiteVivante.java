@@ -125,8 +125,6 @@ public abstract class EntiteVivante extends Entite{
         int vy = (int) (((float) dy / distance) * puissance);
 
         // Appliquer la vitesse initiale au projectile
-        System.out.println("forceX : "+vx);
-        System.out.println("forceY : "+vy);
         projectile.setForceX(vx);
         projectile.setForceY(vy);
 
