@@ -104,11 +104,7 @@ public class Souris implements EventHandler<MouseEvent> {
                         }
                     }
 
-
                 }
-
-
-
 
                 else if (jeu.getJoueur().miner(x, y)) {
                     this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// faire de la taille de la map un un getter

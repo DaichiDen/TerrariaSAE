@@ -31,9 +31,9 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(14, "/Tiles/Four.png"); // Four
 
         items.put(15,"/Tiles/planche_bois.png");
-        items.put(16, "/Tiles/toit_bois_gauche");
+        items.put(16,"/Tiles/toit_bois_gauche.png");
         items.put(17,"/Tiles/toit_bois_droit.png");
-        items.put(18, "Tiles/Fonce_mur_bois.png");
+        items.put(18,"/Tiles/Fonce_mur_bois.png");
         items.put(19,"/Tiles/feuilles.png");
         items.put(20,"/Tiles/Coffre.png");// Coffre
 
@@ -49,7 +49,7 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(54, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
 
         for(int i=55; i<62; i++) {
-            items.put(i, "/Tiles/Fond_noir.png");
+            items.put(i,"/Tiles/Fond_noir.png");
         }
 
         items.put(62, "/Sprite_objets/Sceau_vide.png"); // Seau vide

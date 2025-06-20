@@ -5,7 +5,7 @@ public class Map {
     private int[][] map;
 
     public Map() {
-        JSONMapLoader.MapData mapData = JSONMapLoader.loadMap("/resources/Map..tmj");
+        JSONMapLoader.MapData mapData = JSONMapLoader.loadMap("/MapRéduite.tmj");
 
         int largeur = mapData.width;
         int hauteur = mapData.height;
@@ -114,7 +114,7 @@ public class Map {
         int[] blocRecup = new int[2];
         blocRecup[0] = getCase(y,x);
         blocRecup[1] = 1;
-        if (y>32){
+        if (y>20){
             map[y][x]=10;
         }
         else {
