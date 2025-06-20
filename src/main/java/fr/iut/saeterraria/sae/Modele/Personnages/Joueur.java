@@ -103,6 +103,9 @@
         public boolean arcEnMain() {
             return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 78;
         }
+        public boolean bdfEnMain() {
+            return inventaire.getInventaireJoueur()[0][mainCourante].getItem().getCodeObjet() == 81;
+        }
 
         public void mettreAJour() {
             if (this.getX()/super.getJeu().getTaille1bloc()>this.xMax.get()) {

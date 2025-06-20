@@ -69,11 +69,10 @@ public class Souris implements EventHandler<MouseEvent> {
                         }
                     }
                     if (oui) {
-                        jeu.getJoueur().tirerProjectile(new Projectile("balle",jeu,jeu.getJoueur().getX(),jeu.getJoueur().getY(),5,"balle", jeu.getTaille1bloc(), jeu.getTaille1bloc()),x1,y1);
+                        jeu.getJoueur().tirerProjectile(new Projectile("balle", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 5, "balle", jeu.getTaille1bloc(), jeu.getTaille1bloc()), x1, y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
-                }
-                else if (jeu.getJoueur().arcEnMain()) {
+                } else if (jeu.getJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];
                     int[][] tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(77));
@@ -87,10 +86,25 @@ public class Souris implements EventHandler<MouseEvent> {
                         }
                     }
                     if (oui) {
-
-                        jeu.getJoueur().tirerProjectile(new Projectile("Flèche", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 4,"Flèche", jeu.getTaille1bloc(), jeu.getTaille1bloc()), x1, y1);
+                        jeu.getJoueur().tirerProjectile(new Projectile("Flèche", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 4, "Flèche", jeu.getTaille1bloc(), jeu.getTaille1bloc()), x1, y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
                     }
+                } else if (jeu.getJoueur().bdfEnMain()) {
+                    boolean oui = false;
+                    int[] indice = new int[2];
+                    int[][] tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(81));
+                    for (int i = 0; i < tab.length; i++) {
+                        for (int j = 0; j < tab[i].length; j++) {
+                            if (tab[i][j] == 1) {
+                                oui = true;
+                                indice[0] = i;
+                                indice[1] = j;
+                            }
+                        }
+                    }
+                    if (oui) {
+                        jeu.getJoueur().tirerProjectile(new Projectile("Boule de feu", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 5, "Boule de feu", jeu.getTaille1bloc(), jeu.getTaille1bloc()), x1, y1);
+                        jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
 
                 }
 
@@ -108,7 +122,6 @@ public class Souris implements EventHandler<MouseEvent> {
 
                 else if (jeu.getJoueur().miner(x, y)) {
                     this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// faire de la taille de la map un un getter
-
                     this.tp.getChildren().add((((y * tp.getPrefColumns()) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
                 }
 
@@ -118,6 +131,7 @@ public class Souris implements EventHandler<MouseEvent> {
                 }
             }
         }
+
         else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             if (jeu.getJoueur().estVivant()) {
                 if((map.getCase(y,x)==12 || map.getCase(y,x)==13 || map.getCase(y,x)==15) && jeu.getJoueur().peutEtreAtteint(y,x,2.5)){
@@ -144,6 +158,7 @@ public class Souris implements EventHandler<MouseEvent> {
                 }
             }
         }
+
 
     }
     @FXML

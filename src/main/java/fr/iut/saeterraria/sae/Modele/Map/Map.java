@@ -102,6 +102,9 @@ public class Map {
     }
 
     public int getCase(int x, int y){ return map[x][y];}
+    public void setCase(int x, int y, int c){
+        map[x][y] = c;
+    }
 
     public int getCoordonnéesX(int x){
         return x*32;

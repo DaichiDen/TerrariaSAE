@@ -141,7 +141,7 @@ public class Controller implements Initializable {
         Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte(),fond,screenInventaire,craftSansBlocConstruction,craftEtabli,craftForge,four);
 
         inventaireVue = new VueInventaire(quitterInventaire, screenInventaire, jeu.getJoueur(), inventaire, screen);
-        vueProjectile = new VueProjectile(jeu, screen);
+        vueProjectile = new VueProjectile(jeu, screen, fond, scene);
 
         hotBarVue = new VueHotbar(jeu,hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement

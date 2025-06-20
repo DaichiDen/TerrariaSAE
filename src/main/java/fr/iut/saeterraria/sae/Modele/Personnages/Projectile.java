@@ -14,13 +14,26 @@ public class Projectile extends Entite{
     private BooleanProperty actif;
     private String type;
 
+    private int xExplosion, yExplosion;
+    private BooleanProperty aExplosé = new SimpleBooleanProperty(false);
 
-    public Projectile(String nom, Jeu jeu, int xJoueur, int yJoueur, int attaque,String type, int tailleL, int tailleH) {
+
+    public Projectile(String nom, Jeu jeu, int xJoueur, int yJoueur, int attaque, String type, int tailleL, int tailleH) {
         super(nom, xJoueur, yJoueur, jeu, attaque, tailleL, tailleH);
         this.nom = new SimpleStringProperty(nom);
         this.actif = new SimpleBooleanProperty(true);
         this.type=type;
 
+    }
+
+    public BooleanProperty aExploséProperty() {
+        return aExplosé;
+    }
+    public boolean getaExplosé(){
+        return aExplosé.getValue();
+    }
+    public void setaExplosé(boolean a){
+        aExplosé.setValue(a);
     }
 
     public BooleanProperty getActifProperty() {
@@ -80,4 +93,30 @@ public class Projectile extends Entite{
         this.forceY.setValue(forceY);
     }
 
+    public void explosion() {
+        int x = getX() / 32;
+        int y = getY() / 32;
+        Map map = getJeu().getCarte();
+        for (int j = x - 1; j <= x + 1; j++) {
+            for (int i = y - 1; i <= y + 1; i++) {
+                if (map.getCase(i, j) != 0) {
+                    map.detruireBloc(j,i); // faire avec la resistance comme pour la pioche et la roche (voir avec luc et dedou) + mettre à jour la map héhé
+                }
+                Rectangle2D touché = new Rectangle2D(j*32, i*32,getJeu().getTaille1bloc(), getJeu().getTaille1bloc());
+                for (int e = 0; e < getJeu().getMobs().size(); e++) {
+                    if (touché.intersects(getJeu().getMobs().get(e).getHitbox())) {
+                        getJeu().getMobs().get(e).decrementVie(10);
+                    }
+                }
+                if(getJeu().getJoueur().getHitbox().intersects(touché)){
+                    getJeu().getJoueur().decrementVie(5);
+                }
+                xExplosion = x;
+                yExplosion = y;
+
+            }
+        }
+        System.out.println("bah je le met à true hein");
+        setaExplosé(true);
+    }
 }
