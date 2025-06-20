@@ -127,10 +127,8 @@
                     }
 
                     if (directionDash.equals("droite")) {
-                        System.out.println("droite");
                         this.setX(this.getX() + vitesseDash);
                     } else {
-                        System.out.println("gauche");
                         this.setX(this.getX() - vitesseDash);
                     }
                     dureeDash--;

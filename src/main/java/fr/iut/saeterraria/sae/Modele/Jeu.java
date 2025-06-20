@@ -165,12 +165,11 @@ public class Jeu {
         items.put(7, new Bloc("Minerai DELJCCium","",3,4));
         items.put(8, new Bloc("Pique","",1,10));
         items.put(9, new Bloc("BedRock","Incassable",1,10));
-        items.put(10,new Bloc("FondNoir","Incassable+traversable fond",1,10));
-        items.put(11,new BlocConstruction("ConstructionSansBloc","",0,0));
+        items.put(10, new Bloc("Noir","Incassable+traversable fond",1,10));
+        items.put(11, new BlocConstruction("ConstructionSansBloc","",0,0));
         items.put(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,1, (BlocConstruction) items.get(11)));
         items.put(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3, (BlocConstruction) items.get(12) ));
         items.put(14, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,2,(BlocConstruction) items.get(12)));
-
 
         items.put(15, new Bloc("Planche de bois","",1,1));
         items.put(16, new Bloc("Toit_bois_gauche","",1,1));
@@ -183,11 +182,10 @@ public class Jeu {
         items.put(21, new Item("Charbon","Permet d'alimenter le four et la forge en chaleur",1));
         items.put(22, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1));
         items.put(23, new Item("DELJCCium", "", 1));
-        items.get(22).setProvenance((BlocConstruction) items.get(15));
-        items.get(23).setProvenance((BlocConstruction) items.get(15));
+        items.get(22).setProvenance((BlocConstruction) items.get(14));
+        items.get(23).setProvenance((BlocConstruction) items.get(14));
         for (int i = 24; i < 49; i++) {
             items.put(i,new Item("","",1));
-
         }
 
         // Outils
@@ -234,70 +232,63 @@ public class Jeu {
     private void initializeRecettes() {
 
         // Lingot de fer : 1 Minérai de fer et 1 charbon et 1 four
-        items.get(8).addInRecette(new ElementRecette(items.get(6),1));
-        items.get(8).addInRecette(new ElementRecette(items.get(4),1));
+        items.get(22).addInRecette(new ElementRecette(items.get(6),1));
+        items.get(22).addInRecette(new ElementRecette(items.get(21),1));
 
         // Lingot de DELJCCium : 1 Minérai de DELJCCium et 1 charbon et 1 four
-        items.get(10).addInRecette(new ElementRecette(items.get(16),1));
-        items.get(10).addInRecette(new ElementRecette(items.get(4),1));
+        items.get(23).addInRecette(new ElementRecette(items.get(16),1));
+        items.get(23).addInRecette(new ElementRecette(items.get(21),1));
 
         //Etabli : 2 bois
         items.get(12).addInRecette(new ElementRecette(items.get(3),2));
 
         //Four : 8 Pierre
-        items.get(15).addInRecette(new ElementRecette(items.get(6),8));
+        items.get(14).addInRecette(new ElementRecette(items.get(5),8));
 
         // Forge : 9 fer et 1 seau
-        items.get(13).addInRecette(new ElementRecette(items.get(8),9));
+        items.get(13).addInRecette(new ElementRecette(items.get(22),9));
         items.get(13).addInRecette(new ElementRecette(items.get(62),1));
-
-        // Alambique : 2 seau et 3 pierres
-        items.get(14).addInRecette(new ElementRecette(items.get(62),2));
-        items.get(14).addInRecette(new ElementRecette(items.get(6),3));
-
-        // Coffre : 6 bois
-        items.get(24).addInRecette(new ElementRecette(items.get(3),6));
 
         // Pioche de bois : 4 bois
         items.get(51).addInRecette(new ElementRecette(items.get(3),4));
         // Pioche de pierre : 3 pierre + 1 bois
-        items.get(52).addInRecette(new ElementRecette(items.get(6),3));
+        items.get(52).addInRecette(new ElementRecette(items.get(5),3));
         items.get(52).addInRecette(new ElementRecette(items.get(3),1));
         // Pioche de fer : 3 fer + 1 bois + forge
-        items.get(53).addInRecette(new ElementRecette(items.get(8),3));
+        items.get(53).addInRecette(new ElementRecette(items.get(22),3));
         items.get(53).addInRecette(new ElementRecette(items.get(3),1));
         // Pioche en DELJCCnium : 3 DELJCCium + 1 bois + forge
-        items.get(54).addInRecette(new ElementRecette(items.get(10),3));
+        items.get(54).addInRecette(new ElementRecette(items.get(23),3));
         items.get(54).addInRecette(new ElementRecette(items.get(3),1));
 
         // Casque en fer + forge
-        items.get(64).addInRecette(new ElementRecette(items.get(8),5));
+        items.get(64).addInRecette(new ElementRecette(items.get(22),5));
         // Plastron en fer + forge
-        items.get(66).addInRecette(new ElementRecette(items.get(8),8));
+        items.get(66).addInRecette(new ElementRecette(items.get(22),8));
         // Jambière en fer + forge
-        items.get(68).addInRecette(new ElementRecette(items.get(8),6));
+        items.get(68).addInRecette(new ElementRecette(items.get(22),6));
         // Botte en fer + forge
-        items.get(70).addInRecette(new ElementRecette(items.get(8),4));
+        items.get(70).addInRecette(new ElementRecette(items.get(22),4));
 
         // Casque en DELJCCnium + forge
-        items.get(65).addInRecette(new ElementRecette(items.get(10),5));
+        items.get(65).addInRecette(new ElementRecette(items.get(23),5));
         // Plastron en DELJCCnium + forge
-        items.get(66).addInRecette(new ElementRecette(items.get(10),8));
+        items.get(66).addInRecette(new ElementRecette(items.get(23),8));
         // Jambière en DELJCCnium + forge
-        items.get(68).addInRecette(new ElementRecette(items.get(10),6));
+        items.get(68).addInRecette(new ElementRecette(items.get(23),6));
         // Botte en DELJCCnium + forge
-        items.get(70).addInRecette(new ElementRecette(items.get(10),4));
+        items.get(70).addInRecette(new ElementRecette(items.get(23),4));
 
         // Flèche : 1 Bois 1 fer + forge
         items.get(77).addInRecette(new ElementRecette(items.get(3),1));
-        items.get(77).addInRecette(new ElementRecette(items.get(8),1));
+        items.get(77).addInRecette(new ElementRecette(items.get(22),1));
 
         // Arc : 3 bois 2 fer + forge
         items.get(78).addInRecette(new ElementRecette(items.get(3),3));
-        items.get(78).addInRecette(new ElementRecette(items.get(8),2));
+        items.get(78).addInRecette(new ElementRecette(items.get(22),2));
 
         // Balle en plomb : 2 fer + forge
-        items.get(80).addInRecette(new ElementRecette(items.get(8),2));
+        items.get(80).addInRecette(new ElementRecette(items.get(22),2));
     }
 
     public void initializeBlocConstruction() {
@@ -317,20 +308,13 @@ public class Jeu {
                 ((BlocConstruction) items.get(13)).addRecette(items.get(integer).getCodeObjet(), items.get(integer).getAttributRecette());
             }
 
-            // Alambique
-            else if (items.get(integer).getProvenance() == items.get(14)) {
-                ((BlocConstruction) items.get(14)).addRecette(items.get(integer).getCodeObjet(), items.get(integer).getAttributRecette());
-            }
             // Four
             else if (items.get(integer).getProvenance() == items.get(15)) {
                 System.out.println("Rentré ici four haha");
-                ((BlocConstruction) items.get(15)).addRecette(items.get(integer).getCodeObjet(), items.get(integer).getAttributRecette());
+                ((BlocConstruction) items.get(14)).addRecette(items.get(integer).getCodeObjet(), items.get(integer).getAttributRecette());
             }
         }
 
-        System.out.println(items.get(15).getName());
-
-        System.out.println("Liste recette four" + ((BlocConstruction) items.get(15)).getListeRecette().size());
     }
 
     public void testCraft() {

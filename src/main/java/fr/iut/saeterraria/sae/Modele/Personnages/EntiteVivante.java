@@ -67,7 +67,7 @@ public abstract class EntiteVivante extends Entite{
                 vitesseY = 0;
                 setY(blocBas);
             }
-            if (super.getJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 16 ) {
+            if (super.getJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 8 ) {
 
                 this.decrementVie(1);
             }
@@ -96,9 +96,6 @@ public abstract class EntiteVivante extends Entite{
                 // Repositionner le joueur pile à droite du bloc
                 this.setX(blocDroite);
             }
-
-
-
 
         }
         if (collisionDroite) setMarcheDroite(false);

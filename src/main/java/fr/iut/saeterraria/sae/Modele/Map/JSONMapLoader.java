@@ -8,9 +8,9 @@ public class JSONMapLoader {
     public static MapData loadMap(String filePath) {
         try {
             StringBuilder jsonBuilder = new StringBuilder();
-            InputStream is = JSONMapLoader.class.getResourceAsStream("/Map..tmj");
+            InputStream is = JSONMapLoader.class.getResourceAsStream("/MapReduite.tmj");
             if (is == null) {
-                System.out.println("Fichier /Map..tmj non trouvé dans resources.");
+                System.out.println("Fichier /MapReduite.tmj non trouvé dans resources.");
                 return new MapData(0, 0, 0, 0, new ArrayList<>());
             }
             BufferedReader br = new BufferedReader(new InputStreamReader(is));

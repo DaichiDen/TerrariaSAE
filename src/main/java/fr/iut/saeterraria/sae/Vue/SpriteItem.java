@@ -22,19 +22,20 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(5, "/Tiles/Roche_moche.png"); // Pierre
         items.put(6, "/Tiles/Minerais_fer.png"); // Minerai Fer
         items.put(7, "/Tiles/Minerais_DELJCCium.png"); //Minerai DELJCCIUM
-        // Blocs à constructions
-        items.put(12, "/Tiles/Etabli.png"); // Etabli
-        items.put(13, "/Tiles/Forge.png"); // Forge
-        items.put(15, "/Tiles/Four.png"); // Four
         items.put(8, "/Tiles/piques_vorpales.png"); // Pique
         items.put(9,"/Tiles/bedrock.png"); // Bedrock
         items.put(10,"/Tiles/Noir.png");
+        // Blocs à constructions
+        items.put(12, "/Tiles/Etabli.png"); // Etabli
+        items.put(13, "/Tiles/Forge.png"); // Forge
+        items.put(14, "/Tiles/Four.png"); // Four
+
         items.put(15,"/Tiles/planche_bois.png");
         items.put(16, "/Tiles/toit_bois_gauche");
         items.put(17,"/Tiles/toit_bois_droit.png");
         items.put(18, "Tiles/Fonce_mur_bois.png");
-        items.put(,"/Tiles/feuilles.png");
-        items.put(24,"/Tiles/Coffre.png");// Coffre
+        items.put(19,"/Tiles/feuilles.png");
+        items.put(20,"/Tiles/Coffre.png");// Coffre
 
         items.put(21, "/Sprite_objets/Coal.png"); // Charbon
         items.put(22, "/Sprite_objets/Iron_ingot.png"); // Fer
