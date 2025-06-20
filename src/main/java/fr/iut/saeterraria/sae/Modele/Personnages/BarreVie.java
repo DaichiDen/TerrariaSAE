@@ -21,7 +21,6 @@ public class BarreVie {
     public final Double getVie() {return vie.getValue();}
     public final void setVie(double vie) {this.vie.setValue(vie);}
 
-
 }
 
 

@@ -11,24 +11,14 @@ import java.util.List;
 public abstract class Ennemi extends EntiteVivante {
     private long dernièreAttaque=60;
     private long cooldown=60;
-    private int rangeVue;
-    private int rangeAttaque;
 
     private ArrayList<Item> listDrops;
 
     public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def,Jeu jeu, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
 
-        super(nom,vieMax,  energieMax, 20, x, y, def, 5,jeu,attaque, tailleL, tailleH);
+        super(nom,vieMax,  energieMax, 20, x, y, def, 5,jeu,attaque, tailleL, tailleH, rangeVue,rangeAttaque );
         listDrops = new ArrayList<>();
-        this.rangeVue = rangeVue;
-        this.rangeAttaque = rangeAttaque;
-    }
 
-    public int getRangeVue() {
-        return rangeVue;
-    }
-    public int getRangeAttaque() {
-        return rangeAttaque;
     }
 
     public ArrayList<Item> getListDrops() {
@@ -39,8 +29,14 @@ public abstract class Ennemi extends EntiteVivante {
     }
 
 
-    public abstract void action(int x, int y, int range);
+    public abstract void action(int x, int y);
 
+    public int distanceJoueur(int x, int y){
+        int dx = x - getJeu().getJoueur().getX();
+        int dy = y - getJeu().getJoueur().getY();
+        int distance = (int) Math.sqrt(dx * dx + dy * dy);
+        return distance;
+    }
 
     @Override
     public void mettreAJour(){
@@ -76,7 +72,7 @@ public abstract class Ennemi extends EntiteVivante {
             }
 
             if(peutEtreAtteint(super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32, getRangeVue())){
-                action(super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY(), 2);
+                action(super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY());
             }
 
             // Tu peux gérer dy si les ennemis sautent ou volent
@@ -84,7 +80,7 @@ public abstract class Ennemi extends EntiteVivante {
         else{
             setMarcheGauche(false);
             setMarcheDroite(false);
-            action(super.getJeu().getJoueur().getX(),super.getJeu().getJoueur().getY(), getRangeAttaque());
+            action(super.getJeu().getJoueur().getX(),super.getJeu().getJoueur().getY());
 
         }
     }

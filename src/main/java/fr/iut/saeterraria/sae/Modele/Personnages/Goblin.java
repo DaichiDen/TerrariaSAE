@@ -4,13 +4,12 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 
 public class Goblin extends Ennemi{
 
-    public Goblin(String nom, int vieMax, int energieMax, int x, int y, int def, Jeu jeu, int attaque, int tailleL, int tailleH) {
-        super(nom, vieMax, energieMax, x, y, def, jeu, attaque, tailleL, tailleH, 20, 20);
+    public Goblin(String nom, int vieMax, int energieMax, int x, int y, int def, Jeu jeu, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
+        super(nom, vieMax, energieMax, x, y, def, jeu, attaque, tailleL, tailleH, rangeVue, rangeAttaque);
     }
 
     @Override
-    public void action(int x, int y, int range) {
-
+    public void action(int x, int y) {
         if(getDernièreAttaque()==getCooldown()) {
             if (this.getAttaque() - getJeu().getJoueur().getDef() > 0){
                 tirerProjectile(new Projectile("Flèche",getJeu(),this.getX(),this.getY(),1,"Flèche", 16,16),super.getJeu().getJoueur().getX(),super.getJeu().getJoueur().getY());

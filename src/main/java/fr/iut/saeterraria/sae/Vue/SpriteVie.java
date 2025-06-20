@@ -52,8 +52,5 @@ public class SpriteVie extends CreateRessourceVisuel {
 
         viePre = vieAct; // Met à jour l'ancienne vie
     }
-//commencer par la fin
-
-
 
 }

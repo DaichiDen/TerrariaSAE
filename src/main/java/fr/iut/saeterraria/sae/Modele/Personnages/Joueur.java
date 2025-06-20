@@ -38,9 +38,9 @@
         private IntegerProperty xMax,yMax;
 
 
-        public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp, int tailleL, int tailleH) {
+        public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
 
-            super(nom, 20, 100, 20, 20*32, 14*32, 1, 10, jeu,1, tailleL, tailleH);
+            super(nom, 20, 100, 20, 20*32, 14*32, 1, 10, jeu,1, tailleL, tailleH, rangeVue, rangeAttaque);
             this.equipement = new int[7];
             this.inventaire = new Inventaire();
             this.pierreTp = pierreTp;
@@ -174,7 +174,8 @@
         }
 
         @Override
-        public void action(int x, int y, int range) {
+        public void action(int x, int y) {
+            System.out.println("x: "+getX()+", y: "+getY());
             for (EntiteVivante e : super.getJeu().getEnnemis()) {
 
                 Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(), getJeu().getTaille1bloc(), (getJeu().getTaille1bloc()) * 2);
@@ -183,7 +184,7 @@
                 if (hitboxMob.contains(x, y)) {
                     int ennemiX = (e.getX() + 16) / 32;
                     int ennemiY = (e.getY() + 16) / 32;
-                    if (peutEtreAtteint(ennemiX, ennemiY, range)) {
+                    if (peutEtreAtteint(ennemiX, ennemiY, getRangeVue())){
                         if (this.getAttaque() - e.getDef()>0){
                             e.decrementVie(getAttaque() - e.getDef());
                         }
@@ -291,14 +292,14 @@
         }
 
         public void dashKatana() {
-
             if (enDash) {
+                System.out.println("dash");
                 ennemis_touchées_dash.clear();
                 dureeDash = DUREE_DASH_MAX;
                 directionDash = dernierPos; // Dash dans la direction actuelle
-
             }
         }
+
         public void setEnDash(boolean val){
             this.enDash=val;
         }

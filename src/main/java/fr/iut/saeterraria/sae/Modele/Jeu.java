@@ -26,7 +26,7 @@ public class Jeu {
     private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
-    private ObservableList<EntiteVivante> mobs;
+    private ObservableList<Ennemi> mobs;
     // projectiles
     private ArrayList<Projectile> projectiles;
     private ObservableList<Projectile> liste_projectiles;
@@ -39,7 +39,7 @@ public class Jeu {
         initializeRecettes();
         initializeBlocConstruction();
         carte = new Map();
-        joueur = new Joueur(nomJoueur, this, (Pierre_TP) items.get(49), taille1bloc, taille1bloc*2);
+        joueur = new Joueur(nomJoueur, this, (Pierre_TP) items.get(49), taille1bloc, taille1bloc*2,3,3);
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);
@@ -83,14 +83,14 @@ public class Jeu {
                     // timeStop désactivé, on met à jour tous les projectiles normalement
                     p.setX(p.getX() + (int) p.getForceX());
 
-                    if (!p.getNom().equals("Balle en plomb")) {
+                    if (!p.getType().equals("balle")) {
                         p.setForceY(p.getForceY() + p.getGravité());
                     }
 
                     p.setY(p.getY() + (int) p.getForceY());
 
                     if (p.collisionVerticale() || p.collisionHorizontale()) {
-                        if(p.getNom().equals(" Boule de feu")){
+                        if(p.getType().equals("boule_de_feu")){
                             p.explosion();
                         }
                         p.setActif(false);
@@ -105,16 +105,18 @@ public class Jeu {
                         getListe_projectiles().remove(i);
                     }else if (joueur.getHitbox().intersects(p.getHitbox())){
                         joueur.decrementVie(p.getAttaque());
+                        p.setActif(false);
+                        getListe_projectiles().remove(i);
                     }
                 }
             }
         }
     }
 
-    public ObservableList<EntiteVivante> getMobs() {
+    public ObservableList<Ennemi> getMobs() {
         return mobs;
     }
-    public void addMobs(EntiteVivante entite){
+    public void addMobs(Ennemi entite){
         mobs.add(entite);
     }
     public void removeMob(Entite entite){
@@ -238,8 +240,8 @@ public class Jeu {
         items.put(77, new Item("Flèche","Flèche",1,(BlocConstruction) items.get(13)));
         items.put(78, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) items.get(12)));
         items.put(79, new Distance("Arquebuse","Etrange objet qui semble ralentir le temps",5));
-        items.put(80, new Distance("Grappin","Permet de s'accrocher au surfaces",0));
-        items.put(81, new Item("Balle en plomb","Un projectile qui peut être utlisé ",1));
+        items.put(80, new Item("Balle en plomb","Un projectile qui peut être utlisé ",1));
+        items.put(81, new Distance("Grappin","Permet de s'accrocher au surfaces",0,(BlocConstruction) items.get(13)));
         items.put(82, new Item("Boule de feu","Une boule de feu qui explose à l'impact",1));
     }
 
@@ -317,6 +319,14 @@ public class Jeu {
 
         // Balle en plomb : 2 fer + forge
         items.get(80).addInRecette(new ElementRecette(items.get(22),2));
+
+        items.get(81).addInRecette(new ElementRecette(items.get(3),3));
+        items.get(81).addInRecette(new ElementRecette(items.get(22),3));
+        items.get(81).addInRecette(new ElementRecette(items.get(23),1));
+
+
+
+
     }
 
     public void initializeBlocConstruction() {

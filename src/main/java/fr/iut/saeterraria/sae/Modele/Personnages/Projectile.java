@@ -99,7 +99,7 @@ public class Projectile extends Entite{
         Map map = getJeu().getCarte();
         for (int j = x - 1; j <= x + 1; j++) {
             for (int i = y - 1; i <= y + 1; i++) {
-                if (map.getCase(i, j) != 0 && map.getCase(j, i) != 10 && map.getCase(j, i) != 18) {
+                if (map.getCase(i, j) != 0 && map.getCase(i, j) != 10 && map.getCase(i, j) != 18) {
                     map.detruireBloc(j,i); // faire avec la resistance comme pour la pioche et la roche (voir avec luc et dedou) + mettre à jour la map héhé
                 }
                 Rectangle2D touché = new Rectangle2D(j*32, i*32,getJeu().getTaille1bloc(), getJeu().getTaille1bloc());
@@ -113,10 +113,8 @@ public class Projectile extends Entite{
                 }
                 xExplosion = x;
                 yExplosion = y;
-
             }
         }
-        System.out.println("bah je le met à true hein");
         setaExplosé(true);
     }
 }

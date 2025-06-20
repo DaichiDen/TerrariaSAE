@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import javafx.scene.layout.Pane;
+import fr.iut.saeterraria.sae.Vue.VueProjectile;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,72 +20,36 @@ import java.util.HashMap;
 public class ObsProjectile implements ListChangeListener<Projectile> {
     private Jeu jeu;
     private Pane screen;
+    private VueProjectile p;
     private HashMap<Projectile, Node> spriteProjectiles;
 
-    public ObsProjectile(Jeu jeu, Pane screen){
+    public ObsProjectile(Jeu jeu, Pane screen, VueProjectile p) {
         this.jeu = jeu;
         this.screen = screen;
+        this.p = p;
         this.spriteProjectiles = new HashMap<>();
     }
 
-    @Override
     public void onChanged(Change<? extends Projectile> c) {
         while (c.next()) {
             if (c.wasAdded()) {
-                ImageView sprite;
                 for (Projectile projectile_aj : c.getAddedSubList()) {
-                    // 1) Créer le Node graphique du projectile (par ex. un ImageView)
-                    if (projectile_aj.getType().equals("Flèche")){
-                        URL imageURL = getClass().getResource("/Sprite_objets/Flèche.png");
-                        Image image = new Image(String.valueOf(imageURL));
-                        sprite = new ImageView(image);
-                        sprite.setFitWidth(54);
-                        sprite.setFitHeight(64);
-                    }
-                    else if (projectile_aj.getType().equals("balle")){
-                        URL imageURL = getClass().getResource("/Sprite_objets/Balle.png");
-                        Image image = new Image(String.valueOf(imageURL));
-                        sprite = new ImageView(image);
-                        sprite.setFitWidth(54);
-                        sprite.setFitHeight(64);
-                    }else{
-                        URL imageURL = getClass().getResource("/Sprite_objets/Boule_de_feu.png");
-                        Image image = new Image(String.valueOf(imageURL));
-                        sprite = new ImageView(image);
-                        sprite.setFitWidth(54);
-                        sprite.setFitHeight(64);
-                    }
 
-                    // Positionner au bon endroit, ex. :
-                    sprite.setLayoutX(projectile_aj.getX());
-                    sprite.setLayoutY(projectile_aj.getY());
+                    projectile_aj.xProperty().addListener((obs, oldVal, newVal) -> p.mettreAJourSpriteProjectile(projectile_aj));
+                    projectile_aj.yProperty().addListener((obs, oldVal, newVal) -> p.mettreAJourSpriteProjectile(projectile_aj));
+                    projectile_aj.aExploséProperty().addListener((obs, oldVal, newVal) -> p.detruireBlocExplosion(projectile_aj.getY() / 32, projectile_aj.getX() / 32));
 
-                    // 2) Conserver la correspondance Entite → Node
+                    // Met à jour le sprite depuis VueProjectile
+                    p.mettreAJourSpriteProjectile(projectile_aj); // <- pour forcer la création du sprite
+                    Node sprite = p.getSprite(projectile_aj);     // <- nouvelle méthode à créer
                     spriteProjectiles.put(projectile_aj, sprite);
 
-                    // 3) Ajouter le sprite dans le Pane
-                    screen.getChildren().add(sprite);
-
-                    // 4) Mettre à jour la position à chaque frame
-                    ImageView finalSprite = sprite;
-                    projectile_aj.xProperty().addListener((obs, oldX, newX) -> {
-                        finalSprite.setLayoutX(newX.doubleValue());
-                    });
-                    ImageView finalSprite1 = sprite;
-                    projectile_aj.yProperty().addListener((obs, oldY, newY) -> {
-                        finalSprite1.setLayoutY(newY.doubleValue());
-                    });
-
-                    // 5) **ÉCOUTER la propriété ActifProperty**
                     projectile_aj.getActifProperty().addListener((obs, ancienEtat, nouvelEtat) -> {
                         if (!nouvelEtat) {
-                            // Le projectile vient de toucher un obstacle → on retire son Node de l’écran
-                            Node nodeAMettreAJour = spriteProjectiles.get(projectile_aj);
+                            Node nodeAMettreAJour = spriteProjectiles.remove(projectile_aj);
                             if (nodeAMettreAJour != null) {
                                 screen.getChildren().remove(nodeAMettreAJour);
-                                spriteProjectiles.remove(projectile_aj);
                             }
-                            // (Optionnel) on peut aussi le supprimer de la liste de mobs si ce n’est pas déjà fait
                             jeu.getListe_projectilesObservable().remove(projectile_aj);
                         }
                     });
@@ -92,7 +57,6 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
             }
 
             if (c.wasRemoved()) {
-                // En cas de suppressions “externes”, supprimer aussi du Pane
                 for (Projectile projSuppr : c.getRemoved()) {
                     Node spriteARetirer = spriteProjectiles.remove(projSuppr);
                     if (spriteARetirer != null) {
@@ -101,8 +65,6 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
                 }
             }
         }
-
     }
 }
-
 

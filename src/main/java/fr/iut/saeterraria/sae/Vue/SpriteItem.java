@@ -46,7 +46,7 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(51, "/Sprite_objets/Pioche_bois.png"); // Pioche de bois
         items.put(52, "/Sprite_objets/Pioche_pierre.png"); // Pioche de pierre
         items.put(53, "/Sprite_objets/Pioche_fer.png"); // Pioche de fer
-        items.put(54, "/Sprite_objets/Pioche_pierre.png"); // Pioche de DELJCCium
+        items.put(54, "/Sprite_objets/pioche_DELJCCium.png"); // Pioche de DELJCCium
 
         items.put(62, "/Sprite_objets/Sceau_vide.png"); // Seau vide
         items.put(63, "/Sprite_objets/Sceau_eau.png"); // Sceau d'eau
@@ -67,8 +67,8 @@ public class SpriteItem extends CreateRessourceVisuel{
         items.put(72, "/Sprite_objets/KatanaDash.png");
         items.put(73, "/Sprite_objets/Epee_bois.png");
         items.put(74, "/Sprite_objets/Epee_pierre.png");
-        items.put(75, "/Sprite_objets/Pioche_pierre.png");
-        items.put(76, "/Sprite_objets/Pioche_pierre.png");
+        items.put(75, "/Sprite_objets/Epee_fer.png");
+        items.put(76, "/Sprite_objets/epee_DELJCCium.png");
         items.put(77, "/Sprite_objets/Flèche.png");
         items.put(78, "/Sprite_objets/Arc_repos.png");
         items.put(79, "/Sprite_objets/gun_bh.png");

@@ -1,7 +1,7 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Objets.Arme.Distance;
 import javafx.beans.property.*;
 
 public abstract class EntiteVivante extends Entite{
@@ -17,6 +17,9 @@ public abstract class EntiteVivante extends Entite{
 
     private int vitesseY = 0;
 
+    private int rangeVue;
+    private int rangeAttaque;
+
     //constantes
     protected final int forceSaut = -18;
     //inertie et friction
@@ -24,7 +27,7 @@ public abstract class EntiteVivante extends Entite{
 
 
 
-    public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Jeu jeu, int attaque, int tailleL, int tailleH) {
+    public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Jeu jeu, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
         super(nom, x, y, jeu, attaque, tailleL, tailleH);
 
         this.barreVie = new BarreVie(vieMax);
@@ -33,9 +36,16 @@ public abstract class EntiteVivante extends Entite{
         this.def = new SimpleIntegerProperty(def);
         this.vitesseMax = new SimpleIntegerProperty(vitesseMax);
         this.estVivant= new SimpleBooleanProperty(true);
-
+        this.rangeVue = rangeVue;
+        this.rangeAttaque = rangeAttaque;
     }
 
+    public int getRangeVue() {
+        return rangeVue;
+    }
+    public int getRangeAttaque() {
+        return rangeAttaque;
+    }
 
     public int getVitesseY(){
         return vitesseY;
@@ -43,13 +53,13 @@ public abstract class EntiteVivante extends Entite{
     public int getVitesseX() { return vitesseX; }
 
     public void sauter() {
-        if (!enSaut && this.estVivant() ) {
+        if (!enSaut && this.getEstVivant() ) {
             enSaut = true;
             vitesseY = forceSaut;
         }
     }
 
-    public abstract void action(int x, int y, int range);
+    public abstract void action(int x, int y);
 
     public void bloquéVertical(int tailleL, int tailleH) {
         if(collisionVerticale()){
@@ -103,8 +113,6 @@ public abstract class EntiteVivante extends Entite{
     }
 
     public void tirerProjectile(Projectile projectile, int cibleX, int cibleY) {
-        setMarcheGauche(false);
-        setMarcheDroite(false);
 
         // Position de l'entité
         int ex = this.getX();
@@ -128,12 +136,16 @@ public abstract class EntiteVivante extends Entite{
         projectile.setForceX(vx);
         projectile.setForceY(vy);
 
-        // Position de départ = entité
-        projectile.setX(ex);
+        // Position de départ = entité (+/- 8 pour pas qu'il se la prenne (quand même pas ouf))
+        if(vx < 0){
+            projectile.setX(ex);
+        }else{
+            projectile.setX(ex+32);
+        }
         projectile.setY(ey);
 
-        // Ajouter aux listes
 
+        // Ajouter aux listes
         getJeu().getListe_projectiles().add(projectile);
         getJeu().getListe_projectilesObservable().add(projectile);
     }
@@ -150,6 +162,7 @@ public abstract class EntiteVivante extends Entite{
 
         // On marche dans la ligne du joueur au bloc cible
         int rayonLaser = (Math.max(Math.abs(dx), Math.abs(dy)) * 2); // le nombre d'étapes
+        System.out.println(rayonLaser);
         for (int i = 1; i < rayonLaser; i++) {
             double t = i / (double)rayonLaser;
             int xi = (int)Math.round(joueurX + dx * t);
@@ -171,7 +184,7 @@ public abstract class EntiteVivante extends Entite{
     }
 
     public void mettreAJour() {
-        if (estVivant()) {
+        if (getEstVivant()) {
 
             if (!getCollisionBas()) {
                 vitesseY += getGravité();
@@ -261,7 +274,7 @@ public abstract class EntiteVivante extends Entite{
 
         if(barreVie.getVie()-val <= 0){
             barreVie.setVie(0);
-            estVivant.set(false);
+            setEstVivant(false);
         }else{
             barreVie.setVie((int) (barreVie.getVie()-val));
         }
@@ -270,8 +283,11 @@ public abstract class EntiteVivante extends Entite{
     public BooleanProperty estVivantProperty() {
         return estVivant;
     }
-    public boolean estVivant(){
+    public boolean getEstVivant(){
         return estVivant.getValue();
+    }
+    public void setEstVivant(boolean estVivant){
+        this.estVivant.setValue(estVivant);
     }
 
 

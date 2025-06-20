@@ -3,7 +3,6 @@ package fr.iut.saeterraria.sae.Vue;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -48,11 +47,11 @@ public class SpriteJoueur extends CreateRessourceVisuel {
             unbindX();
             bindXActif = false;
         }
-        else if (bindXActif && joueur.xProperty().getValue() >= (192-1)*32){ //unbind droite
+        else if (bindXActif && joueur.xProperty().getValue() >= (192-21-21)*32){ //unbind droite
             unbindX();
             bindXActif = false;
         }
-        else if (!bindXActif && joueur.xProperty().getValue() > 21*32 && joueur.xProperty().getValue() < (192-1)*32) {
+        else if (!bindXActif && joueur.xProperty().getValue() > 21*32 && joueur.xProperty().getValue() < (192-21-21)*32) {
             bindX();
             bindXActif = true;
         }
@@ -61,16 +60,16 @@ public class SpriteJoueur extends CreateRessourceVisuel {
             unbindY();
             bindYActif = false;
         }
-        else if (bindYActif && joueur.yProperty().getValue()>=(80-8)*32){ //unbind bas 50 est le nombre max de ligne
+        else if (bindYActif && joueur.yProperty().getValue()>=(60-14-8)*32){ //unbind bas 50 est le nombre max de ligne
             unbindY();
             bindYActif = false;
         }
-        else if (!bindYActif && joueur.yProperty().getValue() > 14*32 && joueur.yProperty().getValue() < (80-8)*32) {
+        else if (!bindYActif && joueur.yProperty().getValue() > 14*32 && joueur.yProperty().getValue() < (60-14-8)*32) {
             bindY();
             bindYActif = true;
         }
         String etatActuel = "";
-        if (!joueur.estVivant()) {
+        if (!joueur.getEstVivant()) {
             etatActuel = "mort";
         } else if (joueur.getMarcheGauche()) {
             etatActuel = "gauche";
