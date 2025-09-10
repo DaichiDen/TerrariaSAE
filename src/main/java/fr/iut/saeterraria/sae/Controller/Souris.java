@@ -106,9 +106,12 @@ public class Souris implements EventHandler<MouseEvent> {
                     jeu.getJoueur().action(x1, y1, 2);
                 }
             }
+        }
+
             else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 if (jeu.getJoueur().estVivant()) {
                     if ((map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 15) && jeu.getJoueur().peutEtreAtteint(y, x, 2.5)) {
+                        System.out.println("pitié");
                         ouvrirInventaire();
                         switch (map.getCase(y, x)) {
                             case 12:
@@ -133,7 +136,7 @@ public class Souris implements EventHandler<MouseEvent> {
 
 
         }
-    }
+
     @FXML
     public void ouvrirInventaire() {
         Platform.runLater(() -> screenInventaire.requestFocus());
