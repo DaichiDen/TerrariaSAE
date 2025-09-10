@@ -259,6 +259,18 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(78),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(77),64);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(51),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(54),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(51),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(79),1);
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(80),64);
+
+
+
+
     }
 
     @FXML
