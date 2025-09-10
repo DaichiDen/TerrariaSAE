@@ -27,8 +27,8 @@
         private int mainCourante;
         private boolean enDash = false;
         private int dureeDash = 0;
-        private final int DUREE_DASH_MAX = 30; // environ 15 frames = 250ms à 60fps
-        private int vitesseDash = 5;
+        private final int DUREE_DASH_MAX = 100; // environ 15 frames = 250ms à 60fps
+        private int vitesseDash = 2;
         private int[] stockItem;
 
         private String directionDash = "droite";// 1 = droite, -1 = gauche
