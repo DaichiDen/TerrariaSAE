@@ -109,7 +109,7 @@ public class Souris implements EventHandler<MouseEvent> {
         }
 
             else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                if (jeu.getJoueur().estVivant()) {
+                if (jeu.getJoueur().getEstVivant()) {
                     if ((map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 15) && jeu.getJoueur().peutEtreAtteint(y, x, 2.5)) {
                         System.out.println("pitié");
                         ouvrirInventaire();
