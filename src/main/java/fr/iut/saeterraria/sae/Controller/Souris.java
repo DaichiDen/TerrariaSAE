@@ -3,6 +3,7 @@ package fr.iut.saeterraria.sae.Controller;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Objets.Armure;
+import fr.iut.saeterraria.sae.Modele.Personnages.Case;
 import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.application.Platform;
@@ -14,6 +15,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
+
+import java.util.ArrayList;
 
 public class Souris implements EventHandler<MouseEvent> {
     private Jeu jeu;
@@ -57,36 +60,32 @@ public class Souris implements EventHandler<MouseEvent> {
 
                     boolean oui = false;
                     int[] indice = new int[2];
-                    int[][] tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(80));
-                    for (int i = 0; i < tab.length; i++) {
-                        for (int j = 0; j < tab[i].length; j++) {
-                            if (tab[i][j] == 1) {
+                    ArrayList<Case> tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(80));
+                    for(Case c : tab) {
+                            if (c.getItem().getCodeObjet()!=0) {
                                 oui = true;
-                                indice[0] = i;
-                                indice[1] = j;
+                                indice[0] = c.getLigne();
+                                indice[1] = c.getColonne();
                             }
-                        }
                     }
                     if (oui) {
                         jeu.getJoueur().tirerProjectile(new Projectile("balle", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 5, "balle", jeu.getTaille1bloc(), jeu.getTaille1bloc()), x1, y1);
-                        jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
-                    }
+                        jeu.getJoueur().getInventaire().getInventaireJoueur().get(indice[0]*6+indice[1]).retireQuantite(1);                    }
                 } else if (jeu.getJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];
-                    int[][] tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(77));
-                    for (int i = 0; i < tab.length; i++) {
-                        for (int j = 0; j < tab[i].length; j++) {
-                            if (tab[i][j] == 1) {
+                    ArrayList<Case> tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(77));
+                    for(Case c : tab) {
+                        if (c.getItem().getCodeObjet()!=0) {
+
                                 oui = true;
-                                indice[0] = i;
-                                indice[1] = j;
+                            indice[0] = c.getLigne();
+                            indice[1] = c.getColonne();
                             }
-                        }
                     }
                     if (oui) {
                         jeu.getJoueur().tirerProjectile(new Projectile("Flèche", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 4, "Flèche", jeu.getTaille1bloc(), jeu.getTaille1bloc()), x1, y1);
-                        jeu.getJoueur().getInventaire().getInventaireJoueur()[indice[0]][indice[1]].retireQuantite(1);
+                        jeu.getJoueur().getInventaire().getInventaireJoueur().get(indice[0]*6+indice[1]).retireQuantite(1);
                     }
                 } else if (jeu.getJoueur().grappinEnMain()) {
                     System.out.println(x1 + "x1" + y1 + "y1");
@@ -124,16 +123,16 @@ public class Souris implements EventHandler<MouseEvent> {
                                 four.toFront();
                                 break;
                         }
-                    } else if (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet() >= 64 && jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet() <= 71) {
-                        jeu.getJoueur().equiper((Armure) (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem()));
+                    } else if (jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem().getCodeObjet() >= 64 && jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem().getCodeObjet() <= 71) {
+                        jeu.getJoueur().equiper((Armure) (jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem()));
                     } else {
                         jeu.getJoueur().poser(x, y);
                         this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
                         this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
 
                     }
-                } else if (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet() >= 64 && jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem().getCodeObjet() <= 71) {
-                    jeu.getJoueur().equiper((Armure) (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][jeu.getJoueur().getMainCourante()].getItem()));
+                } else if (jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem().getCodeObjet() >= 64 && jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem().getCodeObjet() <= 71) {
+                    jeu.getJoueur().equiper((Armure) (jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem()));
                 } else {
                     jeu.getJoueur().poser(x, y);
                     this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne

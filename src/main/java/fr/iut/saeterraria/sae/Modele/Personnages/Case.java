@@ -94,4 +94,7 @@ public class Case {
     public BooleanProperty changementProperty() {
         return this.changement;
     }
+
+
 }
+

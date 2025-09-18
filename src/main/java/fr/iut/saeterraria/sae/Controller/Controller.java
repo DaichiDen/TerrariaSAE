@@ -161,10 +161,8 @@ public class Controller implements Initializable {
         });
 
 
-        for (int i = 0; i < jeu.getJoueur().getInventaire().getInventaireJoueur().length; i++) {
-            for (int j = 0; j < jeu.getJoueur().getInventaire().getInventaireJoueur()[i].length; j++) {
-                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].changementProperty().addListener(new ListenerInventaire(inventaireVue, hotBarVue, i, j));
-            }
+        for (int i = 0; i < jeu.getJoueur().getInventaire().getInventaireJoueur().size(); i++) {
+                jeu.getJoueur().getInventaire().getInventaireJoueur().get(i).changementProperty().addListener(new ListenerInventaire(inventaireVue, hotBarVue, jeu.getJoueur().getInventaire().getInventaireJoueur().get(i).getLigne(), jeu.getJoueur().getInventaire().getInventaireJoueur().get(i).getColonne()));
         }
 
         for (int i = 0; i < caseRecetteSansBloc.getChildren().size(); i++) {
