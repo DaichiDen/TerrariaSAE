@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+//Etat final avant refactoring
 public class Terraria_ extends Application {
     @Override
     public void start(Stage stage) throws IOException {
