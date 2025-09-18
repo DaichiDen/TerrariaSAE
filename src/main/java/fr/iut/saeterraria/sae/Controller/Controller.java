@@ -231,8 +231,10 @@ public class Controller implements Initializable {
                         jeu.getJoueur().mettreAJour();
 
                         for (int i = 0; i < jeu.getMobs().size(); i++) {
+                            System.out.println("marchaige ? : "+jeu.getMobs().size());
                             jeu.getMobs().get(i).mettreAJour();
                         }
+                        System.out.println("Oui je marche moi");
 
                         jeu.màjProjectiles();
                     }
@@ -243,10 +245,13 @@ public class Controller implements Initializable {
                         PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
                         delay.setOnFinished(event -> {
                             vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
-                            initialisationJoueur();
-                            initialisationMobs();
+
+
                         });
                         delay.play();
+                        initialisationJoueur();
+                        déinitialisationMobs();
+                        initialisationMobs();
                     }
                 }
             }
@@ -308,50 +313,61 @@ public class Controller implements Initializable {
     }
 
 
-    public void initialisationMobs(){
-        int i = 0;
-        while(jeu.getMobs().size() > 0){
-            jeu.getMobs().get(i).setEstVivant(false);
-            i++;
-        }
-        Ennemi ogre = new Ogre("Pierre l'ogre vert",50,20,3000,0,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2,10,3);
-        Ennemi ogre2 = new Ogre("Pierre l'ogre vert pale",50,20,1340,1340,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2,10,3);
-        Ennemi ogre3 = new Ogre("Pierre l'ogre vert foncé",50,20,4962,1376,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2,10,3);
-        Ennemi ogre4 = new Ogre("Pierre l'ogre vert clair",50,20,3068,1600,0, jeu,4, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2,10,3);
-        Ennemi goblin = new Goblin("Caillou le gobelin vert",20,20,5000,0,0, jeu,2, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2, 10, 8);
-        Ennemi goblin2 = new Goblin("Caillou le gobelin vert pale",20,20,1456,1728,0, jeu,2, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2, 10, 8);
-        Ennemi goblin3 = new Goblin("Caillou le gobelin vert foncé",20,20,2959,1088,0, jeu,2, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2, 10, 8);
-        Ennemi goblin4 = new Goblin("Caillou le gobelin vert clair",20,20,5238,1760,0, jeu,2, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2, 10, 8);
-        Ennemi goblin5 = new Goblin("Caillou le gobelin vert émeraude",20,20,4544,1632,0, jeu,2, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2, 10, 8);
-        Ennemi mh = new MH("Monsieur Homps", 250, 20, 4500, 0, 5, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc()*2, 15, 8);
-        jeu.addEnnemis(ogre);
-        jeu.addEnnemis(ogre2);
-        jeu.addEnnemis(ogre3);
-        jeu.addEnnemis(ogre4);
-        jeu.addMobs(ogre);
-        jeu.addMobs(ogre2);
-        jeu.addMobs(ogre3);
-        jeu.addMobs(ogre4);
-        jeu.addEnnemis(goblin);
-        jeu.addEnnemis(goblin2);
-        jeu.addEnnemis(goblin3);
-        jeu.addEnnemis(goblin4);
-        jeu.addEnnemis(goblin5);
-        jeu.addMobs(goblin);
-        jeu.addMobs(goblin2);
-        jeu.addMobs(goblin3);
-        jeu.addMobs(goblin4);
-        jeu.addMobs(goblin5);
-        jeu.addEnnemis(mh);
-        jeu.addMobs(mh);
+    public void déinitialisationMobs() {
+        int i = jeu.getEnnemis().size()-1;
+        System.out.println(i + "iiiiiiiiiiii");
+        while (i >= 0) {
+            jeu.getEnnemis().get(i).decrementVie(jeu.getEnnemis().get(i).getBarreVie().getVieMax());
 
-    }
+            i--;
+        }
+     }
+        public void initialisationMobs () {
+            Ennemi ogre = new Ogre("Pierre l'ogre vert", 50, 20, 3000, 0, 0, jeu, 4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
+            Ennemi ogre2 = new Ogre("Pierre l'ogre vert pale", 50, 20, 1340, 1340, 0, jeu, 4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
+            Ennemi ogre3 = new Ogre("Pierre l'ogre vert foncé", 50, 20, 4962, 1376, 0, jeu, 4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
+            Ennemi ogre4 = new Ogre("Pierre l'ogre vert clair", 50, 20, 3068, 1600, 0, jeu, 4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
+            Ennemi goblin = new Goblin("Caillou le gobelin vert", 20, 20, 5000, 0, 0, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
+            Ennemi goblin2 = new Goblin("Caillou le gobelin vert pale", 20, 20, 1456, 1728, 0, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
+            Ennemi goblin3 = new Goblin("Caillou le gobelin vert foncé", 20, 20, 2959, 1088, 0, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
+            Ennemi goblin4 = new Goblin("Caillou le gobelin vert clair", 20, 20, 5238, 1760, 0, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
+            Ennemi goblin5 = new Goblin("Caillou le gobelin vert émeraude", 20, 20, 4544, 1632, 0, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
+            Ennemi mh = new MH("Monsieur Homps", 250, 20, 4500, 0, 5, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 15, 8);
+
+            jeu.addEnnemis(ogre);
+            jeu.addEnnemis(ogre2);
+            jeu.addEnnemis(ogre3);
+            jeu.addEnnemis(ogre4);
+            jeu.addMobs(ogre);
+            jeu.addMobs(ogre2);
+            jeu.addMobs(ogre3);
+            jeu.addMobs(ogre4);
+
+            jeu.addEnnemis(goblin);
+            jeu.addEnnemis(goblin2);
+            jeu.addEnnemis(goblin3);
+            jeu.addEnnemis(goblin4);
+            jeu.addEnnemis(goblin5);
+            jeu.addMobs(goblin);
+            jeu.addMobs(goblin2);
+            jeu.addMobs(goblin3);
+            jeu.addMobs(goblin4);
+            jeu.addMobs(goblin5);
+
+            jeu.addEnnemis(mh);
+            jeu.addMobs(mh);
+
+        }
+
+
+
+
 
     public void initialisationJoueur(){
         jeu.getJoueur().getBarreVie().setVie(jeu.getJoueur().getBarreVie().getVieMax());
         jeu.getJoueur().setEstVivant(true);
         jeu.getJoueur().setX(20*32);
-        jeu.getJoueur().setY(14*32);
+        jeu.getJoueur().setY(0*32);
     }
 }
 

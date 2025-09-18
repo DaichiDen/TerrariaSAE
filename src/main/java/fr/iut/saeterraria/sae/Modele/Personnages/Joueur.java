@@ -27,8 +27,8 @@
         private int mainCourante;
         private boolean enDash = false;
         private int dureeDash = 0;
-        private final int DUREE_DASH_MAX = 100; // environ 15 frames = 250ms à 60fps
-        private int vitesseDash = 2;
+        private final int DUREE_DASH_MAX = 20; // environ 15 frames = 250ms à 60fps
+        private int vitesseDash = 5;
         private int[] stockItem;
 
         private String directionDash = "droite";// 1 = droite, -1 = gauche
@@ -121,27 +121,33 @@
                 setDernierPos("droite");
             }
             if (enDash) {
-                Rectangle2D hitboxJoueur = new Rectangle2D(getX(),getY(), getJeu().getTaille1bloc(),getJeu().getTaille1bloc()*2);
-                for(int i=0;i<super.getJeu().getEnnemis().size();i++){
-                    Rectangle2D hitboxEnnemi = new Rectangle2D(super.getJeu().getEnnemis().get(i).getX(),super.getJeu().getEnnemis().get(i).getY(),getJeu().getTaille1bloc(),getJeu().getTaille1bloc()*2);
-                    if(hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(super.getJeu().getEnnemis().get(i))){
-                        ennemis_touchées_dash.add(super.getJeu().getEnnemis().get(i));
-                        super.getJeu().getEnnemis().get(i).decrementVie(10);
-                    }
+                Rectangle2D hitboxJoueur = new Rectangle2D(getX(), getY(), getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
 
-                    if (directionDash.equals("droite")) {
-                        this.setX(this.getX() + vitesseDash);
-                    } else {
-                        this.setX(this.getX() - vitesseDash);
-                    }
-                    dureeDash--;
-                    if (dureeDash <= 0) {
-                        enDash = false;
+                for (int i = 0; i < super.getJeu().getEnnemis().size(); i++) {
+                    Ennemi e = super.getJeu().getEnnemis().get(i);
+                    Rectangle2D hitboxEnnemi = new Rectangle2D(e.getX(), e.getY(), getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
+
+                    if (hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(e)) {
+                        ennemis_touchées_dash.add(e);
+                        e.decrementVie(10);
                     }
                 }
 
+                // Mouvement : une seule fois par frame, hors de la boucle ennemis
+                if (directionDash.equals("droite")) {
+                    this.setX(this.getX() + vitesseDash);
+                } else {
+                    this.setX(this.getX() - vitesseDash);
+                }
+
+                dureeDash--;
+                if (dureeDash <= 0) {
+                    enDash = false;
+                }
             }
+
             super.mettreAJour();
+            System.out.println(getVitesseX());
 
             // appel normal sinon
 

@@ -61,9 +61,10 @@ public class ObsEnnemi implements ListChangeListener<EntiteVivante> {
                             sprite.setFitHeight(64);
                         }
 
-                        // Positionner au bon endroit, ex. :
+                        // Positionner au bon endroit la barre de vie, ex. :
                         sprite.translateXProperty().bind(mobAjoute.xProperty());
                         sprite.translateYProperty().bind(mobAjoute.yProperty());
+
                         ProgressBar progressBar = new ProgressBar();
                         progressBar.progressProperty().bind(mobAjoute.getBarreVie().vieProperty().divide(mobAjoute.getBarreVie().getVieMax()));
                         progressBar.translateXProperty().bind(mobAjoute.xProperty().subtract(20));
