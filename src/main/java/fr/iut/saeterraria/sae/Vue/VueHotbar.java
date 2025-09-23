@@ -22,13 +22,13 @@ public class VueHotbar extends SpriteItem {
 
         // Affiche l'hotbar
         for (int j = 0; j < hotBar.getColumnCount(); j++) {
-            if ((jeu.getJoueur().getInventaire().getInventaireJoueur()[0][j].getItem().getCodeObjet() != 0)) {
+            if ((jeu.getJoueur().getInventaire().getCase(0,j).getItem().getCodeObjet() != 0)) {
 
-                String URL = super.getHmap().get((jeu.getJoueur().getInventaire().getInventaireJoueur())[0][j].getItem().getCodeObjet());
+                String URL = super.getHmap().get((jeu.getJoueur().getInventaire().getCase(0,j).getItem().getCodeObjet()));
 
 
 
-                int quantite = (jeu.getJoueur().getInventaire().getInventaireJoueur())[0][j].getQuantite();
+                int quantite = (jeu.getJoueur().getInventaire().getCase(0,j).getQuantite());
                 afficheItemQuantite(URL, quantite,j);
             } else {
                 structureHotBar(j,false);
@@ -79,11 +79,11 @@ public class VueHotbar extends SpriteItem {
             }
         }
         hotBar.getChildren().remove(caseInventaire);
-        if (jeu.getJoueur().getInventaire().getInventaireJoueur()[0][colonne].getItem().getCodeObjet() != 0) { // Si la case a un item
+        if (jeu.getJoueur().getInventaire().getCase(0,colonne).getItem().getCodeObjet() != 0) { // Si la case a un item
 
-            String URL = super.getHmap().get((jeu.getJoueur().getInventaire().getInventaireJoueur())[0][colonne].getItem().getCodeObjet());
+            String URL = super.getHmap().get((jeu.getJoueur().getInventaire().getCase(0,colonne).getItem().getCodeObjet()));
 
-            int quantite = jeu.getJoueur().getInventaire().getInventaireJoueur()[0][colonne].getQuantite();
+            int quantite = jeu.getJoueur().getInventaire().getCase(0,colonne).getQuantite();
                 afficheItemQuantite(URL, quantite,colonne);
         }
         else if (jeu.getJoueur().getMainCourante() == colonne) {
