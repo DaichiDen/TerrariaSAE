@@ -42,7 +42,7 @@
 
             super(nom, 20, 100, 20, 20*32, 14*32, 1, 10, jeu,1, tailleL, tailleH, rangeVue, rangeAttaque);
             this.equipement = new int[7];
-            this.inventaire = new Inventaire();
+            this.inventaire = new Inventaire(7,6);
             this.pierreTp = pierreTp;
             this.mainCourante = 0;
             this.xPrec = super.getX()/32;

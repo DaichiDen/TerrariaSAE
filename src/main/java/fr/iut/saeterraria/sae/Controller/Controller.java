@@ -191,10 +191,10 @@ public class Controller implements Initializable {
             });
         }
 
-        setupSpinner(ligneCase1, 1, 6, 1);
-        setupSpinner(colonneCase1, 1, 7, 1);
-        setupSpinner(ligneCase2, 1, 6, 1);
-        setupSpinner(colonneCase2, 1, 7, 1);
+        setupSpinner(colonneCase1, 1, 6, 1);
+        setupSpinner(ligneCase1, 1, 7, 1);
+        setupSpinner(colonneCase2, 1, 6, 1);
+        setupSpinner(ligneCase2, 1, 7, 1);
 
 
         // BiblioSon.play(1);
@@ -257,6 +257,7 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(20),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(78),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(77),64);
