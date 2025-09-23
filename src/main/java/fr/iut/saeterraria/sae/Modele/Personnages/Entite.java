@@ -200,65 +200,67 @@ public abstract class Entite {
         return jeu;
     }
 
+    public boolean estTraversable(int x,int y){
+        boolean peutEtreTraversé = false;
+
+        if(jeu.getCarte().getCase(x, y) != 0 && jeu.getCarte().getCase(x, y) != 10 && jeu.getCarte().getCase(x, y) != 18){
+            peutEtreTraversé = true;
+        }
+        return peutEtreTraversé;
+    }
+
+    public boolean estDansMap(int x,int y){
+        boolean estDansLesLimites = false;
+        if((x >= 0 && x < this.jeu.getCarte().getLigne()) && (y >= 0 && y < jeu.getCarte().getColonne())){
+            estDansLesLimites=true;
+        }
+        return estDansLesLimites;
+    }
+
 
     public boolean collisionVerticale() { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
-
         setTailleH(tailleH);
         setTailleL(tailleL);
-
         Rectangle2D hitboxEntite = getHitbox();
-
-        int caseX = (int) (getX() / jeu.getTaille1bloc());
-        int caseY = (int) (getY() / jeu.getTaille1bloc());
-
+        int caseX =(getX() / jeu.getTaille1bloc());
+        int caseY =(getY() / jeu.getTaille1bloc());
         //boucle sur les 4 blocs autour du joueur , i+1 i-1 ,j+1 j-1
         for (int i = caseY - 1; i <= caseY + 2; i++) { // +2 pour la taille du personnage (2 blocs de hauteur)
             for (int j = caseX - 1; j <= caseX + 1; j++) {
-
-                if (i >= 0 && i < this.jeu.getCarte().getLigne() && j >= 0 && j < jeu.getCarte().getColonne()) {
-                    if (jeu.getCarte().getCase(i, j) != 0 && jeu.getCarte().getCase(i, j) != 10 && jeu.getCarte().getCase(i, j) != 18 ) { // si le bloc n'est pas du ciel
-
+                if (estDansMap(i,j)) {
+                    if (estTraversable(i,j)) { 
                         xBloc = jeu.getCarte().getCoordonnéesX(j);
                         yBloc = jeu.getCarte().getCoordonnéesY(i);
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, jeu.getTaille1bloc(), jeu.getTaille1bloc()); // création d'un rectangle de hitbox pour le bloc en cours
                         if (hitboxEntite.intersects(hitboxBloc)) {// si le rectangle du joueur se superpose au carré du bloc alors :
                             collisionBas = true;
                             return true;
-
                         }
                     }
                 }
             }
-            }
+        }
 
         return false;
     }
 
     public boolean collisionHorizontale() {
-
         Rectangle2D hitboxEntite = getHitbox();
-
         setTailleH(tailleH);
         setTailleL(tailleL);
-
-        int caseX = (int) (this.getX() / jeu.getTaille1bloc());
-        int caseY = (int) (this.getY() / jeu.getTaille1bloc());
-
-
+        int caseX =  (this.getX() / jeu.getTaille1bloc());
+        int caseY = (this.getY() / jeu.getTaille1bloc());
         for (int i = caseY ; i <= caseY + 2; i++) {
             for (int j = caseX - 1; j <= caseX + 1; j++) {
-                if (i >= 0 && i < jeu.getCarte().getLigne() && j >= 0 && j < jeu.getCarte().getColonne()) {
-                    if (jeu.getCarte().getCase(i, j) != 0 && jeu.getCarte().getCase(i, j) != 10 && jeu.getCarte().getCase(i, j) != 18 ) {
-
+                if (estDansMap(i,j)) {
+                    if (estTraversable(i,j)) {
                         xBloc = jeu.getCarte().getCoordonnéesX(j);
                         yBloc = jeu.getCarte().getCoordonnéesY(i);
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, tailleL, tailleH);
 
                         if (hitboxEntite.intersects(hitboxBloc)) {
-
                             return true;
-
                         }
                     }
                 }

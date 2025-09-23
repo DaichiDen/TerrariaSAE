@@ -162,17 +162,24 @@ public abstract class EntiteVivante extends Entite{
 
         // On marche dans la ligne du joueur au bloc cible
         int rayonLaser = (Math.max(Math.abs(dx), Math.abs(dy)) * 2); // le nombre d'étapes
-        System.out.println(rayonLaser);
         for (int i = 1; i < rayonLaser; i++) {
             double t = i / (double)rayonLaser;
             int xi = (int)Math.round(joueurX + dx * t);
             int yi = (int)Math.round(joueurY + dy * t);
 
-            if ((xi != blocX || yi != blocY) && getJeu().getCarte().getCase(yi, xi) != 0 && getJeu().getCarte().getCase(yi, xi) != 10 && getJeu().getCarte().getCase(yi, xi) != 18) { // Si bloc devant (obstacle)
+            if ((xi != blocX || yi != blocY) && estTraversable(xi,yi)) { // Si bloc devant (obstacle)
                 return false;
             }
         }
         return true;
+    }
+    public int créerLaserDDA(){
+        int joueurX = (this.getX() + 16) / 32;
+        int joueurY = (this.getY() + 16) / 32;
+
+        int dx = blocX - joueurX;
+        int dy = blocY - joueurY;
+
     }
     public void setVitesseX(int val){
         this.vitesseX=val;
