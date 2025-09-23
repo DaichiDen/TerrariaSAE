@@ -78,7 +78,7 @@ public class Inventaire {
         int compteur = 0;
         while (compteur<planInventaire.size() && !placer) {
             if (planInventaire.get(compteur).comparerId(item.getCodeObjet())) { // Si Item déjà présent dans l'inventaire
-                if (comparerAjoutItemAMaxStack(getNumeroCase(planInventaire.get(compteur)),reste))  { // Si l'ajout de l'item va pas dépasser la limite de stack
+                if (AjoutItemDepassePasMaxStack(getNumeroCase(planInventaire.get(compteur)),reste))  { // Si l'ajout de l'item va pas dépasser la limite de stack
                     this.inventaireJoueur.get(getNumeroCase(planInventaire.get(compteur))).ajouteQuantite(reste);
                     placer = true;
                 }
@@ -102,7 +102,7 @@ public class Inventaire {
         while (compteur2<planInventaire.size() && !placer) {
             if (planInventaire.get(compteur2).getItem().getCodeObjet()==0) {  // Si la case est vide
                 this.inventaireJoueur.get(getNumeroCase(planInventaire.get(compteur2))).ajouterItem(item);
-                if (comparerAjoutItemAMaxStack(getNumeroCase(planInventaire.get(compteur2)),reste)) { // Si l'ajout de l'item va pas dépasser la limite de stack
+                if (AjoutItemDepassePasMaxStack(getNumeroCase(planInventaire.get(compteur2)),reste)) { // Si l'ajout de l'item va pas dépasser la limite de stack
                     this.inventaireJoueur.get(planInventaire.get(compteur2).getLigne()*6+planInventaire.get(compteur2).getColonne()).ajouteQuantite(reste);
                     placer = true;
                 }
@@ -117,7 +117,7 @@ public class Inventaire {
         return placer;
     }
 
-    public boolean comparerAjoutItemAMaxStack(int numeroCase, int reste) {
+    public boolean AjoutItemDepassePasMaxStack(int numeroCase, int reste) {
         return this.inventaireJoueur.get(numeroCase).getQuantite()+reste <= this.inventaireJoueur.get(numeroCase).getMaxStack();
     }
 

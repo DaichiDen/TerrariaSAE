@@ -11,6 +11,7 @@ import java.util.List;
 public abstract class Ennemi extends EntiteVivante {
     private long dernièreAttaque=60;
     private long cooldown=60;
+    private ComportementEnnemi comportementEnnemi;
 
     private ArrayList<Item> listDrops;
 
@@ -18,7 +19,6 @@ public abstract class Ennemi extends EntiteVivante {
 
         super(nom,vieMax,  energieMax, 20, x, y, def, 5,jeu,attaque, tailleL, tailleH, rangeVue,rangeAttaque );
         listDrops = new ArrayList<>();
-
     }
 
     public ArrayList<Item> getListDrops() {
@@ -41,62 +41,13 @@ public abstract class Ennemi extends EntiteVivante {
     @Override
     public void mettreAJour(){
         if(!detecterJoueur()){
-            comportementPasVu();
+            comportementEnnemi = new ComportementPasVu();
+            comportementEnnemi.agir(this);
             super.mettreAJour();
         }else{
-            comportementVu();
+            comportementEnnemi = new ComportementVu();
+            comportementEnnemi.agir(this);
             super.mettreAJour();
-
-        }
-
-    }
-
-    public void comportementVu(){
-        Algo_A_Star pathfinding = new Algo_A_Star(super.getJeu().getCarte());
-        List<Node> path = pathfinding.trouverchemin(this.getX()/32, this.getY()/32, super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32);
-
-
-        if (!path.isEmpty() && path.size()>1) {
-            Node nextStep = path.get(1); // [0] = position actuelle
-            int dx = nextStep.x - (this.getX() / 32);
-            int dy = nextStep.y - (this.getY() / 32);
-
-            if (dx < 0) {
-                setMarcheGauche(true);
-                setMarcheDroite(false);
-            } else if (dx > 0) {
-                setMarcheGauche(false);
-                setMarcheDroite(true);
-            }
-            if(dy < 0) {
-                this.sauter();
-            }
-
-            if(peutEtreAtteint(super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32, getRangeVue())){
-                action(super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY());
-            }
-
-            // Tu peux gérer dy si les ennemis sautent ou volent
-        }
-        else{
-            setMarcheGauche(false);
-            setMarcheDroite(false);
-            action(super.getJeu().getJoueur().getX(),super.getJeu().getJoueur().getY());
-
-        }
-    }
-
-    public void comportementPasVu(){
-        int aleaComp = (int) (Math.random()*11);
-        if(aleaComp < 3){
-            setMarcheDroite(true);
-            setMarcheGauche(false);
-        } else if (aleaComp < 6) {
-            setMarcheDroite(false);
-            setMarcheGauche(true);
-        } else if (aleaComp < 9) {
-            setMarcheDroite(false);
-            setMarcheGauche(false);
 
         }
 
