@@ -269,8 +269,6 @@ public class Controller implements Initializable {
         jeu.getJoueur().ajouterItem(jeu.getItems().get(80),64);
 
 
-
-
     }
 
     @FXML
