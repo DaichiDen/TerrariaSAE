@@ -1,7 +1,6 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Objets.Arme.Distance;
 import javafx.beans.property.*;
 
 public abstract class EntiteVivante extends Entite{
@@ -61,59 +60,63 @@ public abstract class EntiteVivante extends Entite{
 
     public abstract void action(int x, int y);
 
-    public void bloquéVertical(int tailleL, int tailleH) {
+    public void testerVertical() {
         if(collisionVerticale()){
-            int blocHaut = getyBloc();
-            int blocBas = getyBloc() + getJeu().getTaille1bloc();
-            int joueurHaut = getY();
-            int joueurBas = getY() + (getJeu().getTaille1bloc() * 2);
-
-            if (joueurBas >= blocHaut && vitesseY >= 0 && joueurHaut < blocHaut) { //vitesseY >=0 vérifie si le joueur est entrain de tomber
-                setCollisionBas(true);
-                enSaut = false;
-                vitesseY = 0;
-                setY(blocHaut - (getJeu().getTaille1bloc() * 2));
-            } else if (joueurHaut <= blocBas && vitesseY < 0 && joueurBas > blocBas) {
-                vitesseY = 0;
-                setY(blocBas);
-            }
-            if (super.getJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 8 ) {
-
-                this.decrementVie(1);
-            }
+            gérerCollisionVerticale();
         }
     }
-    public void bloquéHorizontal(int tailleL,int tailleH) {
-        boolean collisionDroite = false;
-        boolean collisionGauche = false;
+    public void gérerCollisionVerticale(){
+        int blocHaut = getyBloc();
+        int blocBas = getyBloc() + getJeu().getTaille1bloc();
+        int joueurHaut = getY();
+        int joueurBas = getY() + (getJeu().getTaille1bloc() * 2);
+        appliquerCollisionVertical(blocHaut,blocBas,joueurBas,joueurHaut);
+        if (super.getJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 8 ) {
+            this.decrementVie(1);
+        }
+    }
+    public void appliquerCollisionVertical(int blocHaut, int blocBas, int joueurBas, int joueurHaut){
+        if (joueurBas >= blocHaut && vitesseY >= 0 && joueurHaut < blocHaut) {
+            setCollisionBas(true);
+            enSaut = false;
+            vitesseY = 0;
+            setY(blocHaut - (getJeu().getTaille1bloc() * 2));
+        } else if (joueurHaut <= blocBas && vitesseY < 0 && joueurBas > blocBas) {
+            vitesseY = 0;
+            setY(blocBas);
+        }
+    }
 
+    public void testerHorizontal() {
         if (collisionHorizontale()) {
-            // Bords du bloc
-            int blocGauche = getxBloc();
-            int blocDroite = getxBloc() + super.getJeu().getTaille1bloc();
-            // Bords du joueur
-            int joueurGauche = this.getX();
-            int joueurDroite = this.getX() + super.getJeu().getTaille1bloc();
-
-            if (joueurDroite > blocGauche && joueurGauche < blocGauche) {
-                // Collision côté droit du joueur contre gauche du bloc
-                collisionDroite = true;
-                // Repositionner le joueur pile à gauche du bloc
-                this.setX(blocGauche - super.getJeu().getTaille1bloc());
-            } else if (joueurGauche < blocDroite && joueurDroite > blocDroite) {
-                // Collision côté gauche du joueur contre droite du bloc
-                collisionGauche = true;
-                // Repositionner le joueur pile à droite du bloc
-                this.setX(blocDroite);
-            }
-
+            gérerCollisionHorizontale();
         }
-        if (collisionDroite) setMarcheDroite(false);
-        if (collisionGauche) setMarcheGauche(false);
+    }
+    public void gérerCollisionHorizontale(){
+        // Bords du bloc
+        int blocGauche = getxBloc();
+        int blocDroite = getxBloc() + super.getJeu().getTaille1bloc();
+        // Bords du joueur
+        int joueurGauche = this.getX();
+        int joueurDroite = this.getX() + super.getJeu().getTaille1bloc();
+        appliquerCollisionHorizontale(blocGauche, blocDroite, joueurGauche, joueurDroite);
+    }
+    public void appliquerCollisionHorizontale(int blocGauche, int blocDroite, int joueurGauche, int joueurDroite){
+        if (joueurDroite > blocGauche && joueurGauche < blocGauche) {
+            // Collision côté droit du joueur contre gauche du bloc
+            setMarcheDroite(false);
+            // Repositionner le joueur pile à gauche du bloc
+            this.setX(blocGauche - super.getJeu().getTaille1bloc());
+        } else if (joueurGauche < blocDroite && joueurDroite > blocDroite) {
+            // Collision côté gauche du joueur contre droite du bloc
+            setMarcheGauche(false);
+            // Repositionner le joueur pile à droite du bloc
+            this.setX(blocDroite);
+        }
     }
 
-    public void tirerProjectile(Projectile projectile, int cibleX, int cibleY) {
 
+    public void initialiserProjectile(Projectile projectile, int cibleX, int cibleY) {
         // Position de l'entité
         int ex = this.getX();
         int ey = this.getY();
@@ -132,11 +135,14 @@ public abstract class EntiteVivante extends Entite{
         int vx = (int) (((float) dx / distance) * puissance);
         int vy = (int) (((float) dy / distance) * puissance);
 
+        ajouterProjectile(projectile, vx, vy, ex, ey);
+    }
+    public void ajouterProjectile(Projectile projectile, int vx, int vy, int ex, int ey){
         // Appliquer la vitesse initiale au projectile
         projectile.setForceX(vx);
         projectile.setForceY(vy);
 
-        // Position de départ = entité (+/- 8 pour pas qu'il se la prenne (quand même pas ouf))
+        // Position de départ = entité
         if(vx < 0){
             projectile.setX(ex);
         }else{
@@ -144,11 +150,12 @@ public abstract class EntiteVivante extends Entite{
         }
         projectile.setY(ey);
 
-
         // Ajouter aux listes
         getJeu().getListe_projectiles().add(projectile);
         getJeu().getListe_projectilesObservable().add(projectile);
     }
+
+
 
     public boolean peutEtreAtteint(int blocX, int blocY, double val) {
         int joueurX = (this.getX() + 16) / 32;
@@ -185,16 +192,7 @@ public abstract class EntiteVivante extends Entite{
 
     public void mettreAJour() {
         if (getEstVivant()) {
-
-            if (!getCollisionBas()) {
-                vitesseY += getGravité();
-            }
-            setY(getY() + vitesseY);
-            bloquéVertical(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
-
-            // Appliquer gravité
-
-            // Appliquer déplacement vertical, ensuite vérification des collisions, si le setY l'a fait rentrer dans qqch, alors le setY de la méthode collisionVertical le fait rester en dehors du bloc
+            miseAJourGravité();  // Appliquer gravité
 
             // inertie
             boolean auSol = getCollisionBas();
@@ -213,39 +211,48 @@ public abstract class EntiteVivante extends Entite{
                 friction = getFriction_air();
             }
 
-            // Gestion de l'accélération
-            if (getMarcheDroite() && !getMarcheGauche()) {
-                vitesseX += accel;
-            } else if (getMarcheGauche() && !getMarcheDroite()) {
-                vitesseX -= accel;
-            } else {
-                // Si pas de touche appuyée on applique la friction
-                if (vitesseX > 0) {
-                    vitesseX = Math.max(0, vitesseX - friction); // Réduit la vitesseX par la friction et empêche un dépassement de zéro vers le négatif.
-                } else if (vitesseX < 0) {
-                    vitesseX = Math.min(0, vitesseX + friction); // pareil mais dans l'autre sens
-                }
-            }
-
-            // Limiter la vitesse avec l'inertie
-            if (vitesseX > getVitesseMax()) vitesseX = getVitesseMax();
-            if (vitesseX < -getVitesseMax()) vitesseX = -getVitesseMax();
-
-            // Appliquer le déplacement
-            setX(getX() + vitesseX);
-            bloquéHorizontal(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
-
+            miseAJourVitesseHorizontale(accel, friction);  // Appliquer déplacement
 
         } else {
-            if (!getCollisionBas()) {
-                vitesseY += getGravité();
-            }
-            setY(getY() + vitesseY);
-            bloquéVertical(getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
+            miseAJourGravité();  // Appliquer gravité
         }
-
         resterInBounds();
     }
+
+    public void miseAJourGravité(){
+        if (!getCollisionBas()) {
+            vitesseY += getGravité();
+        }
+        setY(getY() + vitesseY);
+        testerVertical();
+    }
+
+    public void miseAJourVitesseHorizontale(int accel, int friction){
+        // Gestion de l'accélération
+        if (getMarcheDroite() && !getMarcheGauche()) {
+            vitesseX += accel;
+        } else if (getMarcheGauche() && !getMarcheDroite()) {
+            vitesseX -= accel;
+        } else {
+            // Si pas de touche appuyée on applique la friction
+            if (vitesseX > 0) {
+                vitesseX = Math.max(0, vitesseX - friction); // Réduit la vitesseX par la friction et empêche un dépassement de zéro vers le négatif.
+            } else if (vitesseX < 0) {
+                vitesseX = Math.min(0, vitesseX + friction); // pareil mais dans l'autre sens
+            }
+        }
+        appliquerMouvementHorizontal();
+    }
+
+    public void appliquerMouvementHorizontal(){
+        // Limiter la vitesse avec l'inertie
+        if (vitesseX > getVitesseMax()) vitesseX = getVitesseMax();
+        if (vitesseX < -getVitesseMax()) vitesseX = -getVitesseMax();
+        // Appliquer le déplacement
+        setX(getX() + vitesseX);
+        testerHorizontal();
+    }
+
 
     // Gestion du nom
     public StringProperty getNomProperty(){
@@ -322,14 +329,11 @@ public abstract class EntiteVivante extends Entite{
 
     public void resterInBounds(){
         if(this.getX()<=0){
-
             setX(0);
-
         }
         if(this.getY()<=0){
             setY(0);
         }
     }
-
 }
 

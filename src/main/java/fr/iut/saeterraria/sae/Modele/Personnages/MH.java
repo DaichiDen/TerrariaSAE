@@ -17,7 +17,7 @@ public class MH extends Ennemi{
                     getJeu().getJoueur().decrementVie(getAttaque());
                     System.out.println("Mandale");
                 } else {
-                    tirerProjectile(new Projectile("bdf", getJeu(), this.getX(), this.getY(), getAttaque(), "boule_de_feu", 32, 32), super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY());
+                    initialiserProjectile(new Projectile("bdf", getJeu(), this.getX(), this.getY(), getAttaque(), "boule_de_feu", 32, 32), super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY());
                     System.out.println("BDF");
                 }
             }
