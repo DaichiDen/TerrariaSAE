@@ -70,10 +70,6 @@ public class Souris implements EventHandler<MouseEvent> {
                     }
                     if (oui) {
 
-
-
-
-
                         jeu.getJoueur().initialiserProjectile(new Projectile("balle", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 5, "balle", jeu.getTaille1bloc(), jeu.getTaille1bloc()), x1, y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur().get(indice[0]*6+indice[1]).retireQuantite(1);
                     }
@@ -91,9 +87,6 @@ public class Souris implements EventHandler<MouseEvent> {
                             }
                     }
                     if (oui) {
-
-
-
 
                         jeu.getJoueur().initialiserProjectile(new Projectile("Flèche", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 4, "Flèche", jeu.getTaille1bloc(), jeu.getTaille1bloc()), x1, y1);
                         jeu.getJoueur().getInventaire().getInventaireJoueur().get(indice[0]*6+indice[1]).retireQuantite(1);
@@ -121,7 +114,9 @@ public class Souris implements EventHandler<MouseEvent> {
 
             else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 if (jeu.getJoueur().getEstVivant()) {
-                    if ((map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 15) && jeu.getJoueur().peutEtreAtteint(y, x, 2.5)) {
+                    System.out.println("Bloc de craft ? : " +  (map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 15));
+                    System.out.println("Bloc de craft atteignable? : "+ jeu.getJoueur().peutEtreAtteint(x, y, 2.5));
+                    if ( (map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 15) && jeu.getJoueur().peutEtreAtteint(x, y, 2.5)) {
                         System.out.println("pitié");
                         ouvrirInventaire();
                         switch (map.getCase(y, x)) {
