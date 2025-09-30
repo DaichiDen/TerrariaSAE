@@ -147,7 +147,6 @@
             }
 
             super.mettreAJour();
-            System.out.println(getVitesseX());
 
             // appel normal sinon
 
@@ -181,7 +180,6 @@
 
         @Override
         public void action(int x, int y) {
-            System.out.println("x: "+getX()+", y: "+getY());
             for (EntiteVivante e : super.getJeu().getEnnemis()) {
 
                 Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(), getJeu().getTaille1bloc(), (getJeu().getTaille1bloc()) * 2);

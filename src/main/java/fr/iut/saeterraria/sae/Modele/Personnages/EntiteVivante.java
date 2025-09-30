@@ -198,7 +198,6 @@ public abstract class EntiteVivante extends Entite{
         boolean valreturn=true;
 
         double distance = Math.sqrt(calculDX(blocX) * calculDX(blocX) + calculDY(blocY) * calculDY(blocY));
-        System.out.println(distance);
         if (distance > val)
             valreturn=false;
 
