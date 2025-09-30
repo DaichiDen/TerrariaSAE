@@ -52,18 +52,8 @@
 
         }
 
-        public void incrementeMainCourante() {
-            if (this.mainCourante == 6) {
-                setMainCourante(0);
-            } else {
-                this.mainCourante++;
-            }
-        }
         public boolean isTimeStop(){
             return timeStop.getValue();
-        }
-        public BooleanProperty timeStopProperty() {
-            return timeStop;
         }
         public void setTimeStop(boolean timeStop) {
             this.timeStop.setValue(timeStop);
@@ -71,9 +61,6 @@
 
         public void setDernierPos(String val){
             this.dernierPos=val;
-        }
-        public String getDernierPos(){
-            return this.dernierPos;
         }
 
         public void setMainCourante(int mainCourante) {
@@ -200,82 +187,79 @@
 
         // Vérifie si la quantité d'items nécessaires sont suffisants pour construire, puis craft l'item si les ressources sont suffisantes
         public void craftItem(Item item) {
-            int[][] necessaire = new int[2][item.getRecette().size()];//Besoin pour faire le craft
-            // Liste les items et leur quantité pour le craft
+            int[][] necessaire = getRecette(item);
+
+            ArrayList<Case> position = new ArrayList<>();
+            boolean craftableFin = verifieQuantiteSuffisante(necessaire,position, item);
+            if (craftableFin) {
+                craftFin(item,necessaire,position);
+            }
+            else {
+                System.out.println("Craft non possible!");
+            }
+        }
+
+        public int[][] getRecette(Item item) {
+            int[][] necessaire = new int[2][item.getRecette().size()];
             for (int i = 0; i < necessaire[0].length; i++) {
                 necessaire[0][i] = item.getRecette().get(i).getItem().getCodeObjet();
                 necessaire[1][i] = item.getRecette().get(i).getQuantite();
             }
+            return necessaire;
+        }
 
-            boolean[] craftable = new boolean[necessaire[0].length];//Indique si l'objet est en quantité suffisante
+        public boolean verifieQuantiteSuffisante(int[][] necessaire, ArrayList<Case> position, Item item) {
             boolean craftableFin = true;
-            for (int j = 0; j < craftable.length; j++) {
-                craftable[j] = false;
-            }
-
-            ArrayList<Case> position = new ArrayList<>();
+            boolean[] craftable = new boolean[necessaire[0].length] ;//Indique si l'objet est en quantité suffisante
             int quantite;
-            // Vérifie si les quantités sont suffisantes côté joueur
-            for (int i = 0; i < craftable.length; i++) {
-                ArrayList<Case> tabResult;
-                craftableFin = true;
-                tabResult = inventaire.findItem(item.getRecette().get(i).getItem());
+            int i = 0;
+            while ( craftableFin && i < craftable.length) { // Vérifie si les quantités sont suffisantes côté joueur
+                ArrayList<Case> tabResult = inventaire.findItem(item.getRecette().get(i).getItem());
                 if (tabResult != null) {
                     quantite = 0;
                     int o = 0;
                     while (!craftable[i] && o < tabResult.size()) {
-                            if (tabResult.get(o).getItem().getCodeObjet()!=0) {
-                                quantite = quantite + inventaire.getInventaireJoueur().get(o).getQuantite();
-                                position.add(inventaire.getInventaireJoueur().get(o));
-                            }
-                            if (quantite >= necessaire[1][i]) {
-                                craftable[i] = true;
-                            }
+                        if (tabResult.get(o).getItem().getCodeObjet()!=0) {
+                            quantite = quantite + inventaire.getInventaireJoueur().get(o).getQuantite();
+                            position.add(inventaire.getInventaireJoueur().get(o));
+                        }
+                        if (quantite >= necessaire[1][i]) {
+                            craftable[i] = true;
+                        }
                         o++;
                     }
-                } else {
+                }
+                else {
                     craftableFin = false;
                 }
+                i++;
             }
-            // Vérifie que tout les items nécessaires pour le craft sont en quantité suffisante avant de les décrémenter
-            // de l'inventaire du joueur
-            int j = 0;
-            while (j < craftable.length && craftableFin) {
-                if (!craftable[j]) {
-                    craftableFin = false;
-                }
-                j++;
-            }
-
-            int c = 0;
-            int k = 0;//Pour se déplacer sur chaque position des items
-
-            // Enlève les quantités côté inventaire
-            if (craftableFin) {
-
-                if (inventaire.ajoutInventaire(item, 1)) {
-                    while (c < necessaire[1].length && necessaire[1][c] > 0) {//Pour chaque item nécessaire
-                        while (k < position.size() && necessaire[1][c] > 0) { //Retire à chaque position des items
-                            if (necessaire[1][c] <= position.get(k).getQuantite()) { // Si la case a assez pour le craft
-                                position.get(k).retireQuantite(necessaire[1][c]);
-                                necessaire[1][c] = 0;
-                            } else { // Si la case n'a pas assez pour le craft
-                                necessaire[1][c] -= position.get(k).getQuantite();
-                                position.get(k).retireQuantite(position.get(k).getQuantite());
-                            }
-                            k++;
-                        }
-                        c++;
-                    }
-                    System.out.println("craft réussi");
-                } else {
-                    System.out.println("non réussi");
-                }
-            } else {
-                System.out.println("craft pas réussi");
-            }
+            return craftableFin;
         }
 
+        public void craftFin(Item item, int[][] necessaire, ArrayList<Case> position) {
+            int c = 0;
+            int k = 0;
+            if (inventaire.ajoutInventaire(item, 1)) {
+                while (c < necessaire[1].length && necessaire[1][c] > 0) {//Pour chaque item nécessaire
+                    while (k < position.size() && necessaire[1][c] > 0) { //Retire à chaque position des items
+                        if (necessaire[1][c] <= position.get(k).getQuantite()) { // Si la case a assez pour le craft
+                            position.get(k).retireQuantite(necessaire[1][c]);
+                            necessaire[1][c] = 0;
+                        } else { // Si la case n'a pas assez pour le craft
+                            necessaire[1][c] -= position.get(k).getQuantite();
+                            position.get(k).retireQuantite(position.get(k).getQuantite());
+                        }
+                        k++;
+                    }
+                    c++;
+                }
+                System.out.println("craft réussi");
+            }
+            else {
+                System.out.println("non réussi");
+            }
+        }
 
         public void tp(int x, int y) {
             this.setX(x);

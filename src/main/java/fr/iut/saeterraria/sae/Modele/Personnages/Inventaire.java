@@ -26,7 +26,6 @@ public class Inventaire {
         }
     }
 
-
     // Ajoute l'item dans une case ou dans plusieurs si aucune case peut contenir toute la quantité (ou pas du tout si aucune case le permet)==
     public boolean ajoutInventaire(Item item, int quantite) {
         ArrayList<Case> planInventaire= findItem(item);
