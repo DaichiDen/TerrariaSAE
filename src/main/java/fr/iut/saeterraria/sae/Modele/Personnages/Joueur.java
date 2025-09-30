@@ -224,8 +224,8 @@
                     int o = 0;
                     while (!craftable[i] && o < tabResult.size()) {
                         if (tabResult.get(o).getItem().getCodeObjet()!=0) {
-                            quantite = quantite + inventaire.getInventaireJoueur().get(o).getQuantite();
-                            position.add(inventaire.getInventaireJoueur().get(o));
+                            quantite = quantite + inventaire.getCase(tabResult.get(o).getLigne(), tabResult.get(o).getColonne()).getQuantite();
+                            position.add(inventaire.getCase(tabResult.get(o).getLigne(), tabResult.get(o).getColonne()));
                         }
                         if (quantite >= necessaire[1][i]) {
                             craftable[i] = true;
@@ -238,6 +238,15 @@
                 }
                 i++;
             }
+
+            int j = 0;
+            while ( j<craftable.length && craftableFin) {
+                if (!craftable[j]) {
+                    craftableFin = false;
+                }
+                j++;
+            }
+
             return craftableFin;
         }
 
