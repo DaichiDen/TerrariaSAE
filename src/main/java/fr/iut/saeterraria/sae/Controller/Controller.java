@@ -161,10 +161,8 @@ public class Controller implements Initializable {
         });
 
 
-        for (int i = 0; i < jeu.getJoueur().getInventaire().getInventaireJoueur().length; i++) {
-            for (int j = 0; j < jeu.getJoueur().getInventaire().getInventaireJoueur()[i].length; j++) {
-                jeu.getJoueur().getInventaire().getInventaireJoueur()[i][j].changementProperty().addListener(new ListenerInventaire(inventaireVue, hotBarVue, i, j));
-            }
+        for (int i = 0; i < jeu.getJoueur().getInventaire().getInventaireJoueur().size(); i++) {
+                jeu.getJoueur().getInventaire().getInventaireJoueur().get(i).changementProperty().addListener(new ListenerInventaire(inventaireVue, hotBarVue, jeu.getJoueur().getInventaire().getInventaireJoueur().get(i).getLigne(), jeu.getJoueur().getInventaire().getInventaireJoueur().get(i).getColonne()));
         }
 
         for (int i = 0; i < caseRecetteSansBloc.getChildren().size(); i++) {
@@ -193,10 +191,10 @@ public class Controller implements Initializable {
             });
         }
 
-        setupSpinner(ligneCase1, 1, 6, 1);
-        setupSpinner(colonneCase1, 1, 7, 1);
-        setupSpinner(ligneCase2, 1, 6, 1);
-        setupSpinner(colonneCase2, 1, 7, 1);
+        setupSpinner(colonneCase1, 1, 6, 1);
+        setupSpinner(ligneCase1, 1, 7, 1);
+        setupSpinner(colonneCase2, 1, 6, 1);
+        setupSpinner(ligneCase2, 1, 7, 1);
 
 
         // BiblioSon.play(1);
@@ -262,6 +260,7 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
+        jeu.getJoueur().ajouterItem(jeu.getItems().get(20),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(78),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(77),64);
@@ -270,8 +269,6 @@ public class Controller implements Initializable {
         jeu.getJoueur().ajouterItem(jeu.getItems().get(51),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(79),1);
         jeu.getJoueur().ajouterItem(jeu.getItems().get(80),64);
-
-
 
 
     }

@@ -1,124 +1,130 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 public class Inventaire {
-    private Case[][] inventaireJoueur;
+    private ObservableList<Case> inventaireJoueur;
+    private int ligneMax;
+    private int colonneMax;
 
-    public Inventaire() {
-        this.inventaireJoueur = new Case[7][6]; // 6 première colonne pour hotbar 36 Colonnes pour les 36 cases
+    public Inventaire(int ligneMax, int colonneMax) {
+        this.inventaireJoueur = FXCollections.observableArrayList(); // 6 première colonne pour hotbar 36 Colonnes pour les 36 cases
+        this.ligneMax = ligneMax;
+        this.colonneMax = colonneMax;
         initialiseInventaire();
     }
 
-    public void initialiseInventaire(){
-        for (int i = 0; i < inventaireJoueur.length; i++) {
-            for (int j = 0; j < inventaireJoueur[i].length; j++) {
-              this.inventaireJoueur[i][j] = new Case(i, j);
+    public void initialiseInventaire() {
+        for (int ligne = 0; ligne < this.ligneMax; ligne++) {       // 7 lignes
+            for (int colonne = 0; colonne < this.colonneMax; colonne++) { // 6 colonnes
+                inventaireJoueur.add(new Case(ligne, colonne));
             }
         }
     }
 
     // Ajoute l'item dans une case ou dans plusieurs si aucune case peut contenir toute la quantité (ou pas du tout si aucune case le permet)==
     public boolean ajoutInventaire(Item item, int quantite) {
-        int[][] planInventaire= findItem(item);
-        int i=0;
-        int j=0;
+        ArrayList<Case> planInventaire= findItem(item);
         boolean placer = false;
         int reste = quantite;
         if(planInventaire == null) {//Pas de place
             System.out.println("Pas de place dans l'inventaire");
         }
         else {
-            while (!placer && i < planInventaire.length) {//Si Item déjà présent dans l'inventaire
-                while (!placer && j < planInventaire[i].length) {
-                    if ( planInventaire[i][j] == 1) {
-                        if (this.inventaireJoueur[i][j].getQuantite()+reste <= this.inventaireJoueur[i][j].getMaxStack())  { // Si l'ajout de l'item va pas dépasser la limite de stack
-                            this.inventaireJoueur[i][j].ajouteQuantite(reste);
-                            placer = true;
-                        }
-                        else if( !(this.inventaireJoueur[i][j].getQuantite() == this.inventaireJoueur[i][j].getMaxStack()) ){//Limite atteinte par stack
-                            int ajout = this.inventaireJoueur[i][j].getMaxStack() - this.inventaireJoueur[i][j].getQuantite();
-                            this.inventaireJoueur[i][j].ajouteQuantite(ajout);
-                            reste = reste - ajout;
-                        }
-                    }
-                    j++;
-                }
-                j=0;
-                i++;
-            }
-            i=0;
-            while(!placer && i < planInventaire.length ) {
-                while (!placer && j < planInventaire[i].length) {
-                    if (planInventaire[i][j] == 2) {              // Si la case est vide
-                        this.inventaireJoueur[i][j].ajouterItem(item);
-                        if (reste <= this.inventaireJoueur[i][j].getMaxStack()) { // Si l'ajout de l'item va pas dépasser la limite de stack
-                            this.inventaireJoueur[i][j].ajouteQuantite(reste);
-                            placer = true;
-                        }
-                        else {//Limite atteinte par stack
-                            int ajout = this.inventaireJoueur[i][j].getMaxStack();
-                            this.inventaireJoueur[i][j].ajouteQuantite(ajout);
-                            reste = reste - ajout;
-                        }
-                    }
-                    j++;
-                }
-                j=0;
-                i++;
-            }
+            placer = AddDansCaseItemPresent(planInventaire,item,placer,reste);
         }
         return placer;
     }
 
-//    public void decrementeItem(int ligne, int colonne) {
-//        if(inventaireJoueur[ligne][colonne].getQuantite()-1>0) {
-//            this.inventaireJoueur[ligne][colonne].retireQuantite(1);
-//        }
-//        else {
-//            inventaireJoueur[ligne][colonne].setCase(new Item(), 0);
-//        }
-//    }
-//
-//    public void incrementerItem(int ligne,int colonne) {
-//        if(inventaireJoueur[ligne][colonne].getQuantite()+1<=this.inventaireJoueur[ligne][colonne].getMaxStack()) {
-//            this.inventaireJoueur[ligne][colonne].ajouteQuantite(1);
-//        }
-//        else {
-//            ajoutInventaire(inventaireJoueur[ligne][colonne].getItem(),1);
-//        }
-//    }
-
-    public Case[][] getInventaireJoueur() {
+    public ObservableList<Case> getInventaireJoueur() {
         return inventaireJoueur;
     }
 
     public void removeItem(int ligne, int colonne) {
-        inventaireJoueur[ligne][colonne].setCase(new Item(), 0);
+        this.inventaireJoueur.get(ligne*this.colonneMax+colonne).setCase(new Item(), 0);
         System.out.println("Suppression item de l'inventaire effectué");
     }
 
+    public Case getCase(int ligne, int colonne) {
+        return this.inventaireJoueur.get(ligne*6+colonne);
+    }
+
     // Trouve toutes les instances de l'item dans l'inventaire ainsi que les cases vides, retourne null si pas de place
-    public int[][] findItem(Item item) {
-        boolean presentItemCaseLibre = false;
-        int[][] instance = new int[this.inventaireJoueur.length][this.inventaireJoueur[0].length];//Taille 7 ligne & 6 colonne
-        for (int i = 0; i < this.inventaireJoueur.length; i++) {
-            for (int j = 0; j < this.inventaireJoueur[i].length; j++) {
-                if (this.inventaireJoueur[i][j].comparerId(item.getCodeObjet())) {//Item présent
-                    instance[i][j] = 1;
-                    presentItemCaseLibre = true;
-                } else if (this.inventaireJoueur[i][j].getItem().getCodeObjet() == 0) {//Case vide
-                    instance[i][j] = 2;
-                    presentItemCaseLibre = true;
+    public ArrayList<Case> findItem(Item item) {
+        ArrayList<Case> listInstances = new ArrayList<>();
+        for (int i = 0; i < this.inventaireJoueur.size(); i++) {
+                if (this.inventaireJoueur.get(i).comparerId(item.getCodeObjet())) { //Item présent
+                    listInstances.add(inventaireJoueur.get(i));
+                } else if (this.inventaireJoueur.get(i).getItem().getCodeObjet() == 0) {//Case vide
+                    listInstances.add(inventaireJoueur.get(i));
                 }
-            }
         }
-        if (presentItemCaseLibre) {
-            return instance;
-        }
-        else{
+        if (listInstances.isEmpty()) {
             System.out.println("Impossible de rajouter dans l'inventaire");
             return null;
         }
+        else{
+            return listInstances;
+        }
+    }
+
+    // Essaye d'ajouter l'item dans une case ayant le même item, si ce n'est pas possible, il va appeler addItemCaseVide qui va essayer d'ajouter dans une case vide
+    public boolean AddDansCaseItemPresent(ArrayList<Case> planInventaire, Item item, boolean placer, int reste) {
+        int compteur = 0;
+        while (compteur<planInventaire.size() && !placer) {
+            if (planInventaire.get(compteur).comparerId(item.getCodeObjet())) { // Si Item déjà présent dans l'inventaire
+                if (comparerAjoutItemAMaxStack(getNumeroCase(planInventaire.get(compteur)),reste))  { // Si l'ajout de l'item va pas dépasser la limite de stack
+                    this.inventaireJoueur.get(getNumeroCase(planInventaire.get(compteur))).ajouteQuantite(reste);
+                    placer = true;
+                }
+                else if(caseEstPlein(getNumeroCase(planInventaire.get(compteur)))){ //Limite atteinte par stack
+                    int ajout = this.inventaireJoueur.get(getNumeroCase(planInventaire.get(compteur))).getMaxStack() - this.inventaireJoueur.get(getNumeroCase(planInventaire.get(compteur))).getQuantite();
+                    this.inventaireJoueur.get(getNumeroCase(planInventaire.get(compteur))).ajouteQuantite(ajout);
+                    reste = reste - ajout;
+                }
+            }
+            compteur++;
+        }
+        // Si ce n'est pas possible d'ajouter les items dans les cases ayant déjà un item alors on va essayer d'ajouter dans des cases vides
+        if(!placer) {
+            placer = addItemCaseVide(planInventaire,item,placer,reste);
+        }
+        return placer;
+    }
+
+    public boolean addItemCaseVide(ArrayList<Case> planInventaire, Item item, boolean placer, int reste) {
+        int compteur2=0;
+        while (compteur2<planInventaire.size() && !placer) {
+            if (planInventaire.get(compteur2).getItem().getCodeObjet()==0) {  // Si la case est vide
+                this.inventaireJoueur.get(getNumeroCase(planInventaire.get(compteur2))).ajouterItem(item);
+                if (comparerAjoutItemAMaxStack(getNumeroCase(planInventaire.get(compteur2)),reste)) { // Si l'ajout de l'item va pas dépasser la limite de stack
+                    this.inventaireJoueur.get(planInventaire.get(compteur2).getLigne()*6+planInventaire.get(compteur2).getColonne()).ajouteQuantite(reste);
+                    placer = true;
+                }
+                else { //Limite atteinte par stack
+                    int ajout = this.inventaireJoueur.get(getNumeroCase(planInventaire.get(compteur2))).getMaxStack();
+                    this.inventaireJoueur.get(getNumeroCase(planInventaire.get(compteur2))).ajouteQuantite(ajout);
+                    reste = reste - ajout;
+                }
+            }
+            compteur2++;
+        }
+        return placer;
+    }
+
+    public boolean comparerAjoutItemAMaxStack(int numeroCase, int reste) {
+        return this.inventaireJoueur.get(numeroCase).getQuantite()+reste <= this.inventaireJoueur.get(numeroCase).getMaxStack();
+    }
+
+    public int getNumeroCase(Case c) {
+        return c.getLigne()*this.colonneMax+c.getColonne();
+    }
+
+    public boolean caseEstPlein(int numeroCase) {
+        return this.inventaireJoueur.get(numeroCase).getQuantite()==this.inventaireJoueur.get(numeroCase).getMaxStack();
     }
 }
