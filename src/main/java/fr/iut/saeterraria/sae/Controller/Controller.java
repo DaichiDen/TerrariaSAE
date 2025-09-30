@@ -231,10 +231,8 @@ public class Controller implements Initializable {
                         jeu.getJoueur().mettreAJour();
 
                         for (int i = 0; i < jeu.getMobs().size(); i++) {
-                            System.out.println("marchaige ? : "+jeu.getMobs().size());
                             jeu.getMobs().get(i).mettreAJour();
                         }
-                        System.out.println("Oui je marche moi");
 
                         jeu.màjProjectiles();
                     }
@@ -315,7 +313,6 @@ public class Controller implements Initializable {
 
     public void déinitialisationMobs() {
         int i = jeu.getEnnemis().size()-1;
-        System.out.println(i + "iiiiiiiiiiii");
         while (i >= 0) {
             jeu.getEnnemis().get(i).decrementVie(jeu.getEnnemis().get(i).getBarreVie().getVieMax());
 
