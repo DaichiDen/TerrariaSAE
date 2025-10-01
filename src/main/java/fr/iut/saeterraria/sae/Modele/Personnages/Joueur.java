@@ -20,10 +20,11 @@
 
 
     public class Joueur extends EntiteVivante {
+        private static Joueur uniqueJoueur = null;
+
         private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
         private int[] equipement;
         private BooleanProperty timeStop = new SimpleBooleanProperty(false);
-        private Pierre_TP pierreTp;
         private int mainCourante;
         private boolean enDash = false;
         private int dureeDash = 0;
@@ -38,18 +39,24 @@
         private IntegerProperty xMax,yMax;
 
 
-        public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
+        private Joueur(String nom, Jeu jeu, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
 
             super(nom, 20, 100, 20, 20*32, 14*32, 1, 10, jeu,1, tailleL, tailleH, rangeVue, rangeAttaque);
             this.equipement = new int[7];
             this.inventaire = new Inventaire(7,6);
-            this.pierreTp = pierreTp;
             this.mainCourante = 0;
             this.xPrec = super.getX()/32;
             this.xMax = new SimpleIntegerProperty(getX()/super.getJeu().getTaille1bloc());
             this.yMax = new SimpleIntegerProperty(getY()/super.getJeu().getTaille1bloc());
             this.stockItem = new int[2];
 
+        }
+
+        public static Joueur getUniqueJoueur(String nom, Jeu jeu, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
+            if (uniqueJoueur == null) {
+                uniqueJoueur = new Joueur(nom,jeu,tailleL,tailleH,rangeVue,rangeAttaque);
+            }
+            return uniqueJoueur;
         }
 
         public boolean isTimeStop(){
@@ -279,10 +286,6 @@
         public void tp(int x, int y) {
             this.setX(x);
             this.setY(y);
-        }
-
-        public Pierre_TP getPierreTp() {
-            return this.pierreTp;
         }
 
         public void dashKatana() {

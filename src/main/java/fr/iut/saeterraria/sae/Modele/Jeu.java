@@ -39,7 +39,7 @@ public class Jeu {
         initializeRecettes();
         initializeBlocConstruction();
         carte = new Map();
-        joueur = new Joueur(nomJoueur, this, (Pierre_TP) items.get(49), taille1bloc, taille1bloc*2,3,3);
+        joueur = Joueur.getUniqueJoueur(nomJoueur, this,taille1bloc, taille1bloc*2,3,3);
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);
