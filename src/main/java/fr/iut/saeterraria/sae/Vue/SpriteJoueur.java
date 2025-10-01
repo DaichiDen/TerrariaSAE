@@ -12,7 +12,6 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
 
     private Pane screen;
-    private Jeu jeu;
     private int width, height;
     private TilePane background;
     private Pane opacite;
@@ -26,14 +25,13 @@ public class SpriteJoueur extends CreateRessourceVisuel {
     private ImageView marcheNon = createImageView("/Sprite/Hero_stop.png", width, height);
 
 
-    public SpriteJoueur(Jeu jeu, Pane screen,TilePane background, Pane opacite) {
-        this.jeu = jeu;
+    public SpriteJoueur(Pane screen,TilePane background, Pane opacite) {
         this.screen = screen;
         this.width = 150;
         this.height = 150;
-        jeu.getJoueur().marcheGaucheProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
-        jeu.getJoueur().marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
-        jeu.getJoueur().xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
+        Joueur.getUniqueJoueur().marcheGaucheProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur());
+        Joueur.getUniqueJoueur().marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur());
+        Joueur.getUniqueJoueur().xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur());
         this.background = background;
         this.opacite = opacite;
         background.getChildren().add(createImageView("/Backgrounds/background.jpg",2000,1120));
@@ -41,45 +39,45 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         bindAll();
     }
 
-    public void mettreAJourSpriteJoueur(Joueur joueur) {
+    public void mettreAJourSpriteJoueur() {
 
-        if (bindXActif && joueur.xProperty().getValue() <= 21*32) { //unbind gauche
+        if (bindXActif && Joueur.getUniqueJoueur().xProperty().getValue() <= 21*32) { //unbind gauche
             unbindX();
             bindXActif = false;
         }
-        else if (bindXActif && joueur.xProperty().getValue() >= (192-21-21)*32){ //unbind droite
+        else if (bindXActif && Joueur.getUniqueJoueur().xProperty().getValue() >= (192-21-21)*32){ //unbind droite
             unbindX();
             bindXActif = false;
         }
-        else if (!bindXActif && joueur.xProperty().getValue() > 21*32 && joueur.xProperty().getValue() < (192-21-21)*32) {
+        else if (!bindXActif && Joueur.getUniqueJoueur().xProperty().getValue() > 21*32 && Joueur.getUniqueJoueur().xProperty().getValue() < (192-21-21)*32) {
             bindX();
             bindXActif = true;
         }
 
-        if (bindYActif && joueur.yProperty().getValue()<=14*32){ // unbind haut
+        if (bindYActif && Joueur.getUniqueJoueur().yProperty().getValue()<=14*32){ // unbind haut
             unbindY();
             bindYActif = false;
         }
-        else if (bindYActif && joueur.yProperty().getValue()>=(60-14-8)*32){ //unbind bas 50 est le nombre max de ligne
+        else if (bindYActif && Joueur.getUniqueJoueur().yProperty().getValue()>=(60-14-8)*32){ //unbind bas 50 est le nombre max de ligne
             unbindY();
             bindYActif = false;
         }
-        else if (!bindYActif && joueur.yProperty().getValue() > 14*32 && joueur.yProperty().getValue() < (60-14-8)*32) {
+        else if (!bindYActif && Joueur.getUniqueJoueur().yProperty().getValue() > 14*32 && Joueur.getUniqueJoueur().yProperty().getValue() < (60-14-8)*32) {
             bindY();
             bindYActif = true;
         }
         String etatActuel = "";
-        if (!joueur.getEstVivant()) {
+        if (!Joueur.getUniqueJoueur().getEstVivant()) {
             etatActuel = "mort";
-        } else if (joueur.getMarcheGauche()) {
+        } else if (Joueur.getUniqueJoueur().getMarcheGauche()) {
             etatActuel = "gauche";
-        } else if (joueur.getMarcheDroite()) {
+        } else if (Joueur.getUniqueJoueur().getMarcheDroite()) {
             etatActuel = "droite";
-        } else if ((!joueur.getMarcheDroite() && !joueur.getMarcheGauche()) || (joueur.getMarcheDroite() && joueur.getMarcheGauche())) {
+        } else if ((!Joueur.getUniqueJoueur().getMarcheDroite() && !Joueur.getUniqueJoueur().getMarcheGauche()) || (Joueur.getUniqueJoueur().getMarcheDroite() && Joueur.getUniqueJoueur().getMarcheGauche())) {
             etatActuel = "stop";
         }
-        if (joueur.getEnDash()) {
-            if (joueur.getDirectionDash().equals("droite")) {
+        if (Joueur.getUniqueJoueur().getEnDash()) {
+            if (Joueur.getUniqueJoueur().getDirectionDash().equals("droite")) {
                 etatActuel = "dash_droit";
             } else {
                 etatActuel = "dash_gauche";
@@ -112,9 +110,9 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         }
 
 
-        spriteActuel.setId(joueur.getNom());
-        spriteActuel.translateXProperty().bind(joueur.xProperty());
-        spriteActuel.translateYProperty().bind(joueur.yProperty());
+        spriteActuel.setId(Joueur.getUniqueJoueur().getNom());
+        spriteActuel.translateXProperty().bind(Joueur.getUniqueJoueur().xProperty());
+        spriteActuel.translateYProperty().bind(Joueur.getUniqueJoueur().yProperty());
         spriteActuel.setFitWidth(54);
         spriteActuel.setFitHeight(64);
         screen.getChildren().add(spriteActuel);
@@ -138,10 +136,10 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         opacite.translateYProperty().bind(screen.translateYProperty().multiply(-1));
     }
     public void bindX(){
-        screen.translateXProperty().bind(jeu.getJoueur().xProperty().multiply(-1).add(19*32));
+        screen.translateXProperty().bind(Joueur.getUniqueJoueur().xProperty().multiply(-1).add(19*32));
     }
     public void bindY(){
-        screen.translateYProperty().bind(jeu.getJoueur().yProperty().multiply(-1).add(14*32));
+        screen.translateYProperty().bind(Joueur.getUniqueJoueur().yProperty().multiply(-1).add(14*32));
     }
 }
 

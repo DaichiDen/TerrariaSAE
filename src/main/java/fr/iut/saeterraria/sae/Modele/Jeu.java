@@ -19,10 +19,9 @@ import java.util.HashMap;
 
 // Environnement du jeu
 public class Jeu {
+    private static Jeu uniqueJeu = null;
 
     private Map carte;
-    private TilePane tp;
-    private Joueur joueur;
     private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
@@ -33,19 +32,25 @@ public class Jeu {
 
     public final static int taille1bloc = 32;
 
-    public Jeu(String nomJoueur){
+    private Jeu(){
         items = new HashMap<>();
         initialiseItems();
         initializeRecettes();
         initializeBlocConstruction();
         carte = new Map();
-        joueur = Joueur.getUniqueJoueur(nomJoueur, this,taille1bloc, taille1bloc*2,3,3);
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);
         projectiles= new ArrayList<>();
         liste_projectiles = FXCollections.observableArrayList(projectiles);
 
+    }
+
+    public static Jeu getUniqueJeu(){
+        if(uniqueJeu == null){
+            uniqueJeu = new Jeu();
+        }
+        return uniqueJeu;
     }
 
     public int getTaille1bloc(){
@@ -65,7 +70,7 @@ public class Jeu {
             for (int i = getListe_projectiles().size() - 1; i >= 0; i--) {
                 Projectile p = getListe_projectiles().get(i);
 
-                if (getJoueur().isTimeStop()) {
+                if (Joueur.getUniqueJoueur().isTimeStop()) {
                     // Si timeStop activé, on met à jour uniquement les balles
                     if (p.getType().equals("balle")) {
 
@@ -103,8 +108,8 @@ public class Jeu {
                         mobs.get(j).decrementVie(p.getAttaque());
                         p.setActif(false);
                         getListe_projectiles().remove(i);
-                    }else if (joueur.getHitbox().intersects(p.getHitbox())){
-                        joueur.decrementVie(p.getAttaque());
+                    }else if (Joueur.getUniqueJoueur().getHitbox().intersects(p.getHitbox())){
+                        Joueur.getUniqueJoueur().decrementVie(p.getAttaque());
                         p.setActif(false);
                         getListe_projectiles().remove(i);
                     }
@@ -152,9 +157,6 @@ public class Jeu {
 
     public Map getCarte(){
         return carte;
-    }
-    public Joueur getJoueur() {
-        return joueur;
     }
 
     public ArrayList<Ennemi> getEnnemis() {
@@ -355,11 +357,11 @@ public class Jeu {
     }
 
     public void testCraft() {
-        getJoueur().ajouterItem(items.get(3),96);
-        getJoueur().ajouterItem(items.get(5),96);
-        getJoueur().ajouterItem(items.get(6),20);
-        getJoueur().ajouterItem(items.get(7),20);
-        getJoueur().ajouterItem(items.get(21),50);
+        Joueur.getUniqueJoueur().ajouterItem(items.get(3),96);
+        Joueur.getUniqueJoueur().ajouterItem(items.get(5),96);
+        Joueur.getUniqueJoueur().ajouterItem(items.get(6),20);
+        Joueur.getUniqueJoueur().ajouterItem(items.get(7),20);
+        Joueur.getUniqueJoueur().ajouterItem(items.get(21),50);
     }
 
 }

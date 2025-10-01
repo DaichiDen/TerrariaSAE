@@ -97,7 +97,7 @@ public class Controller implements Initializable {
     private Spinner<Integer> colonneCase2;
 
 
-    private Jeu jeu;
+    private Jeu jeu = Jeu.getUniqueJeu();
     public Fond scene;
     private VueInventaire inventaireVue;
     private VueHotbar hotBarVue;
@@ -110,7 +110,6 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        jeu = new Jeu("Nom");
         zoneNom.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 confirmerNom();
@@ -131,17 +130,17 @@ public class Controller implements Initializable {
         imageaccueil.fitHeightProperty().bind(imagebloc_accueil.widthProperty());
         SpriteVie barre = new SpriteVie(Vie, jeu);
 
-        Clavier controlleurJoueur = new Clavier(jeu,screenInventaire,quitterInventaire,openInventaire,fond,hotBar, screenPrincipal);
+        Clavier controlleurJoueur = new Clavier(screenInventaire,quitterInventaire,openInventaire,fond,hotBar, screenPrincipal);
 
-        Souris controlleurSouris = new Souris(jeu,scene,jeu.getCarte(),fond,screenInventaire,craftSansBlocConstruction,craftEtabli,craftForge,four);
+        Souris controlleurSouris = new Souris(scene,Jeu.getUniqueJeu().getCarte(),fond,screenInventaire,craftSansBlocConstruction,craftEtabli,craftForge,four);
 
-        inventaireVue = new VueInventaire(quitterInventaire, screenInventaire, jeu.getJoueur(), inventaire, screen);
+        inventaireVue = new VueInventaire(quitterInventaire, screenInventaire, inventaire, screen);
 
-        hotBarVue = new VueHotbar(jeu,hotBar);
+        hotBarVue = new VueHotbar(hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
 
-        vuejoueur = new SpriteJoueur(jeu, screen, background,opaciteBackground); // Appelle la classe de la vue pour l'initialiser
-        vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
+        vuejoueur = new SpriteJoueur(screen, background,opaciteBackground); // Appelle la classe de la vue pour l'initialiser
+        vuejoueur.mettreAJourSpriteJoueur();
         vueCraft = new VueCraft(craftSansBlocConstruction,craftEtabli,craftForge,caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge,
                 ((BlocConstruction) jeu.getItems().get(11)).getListeRecette(), ((BlocConstruction) jeu.getItems().get(12)).getListeRecette(),
                 ((BlocConstruction) jeu.getItems().get(13)).getListeRecette(),jeu.getItems(), caseRecetteFour, ((BlocConstruction) jeu.getItems().get(14)).getListeRecette());
@@ -151,18 +150,18 @@ public class Controller implements Initializable {
 
         ObsJoueur obsJ = new ObsJoueur(jeu, vuejoueur, controlleurJoueur);
 
-        jeu.getJoueur().getXMaxProperty().addListener(new ObsMapX(jeu, scene));
-        jeu.getJoueur().getYMaxProperty().addListener(new ObsMapY(jeu, scene));
+        Joueur.getUniqueJoueur().getXMaxProperty().addListener(new ObsMapX(jeu, scene));
+        Joueur.getUniqueJoueur().getYMaxProperty().addListener(new ObsMapY(jeu, scene));
 
-        jeu.getJoueur().yProperty().addListener(obsJ);
+        Joueur.getUniqueJoueur().yProperty().addListener(obsJ);
 
-        jeu.getJoueur().getBarreVie().vieProperty().addListener((obs, oldVal, newVal) -> {
-            barre.mettreAJourSpriteVie(jeu.getJoueur());
+        Joueur.getUniqueJoueur().getBarreVie().vieProperty().addListener((obs, oldVal, newVal) -> {
+            barre.mettreAJourSpriteVie(Joueur.getUniqueJoueur());
         });
 
 
-        for (int i = 0; i < jeu.getJoueur().getInventaire().getInventaireJoueur().size(); i++) {
-                jeu.getJoueur().getInventaire().getInventaireJoueur().get(i).changementProperty().addListener(new ListenerInventaire(inventaireVue, hotBarVue, jeu.getJoueur().getInventaire().getInventaireJoueur().get(i).getLigne(), jeu.getJoueur().getInventaire().getInventaireJoueur().get(i).getColonne()));
+        for (int i = 0; i < Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().size(); i++) {
+                Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(i).changementProperty().addListener(new ListenerInventaire(inventaireVue, hotBarVue, Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(i).getLigne(), Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(i).getColonne()));
         }
 
         for (int i = 0; i < caseRecetteSansBloc.getChildren().size(); i++) {
@@ -207,8 +206,8 @@ public class Controller implements Initializable {
             @Override
             public void handle(long now) {
                 if (now - lastUpdate >= frameInterval) {
-                    if (jeu.getJoueur().isTimeStop()) {
-                        jeu.getJoueur().mettreAJour();
+                    if (Joueur.getUniqueJoueur().isTimeStop()) {
+                        Joueur.getUniqueJoueur().mettreAJour();
 
                         for(int i=0;i<jeu.getListe_projectiles().size();i++){
                             if(jeu.getListe_projectiles().get(i).getType().equals("balle")){
@@ -220,13 +219,13 @@ public class Controller implements Initializable {
                             timeStopActive = true;
                             PauseTransition delay = new PauseTransition(Duration.seconds(5));
                             delay.setOnFinished(event -> {
-                                jeu.getJoueur().setTimeStop(false);
+                                Joueur.getUniqueJoueur().setTimeStop(false);
                                 timeStopActive = false;
                             });
                             delay.play();
                         }
                     } else {
-                        jeu.getJoueur().mettreAJour();
+                        Joueur.getUniqueJoueur().mettreAJour();
 
                         for (int i = 0; i < jeu.getMobs().size(); i++) {
                             jeu.getMobs().get(i).mettreAJour();
@@ -237,10 +236,10 @@ public class Controller implements Initializable {
 
                     lastUpdate = now;
 
-                    if (!jeu.getJoueur().getEstVivant()) {
+                    if (!Joueur.getUniqueJoueur().getEstVivant()) {
                         PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
                         delay.setOnFinished(event -> {
-                            vuejoueur.mettreAJourSpriteJoueur(jeu.getJoueur());
+                            vuejoueur.mettreAJourSpriteJoueur();
 
 
                         });
@@ -260,15 +259,15 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(20),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(72),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(78),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(77),64);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(51),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(54),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(51),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(79),1);
-        jeu.getJoueur().ajouterItem(jeu.getItems().get(80),64);
+        Joueur.getUniqueJoueur().ajouterItem(jeu.getItems().get(20),1);
+        Joueur.getUniqueJoueur().ajouterItem(jeu.getItems().get(72),1);
+        Joueur.getUniqueJoueur().ajouterItem(jeu.getItems().get(78),1);
+        Joueur.getUniqueJoueur().ajouterItem(jeu.getItems().get(77),64);
+        Joueur.getUniqueJoueur().ajouterItem(jeu.getItems().get(51),1);
+        Joueur.getUniqueJoueur().ajouterItem(jeu.getItems().get(54),1);
+        Joueur.getUniqueJoueur().ajouterItem(jeu.getItems().get(51),1);
+        Joueur.getUniqueJoueur().ajouterItem(jeu.getItems().get(79),1);
+        Joueur.getUniqueJoueur().ajouterItem(jeu.getItems().get(80),64);
 
 
     }
@@ -289,7 +288,7 @@ public class Controller implements Initializable {
     public void confirmerNom() {
         menu.toBack();
         screenPrincipal.toFront();
-        jeu.getJoueur().setNom(zoneNom.getText());
+        Joueur.getUniqueJoueur().setNom(zoneNom.getText());
         Platform.runLater(() -> fond.requestFocus());
     }
 
@@ -300,7 +299,7 @@ public class Controller implements Initializable {
 
     @FXML
     public void activerSwitch(){
-        jeu.getJoueur().swapItem(ligneCase1.getValue()-1,colonneCase1.getValue()-1,ligneCase2.getValue()-1,colonneCase2.getValue()-1);
+        Joueur.getUniqueJoueur().swapItem(ligneCase1.getValue()-1,colonneCase1.getValue()-1,ligneCase2.getValue()-1,colonneCase2.getValue()-1);
     }
 
     private void setupSpinner(Spinner<Integer> spinner, int min, int max, int initialValue) {
@@ -317,16 +316,16 @@ public class Controller implements Initializable {
         }
      }
         public void initialisationMobs () {
-            Ennemi ogre = new Ogre("Pierre l'ogre vert", 50, 20, 3000, 0, 0, jeu, 4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
-            Ennemi ogre2 = new Ogre("Pierre l'ogre vert pale", 50, 20, 1340, 1340, 0, jeu, 4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
-            Ennemi ogre3 = new Ogre("Pierre l'ogre vert foncé", 50, 20, 4962, 1376, 0, jeu, 4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
-            Ennemi ogre4 = new Ogre("Pierre l'ogre vert clair", 50, 20, 3068, 1600, 0, jeu, 4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
-            Ennemi goblin = new Goblin("Caillou le gobelin vert", 20, 20, 5000, 0, 0, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
-            Ennemi goblin2 = new Goblin("Caillou le gobelin vert pale", 20, 20, 1456, 1728, 0, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
-            Ennemi goblin3 = new Goblin("Caillou le gobelin vert foncé", 20, 20, 2959, 1088, 0, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
-            Ennemi goblin4 = new Goblin("Caillou le gobelin vert clair", 20, 20, 5238, 1760, 0, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
-            Ennemi goblin5 = new Goblin("Caillou le gobelin vert émeraude", 20, 20, 4544, 1632, 0, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
-            Ennemi mh = new MH("Monsieur Homps", 250, 20, 4500, 0, 5, jeu, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 15, 8);
+            Ennemi ogre = new Ogre("Pierre l'ogre vert", 50, 20, 3000, 0, 0, 4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
+            Ennemi ogre2 = new Ogre("Pierre l'ogre vert pale", 50, 20, 1340, 1340, 0,  4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
+            Ennemi ogre3 = new Ogre("Pierre l'ogre vert foncé", 50, 20, 4962, 1376, 0, 4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
+            Ennemi ogre4 = new Ogre("Pierre l'ogre vert clair", 50, 20, 3068, 1600, 0,  4, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 3);
+            Ennemi goblin = new Goblin("Caillou le gobelin vert", 20, 20, 5000, 0, 0,  2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
+            Ennemi goblin2 = new Goblin("Caillou le gobelin vert pale", 20, 20, 1456, 1728, 0, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
+            Ennemi goblin3 = new Goblin("Caillou le gobelin vert foncé", 20, 20, 2959, 1088, 0, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
+            Ennemi goblin4 = new Goblin("Caillou le gobelin vert clair", 20, 20, 5238, 1760, 0, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
+            Ennemi goblin5 = new Goblin("Caillou le gobelin vert émeraude", 20, 20, 4544, 1632, 0, 2, jeu.getTaille1bloc(), jeu.getTaille1bloc() * 2, 10, 8);
+            Ennemi mh =MH.getUniqueMh();
 
             jeu.addEnnemis(ogre);
             jeu.addEnnemis(ogre2);
@@ -358,10 +357,10 @@ public class Controller implements Initializable {
 
 
     public void initialisationJoueur(){
-        jeu.getJoueur().getBarreVie().setVie(jeu.getJoueur().getBarreVie().getVieMax());
-        jeu.getJoueur().setEstVivant(true);
-        jeu.getJoueur().setX(20*32);
-        jeu.getJoueur().setY(0*32);
+        Joueur.getUniqueJoueur().getBarreVie().setVie(Joueur.getUniqueJoueur().getBarreVie().getVieMax());
+        Joueur.getUniqueJoueur().setEstVivant(true);
+        Joueur.getUniqueJoueur().setX(20*32);
+        Joueur.getUniqueJoueur().setY(0*32);
     }
 }
 

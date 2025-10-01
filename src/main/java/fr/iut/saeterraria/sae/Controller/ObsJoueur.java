@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Controller;
 
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 import fr.iut.saeterraria.sae.Vue.SpriteJoueur;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
@@ -21,7 +22,7 @@ public class ObsJoueur implements ChangeListener<Number> {
     @Override
     public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
         clavier.update();
-        sprite.mettreAJourSpriteJoueur(jeu.getJoueur());
+        sprite.mettreAJourSpriteJoueur();
     }
     
 }

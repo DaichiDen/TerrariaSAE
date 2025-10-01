@@ -3,26 +3,34 @@ package fr.iut.saeterraria.sae.Modele.Personnages;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
 public class MH extends Ennemi{
+    private static MH uniqueMh = null;
 
-    public MH(String nom, int vieMax, int energieMax, int x, int y, int def, Jeu jeu, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
-        super(nom, vieMax, energieMax, x, y, def, jeu, attaque, tailleL, tailleH, rangeVue, rangeAttaque);
+    private MH() {
+        super("Monsieur Homps", 250, 20, 4500, 0, 5, 2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2, 15, 8);
     }
 
     @Override
     public void action(int x, int y) {
        int attaque = (int) (Math.random() * 10);
         if (getDernièreAttaque() == getCooldown()) {
-            if (this.getAttaque() - getJeu().getJoueur().getDef() > 0) {
+            if (this.getAttaque() - Joueur.getUniqueJoueur().getDef() > 0) {
                 if (attaque<2) {
-                    getJeu().getJoueur().decrementVie(getAttaque());
+                    Joueur.getUniqueJoueur().decrementVie(getAttaque());
                     System.out.println("Mandale");
                 } else {
-                    initialiserProjectile(new Projectile("bdf", getJeu(), this.getX(), this.getY(), getAttaque(), "boule_de_feu", 32, 32), super.getJeu().getJoueur().getX(), super.getJeu().getJoueur().getY());
+                    initialiserProjectile(new Projectile("bdf", this.getX(), this.getY(), getAttaque(), "boule_de_feu", 32, 32), Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY());
                     System.out.println("BDF");
                 }
             }
             setDernièreAttaque(0);
         }
         setDernièreAttaque(getDernièreAttaque() + 1);
+    }
+
+    public static MH getUniqueMh() {
+        if (uniqueMh == null) {
+            uniqueMh = new MH();
+        }
+        return uniqueMh;
     }
 }
