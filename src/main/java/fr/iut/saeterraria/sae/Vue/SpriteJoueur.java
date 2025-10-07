@@ -58,11 +58,11 @@ public class SpriteJoueur extends CreateRessourceVisuel {
             unbindY();
             bindYActif = false;
         }
-        else if (bindYActif && joueur.yProperty().getValue()>=(60-14-8)*32){ //unbind bas 50 est le nombre max de ligne
+        else if (bindYActif && joueur.yProperty().getValue()>=(60-10-8)*32){ //unbind bas 50 est le nombre max de ligne
             unbindY();
             bindYActif = false;
         }
-        else if (!bindYActif && joueur.yProperty().getValue() > 14*32 && joueur.yProperty().getValue() < (60-14-8)*32) {
+        else if (!bindYActif && joueur.yProperty().getValue() > 14*32 && joueur.yProperty().getValue() < (60-10-8)*32) {
             bindY();
             bindYActif = true;
         }

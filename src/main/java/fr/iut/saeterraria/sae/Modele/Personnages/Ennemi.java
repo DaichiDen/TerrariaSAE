@@ -13,6 +13,8 @@ public abstract class Ennemi extends EntiteVivante {
     private long cooldown=60;
     private ComportementEnnemi comportementEnnemi;
 
+    //PB avec ennemis dans CAVE , il ne utilisent pas bien A*
+
     private ArrayList<Item> listDrops;
 
     public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
