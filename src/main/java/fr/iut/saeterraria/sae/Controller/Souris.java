@@ -4,6 +4,7 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Objets.Armure;
 import fr.iut.saeterraria.sae.Modele.Personnages.Case;
+import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.application.Platform;
@@ -19,7 +20,6 @@ import javafx.scene.layout.TilePane;
 import java.util.ArrayList;
 
 public class Souris implements EventHandler<MouseEvent> {
-    private Jeu jeu;
     private Fond fond;
     private TilePane tp;
     private Map map;
@@ -34,8 +34,7 @@ public class Souris implements EventHandler<MouseEvent> {
     @FXML
     private ScrollPane four;
 
-    public Souris(Jeu jeu,Fond fond,Map map,TilePane tp, AnchorPane screenInventaire, ScrollPane craftSansBlocConstruction, ScrollPane craftEtabli, ScrollPane craftForge, ScrollPane four) {
-        this.jeu = jeu;
+    public Souris(Fond fond,Map map,TilePane tp, AnchorPane screenInventaire, ScrollPane craftSansBlocConstruction, ScrollPane craftEtabli, ScrollPane craftForge, ScrollPane four) {
         this.fond = fond;
         this.map = map;
         this.tp = tp;
@@ -53,14 +52,14 @@ public class Souris implements EventHandler<MouseEvent> {
         int x1 = ((int) mouseEvent.getX()); // position x dans le FX
         int y1 = ((int) mouseEvent.getY()); // position y dans le FX
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-            if (jeu.getJoueur().getEstVivant()) {
+            if (Joueur.getUniqueJoueur().getEstVivant()) {
 
-                if (jeu.getJoueur().gunEnMain() && !jeu.getJoueur().isTimeStop()) {
-                    jeu.getJoueur().setTimeStop(true);
+                if (Joueur.getUniqueJoueur().gunEnMain() && !Joueur.getUniqueJoueur().isTimeStop()) {
+                    Joueur.getUniqueJoueur().setTimeStop(true);
 
                     boolean oui = false;
                     int[] indice = new int[2];
-                    ArrayList<Case> tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(80));
+                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(Jeu.getUniqueJeu().getItems().get(80));
                     for(Case c : tab) {
                             if (c.getItem().getCodeObjet()!=0) {
                                 oui = true;
@@ -70,14 +69,14 @@ public class Souris implements EventHandler<MouseEvent> {
                     }
                     if (oui) {
 
-                        jeu.getJoueur().initialiserProjectile(new Projectile("balle", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 5, "balle", jeu.getTaille1bloc(), jeu.getTaille1bloc()), x1, y1);
-                        jeu.getJoueur().getInventaire().getInventaireJoueur().get(indice[0]*6+indice[1]).retireQuantite(1);
+                        Joueur.getUniqueJoueur().initialiserProjectile(new Projectile("balle", Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY(), 5, "balle", Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()), x1, y1);
+                        Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(indice[0]*6+indice[1]).retireQuantite(1);
                     }
 
-                } else if (jeu.getJoueur().arcEnMain()) {
+                } else if (Joueur.getUniqueJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];
-                    ArrayList<Case> tab = jeu.getJoueur().getInventaire().findItem(jeu.getItems().get(77));
+                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(Jeu.getUniqueJeu().getItems().get(77));
                     for(Case c : tab) {
                         if (c.getItem().getCodeObjet()!=0) {
 
@@ -88,35 +87,35 @@ public class Souris implements EventHandler<MouseEvent> {
                     }
                     if (oui) {
 
-                        jeu.getJoueur().initialiserProjectile(new Projectile("Flèche", jeu, jeu.getJoueur().getX(), jeu.getJoueur().getY(), 4, "Flèche", jeu.getTaille1bloc(), jeu.getTaille1bloc()), x1, y1);
-                        jeu.getJoueur().getInventaire().getInventaireJoueur().get(indice[0]*6+indice[1]).retireQuantite(1);
+                        Joueur.getUniqueJoueur().initialiserProjectile(new Projectile("Flèche", Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY(), 4, "Flèche", Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()), x1, y1);
+                        Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(indice[0]*6+indice[1]).retireQuantite(1);
 
                     }
-                } else if (jeu.getJoueur().grappinEnMain()) {
+                } else if (Joueur.getUniqueJoueur().grappinEnMain()) {
                     System.out.println(x1 + "x1" + y1 + "y1");
                     System.out.println(x + "y2" + y + "y1");
 
-                    if (jeu.getJoueur().peutEtreAtteint(x, y, 100)) {
-                        if (jeu.getCarte().getCase(y, x) != 0 && jeu.getCarte().getCase(y, x) != 10 && jeu.getCarte().getCase(y, x) != 18) {
-                            jeu.getJoueur().grappiner(x1, y1);
+                    if (Joueur.getUniqueJoueur().peutEtreAtteint(x, y, 100)) {
+                        if (Jeu.getUniqueJeu().getCarte().getCase(y, x) != 0 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 10 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 18) {
+                            Joueur.getUniqueJoueur().grappiner(x1, y1);
                         }
                     }
 
-                } else if (jeu.getJoueur().miner(x, y)) {
+                } else if (Joueur.getUniqueJoueur().miner(x, y)) {
                     this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// faire de la taille de la map un un getter
                     this.tp.getChildren().add((((y * tp.getPrefColumns()) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
                 } else {
-                    jeu.getJoueur().action(x1, y1);
+                    Joueur.getUniqueJoueur().action(x1, y1);
                 }
             }
 
         }
 
             else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                if (jeu.getJoueur().getEstVivant()) {
+                if (Joueur.getUniqueJoueur().getEstVivant()) {
                     System.out.println("Bloc de craft ? : " +  (map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 15));
-                    System.out.println("Bloc de craft atteignable? : "+ jeu.getJoueur().peutEtreAtteint(x, y, 2.5));
-                    if ( (map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 15) && jeu.getJoueur().peutEtreAtteint(x, y, 2.5)) {
+                    System.out.println("Bloc de craft atteignable? : "+ Joueur.getUniqueJoueur().peutEtreAtteint(x, y, 2.5));
+                    if ( (map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 15) && Joueur.getUniqueJoueur().peutEtreAtteint(x, y, 2.5)) {
                         System.out.println("pitié");
                         ouvrirInventaire();
                         switch (map.getCase(y, x)) {
@@ -130,18 +129,18 @@ public class Souris implements EventHandler<MouseEvent> {
                                 four.toFront();
                                 break;
                         }
-                    } else if (jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem().getCodeObjet() >= 64 && jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem().getCodeObjet() <= 71) {
-                        jeu.getJoueur().equiper((Armure) (jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem()));
+                    } else if (Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() >= 64 && Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() <= 71) {
+                        Joueur.getUniqueJoueur().equiper((Armure) (Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem()));
                     } else {
-                        jeu.getJoueur().poser(x, y);
+                        Joueur.getUniqueJoueur().poser(x, y);
                         this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
                         this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
 
                     }
-                } else if (jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem().getCodeObjet() >= 64 && jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem().getCodeObjet() <= 71) {
-                    jeu.getJoueur().equiper((Armure) (jeu.getJoueur().getInventaire().getCase(0,jeu.getJoueur().getMainCourante()).getItem()));
+                } else if (Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() >= 64 && Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() <= 71) {
+                    Joueur.getUniqueJoueur().equiper((Armure) (Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem()));
                 } else {
-                    jeu.getJoueur().poser(x, y);
+                    Joueur.getUniqueJoueur().poser(x, y);
                     this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
                     this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
                 }
@@ -155,13 +154,13 @@ public class Souris implements EventHandler<MouseEvent> {
     @FXML
     public void ouvrirInventaire() {
         Platform.runLater(() -> screenInventaire.requestFocus());
-        jeu.testCraft();
+        Jeu.getUniqueJeu().testCraft();
         screenInventaire.toFront();
-        jeu.getJoueur().setMarcheDroite(false);
-        jeu.getJoueur().setMarcheGauche(false);
+        Joueur.getUniqueJoueur().setMarcheDroite(false);
+        Joueur.getUniqueJoueur().setMarcheGauche(false);
     }
 
     public void handleCraft (String nom){
-        jeu.getJoueur().craftItem(jeu.getItem(nom));
+        Joueur.getUniqueJoueur().craftItem(Jeu.getUniqueJeu().getItem(nom));
     }
 }

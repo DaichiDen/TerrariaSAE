@@ -7,7 +7,6 @@ import javafx.scene.layout.Pane;
 
 public class VueObjet extends CreateRessourceVisuel{
     private Pane screen;
-    private Jeu jeu;
     private int width,height;
 
     private ImageView spriteActuel;
@@ -16,16 +15,15 @@ public class VueObjet extends CreateRessourceVisuel{
 
     private Rectangle2D hitboxJoueur;
 
-    public void vueObjet(Jeu jeu, Pane screen){
-        this.jeu = jeu;
+    public void vueObjet( Pane screen){
         this.screen = screen;
         this.width=150;
         this.height=150;
         spriteActuel = createImageView("/Sprite_objets/arme_test.png",150,150);
         screen.getChildren().add(spriteActuel);
-        spriteActuel.setId("" + this.jeu.getItems().get(1).getCodeObjet());
-        spriteActuel.translateXProperty().bind(jeu.getEnnemis().get(0).xProperty());
-        spriteActuel.translateYProperty().bind(jeu.getEnnemis().get(0).yProperty());
+        spriteActuel.setId("" + Jeu.getUniqueJeu().getItems().get(1).getCodeObjet());
+        spriteActuel.translateXProperty().bind(Jeu.getUniqueJeu().getEnnemis().get(0).xProperty());
+        spriteActuel.translateYProperty().bind(Jeu.getUniqueJeu().getEnnemis().get(0).yProperty());
         spriteActuel.setFitWidth(54);
         spriteActuel.setFitHeight(64);
     }

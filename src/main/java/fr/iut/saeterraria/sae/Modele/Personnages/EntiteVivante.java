@@ -12,11 +12,11 @@ public abstract class EntiteVivante extends Entite{
 
     private BooleanProperty estVivant;
 
-    private boolean enSaut = false;
+    private boolean enSaut = false; //TODO c'est pas dans la bonne classe
 
     private int vitesseY = 0;
 
-    private int rangeVue;
+    private int rangeVue; //TODO c'est quoi ?
     private int rangeAttaque;
 
     //constantes
@@ -26,8 +26,8 @@ public abstract class EntiteVivante extends Entite{
 
 
 
-    public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, Jeu jeu, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
-        super(nom, x, y, jeu, attaque, tailleL, tailleH);
+    public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
+        super(nom, x, y, attaque, tailleL, tailleH);
 
         this.barreVie = new BarreVie(vieMax);
         this.energieMax = new SimpleIntegerProperty(energieMax);
@@ -68,11 +68,11 @@ public abstract class EntiteVivante extends Entite{
     }
     public void gérerCollisionVerticale(){
         int blocHaut = getyBloc();
-        int blocBas = getyBloc() + getJeu().getTaille1bloc();
+        int blocBas = getyBloc() + Jeu.getUniqueJeu().getTaille1bloc();
         int joueurHaut = getY();
-        int joueurBas = getY() + (getJeu().getTaille1bloc() * 2);
+        int joueurBas = getY() + (Jeu.getUniqueJeu().getTaille1bloc() * 2);
         appliquerCollisionVertical(blocHaut,blocBas,joueurBas,joueurHaut);
-        if (super.getJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 8 ) {
+        if (Jeu.getUniqueJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 8 ) {
             this.decrementVie(1);
         }
     }
@@ -81,7 +81,7 @@ public abstract class EntiteVivante extends Entite{
             setCollisionBas(true);
             enSaut = false;
             vitesseY = 0;
-            setY(blocHaut - (getJeu().getTaille1bloc() * 2));
+            setY(blocHaut - (Jeu.getUniqueJeu().getTaille1bloc() * 2));
         } else if (joueurHaut <= blocBas && vitesseY < 0 && joueurBas > blocBas) {
             vitesseY = 0;
             setY(blocBas);
@@ -96,10 +96,10 @@ public abstract class EntiteVivante extends Entite{
     public void gérerCollisionHorizontale(){
         // Bords du bloc
         int blocGauche = getxBloc();
-        int blocDroite = getxBloc() + super.getJeu().getTaille1bloc();
+        int blocDroite = getxBloc() + Jeu.getUniqueJeu().getTaille1bloc();
         // Bords du joueur
         int joueurGauche = this.getX();
-        int joueurDroite = this.getX() + super.getJeu().getTaille1bloc();
+        int joueurDroite = this.getX() + Jeu.getUniqueJeu().getTaille1bloc();
         appliquerCollisionHorizontale(blocGauche, blocDroite, joueurGauche, joueurDroite);
     }
     public void appliquerCollisionHorizontale(int blocGauche, int blocDroite, int joueurGauche, int joueurDroite){
@@ -107,7 +107,7 @@ public abstract class EntiteVivante extends Entite{
             // Collision côté droit du joueur contre gauche du bloc
             setMarcheDroite(false);
             // Repositionner le joueur pile à gauche du bloc
-            this.setX(blocGauche - super.getJeu().getTaille1bloc());
+            this.setX(blocGauche - Jeu.getUniqueJeu().getTaille1bloc());
         } else if (joueurGauche < blocDroite && joueurDroite > blocDroite) {
             // Collision côté gauche du joueur contre droite du bloc
             setMarcheGauche(false);
@@ -152,8 +152,8 @@ public abstract class EntiteVivante extends Entite{
         projectile.setY(ey);
 
         // Ajouter aux listes
-        getJeu().getListe_projectiles().add(projectile);
-        getJeu().getListe_projectilesObservable().add(projectile);
+        Jeu.getUniqueJeu().getListe_projectiles().add(projectile);
+        Jeu.getUniqueJeu().getListe_projectilesObservable().add(projectile);
     }
 
 

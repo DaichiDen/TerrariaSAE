@@ -20,6 +20,8 @@
 
 
     public class Joueur extends EntiteVivante {
+
+        private static Joueur uniqueJoueur = null;
         private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
         private int[] equipement;
         private BooleanProperty timeStop = new SimpleBooleanProperty(false);
@@ -38,18 +40,25 @@
         private IntegerProperty xMax,yMax;
 
 
-        public Joueur(String nom, Jeu jeu, Pierre_TP pierreTp, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
+        private Joueur(String nom, int rangeVue, int rangeAttaque) {
 
-            super(nom, 20, 100, 20, 20*32, 14*32, 1, 10, jeu,1, tailleL, tailleH, rangeVue, rangeAttaque);
+            super(nom, 20, 100, 20, 20*32, 14*32, 1, 10,1,Jeu.getUniqueJeu().getTaille1bloc(),Jeu.getUniqueJeu().getTaille1bloc()*2,rangeVue,rangeAttaque);
             this.equipement = new int[7];
             this.inventaire = new Inventaire(7,6);
             this.pierreTp = pierreTp;
             this.mainCourante = 0;
             this.xPrec = super.getX()/32;
-            this.xMax = new SimpleIntegerProperty(getX()/super.getJeu().getTaille1bloc());
-            this.yMax = new SimpleIntegerProperty(getY()/super.getJeu().getTaille1bloc());
+            this.xMax = new SimpleIntegerProperty(getX()/Jeu.getUniqueJeu().getTaille1bloc());
+            this.yMax = new SimpleIntegerProperty(getY()/Jeu.getUniqueJeu().getTaille1bloc());
             this.stockItem = new int[2];
 
+        }
+
+        public static Joueur getUniqueJoueur() {
+            if(uniqueJoueur == null) {
+                uniqueJoueur = new Joueur("Joueur",3,3);
+            }
+            return uniqueJoueur;
         }
 
         public boolean isTimeStop(){
@@ -95,10 +104,10 @@
         }
 
         public void mettreAJour() {
-            if (this.getX()/super.getJeu().getTaille1bloc()>this.xMax.get()) {
+            if (this.getX()/Jeu.getUniqueJeu().getTaille1bloc()>this.xMax.get()) {
                 setXMax(this.getX());
             }
-            if (this.getY()/super.getJeu().getTaille1bloc()>this.yMax.get()) {
+            if (this.getY()/Jeu.getUniqueJeu().getTaille1bloc()>this.yMax.get()) {
                 setYMax(this.getY());
             }
             if(getMarcheGauche()){
@@ -108,11 +117,11 @@
                 setDernierPos("droite");
             }
             if (enDash) {
-                Rectangle2D hitboxJoueur = new Rectangle2D(getX(), getY(), getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
+                Rectangle2D hitboxJoueur = new Rectangle2D(getX(), getY(), Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2);
 
-                for (int i = 0; i < super.getJeu().getEnnemis().size(); i++) {
-                    Ennemi e = super.getJeu().getEnnemis().get(i);
-                    Rectangle2D hitboxEnnemi = new Rectangle2D(e.getX(), e.getY(), getJeu().getTaille1bloc(), getJeu().getTaille1bloc()*2);
+                for (int i = 0; i < Jeu.getUniqueJeu().getEnnemis().size(); i++) {
+                    Ennemi e = Jeu.getUniqueJeu().getEnnemis().get(i);
+                    Rectangle2D hitboxEnnemi = new Rectangle2D(e.getX(), e.getY(), Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2);
 
                     if (hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(e)) {
                         ennemis_touchées_dash.add(e);
@@ -142,9 +151,9 @@
         public boolean miner(int x, int y) {
             boolean miner = false;
             if (peutEtreAtteint(x, y, 2.5)) {
-                if ( ((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x))).getResistance() == 1 || getJeu().getCarte().getCase(y, x) != 0 && getJeu().getCarte().getCase(y, x) != 18 && getJeu().getCarte().getCase(y, x) != 22 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()<55 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()>50 && compareResistance(((Bloc) super.getJeu().getItems().get(getJeu().getCarte().getCase(y,x)))) ) {
-                    int[] bloc = getJeu().getCarte().detruireBloc(x, y);
-                    ajouterItem(super.getJeu().getItems().get(bloc[0]), bloc[1]);
+                if ( ((Bloc) Jeu.getUniqueJeu().getItems().get(Jeu.getUniqueJeu().getCarte().getCase(y,x))).getResistance() == 1 || Jeu.getUniqueJeu().getCarte().getCase(y, x) != 0 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 18 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 22 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()<55 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()>50 && compareResistance(((Bloc) Jeu.getUniqueJeu().getItems().get(Jeu.getUniqueJeu().getCarte().getCase(y,x)))) ) {
+                    int[] bloc = Jeu.getUniqueJeu().getCarte().detruireBloc(x, y);
+                    ajouterItem(Jeu.getUniqueJeu().getItems().get(bloc[0]), bloc[1]);
                     miner = true;
                 }
             }
@@ -157,9 +166,9 @@
 
         public void poser(int x, int y) {//x = colonne && y = ligne
             if( ((this.getX()/32)!=x) || ((this.getY()/32)!=y) ) {
-                 if (peutEtreAtteint(x, y, 2.5) && inventaire.getCase(0,mainCourante).getItem().getCodeObjet() < 20 && (getJeu().getCarte().getCase(y, x) == 0 || getJeu().getCarte().getCase(y, x) == 10 || getJeu().getCarte().getCase(y, x) == 18)) {
+                 if (peutEtreAtteint(x, y, 2.5) && inventaire.getCase(0,mainCourante).getItem().getCodeObjet() < 20 && (Jeu.getUniqueJeu().getCarte().getCase(y, x) == 0 || Jeu.getUniqueJeu().getCarte().getCase(y, x) == 10 || Jeu.getUniqueJeu().getCarte().getCase(y, x) == 18)) {
                     if (inventaire.getCase(0,mainCourante).getQuantite()>0) {
-                        getJeu().getCarte().poserBloc(x, y, inventaire.getCase(0,mainCourante).getItem().getCodeObjet());
+                        Jeu.getUniqueJeu().getCarte().poserBloc(x, y, inventaire.getCase(0,mainCourante).getItem().getCodeObjet());
                         inventaire.getCase(0, mainCourante).retireQuantite(1);
                     }
                 }
@@ -169,9 +178,9 @@
 
         @Override
         public void action(int x, int y) {
-            for (EntiteVivante e : super.getJeu().getEnnemis()) {
+            for (EntiteVivante e : Jeu.getUniqueJeu().getEnnemis()) {
 
-                Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(), getJeu().getTaille1bloc(), (getJeu().getTaille1bloc()) * 2);
+                Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(), Jeu.getUniqueJeu().getTaille1bloc(), (Jeu.getUniqueJeu().getTaille1bloc()) * 2);
 
                 // Si le clic est à l'intérieur de la hitbox du mob
                 if (hitboxMob.contains(x, y)) {
@@ -308,13 +317,14 @@
             return xMax.getValue();
         }
         public IntegerProperty getXMaxProperty(){ return xMax; }
-        public void setXMax(int xMax){ this.xMax.setValue(xMax/super.getJeu().getTaille1bloc()); }
+        public void setXMax(int xMax){ this.xMax.setValue(xMax/Jeu.getUniqueJeu().getTaille1bloc()); }
 
         public int getYMax(){
             return yMax.getValue();
         }
         public IntegerProperty getYMaxProperty(){ return yMax; }
-        public void setYMax(int yMax){ this.yMax.setValue(yMax/super.getJeu().getTaille1bloc()); }
+
+        public void setYMax(int yMax){ this.yMax.setValue(yMax/Jeu.getUniqueJeu().getTaille1bloc()); }
 
         public boolean gunEnMain() {
             return inventaire.getCase(0,mainCourante).getItem().getCodeObjet() == 79;
@@ -324,25 +334,25 @@
             switch (armure.getTypeArmure()){
                 case 1:
                     if (equipement[0]==64 || equipement[0]==65) {
-                       inventaire.ajoutInventaire(getJeu().getItems().get(equipement[0]), 1);
+                       inventaire.ajoutInventaire(Jeu.getUniqueJeu().getItems().get(equipement[0]), 1);
                     }
                     equipement[0]=armure.getCodeObjet();
                     break;
                 case 2:
                     if (equipement[1]==66 || equipement[1]==67) {
-                        inventaire.ajoutInventaire(getJeu().getItems().get(equipement[1]), 1);
+                        inventaire.ajoutInventaire(Jeu.getUniqueJeu().getItems().get(equipement[1]), 1);
                     }
                     equipement[1]=armure.getCodeObjet();
                     break;
                 case 3:
                     if (equipement[2]==68 || equipement[2]==69) {
-                        inventaire.ajoutInventaire(getJeu().getItems().get(equipement[2]), 1);
+                        inventaire.ajoutInventaire(Jeu.getUniqueJeu().getItems().get(equipement[2]), 1);
                     }
                     equipement[2]=armure.getCodeObjet();
                     break;
                 case 4:
                     if (equipement[3]==70 || equipement[3]==71) {
-                        inventaire.ajoutInventaire(getJeu().getItems().get(equipement[3]), 1);
+                        inventaire.ajoutInventaire(Jeu.getUniqueJeu().getItems().get(equipement[3]), 1);
                     }
                     equipement[3]=armure.getCodeObjet();
                     break;
@@ -353,15 +363,15 @@
 
         public void updateDefense(){
             for ( int piece : equipement){
-                this.defProperty().setValue(this.defProperty().getValue() + ((Armure)getJeu().getItems().get(piece)).getDefense());
+                this.defProperty().setValue(this.defProperty().getValue() + ((Armure)Jeu.getUniqueJeu().getItems().get(piece)).getDefense());
             }
         }
 
         public void swapItem(int ligneDep, int colonneDep, int ligneFin, int colonneFin) {
             stockItem[0] = inventaire.getCase(ligneDep,colonneDep).getItem().getCodeObjet();
             stockItem[1] = inventaire.getCase(ligneDep,colonneDep).getQuantite();
-            inventaire.getCase(ligneDep,colonneDep).setCase(getJeu().getItems().get(inventaire.getCase(ligneFin,colonneFin).getItem().getCodeObjet()),inventaire.getCase(ligneFin,colonneFin).getQuantite());
-            inventaire.getCase(ligneFin,colonneFin).setCase(getJeu().getItems().get(stockItem[0]), stockItem[1]);
+            inventaire.getCase(ligneDep,colonneDep).setCase(Jeu.getUniqueJeu().getItems().get(inventaire.getCase(ligneFin,colonneFin).getItem().getCodeObjet()),inventaire.getCase(ligneFin,colonneFin).getQuantite());
+            inventaire.getCase(ligneFin,colonneFin).setCase(Jeu.getUniqueJeu().getItems().get(stockItem[0]), stockItem[1]);
         }
 
         public void grappiner(int cibleX, int cibleY){

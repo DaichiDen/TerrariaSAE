@@ -17,15 +17,13 @@ public class VueProjectile extends CreateRessourceVisuel {
     private Pane screen;
     private TilePane tp;
     private Fond fond;
-    private Jeu jeu;
 
     private Map<Projectile, ImageView> sprites = new HashMap<>();
 
 
     private ImageView spriteActuel = new ImageView();
 
-    public VueProjectile(Jeu jeu, Pane screen, TilePane tp, Fond fond) {
-        this.jeu = jeu;
+    public VueProjectile(Pane screen, TilePane tp, Fond fond) {
         this.screen = screen;
         this.tp = tp;
         this.fond = fond;
@@ -66,7 +64,7 @@ public class VueProjectile extends CreateRessourceVisuel {
         for (int j = x - 1; j <= x + 1; j++) {
             for (int i = y - 1; i <= y + 1; i++) {
                 this.tp.getChildren().remove((j * tp.getPrefColumns()) + i);
-                this.tp.getChildren().add((((j * tp.getPrefColumns()) +  i)), new ImageView(fond.getTiles().get(jeu.getCarte().getCase(j, i))));
+                this.tp.getChildren().add((((j * tp.getPrefColumns()) +  i)), new ImageView(fond.getTiles().get(Jeu.getUniqueJeu().getCarte().getCase(j, i))));
             }
         }
     }

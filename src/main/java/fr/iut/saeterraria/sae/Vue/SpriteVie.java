@@ -7,15 +7,13 @@ import javafx.scene.layout.Pane;
 public class SpriteVie extends CreateRessourceVisuel {
     private int[] liste_hp;
     private Pane screen;
-    private Jeu jeu;
     private int width,height;
 
     private int viePre;
     private int vieAct;
 
-    public SpriteVie(Pane screen, Jeu jeu) {
+    public SpriteVie(Pane screen) {
         this.screen = screen;
-        this.jeu = jeu;
         this.width=25;
         this.height=25;
         liste_hp = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};

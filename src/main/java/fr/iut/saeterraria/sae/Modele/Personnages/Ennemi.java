@@ -15,9 +15,9 @@ public abstract class Ennemi extends EntiteVivante {
 
     private ArrayList<Item> listDrops;
 
-    public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def,Jeu jeu, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
+    public Ennemi(String nom, int vieMax,int energieMax, int x, int y, int def, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
 
-        super(nom,vieMax,  energieMax, 20, x, y, def, 5,jeu,attaque, tailleL, tailleH, rangeVue,rangeAttaque );
+        super(nom,vieMax,  energieMax, 20, x, y, def, 5,attaque, tailleL, tailleH, rangeVue,rangeAttaque );
         listDrops = new ArrayList<>();
     }
 
@@ -32,8 +32,8 @@ public abstract class Ennemi extends EntiteVivante {
     public abstract void action(int x, int y);
 
     public int distanceJoueur(int x, int y){
-        int dx = x - getJeu().getJoueur().getX();
-        int dy = y - getJeu().getJoueur().getY();
+        int dx = x - Joueur.getUniqueJoueur().getX();
+        int dy = y - Joueur.getUniqueJoueur().getY();
         int distance = (int) Math.sqrt(dx * dx + dy * dy);
         return distance;
     }
@@ -55,7 +55,7 @@ public abstract class Ennemi extends EntiteVivante {
 
     public boolean detecterJoueur() {// À définir la distance où il détecte le joueur
         boolean aVuJoueur = false;
-        if (peutEtreAtteint(super.getJeu().getJoueur().getX()/32, super.getJeu().getJoueur().getY()/32, 5)) {
+        if (peutEtreAtteint(Joueur.getUniqueJoueur().getX()/32, Joueur.getUniqueJoueur().getY()/32, 5)) {
             aVuJoueur = true;
         }
         return aVuJoueur;

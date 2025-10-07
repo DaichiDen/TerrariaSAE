@@ -7,18 +7,16 @@ import javafx.beans.value.ObservableValue;
 
 public class ObsMapY implements ChangeListener<Number> {
 
-    private Jeu jeu;
     private Fond fond;
 
-    public ObsMapY(Jeu jeu, Fond fond){
-        this.jeu = jeu;
+    public ObsMapY(Fond fond){
         this.fond = fond;
     }
 
     @Override
     public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
         if(!newValue.equals(oldValue) ){
-            if (this.jeu.getCarte().getLigne()>fond.getEnvironnement().getPrefRows()) {
+            if (Jeu.getUniqueJeu().getCarte().getLigne()>fond.getEnvironnement().getPrefRows()) {
                 fond.updateMapY();
                 fond.getEnvironnement().setPrefRows(fond.getEnvironnement().getPrefRows() + 1);
             }

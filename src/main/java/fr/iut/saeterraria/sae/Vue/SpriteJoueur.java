@@ -12,7 +12,6 @@ public class SpriteJoueur extends CreateRessourceVisuel {
 
 
     private Pane screen;
-    private Jeu jeu;
     private int width, height;
     private TilePane background;
     private Pane opacite;
@@ -26,14 +25,13 @@ public class SpriteJoueur extends CreateRessourceVisuel {
     private ImageView marcheNon = createImageView("/Sprite/Hero_stop.png", width, height);
 
 
-    public SpriteJoueur(Jeu jeu, Pane screen,TilePane background, Pane opacite) {
-        this.jeu = jeu;
+    public SpriteJoueur(Pane screen,TilePane background, Pane opacite) {
         this.screen = screen;
         this.width = 150;
         this.height = 150;
-        jeu.getJoueur().marcheGaucheProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
-        jeu.getJoueur().marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
-        jeu.getJoueur().xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(jeu.getJoueur()));
+        Joueur.getUniqueJoueur().marcheGaucheProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(Joueur.getUniqueJoueur()));
+        Joueur.getUniqueJoueur().marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(Joueur.getUniqueJoueur()));
+        Joueur.getUniqueJoueur().xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteJoueur(Joueur.getUniqueJoueur()));
         this.background = background;
         this.opacite = opacite;
         background.getChildren().add(createImageView("/Backgrounds/background.jpg",2000,1120));
@@ -138,10 +136,10 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         opacite.translateYProperty().bind(screen.translateYProperty().multiply(-1));
     }
     public void bindX(){
-        screen.translateXProperty().bind(jeu.getJoueur().xProperty().multiply(-1).add(19*32));
+        screen.translateXProperty().bind(Joueur.getUniqueJoueur().xProperty().multiply(-1).add(19*32));
     }
     public void bindY(){
-        screen.translateYProperty().bind(jeu.getJoueur().yProperty().multiply(-1).add(14*32));
+        screen.translateYProperty().bind(Joueur.getUniqueJoueur().yProperty().multiply(-1).add(14*32));
     }
 }
 

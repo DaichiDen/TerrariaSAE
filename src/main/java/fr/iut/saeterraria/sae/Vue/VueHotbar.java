@@ -1,6 +1,7 @@
 package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
@@ -9,11 +10,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 public class VueHotbar extends SpriteItem {
-    private Jeu jeu;
     private GridPane hotBar;
 
-    public VueHotbar(Jeu jeu, GridPane hotBar) {
-        this.jeu = jeu;
+    public VueHotbar( GridPane hotBar) {
         this.hotBar = hotBar;
         afficherHotBar();
     }
@@ -22,13 +21,13 @@ public class VueHotbar extends SpriteItem {
 
         // Affiche l'hotbar
         for (int j = 0; j < hotBar.getColumnCount(); j++) {
-            if ((jeu.getJoueur().getInventaire().getCase(0,j).getItem().getCodeObjet() != 0)) {
+            if ((Joueur.getUniqueJoueur().getInventaire().getCase(0,j).getItem().getCodeObjet() != 0)) {
 
-                String URL = super.getHmap().get((jeu.getJoueur().getInventaire().getCase(0,j).getItem().getCodeObjet()));
+                String URL = super.getHmap().get((Joueur.getUniqueJoueur().getInventaire().getCase(0,j).getItem().getCodeObjet()));
 
 
 
-                int quantite = (jeu.getJoueur().getInventaire().getCase(0,j).getQuantite());
+                int quantite = (Joueur.getUniqueJoueur().getInventaire().getCase(0,j).getQuantite());
                 afficheItemQuantite(URL, quantite,j);
             } else {
                 structureHotBar(j,false);
@@ -38,7 +37,7 @@ public class VueHotbar extends SpriteItem {
 
     public void afficheItemQuantite(String path, int quantite, int colonne) {
         HBox hBox;
-        if (jeu.getJoueur().getMainCourante() == colonne) {
+        if (Joueur.getUniqueJoueur().getMainCourante() == colonne) {
             hBox = structureHotBar(colonne, true);
         } else {
             hBox = structureHotBar(colonne, false);
@@ -79,14 +78,14 @@ public class VueHotbar extends SpriteItem {
             }
         }
         hotBar.getChildren().remove(caseInventaire);
-        if (jeu.getJoueur().getInventaire().getCase(0,colonne).getItem().getCodeObjet() != 0) { // Si la case a un item
+        if (Joueur.getUniqueJoueur().getInventaire().getCase(0,colonne).getItem().getCodeObjet() != 0) { // Si la case a un item
 
-            String URL = super.getHmap().get((jeu.getJoueur().getInventaire().getCase(0,colonne).getItem().getCodeObjet()));
+            String URL = super.getHmap().get((Joueur.getUniqueJoueur().getInventaire().getCase(0,colonne).getItem().getCodeObjet()));
 
-            int quantite = jeu.getJoueur().getInventaire().getCase(0,colonne).getQuantite();
+            int quantite = Joueur.getUniqueJoueur().getInventaire().getCase(0,colonne).getQuantite();
                 afficheItemQuantite(URL, quantite,colonne);
         }
-        else if (jeu.getJoueur().getMainCourante() == colonne) {
+        else if (Joueur.getUniqueJoueur().getMainCourante() == colonne) {
             structureHotBar(colonne,true);
         }
         else { // Si la case de la hotbar est vide

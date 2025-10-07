@@ -13,14 +13,12 @@ public class VueInventaire extends SpriteItem {
     private Pane fond;
     private Button quitterInventaire;
     private Pane screenInventaire;
-    private Joueur player;
     private GridPane tableauInventaire;//Affichage de l'inventaire
 
     // gridpane.add(new Button(), 1, 0); // column=1 row=0
-    public VueInventaire(Button button, Pane pane, Joueur joueur, GridPane tableauInventaire, Pane fond) {
+    public VueInventaire(Button button, Pane pane, GridPane tableauInventaire, Pane fond) {
         this.quitterInventaire = button;
         this.screenInventaire = pane;
-        this.player = joueur;
         this.tableauInventaire = tableauInventaire;
         this.fond = fond;
         afficherInventaire();
@@ -33,10 +31,10 @@ public class VueInventaire extends SpriteItem {
 
         // Affiche l'hotbar
         for (int j = 0; j < tableauInventaire.getColumnCount(); j++) {
-            if ( player.getInventaire().getCase(0,j).getItem().getCodeObjet() != 0) {
+            if ( Joueur.getUniqueJoueur().getInventaire().getCase(0,j).getItem().getCodeObjet() != 0) {
 
-                String URL = super.getHmap().get((player.getInventaire().getCase(0,j).getItem().getCodeObjet()));
-                int quantite = player.getInventaire().getCase(0,j).getQuantite();
+                String URL = super.getHmap().get((Joueur.getUniqueJoueur().getInventaire().getCase(0,j).getItem().getCodeObjet()));
+                int quantite = Joueur.getUniqueJoueur().getInventaire().getCase(0,j).getQuantite();
                 afficheItemQuantite(URL,quantite, 0, j,0);
             }
             else{
@@ -47,11 +45,11 @@ public class VueInventaire extends SpriteItem {
 
         for (int i = 1; i < tableauInventaire.getRowCount(); i++) {
             for (int j = 0; j < tableauInventaire.getColumnCount(); j++) {
-               if (player.getInventaire().getCase(i,j).getItem().getCodeObjet() != 0) {
+               if (Joueur.getUniqueJoueur().getInventaire().getCase(i,j).getItem().getCodeObjet() != 0) {
 
-                   String URL = super.getHmap().get((player.getInventaire().getCase(i,j).getItem().getCodeObjet()));
+                   String URL = super.getHmap().get((Joueur.getUniqueJoueur().getInventaire().getCase(i,j).getItem().getCodeObjet()));
 
-                   int quantite = player.getInventaire().getCase(i,j).getQuantite();
+                   int quantite = Joueur.getUniqueJoueur().getInventaire().getCase(i,j).getQuantite();
                    afficheItemQuantite(URL, quantite, i, j, 1);
                 }
                 else {
@@ -103,9 +101,9 @@ public class VueInventaire extends SpriteItem {
                 }
             }
         tableauInventaire.getChildren().remove(caseInventaire);
-        if(player.getInventaire().getCase(ligne,colonne).getItem().getCodeObjet()!= 0) {
-            String URL = super.getHmap().get((player.getInventaire().getCase(ligne,colonne).getItem().getCodeObjet()));
-            int quantite = player.getInventaire().getCase(ligne,colonne).getQuantite();
+        if(Joueur.getUniqueJoueur().getInventaire().getCase(ligne,colonne).getItem().getCodeObjet()!= 0) {
+            String URL = super.getHmap().get((Joueur.getUniqueJoueur().getInventaire().getCase(ligne,colonne).getItem().getCodeObjet()));
+            int quantite = Joueur.getUniqueJoueur().getInventaire().getCase(ligne,colonne).getQuantite();
 
             if(ligne==0) {
                 afficheItemQuantite(URL, quantite, ligne, colonne, 0);

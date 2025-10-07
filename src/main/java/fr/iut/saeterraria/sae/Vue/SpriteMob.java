@@ -16,7 +16,6 @@ public class SpriteMob extends CreateRessourceVisuel {
 
 
     private Pane screen;
-    private Jeu jeu;
     private int width,height;
 
 
@@ -24,17 +23,16 @@ public class SpriteMob extends CreateRessourceVisuel {
     private ImageView goblin = createImageView("/Sprite/ogre.png",width,height);
     private ImageView mh = createImageView("/Sprite/MH.png",width,height);
 
-    public SpriteMob(Jeu jeu, Pane screen, String nom){
-        this.jeu = jeu;
+    public SpriteMob( Pane screen, String nom){
         this.screen = screen;
         this.width=150;
         this.height=150;
 
-        for(int i = 0; i < jeu.getMobs().size() ; i++) {
+        for(int i = 0; i < Jeu.getUniqueJeu().getMobs().size() ; i++) {
             int finalI = i;
-            jeu.getMobs().get(i).marcheGaucheProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteMob(jeu.getMobs().get(finalI)));
-                jeu.getMobs().get(i).marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteMob(jeu.getMobs().get(finalI)));
-                jeu.getMobs().get(i).xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteMob(jeu.getMobs().get(finalI)));
+            Jeu.getUniqueJeu().getMobs().get(i).marcheGaucheProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteMob(Jeu.getUniqueJeu().getMobs().get(finalI)));
+                Jeu.getUniqueJeu().getMobs().get(i).marcheDroiteProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteMob(Jeu.getUniqueJeu().getMobs().get(finalI)));
+                Jeu.getUniqueJeu().getMobs().get(i).xProperty().addListener((obs, oldVal, newVal) -> mettreAJourSpriteMob(Jeu.getUniqueJeu().getMobs().get(finalI)));
             }
         }
 

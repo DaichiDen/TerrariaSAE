@@ -18,13 +18,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ObsProjectile implements ListChangeListener<Projectile> {
-    private Jeu jeu;
     private Pane screen;
     private VueProjectile p;
     private HashMap<Projectile, Node> spriteProjectiles;
 
-    public ObsProjectile(Jeu jeu, Pane screen, VueProjectile p) {
-        this.jeu = jeu;
+    public ObsProjectile(Pane screen, VueProjectile p) {
         this.screen = screen;
         this.p = p;
         this.spriteProjectiles = new HashMap<>();
@@ -50,7 +48,7 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
                             if (nodeAMettreAJour != null) {
                                 screen.getChildren().remove(nodeAMettreAJour);
                             }
-                            jeu.getListe_projectilesObservable().remove(projectile_aj);
+                            Jeu.getUniqueJeu().getListe_projectilesObservable().remove(projectile_aj);
                         }
                     });
                 }

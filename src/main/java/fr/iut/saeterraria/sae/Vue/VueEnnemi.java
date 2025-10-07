@@ -19,14 +19,12 @@ public class VueEnnemi extends CreateRessourceVisuel {
 
 
     private Pane screen;
-    private Jeu jeu;
 
 
     private ImageView spriteActuel;
     private Map<Ennemi, ImageView> sprites = new HashMap<>();
 
-    public VueEnnemi(Jeu jeu, Pane screen){
-        this.jeu = jeu;
+    public VueEnnemi(Pane screen){
         this.screen = screen;
 
     }

@@ -21,13 +21,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ObsEnnemi implements ListChangeListener<EntiteVivante> {
-    private Jeu jeu;
     private Pane screen;
     private HashMap<Entite, Node> spritesMobs;
     private HashMap<Entite, ProgressBar> barreVie;
 
-    public ObsEnnemi(Jeu jeu, Pane screen) {
-        this.jeu = jeu;
+    public ObsEnnemi(Pane screen) {
         this.screen = screen;
         this.spritesMobs = new HashMap<>();
         this.barreVie = new HashMap<>();
@@ -89,7 +87,7 @@ public class ObsEnnemi implements ListChangeListener<EntiteVivante> {
                                     spritesMobs.remove(mobAjoute);
                                 }
                                 // (Optionnel) on peut aussi le supprimer de la liste de mobs si ce n’est pas déjà fait
-                                jeu.getMobs().remove(mobAjoute);
+                                Jeu.getUniqueJeu().getMobs().remove(mobAjoute);
                             }
                         });
                     }

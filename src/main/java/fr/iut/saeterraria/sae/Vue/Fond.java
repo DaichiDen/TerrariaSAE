@@ -14,13 +14,11 @@ import java.util.HashMap;
 
 public class Fond extends CreateRessourceVisuel {
 
-    private Jeu jeu;
     private HashMap<Integer, Image> tiles;
     private static int id = 0;
     private TilePane environnement;
 
-    public Fond(TilePane environnement,Jeu jeu) {
-        this.jeu = jeu;
+    public Fond(TilePane environnement) {
         this.tiles = new HashMap<>();
         this.environnement = environnement;
         initialiseTile();
@@ -66,7 +64,7 @@ public class Fond extends CreateRessourceVisuel {
     public void afficherCarte() {
         for (int i = 0; i < environnement.getPrefRows(); i++) {
             for (int j = 0; j < environnement.getPrefColumns(); j++) {
-                this.environnement.getChildren().add(new ImageView(tiles.get(this.jeu.getCarte().getCase(i, j))));
+                this.environnement.getChildren().add(new ImageView(tiles.get(Jeu.getUniqueJeu().getCarte().getCase(i, j))));
             }
         }
     }
@@ -90,14 +88,14 @@ public class Fond extends CreateRessourceVisuel {
     public void updateMapX() {
         //X+1 = ajouter 1 colonne et donc ajouter à chaque ligne une case
         for (int x = 0; x < this.environnement.getPrefRows(); x++) {
-            this.environnement.getChildren().add((x*environnement.getPrefColumns()+environnement.getPrefColumns()+x),new ImageView(tiles.get(this.jeu.getCarte().getCase(x, environnement.getPrefColumns()))));
+            this.environnement.getChildren().add((x*environnement.getPrefColumns()+environnement.getPrefColumns()+x),new ImageView(tiles.get(Jeu.getUniqueJeu().getCarte().getCase(x, environnement.getPrefColumns()))));
         }
     }
 
     public void updateMapY() {
         //Y+1 = ajouter 1 ligne donc ajouter à chaque colonne une case
         for (int y = 0; y < this.environnement.getPrefColumns(); y++) {
-            this.environnement.getChildren().add(((environnement.getPrefRows()*environnement.getPrefColumns())+y),new ImageView(tiles.get(this.jeu.getCarte().getCase(environnement.getPrefRows(), y))));
+            this.environnement.getChildren().add(((environnement.getPrefRows()*environnement.getPrefColumns())+y),new ImageView(tiles.get(Jeu.getUniqueJeu().getCarte().getCase(environnement.getPrefRows(), y))));
         }
     }
 

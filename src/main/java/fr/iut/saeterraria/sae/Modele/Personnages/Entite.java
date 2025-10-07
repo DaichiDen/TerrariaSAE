@@ -4,13 +4,14 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 import javafx.beans.property.*;
 import javafx.geometry.Rectangle2D;
 
-
+/*
+ *
+ */
 public abstract class Entite {
 
     private IntegerProperty x, y;
     private IntegerProperty xHitbox, yHitbox;
     private StringProperty nom;
-    private Jeu jeu;
     private int attaque;
     private Rectangle2D hitbox;
 
@@ -32,11 +33,10 @@ public abstract class Entite {
 //    MediaPlayer damage1 = super.Sonore("/Sound/damage1.wav");
 //    MediaPlayer damage2 = super.Sonore("/Sound/damage2.wav");
 
-    public Entite(String nom, int x, int y, Jeu jeu, int attaque, int tailleL, int tailleH) {
+    public Entite(String nom, int x, int y, int attaque, int tailleL, int tailleH) {
         this.nom = new SimpleStringProperty(nom);
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
-        this.jeu = jeu;
         this.attaque = attaque;
         this.tailleL = tailleL;
         this.tailleH = tailleH;
@@ -196,14 +196,11 @@ public abstract class Entite {
     }
     public int getAttaque() { return this.attaque;}
     public void setAttaque(int attaque) { this.attaque = attaque;}
-    public Jeu getJeu() {
-        return jeu;
-    }
 
     public boolean estTraversable(int x,int y){
         boolean peutEtreTraversé = false;
 
-        if(jeu.getCarte().getCase(x, y) != 0 && jeu.getCarte().getCase(x, y) != 10 && jeu.getCarte().getCase(x, y) != 18){
+        if(Jeu.getUniqueJeu().getCarte().getCase(x, y) != 0 && Jeu.getUniqueJeu().getCarte().getCase(x, y) != 10 && Jeu.getUniqueJeu().getCarte().getCase(x, y) != 18){
             peutEtreTraversé = true;
         }
         return peutEtreTraversé;
@@ -211,7 +208,7 @@ public abstract class Entite {
 
     public boolean estDansMap(int x,int y){
         boolean estDansLesLimites = false;
-        if((x >= 0 && x < this.jeu.getCarte().getLigne()) && (y >= 0 && y < jeu.getCarte().getColonne())){
+        if((x >= 0 && x < Jeu.getUniqueJeu().getCarte().getLigne()) && (y >= 0 && y < Jeu.getUniqueJeu().getCarte().getColonne())){
             estDansLesLimites=true;
         }
         return estDansLesLimites;
@@ -232,17 +229,17 @@ public abstract class Entite {
 
 
 
-        int caseX =(getX() / jeu.getTaille1bloc());
-        int caseY =(getY() / jeu.getTaille1bloc());
+        int caseX =(getX() / Jeu.getUniqueJeu().getTaille1bloc());
+        int caseY =(getY() / Jeu.getUniqueJeu().getTaille1bloc());
         //boucle sur les 4 blocs autour du joueur , i+1 i-1 ,j+1 j-1
         for (int i = caseY - 1; i <= caseY + 2; i++) { // +2 pour la taille du personnage (2 blocs de hauteur)
             for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (estDansMap(i,j)) {
                     if (estTraversable(i,j)) { 
 
-                        xBloc = jeu.getCarte().getCoordonnéesX(j);
-                        yBloc = jeu.getCarte().getCoordonnéesY(i);
-                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, jeu.getTaille1bloc(), jeu.getTaille1bloc()); // création d'un rectangle de hitbox pour le bloc en cours
+                        xBloc = Jeu.getUniqueJeu().getCarte().getCoordonnéesX(j);
+                        yBloc = Jeu.getUniqueJeu().getCarte().getCoordonnéesY(i);
+                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()); // création d'un rectangle de hitbox pour le bloc en cours
                         if (hitboxEntite.intersects(hitboxBloc)) {// si le rectangle du joueur se superpose au carré du bloc alors :
                             collisionBas = true;
                             return true;
@@ -262,14 +259,14 @@ public abstract class Entite {
         Rectangle2D hitboxEntite = getHitbox();
         setTailleH(tailleH);
         setTailleL(tailleL);
-        int caseX =  (this.getX() / jeu.getTaille1bloc());
-        int caseY = (this.getY() / jeu.getTaille1bloc());
+        int caseX =  (this.getX() / Jeu.getUniqueJeu().getTaille1bloc());
+        int caseY = (this.getY() / Jeu.getUniqueJeu().getTaille1bloc());
         for (int i = caseY ; i <= caseY + 2; i++) {
             for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (estDansMap(i,j)) {
                     if (estTraversable(i,j)) {
-                        xBloc = jeu.getCarte().getCoordonnéesX(j);
-                        yBloc = jeu.getCarte().getCoordonnéesY(i);
+                        xBloc = Jeu.getUniqueJeu().getCarte().getCoordonnéesX(j);
+                        yBloc = Jeu.getUniqueJeu().getCarte().getCoordonnéesY(i);
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, tailleL, tailleH);
 
                         if (hitboxEntite.intersects(hitboxBloc)) {
