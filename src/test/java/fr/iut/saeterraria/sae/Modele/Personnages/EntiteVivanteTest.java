@@ -1,17 +1,15 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class EntiteVivanteTest {
-   private Map map;
+   private Carte carte;
    private Jeu jeu;
     @BeforeEach void test(){
-        map = new Map();
+        carte = new Carte();
         jeu = new Jeu("Joueur");
     }
 

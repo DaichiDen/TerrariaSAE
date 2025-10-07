@@ -181,7 +181,7 @@
          "source":"Tiled\/Minerais_DELJCCium.tsx"
         }],
  "tilewidth":32,
- "type":"map",
+ "type":"carte",
  "version":"1.10",
  "width":416
 }

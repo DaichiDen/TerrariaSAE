@@ -1,10 +1,9 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import javafx.beans.property.*;
 import javafx.geometry.Rectangle2D;
-import fr.iut.saeterraria.sae.Modele.Map.Map;
 
 public class Projectile extends Entite{
     private StringProperty nom;
@@ -97,11 +96,11 @@ public class Projectile extends Entite{
     public void explosion() {
         int x = getX() / 32;
         int y = getY() / 32;
-        Map map = Jeu.getUniqueJeu().getCarte();
+        Carte carte = Jeu.getUniqueJeu().getCarte();
         for (int j = x - 1; j <= x + 1; j++) {
             for (int i = y - 1; i <= y + 1; i++) {
-                if (map.getCase(i, j) != 0 && map.getCase(i, j) != 10 && map.getCase(i, j) != 18) {
-                    map.detruireBloc(j,i); // faire avec la resistance comme pour la pioche et la roche (voir avec luc et dedou) + mettre à jour la map héhé
+                if (carte.getCase(i, j) != 0 && carte.getCase(i, j) != 10 && carte.getCase(i, j) != 18) {
+                    carte.detruireBloc(j,i); // faire avec la resistance comme pour la pioche et la roche (voir avec luc et dedou) + mettre à jour la map héhé
                 }
                 Rectangle2D touché = new Rectangle2D(j*32, i*32,Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc());
                 for (int e = 0; e < Jeu.getUniqueJeu().getMobs().size(); e++) {

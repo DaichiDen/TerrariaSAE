@@ -208,7 +208,7 @@ public abstract class Entite {
 
     public boolean estDansMap(int x,int y){
         boolean estDansLesLimites = false;
-        if((x >= 0 && x < Jeu.getUniqueJeu().getCarte().getLigne()) && (y >= 0 && y < Jeu.getUniqueJeu().getCarte().getColonne())){
+        if((x >= 0 && x < Jeu.getUniqueJeu().getCarte().recupLigneTaille()) && (y >= 0 && y < Jeu.getUniqueJeu().getCarte().recupColonneTaille())){
             estDansLesLimites=true;
         }
         return estDansLesLimites;

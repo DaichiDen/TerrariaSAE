@@ -16,7 +16,7 @@ public class ObsMapY implements ChangeListener<Number> {
     @Override
     public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
         if(!newValue.equals(oldValue) ){
-            if (Jeu.getUniqueJeu().getCarte().getLigne()>fond.getEnvironnement().getPrefRows()) {
+            if (Jeu.getUniqueJeu().getCarte().recupLigneTaille()>fond.getEnvironnement().getPrefRows()) {
                 fond.updateMapY();
                 fond.getEnvironnement().setPrefRows(fond.getEnvironnement().getPrefRows() + 1);
             }

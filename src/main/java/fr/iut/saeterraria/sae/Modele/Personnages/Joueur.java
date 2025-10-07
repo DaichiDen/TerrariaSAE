@@ -1,6 +1,5 @@
     package fr.iut.saeterraria.sae.Modele.Personnages;
     import fr.iut.saeterraria.sae.Modele.Jeu;
-    import fr.iut.saeterraria.sae.Modele.Map.Map;
     import fr.iut.saeterraria.sae.Modele.Objets.*;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
@@ -12,8 +11,6 @@
     import javafx.beans.property.SimpleIntegerProperty;
 
     import javafx.geometry.Rectangle2D;
-
-    import javafx.scene.input.MouseEvent;
 
 
     import java.util.*;

@@ -12,7 +12,6 @@ import fr.iut.saeterraria.sae.Modele.Personnages.*;
 import fr.iut.saeterraria.sae.Modele.Map.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.layout.TilePane;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,8 +20,7 @@ import java.util.HashMap;
 public class Jeu {
     private static Jeu uniqueJeu = null;
 
-    private Map carte;
-    private TilePane tp;
+    private Carte carte;
     private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
@@ -33,12 +31,12 @@ public class Jeu {
 
     public final static int taille1bloc = 32;
 
-    private Jeu(String nomJoueur){
+    private Jeu(){
         items = new HashMap<>();
         initialiseItems();
         initializeRecettes();
         initializeBlocConstruction();
-        carte = new Map();
+        carte = new Carte();
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);
@@ -49,7 +47,7 @@ public class Jeu {
 
     public static Jeu getUniqueJeu() {
         if(uniqueJeu == null) {
-            uniqueJeu = new Jeu("Joueur");
+            uniqueJeu = new Jeu();
         }
         return uniqueJeu;
     }
@@ -156,7 +154,7 @@ public class Jeu {
         return entite.getBarreVie().getVie()>0;
     }
 
-    public Map getCarte(){
+    public Carte getCarte(){
         return carte;
     }
 

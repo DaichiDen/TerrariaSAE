@@ -1,16 +1,13 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Map.Map;
-import  javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.geometry.Rectangle2D;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 
 import java.util.ArrayList;
 
 public class PNJ extends EntiteVivante{
 
     private ArrayList<String> dialogue;
-    public PNJ(String nom, int x, int y, Map map, Jeu jeu, int tailleL, int tailleH) {
+    public PNJ(String nom, int x, int y, Carte carte, Jeu jeu, int tailleL, int tailleH) {
 
         super(nom, 20, 20, 10, x, y, 2, 0,0, tailleL, tailleH, 1,1);
 

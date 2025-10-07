@@ -1,15 +1,15 @@
 package fr.iut.saeterraria.sae.Modele.A_Star;
 
-import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 
 import java.util.*;
 
 public class Algo_A_Star {
 
-    private Map map;
+    private Carte carte;
 
-    public Algo_A_Star(Map map) {
-        this.map = map;
+    public Algo_A_Star(Carte carte) {
+        this.carte = carte;
     }
 
     public List<Node> trouverchemin(int x1,int y1,int x2,int y2){
@@ -76,15 +76,15 @@ public class Algo_A_Star {
         return neighbors;
     }
     private boolean inBounds(int x, int y) { // à refaire, quand on fera des collisions au bord de la map
-        return x >= 0 && x < map.getColonne() && y >= 0 && y < map.getLigne();
+        return x >= 0 && x < carte.recupColonneTaille() && y >= 0 && y < carte.recupLigneTaille();
     }
     public boolean isWalkable(int x, int y) {
         // On s'assure que les coordonnées sont dans les limites de la carte
-        if (y < 0 || y >= map.getLigne() || x < 0 || x >= map.getColonne()) {
+        if (y < 0 || y >= carte.recupLigneTaille() || x < 0 || x >= carte.recupColonneTaille()) {
             return false;
         }
 
-        int val = map.getCase(y, x); // attention, map[y][x] est l'ordre ligne-colonne
+        int val = carte.getCase(y, x); // attention, map[y][x] est l'ordre ligne-colonne
         return val == 0; // Seul le ciel est considéré comme marchable
     }
     private int heuristic(Node a, Node b) {

@@ -1,7 +1,7 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class JoueurTest {
     private Jeu jeu;
-    private Map map;
+    private Carte carte;
     @BeforeEach void Test(){
         jeu = new Jeu("Stong");
-        map = jeu.getCarte();
+        carte = jeu.getCarte();
         jeu.getJoueur().ajouterItem(jeu.getItems().get(3),2); // On place 2 bois dans l'inventaire du joueur [0][0] (ligne 0 colonne 0)
     }
     @Test

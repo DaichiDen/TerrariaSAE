@@ -161,7 +161,7 @@
          "source":"Tiled\/Fonc\u00e9_mur_bois.tsx"
         }],
  "tilewidth":32,
- "type":"map",
+ "type":"carte",
  "version":"1.10",
  "width":192
 }
