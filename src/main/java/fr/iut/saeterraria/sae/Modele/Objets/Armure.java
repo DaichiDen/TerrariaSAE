@@ -8,8 +8,8 @@ public class Armure extends Equipement {
     private DoubleProperty defense; // Valeur de défense de l'armure
     private int typeArmure;
 
-    public Armure (String nom, String desc, double defense, BlocConstruction blocConstruction, int typeArmure) {
-        super(nom,desc,blocConstruction);
+    public Armure (String nom, String desc, double defense, BlocConstruction blocConstruction, int typeArmure, int codeobjet) {
+        super(nom,desc,blocConstruction,codeobjet);
         this.defense = new SimpleDoubleProperty(defense);
     this.typeArmure = typeArmure;
     }

@@ -8,13 +8,13 @@ import java.util.HashMap;
 public class BlocConstruction extends Bloc {
     HashMap<Integer, Recette> listeRecettes;
 
-    public BlocConstruction(String nom, String desc, int typeBloc, int resistance, BlocConstruction provenance) {
-        super(nom,desc, resistance,provenance);
+    public BlocConstruction(String nom, String desc, int typeBloc, int resistance, BlocConstruction provenance, int codeobjet) {
+        super(nom,desc, resistance,provenance, codeobjet);
         this.listeRecettes = new HashMap<>();
     }
 
-    public BlocConstruction(String nom, String desc, int typeBloc, int resistance) {
-        super(nom,desc, resistance);
+    public BlocConstruction(String nom, String desc, int typeBloc, int resistance, int codeobjet) {
+        super(nom,desc, resistance, codeobjet);
         this.listeRecettes = new HashMap<>();
     }
 

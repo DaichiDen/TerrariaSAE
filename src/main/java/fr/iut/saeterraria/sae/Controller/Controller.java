@@ -109,6 +109,8 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Jeu.getUniqueJeu();
+        ListeItems.initialiserRecettes();
+        ListeItems.initialiserBlocConstructions();
         zoneNom.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 confirmerNom();
@@ -141,8 +143,8 @@ public class Controller implements Initializable {
         vuejoueur = new SpriteJoueur(screen, background,opaciteBackground); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.mettreAJourSpriteJoueur(Joueur.getUniqueJoueur());
         vueCraft = new VueCraft(craftSansBlocConstruction,craftEtabli,craftForge,caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge,
-                ((BlocConstruction) Jeu.getUniqueJeu().getItems().get(11)).getListeRecette(), ((BlocConstruction) Jeu.getUniqueJeu().getItems().get(12)).getListeRecette(),
-                ((BlocConstruction) Jeu.getUniqueJeu().getItems().get(13)).getListeRecette(),Jeu.getUniqueJeu().getItems(), caseRecetteFour, ((BlocConstruction) Jeu.getUniqueJeu().getItems().get(14)).getListeRecette());
+                ((BlocConstruction) ListeItems.getItemParId(11)).getListeRecette(), ((BlocConstruction) ListeItems.getItemParId(12)).getListeRecette(),
+                ((BlocConstruction) ListeItems.getItemParId(13)).getListeRecette(), caseRecetteFour, ((BlocConstruction) ListeItems.getItemParId(14)).getListeRecette());
 
         screenPrincipal.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
         screen.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
@@ -258,17 +260,15 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
-        Joueur.getUniqueJoueur().ajouterItem(Jeu.getUniqueJeu().getItems().get(20),1);
-        Joueur.getUniqueJoueur().ajouterItem(Jeu.getUniqueJeu().getItems().get(72),1);
-        Joueur.getUniqueJoueur().ajouterItem(Jeu.getUniqueJeu().getItems().get(78),1);
-        Joueur.getUniqueJoueur().ajouterItem(Jeu.getUniqueJeu().getItems().get(77),64);
-        Joueur.getUniqueJoueur().ajouterItem(Jeu.getUniqueJeu().getItems().get(51),1);
-        Joueur.getUniqueJoueur().ajouterItem(Jeu.getUniqueJeu().getItems().get(54),1);
-        Joueur.getUniqueJoueur().ajouterItem(Jeu.getUniqueJeu().getItems().get(51),1);
-        Joueur.getUniqueJoueur().ajouterItem(Jeu.getUniqueJeu().getItems().get(79),1);
-        Joueur.getUniqueJoueur().ajouterItem(Jeu.getUniqueJeu().getItems().get(80),64);
-
-
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(20),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(72),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(78),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(77),64);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(51),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(54),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(51),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(79),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(80),64);
     }
 
     @FXML

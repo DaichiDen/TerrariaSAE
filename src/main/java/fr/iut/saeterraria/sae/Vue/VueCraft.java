@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import fr.iut.saeterraria.sae.Modele.Objets.Recette;
+import fr.iut.saeterraria.sae.Modele.Personnages.ListeItems;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -16,10 +17,9 @@ public class VueCraft extends SpriteItem {
     private ScrollPane craftSansBlocConstruction,craftEtabli,craftForge, four;
     private VBox caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge, caseRecetteFour;
     private HashMap<Integer, Recette> recetteSansBloc,recetteEtabli,recetteForge, recetteFour;
-    private HashMap<Integer, Item> items;
 
     public VueCraft(ScrollPane craftSansBlocConstruction,ScrollPane craftEtabli,ScrollPane craftForge,VBox caseRecetteSansBloc,VBox caseRecetteEtabli,VBox caseRecetteForge,
-                    HashMap<Integer,Recette> recetteSansBloc,HashMap<Integer, Recette> recetteEtabli,HashMap<Integer, Recette> recetteForge, HashMap<Integer,Item> items,
+                    HashMap<Integer,Recette> recetteSansBloc,HashMap<Integer, Recette> recetteEtabli,HashMap<Integer, Recette> recetteForge,
                     VBox caseRecetteFour, HashMap<Integer, Recette> recetteFour) {
         this.craftSansBlocConstruction = craftSansBlocConstruction;
         this.craftEtabli = craftEtabli;
@@ -32,7 +32,6 @@ public class VueCraft extends SpriteItem {
         this.recetteForge = recetteForge;
         this.caseRecetteFour = caseRecetteFour;
         this.recetteFour = recetteFour;
-        this.items = items;
 
         craftSansBlocConstruction.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         craftEtabli.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -51,7 +50,7 @@ public class VueCraft extends SpriteItem {
             VBox sectionItemConstruit = new VBox();
             VBox sectionItemsNecessaires = new VBox();
             sectionItemConstruit.getChildren().add(super.createImageView(super.getHmap().get(codeObjet), 45, 45));
-            sectionItemConstruit.getChildren().add(super.createLabelNom(items.get(codeObjet).getName()));
+            sectionItemConstruit.getChildren().add(super.createLabelNom(ListeItems.getItemParId(codeObjet).getName()));
 
             sectionItemConstruit.prefWidthProperty().bind(blocRecette.widthProperty().divide(2));
             sectionItemsNecessaires.prefWidthProperty().bind(blocRecette.widthProperty().divide(2));
