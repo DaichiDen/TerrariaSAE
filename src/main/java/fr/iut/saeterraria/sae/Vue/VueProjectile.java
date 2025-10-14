@@ -35,10 +35,10 @@ public class VueProjectile extends CreateRessourceVisuel {
 
         if (sprite == null) {
             // Si pas existant, créer et configurer le sprite une fois
-            if (projectile.getType().equals("Flèche")) {
+            if (projectile.getNom().equals("flèche")) {
                 sprite = createImageView("/Sprite_objets/Flèche.png", 24, 24);
 
-            } else if (projectile.getType().equals("balle")) {
+            } else if (projectile.getNom().equals("balle")) {
                 sprite = createImageView("/Sprite_objets/Balle.png", 20, 20);
 
             } else {

@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Controller;
 
+import fr.iut.saeterraria.sae.Modele.Personnages.BouleDeFeu;
 import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
 
 import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
@@ -35,8 +36,10 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
 
                     projectile_aj.xProperty().addListener((obs, oldVal, newVal) -> p.mettreAJourSpriteProjectile(projectile_aj));
                     projectile_aj.yProperty().addListener((obs, oldVal, newVal) -> p.mettreAJourSpriteProjectile(projectile_aj));
-                    projectile_aj.aExploséProperty().addListener((obs, oldVal, newVal) -> p.detruireBlocExplosion(projectile_aj.getY() / 32, projectile_aj.getX() / 32));
-
+                    //TODO oe ok peut mieux faire le boug
+                    if(projectile_aj.getClass().equals(BouleDeFeu.class)) {
+                        ((BouleDeFeu) projectile_aj).aExploséProperty().addListener((obs, oldVal, newVal) -> p.detruireBlocExplosion(projectile_aj.getY() / 32, projectile_aj.getX() / 32));
+                    }
                     // Met à jour le sprite depuis VueProjectile
                     p.mettreAJourSpriteProjectile(projectile_aj); // <- pour forcer la création du sprite
                     Node sprite = p.getSprite(projectile_aj);     // <- nouvelle méthode à créer

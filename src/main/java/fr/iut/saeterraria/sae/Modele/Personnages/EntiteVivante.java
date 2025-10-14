@@ -117,44 +117,8 @@ public abstract class EntiteVivante extends Entite{
     }
 
 
-    public void initialiserProjectile(Projectile projectile, int cibleX, int cibleY) {
-        // Position de l'entité
-        int ex = this.getX();
-        int ey = this.getY();
 
-        // Direction du tire
-        int dx = cibleX - ex;
-        int dy = cibleY - ey;
 
-        // Normalisation du vecteur (dx, dy)
-        int distance = (int) Math.sqrt(dx * dx + dy * dy);
-        if (distance == 0) distance = 1; // éviter division par zéro
-
-        // Vitesse initiale (puissance du tir)
-        int puissance = 35;
-
-        int vx = (int) (((float) dx / distance) * puissance);
-        int vy = (int) (((float) dy / distance) * puissance);
-
-        ajouterProjectile(projectile, vx, vy, ex, ey);
-    }
-    public void ajouterProjectile(Projectile projectile, int vx, int vy, int ex, int ey){
-        // Appliquer la vitesse initiale au projectile
-        projectile.setForceX(vx);
-        projectile.setForceY(vy);
-
-        // Position de départ = entité
-        if(vx < 0){
-            projectile.setX(ex);
-        }else{
-            projectile.setX(ex+32);
-        }
-        projectile.setY(ey);
-
-        // Ajouter aux listes
-        Jeu.getUniqueJeu().getListe_projectiles().add(projectile);
-        Jeu.getUniqueJeu().getListe_projectilesObservable().add(projectile);
-    }
 
 
 

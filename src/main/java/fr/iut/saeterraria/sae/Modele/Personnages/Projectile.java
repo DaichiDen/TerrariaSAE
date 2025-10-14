@@ -6,35 +6,18 @@ import javafx.beans.property.*;
 import javafx.geometry.Rectangle2D;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 
-public class Projectile extends Entite{
+public abstract class Projectile extends Entite{
     private StringProperty nom;
-    private int gravité = 1;
     private DoubleProperty forceX = new SimpleDoubleProperty(0), forceY = new SimpleDoubleProperty(0);
     private int xBloc, yBloc;
     private BooleanProperty actif;
-    private String type;
 
-    private int xExplosion, yExplosion;
-    private BooleanProperty aExplosé = new SimpleBooleanProperty(false);
-
-
-    public Projectile(String nom, int xJoueur, int yJoueur, int attaque, String type, int tailleL, int tailleH) {
+    public Projectile(String nom, int xJoueur, int yJoueur, int attaque, int tailleL, int tailleH) {
         super(nom, xJoueur, yJoueur, attaque, tailleL, tailleH);
         this.nom = new SimpleStringProperty(nom);
         this.actif = new SimpleBooleanProperty(true);
-        this.type=type;
-
     }
 
-    public BooleanProperty aExploséProperty() {
-        return aExplosé;
-    }
-    public boolean getaExplosé(){
-        return aExplosé.getValue();
-    }
-    public void setaExplosé(boolean a){
-        aExplosé.setValue(a);
-    }
 
     public BooleanProperty getActifProperty() {
         return actif;
@@ -45,6 +28,7 @@ public class Projectile extends Entite{
     public boolean getActif() {
         return actif.getValue();
     }
+
 
     public int getxBloc() {
         return xBloc;
@@ -57,18 +41,6 @@ public class Projectile extends Entite{
     }
     public void setyBloc(int yBloc) {
         this.yBloc = yBloc;
-    }
-    public String getType() {
-        return type;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
-
-
-    @Override
-    public int getGravité() {
-        return gravité;
     }
 
     public String getNom() {
@@ -93,29 +65,49 @@ public class Projectile extends Entite{
         this.forceY.setValue(forceY);
     }
 
-    //TODO faire des sous-classes : l'explosion c'est uniquement pour les boules de feu, pas pur les balles
-    public void explosion() {
-        int x = getX() / 32;
-        int y = getY() / 32;
-        Map map = Jeu.getUniqueJeu().getCarte();
-        for (int j = x - 1; j <= x + 1; j++) {
-            for (int i = y - 1; i <= y + 1; i++) {
-                if (map.getCase(i, j) != 0 && map.getCase(i, j) != 10 && map.getCase(i, j) != 18) {
-                    map.detruireBloc(j,i); // faire avec la resistance comme pour la pioche et la roche (voir avec luc et dedou) + mettre à jour la map héhé
-                }
-                Rectangle2D touché = new Rectangle2D(j*32, i*32,Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc());
-                for (int e = 0; e < Jeu.getUniqueJeu().getMobs().size(); e++) {
-                    if (touché.intersects(Jeu.getUniqueJeu().getMobs().get(e).getHitbox()) && Jeu.getUniqueJeu().getMobs().get(e).getDef()<8) {
-                        Jeu.getUniqueJeu().getMobs().get(e).decrementVie(8-Jeu.getUniqueJeu().getMobs().get(e).getDef());
-                    }
-                }
-                if(Joueur.getUniqueJoueur().getHitbox().intersects(touché) && Joueur.getUniqueJoueur().getDef()<5){
-                    Joueur.getUniqueJoueur().decrementVie(5-Joueur.getUniqueJoueur().getDef());
-                }
-                xExplosion = x;
-                yExplosion = y;
-            }
-        }
-        setaExplosé(true);
+    //TODO mettre des limites à la balle à babar pour timestop
+    public void màjProjectile(){
+        this.setX(this.getX() + (int) this.getForceX());
+        this.setY(this.getY() + (int) this.getForceY());
     }
+
+    public void initialiserProjectile(int cibleX, int cibleY) {
+        // Position de l'entité
+        int ex = this.getX();
+        int ey = this.getY();
+
+        // Direction du tire
+        int dx = cibleX - ex;
+        int dy = cibleY - ey;
+
+        // Normalisation du vecteur (dx, dy)
+        int distance = (int) Math.sqrt(dx * dx + dy * dy);
+        if (distance == 0) distance = 1; // éviter division par zéro
+
+        // Vitesse initiale (puissance du tir)
+        int puissance = 35;
+
+        int vx = (int) (((float) dx / distance) * puissance);
+        int vy = (int) (((float) dy / distance) * puissance);
+
+        ajouterProjectile(vx, vy, ex, ey);
+    }
+    public void ajouterProjectile(int vx, int vy, int ex, int ey){
+        // Appliquer la vitesse initiale au projectile
+        this.setForceX(vx);
+        this.setForceY(vy);
+
+        // Position de départ = entité
+        if(vx < 0){
+            this.setX(ex);
+        }else{
+            this.setX(ex+32);
+        }
+        this.setY(ey);
+
+        // Ajouter aux listes
+        Jeu.getUniqueJeu().getListe_projectiles().add(this);
+        Jeu.getUniqueJeu().getListe_projectilesObservable().add(this);
+    }
+    public abstract void action();
 }

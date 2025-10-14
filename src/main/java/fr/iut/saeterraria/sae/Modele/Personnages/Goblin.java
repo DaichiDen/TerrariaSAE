@@ -12,7 +12,8 @@ public class Goblin extends Ennemi{
     public void action(int x, int y) {
         if(getDernièreAttaque()==getCooldown()) {
             if (this.getAttaque() - Joueur.getUniqueJoueur().getDef() > 0){
-                initialiserProjectile(new Projectile("Flèche",this.getX(),this.getY(),1,"Flèche", 16,16),Joueur.getUniqueJoueur().getX(),Joueur.getUniqueJoueur().getY());
+                Projectile p=new Fleche(this.getX(), this.getY());
+                p.initialiserProjectile(Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY());
             }
             setDernièreAttaque(0);
         }

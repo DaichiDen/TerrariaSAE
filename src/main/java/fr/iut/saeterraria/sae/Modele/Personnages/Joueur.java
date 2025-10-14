@@ -61,12 +61,6 @@
             return uniqueJoueur;
         }
 
-        public boolean isTimeStop(){
-            return timeStop.getValue();
-        }
-        public void setTimeStop(boolean timeStop) {
-            this.timeStop.setValue(timeStop);
-        }
 
         public void setDernierPos(String val){
             this.dernierPos=val;

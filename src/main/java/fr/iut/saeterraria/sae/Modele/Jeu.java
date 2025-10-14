@@ -30,6 +30,7 @@ public class Jeu {
     // projectiles
     private ArrayList<Projectile> projectiles;
     private ObservableList<Projectile> liste_projectiles;
+    private boolean arretTemps;
 
     public final static int taille1bloc = 32;
 
@@ -65,51 +66,27 @@ public class Jeu {
         return liste_projectiles;
     }
 
+    //TODO Refactor de màjProjectile
     public void màjProjectiles() {
         if (this.getListe_projectiles() != null) {
 
             for (int i = getListe_projectiles().size() - 1; i >= 0; i--) {
                 Projectile p = getListe_projectiles().get(i);
 
-                if (Joueur.getUniqueJoueur().isTimeStop()) {
-                    // Si timeStop activé, on met à jour uniquement les balles
-                    if (p.getType().equals("balle")) {
+                p.màjProjectile();
 
-                        p.setX(p.getX() + (int) p.getForceX());
-
-                        p.setY(p.getY() + (int) p.getForceY());
-
-                        if (p.collisionVerticale() || p.collisionHorizontale()) {
-                            p.setActif(false);
-                            getListe_projectiles().remove(i);
-                        }
-                    }
-
-                } else {
-                    // timeStop désactivé, on met à jour tous les projectiles normalement
-                    p.setX(p.getX() + (int) p.getForceX());
-
-                    if (!p.getType().equals("balle")) {
-                        p.setForceY(p.getForceY() + p.getGravité());
-                    }
-
-                    p.setY(p.getY() + (int) p.getForceY());
-
-                    if (p.collisionVerticale() || p.collisionHorizontale()) {
-                        if(p.getType().equals("boule_de_feu")){
-                            p.explosion();
-                        }
-                        p.setActif(false);
-                        getListe_projectiles().remove(i);
-                    }
+                if (p.collisionVerticale() || p.collisionHorizontale()) {
+                    p.action();
+                    p.setActif(false);
+                    getListe_projectiles().remove(i);
                 }
 
-                for(int j = 0; j < mobs.size(); j++ ){ //dégâts sur les entités vivantes
-                    if(mobs.get(j).getHitbox().intersects(p.getHitbox())){
+                for (int j = 0; j < mobs.size(); j++) { //dégâts sur les entités vivantes
+                    if (mobs.get(j).getHitbox().intersects(p.getHitbox())) {
                         mobs.get(j).decrementVie(p.getAttaque());
                         p.setActif(false);
                         getListe_projectiles().remove(i);
-                    }else if (Joueur.getUniqueJoueur().getHitbox().intersects(p.getHitbox())){
+                    } else if (Joueur.getUniqueJoueur().getHitbox().intersects(p.getHitbox())) {
                         Joueur.getUniqueJoueur().decrementVie(p.getAttaque());
                         p.setActif(false);
                         getListe_projectiles().remove(i);
@@ -118,6 +95,7 @@ public class Jeu {
             }
         }
     }
+
 
     public ObservableList<Ennemi> getMobs() {
         return mobs;
@@ -355,6 +333,67 @@ public class Jeu {
             }
         }
 
+    }
+    public void déinitialisationMobs() {
+        int i = Jeu.getUniqueJeu().getEnnemis().size()-1;
+        while (i >= 0) {
+            this.getEnnemis().get(i).decrementVie(Jeu.getUniqueJeu().getEnnemis().get(i).getBarreVie().getVieMax());
+
+            i--;
+        }
+    }
+    public void initialisationMobs () {
+        Ennemi ogre = new Ogre("Pierre l'ogre vert", 50, 20, 3000, 0, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
+        Ennemi ogre2 = new Ogre("Pierre l'ogre vert pale", 50, 20, 1340, 1340, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
+        Ennemi ogre3 = new Ogre("Pierre l'ogre vert foncé", 50, 20, 4962, 1376, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
+        Ennemi ogre4 = new Ogre("Pierre l'ogre vert clair", 50, 20, 3068, 1600, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
+        Ennemi goblin = new Goblin("Caillou le gobelin vert", 20, 20, 5000, 0, 0, 2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
+        Ennemi goblin2 = new Goblin("Caillou le gobelin vert pale", 20, 20, 1456, 1728, 0, 2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
+        Ennemi goblin3 = new Goblin("Caillou le gobelin vert foncé", 20, 20, 2959, 1088, 0, 2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
+        Ennemi goblin4 = new Goblin("Caillou le gobelin vert clair", 20, 20, 5238, 1760, 0,  2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
+        Ennemi goblin5 = new Goblin("Caillou le gobelin vert émeraude", 20, 20, 4544, 1632, 0,  2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
+        Ennemi mh = new MH("Monsieur Homps", 250, 20, 4500, 0, 5,  2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 15, 8);
+
+        this.addEnnemis(ogre);
+       this.addEnnemis(ogre2);
+        this.addEnnemis(ogre3);
+        this.addEnnemis(ogre4);
+        this.addMobs(ogre);
+        this.addMobs(ogre2);
+        this.addMobs(ogre3);
+        this.addMobs(ogre4);
+
+        this.addEnnemis(goblin);
+        this.addEnnemis(goblin2);
+        this.addEnnemis(goblin3);
+        this.addEnnemis(goblin4);
+        this.addEnnemis(goblin5);
+        this.addMobs(goblin);
+        this.addMobs(goblin2);
+        this.addMobs(goblin3);
+        this.addMobs(goblin4);
+        this.addMobs(goblin5);
+
+        this.getUniqueJeu().addEnnemis(mh);
+        this.getUniqueJeu().addMobs(mh);
+
+    }
+    public void setArretJeu(boolean b){
+        this.arretTemps=b;
+    }
+    public boolean estArretJeu(){
+        return arretTemps;
+    }
+
+
+
+
+
+    public void initialisationJoueur(){
+        Joueur.getUniqueJoueur().getBarreVie().setVie(Joueur.getUniqueJoueur().getBarreVie().getVieMax());
+        Joueur.getUniqueJoueur().setEstVivant(true);
+        Joueur.getUniqueJoueur().setX(20*32);
+        Joueur.getUniqueJoueur().setY(0*32);
     }
 
     public void testCraft() {

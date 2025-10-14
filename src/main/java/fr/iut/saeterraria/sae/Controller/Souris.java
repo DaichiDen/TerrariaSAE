@@ -3,9 +3,7 @@ package fr.iut.saeterraria.sae.Controller;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Objets.Armure;
-import fr.iut.saeterraria.sae.Modele.Personnages.Case;
-import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
-import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
+import fr.iut.saeterraria.sae.Modele.Personnages.*;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -54,8 +52,8 @@ public class Souris implements EventHandler<MouseEvent> {
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
             if (Joueur.getUniqueJoueur().getEstVivant()) {
 
-                if (Joueur.getUniqueJoueur().gunEnMain() && !Joueur.getUniqueJoueur().isTimeStop()) {
-                    Joueur.getUniqueJoueur().setTimeStop(true);
+                if (Joueur.getUniqueJoueur().gunEnMain() && !Jeu.getUniqueJeu().estArretJeu()) {
+                    Jeu.getUniqueJeu().setArretJeu(true);
 
                     boolean oui = false;
                     int[] indice = new int[2];
@@ -68,8 +66,8 @@ public class Souris implements EventHandler<MouseEvent> {
                             }
                     }
                     if (oui) {
-
-                        Joueur.getUniqueJoueur().initialiserProjectile(new Projectile("balle", Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY(), 5, "balle", Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()), x1, y1);
+                        Projectile balle = new Balle( Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY());
+                        balle.initialiserProjectile(x1, y1);
                         Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(indice[0]*6+indice[1]).retireQuantite(1);
                     }
 
@@ -86,8 +84,8 @@ public class Souris implements EventHandler<MouseEvent> {
                             }
                     }
                     if (oui) {
-
-                        Joueur.getUniqueJoueur().initialiserProjectile(new Projectile("Flèche", Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY(), 4, "Flèche", Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()), x1, y1);
+                        Projectile fleche = new Fleche(Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY());
+                        fleche.initialiserProjectile(x1, y1);
                         Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(indice[0]*6+indice[1]).retireQuantite(1);
 
                     }
