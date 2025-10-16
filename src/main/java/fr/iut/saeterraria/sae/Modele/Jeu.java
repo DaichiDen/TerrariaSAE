@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,7 +22,6 @@ import java.util.HashMap;
 public class Jeu {
     private static Jeu uniqueJeu = null;
 
-    private Map carte;
     private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
     private ObservableList<Ennemi> mobs;
@@ -32,8 +32,12 @@ public class Jeu {
 
     public final static int taille1bloc = 32;
 
-    private Jeu(String nomJoueur){
-        carte = new Map();
+
+    private Jeu(){
+        items = new HashMap<>();
+        initialiseItems();
+        initializeRecettes();
+        initializeBlocConstruction();
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);
@@ -43,7 +47,7 @@ public class Jeu {
 
     public static Jeu getUniqueJeu() {
         if(uniqueJeu == null) {
-            uniqueJeu = new Jeu("Joueur");
+            uniqueJeu = new Jeu();
         }
         return uniqueJeu;
     }
@@ -123,10 +127,6 @@ public class Jeu {
 
     public boolean estVivant(EntiteVivante entite){
         return entite.getBarreVie().getVie()>0;
-    }
-
-    public Map getCarte(){
-        return carte;
     }
 
     public ArrayList<Ennemi> getEnnemis() {

@@ -3,6 +3,7 @@ package fr.iut.saeterraria.sae.Modele.Personnages;
 import fr.iut.saeterraria.sae.Modele.A_Star.Algo_A_Star;
 import fr.iut.saeterraria.sae.Modele.A_Star.Node;
 import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public abstract class Ennemi extends EntiteVivante {
 
     public boolean detecterJoueur() {// À définir la distance où il détecte le joueur
         boolean aVuJoueur = false;
-        if (peutEtreAtteint(Joueur.getUniqueJoueur().getX()/32, Joueur.getUniqueJoueur().getY()/32, 5)) {
+        if (Carte.getUniqueCarte().peutEtreAtteint(Joueur.getUniqueJoueur().getX()/32, Joueur.getUniqueJoueur().getY()/32, 5, this)) {
             aVuJoueur = true;
         }
         return aVuJoueur;

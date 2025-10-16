@@ -1,10 +1,9 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import javafx.beans.property.*;
 import javafx.geometry.Rectangle2D;
-import fr.iut.saeterraria.sae.Modele.Map.Map;
 
 public abstract class Projectile extends Entite{
     private StringProperty nom;
@@ -104,6 +103,7 @@ public abstract class Projectile extends Entite{
             this.setX(ex);
         }else{
             this.setX(ex+32);
+
         }
         this.setY(ey);
 

@@ -2,6 +2,7 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Personnages.*;
 import fr.iut.saeterraria.sae.Vue.*;
@@ -133,7 +134,7 @@ public class Controller implements Initializable {
 
         Clavier controlleurJoueur = new Clavier(screenInventaire,quitterInventaire,openInventaire,fond,hotBar, screenPrincipal);
 
-        Souris controlleurSouris = new Souris(scene,Jeu.getUniqueJeu().getCarte(),fond,screenInventaire,craftSansBlocConstruction,craftEtabli,craftForge,four);
+        Souris controlleurSouris = new Souris(scene,fond,screenInventaire,craftSansBlocConstruction,craftEtabli,craftForge,four);
 
         inventaireVue = new VueInventaire(quitterInventaire, screenInventaire, inventaire, screen);
 

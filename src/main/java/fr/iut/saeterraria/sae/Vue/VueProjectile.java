@@ -1,6 +1,7 @@
 package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import javafx.scene.Node;
@@ -64,7 +65,7 @@ public class VueProjectile extends CreateRessourceVisuel {
         for (int j = x - 1; j <= x + 1; j++) {
             for (int i = y - 1; i <= y + 1; i++) {
                 this.tp.getChildren().remove((j * tp.getPrefColumns()) + i);
-                this.tp.getChildren().add((((j * tp.getPrefColumns()) +  i)), new ImageView(fond.getTiles().get(Jeu.getUniqueJeu().getCarte().getCase(j, i))));
+                this.tp.getChildren().add((((j * tp.getPrefColumns()) +  i)), new ImageView(fond.getTiles().get(Carte.getUniqueCarte().getCase(j, i))));
             }
         }
     }

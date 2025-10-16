@@ -1,7 +1,7 @@
 package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Modele.Objets.Armure;
 
 import fr.iut.saeterraria.sae.Modele.Personnages.*;
@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class Souris implements EventHandler<MouseEvent> {
     private Fond fond;
     private TilePane tp;
-    private Map map;
     @FXML
     private AnchorPane screenInventaire;
     @FXML
@@ -37,9 +36,8 @@ public class Souris implements EventHandler<MouseEvent> {
     @FXML
     private ScrollPane four;
 
-    public Souris(Fond fond,Map map,TilePane tp, AnchorPane screenInventaire, ScrollPane craftSansBlocConstruction, ScrollPane craftEtabli, ScrollPane craftForge, ScrollPane four) {
+    public Souris(Fond fond, TilePane tp, AnchorPane screenInventaire, ScrollPane craftSansBlocConstruction, ScrollPane craftEtabli, ScrollPane craftForge, ScrollPane four) {
         this.fond = fond;
-        this.map = map;
         this.tp = tp;
         this.screenInventaire = screenInventaire;
         this.craftSansBlocConstruction = craftSansBlocConstruction;
@@ -98,15 +96,15 @@ public class Souris implements EventHandler<MouseEvent> {
                     System.out.println(x1 + "x1" + y1 + "y1");
                     System.out.println(x + "y2" + y + "y1");
 
-                    if (Joueur.getUniqueJoueur().peutEtreAtteint(x, y, 100)) {
-                        if (Jeu.getUniqueJeu().getCarte().getCase(y, x) != 0 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 10 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 18) {
+                    if (Carte.getUniqueCarte().peutEtreAtteint(x, y, 100,Joueur.getUniqueJoueur())) {
+                        if (!Carte.getUniqueCarte().blocTraversable(y,x)) {
                             Joueur.getUniqueJoueur().grappiner(x1, y1);
                         }
                     }
 
                 } else if (Joueur.getUniqueJoueur().miner(x, y)) {
                     this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// faire de la taille de la map un un getter
-                    this.tp.getChildren().add((((y * tp.getPrefColumns()) + x)), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+                    this.tp.getChildren().add((((y * tp.getPrefColumns()) + x)), new ImageView(fond.getTiles().get(Carte.getUniqueCarte().getCase(y, x))));
                 } else {
                     Joueur.getUniqueJoueur().action(x1, y1);
                 }
@@ -116,12 +114,12 @@ public class Souris implements EventHandler<MouseEvent> {
 
             else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 if (Joueur.getUniqueJoueur().getEstVivant()) {
-                    System.out.println("Bloc de craft ? : " +  (map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 15));
-                    System.out.println("Bloc de craft atteignable? : "+ Joueur.getUniqueJoueur().peutEtreAtteint(x, y, 2.5));
-                    if ( (map.getCase(y, x) == 12 || map.getCase(y, x) == 13 || map.getCase(y, x) == 15) && Joueur.getUniqueJoueur().peutEtreAtteint(x, y, 2.5)) {
+                    System.out.println("Bloc de craft ? : " + Carte.getUniqueCarte().blocDeFabrication(y, x));
+                    System.out.println("Bloc de craft atteignable? : " + Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5,Joueur.getUniqueJoueur()));
+                    if (Carte.getUniqueCarte().blocDeFabrication(y, x) && Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5, Joueur.getUniqueJoueur())) {
                         System.out.println("pitié");
                         ouvrirInventaire();
-                        switch (map.getCase(y, x)) {
+                        switch (Carte.getUniqueCarte().getCase(y, x)) {
                             case 12:
                                 craftEtabli.toFront();
                                 break;
@@ -132,20 +130,14 @@ public class Souris implements EventHandler<MouseEvent> {
                                 four.toFront();
                                 break;
                         }
-                    } else if (Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() >= 64 && Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() <= 71) {
-                        Joueur.getUniqueJoueur().equiper((Armure) (Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem()));
+                    } else if (Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() >= 64 && Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() <= 71) {
+                        Joueur.getUniqueJoueur().equiper((Armure) (Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).getItem()));
                     } else {
                         Joueur.getUniqueJoueur().poser(x, y);
                         this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
-                        this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
+                        this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(Carte.getUniqueCarte().getCase(y, x))));
 
                     }
-                } else if (Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() >= 64 && Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() <= 71) {
-                    Joueur.getUniqueJoueur().equiper((Armure) (Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem()));
-                } else {
-                    Joueur.getUniqueJoueur().poser(x, y);
-                    this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
-                    this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(map.getCase(y, x))));
                 }
             }
         }

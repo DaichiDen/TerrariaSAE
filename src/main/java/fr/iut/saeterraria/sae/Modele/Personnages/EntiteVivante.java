@@ -1,6 +1,7 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import javafx.beans.property.*;
 
 public abstract class EntiteVivante extends Entite{
@@ -72,7 +73,7 @@ public abstract class EntiteVivante extends Entite{
         int joueurHaut = getY();
         int joueurBas = getY() + (Jeu.getUniqueJeu().getTaille1bloc() * 2);
         appliquerCollisionVertical(blocHaut,blocBas,joueurBas,joueurHaut);
-        if (Jeu.getUniqueJeu().getCarte().getCase((joueurBas/32), (this.getX()/32)) == 8 ) {
+        if (Carte.getUniqueCarte().getPique((joueurBas/32), (this.getX()/32)) ) {
             this.decrementVie(1);
         }
     }
@@ -119,72 +120,6 @@ public abstract class EntiteVivante extends Entite{
 
 
 
-
-
-
-    public boolean peutEtreAtteint(int blocX, int blocY, double val) {
-        boolean peutEtreAtteint = true;
-        if(!estDansLaPortée(blocX,blocY,val)){// Quand c'est pas à portée
-            peutEtreAtteint= false;
-        }
-
-        if (!DDA(blocX,blocY)) { // Si bloc devant (obstacle)
-                peutEtreAtteint= false;
-            }
-
-        return peutEtreAtteint;
-    }
-
-    public int calculDX(int blocX){
-
-        int dx = blocX - transfoXJoueur();
-        return dx;
-
-    }
-    public int calculDY(int blocY){
-
-        int dy = blocY - transfoYJoueur();
-        return dy;
-    }
-    public int transfoXJoueur(){
-        int transfoX = (this.getX() + 16) / 32;
-
-        return transfoX;
-
-    }
-    public int transfoYJoueur(){
-        int transfoY = (this.getY() + 16) / 32;
-
-        return transfoY;
-    }
-
-
-    public boolean estDansLaPortée(int blocX, int blocY, double val){
-        boolean valreturn=true;
-
-        double distance = Math.sqrt(calculDX(blocX) * calculDX(blocX) + calculDY(blocY) * calculDY(blocY));
-        if (distance > val)
-            valreturn=false;
-
-        return valreturn;
-    }
-
-    public boolean DDA(int blocX, int blocY){
-        boolean valreturn=true;
-
-        int rayonLaser = (Math.max(Math.abs(calculDX(blocX)), Math.abs(calculDY(blocY))) * 2); // le nombre d'étapes
-        for (int i = 1; i < rayonLaser; i++) {
-            double t = i / (double) rayonLaser;
-            int xi = (int) Math.round(transfoXJoueur() + (calculDX(blocX)) * t);
-            int yi = (int) Math.round(transfoYJoueur() + (calculDY(blocY)) * t);
-
-            if ((xi != blocX || yi != blocY) && estTraversable(yi, xi)) { // Si bloc devant (obstacle)
-                valreturn=false;
-            }
-        }
-        return valreturn;
-
-    }
 
     public void setVitesseX(int val){
         this.vitesseX=val;

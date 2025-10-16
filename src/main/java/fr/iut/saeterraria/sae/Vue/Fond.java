@@ -2,6 +2,7 @@
 package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Modele.Objets.Coffre;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -64,7 +65,7 @@ public class Fond extends CreateRessourceVisuel {
     public void afficherCarte() {
         for (int i = 0; i < environnement.getPrefRows(); i++) {
             for (int j = 0; j < environnement.getPrefColumns(); j++) {
-                this.environnement.getChildren().add(new ImageView(tiles.get(Jeu.getUniqueJeu().getCarte().getCase(i, j))));
+                this.environnement.getChildren().add(new ImageView(tiles.get(Carte.getUniqueCarte().getCase(i, j))));
             }
         }
     }
@@ -88,14 +89,14 @@ public class Fond extends CreateRessourceVisuel {
     public void updateMapX() {
         //X+1 = ajouter 1 colonne et donc ajouter à chaque ligne une case
         for (int x = 0; x < this.environnement.getPrefRows(); x++) {
-            this.environnement.getChildren().add((x*environnement.getPrefColumns()+environnement.getPrefColumns()+x),new ImageView(tiles.get(Jeu.getUniqueJeu().getCarte().getCase(x, environnement.getPrefColumns()))));
+            this.environnement.getChildren().add((x*environnement.getPrefColumns()+environnement.getPrefColumns()+x),new ImageView(tiles.get(Carte.getUniqueCarte().getCase(x, environnement.getPrefColumns()))));
         }
     }
 
     public void updateMapY() {
         //Y+1 = ajouter 1 ligne donc ajouter à chaque colonne une case
         for (int y = 0; y < this.environnement.getPrefColumns(); y++) {
-            this.environnement.getChildren().add(((environnement.getPrefRows()*environnement.getPrefColumns())+y),new ImageView(tiles.get(Jeu.getUniqueJeu().getCarte().getCase(environnement.getPrefRows(), y))));
+            this.environnement.getChildren().add(((environnement.getPrefRows()*environnement.getPrefColumns())+y),new ImageView(tiles.get(Carte.getUniqueCarte().getCase(environnement.getPrefRows(), y))));
         }
     }
 
