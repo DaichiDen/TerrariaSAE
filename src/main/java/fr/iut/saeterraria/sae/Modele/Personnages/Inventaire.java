@@ -72,6 +72,12 @@ public class Inventaire {
         }
     }
 
+
+
+
+
+    
+
     // Essaye d'ajouter l'item dans une case ayant le même item, si ce n'est pas possible, il va appeler addItemCaseVide qui va essayer d'ajouter dans une case vide
     public boolean AddDansCaseItemPresent(ArrayList<Case> planInventaire, Item item, boolean placer, int reste) {
         int compteur = 0;
@@ -95,6 +101,13 @@ public class Inventaire {
         }
         return placer;
     }
+
+
+
+
+
+
+
 
     public boolean addItemCaseVide(ArrayList<Case> planInventaire, Item item, boolean placer, int reste) {
         int compteur2=0;

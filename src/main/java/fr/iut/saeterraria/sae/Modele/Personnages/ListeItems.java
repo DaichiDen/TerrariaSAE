@@ -6,7 +6,7 @@ import fr.iut.saeterraria.sae.Modele.Objets.Etablis.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.*;
 
 public enum ListeItems {
-
+    Ciel(0,new Bloc("Ciel","Incassable+traversable fond",10,0)),
     Terre_Haute(1, new Bloc("Terre Haute","Bloc commun qui recouvre le monde", 1,1)),
     Terre_Basse(2, new Bloc("Terre Basse","Bloc commun qui recouvre le sol du monde", 1,2)),
     Bois(3, new Bloc("Bois","Element indispensable, base de créativité", 1,3)),

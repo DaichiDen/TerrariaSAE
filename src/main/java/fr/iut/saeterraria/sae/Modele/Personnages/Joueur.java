@@ -140,12 +140,14 @@
         public boolean miner(int x, int y) {
             boolean miner = false;
             if (Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5,this)) {
+                System.out.println(Carte.getUniqueCarte().getCase(y,x));
                 if ( ((Bloc) ListeItems.getItemParId(Carte.getUniqueCarte().getCase(y,x))).getResistance() == 1 || Carte.getUniqueCarte().getCase(y, x) != 0 && Carte.getUniqueCarte().getCase(y, x) != 18 && Carte.getUniqueCarte().getCase(y, x) != 22 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()<55 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()>50 && compareResistance(((Bloc) ListeItems.getItemParId(Carte.getUniqueCarte().getCase(y,x)))) ) {
                     int[] bloc = Carte.getUniqueCarte().detruireBloc(x, y);
                     ajouterItem(ListeItems.getItemParId(bloc[0]), bloc[1]);
                     miner = true;
                 }
             }
+
             return miner;
         }
 
