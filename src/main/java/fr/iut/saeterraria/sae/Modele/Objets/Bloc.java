@@ -5,13 +5,13 @@ import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 public class Bloc extends Item{
     private int resistance; // Selon le type, la résistance évolue avec le integer
 
-    public Bloc (String nom,String description, int resistance) {
-        super(nom,description,1);
+    public Bloc (String nom,String description, int resistance, int codeobjet) {
+        super(nom,description,1,codeobjet);
         this.resistance = resistance;
     }
 
-    public Bloc (String nom, String description, int resistance, BlocConstruction provenance) {
-        super(nom,description,3,provenance);
+    public Bloc (String nom, String description, int resistance, BlocConstruction provenance, int codeobjet) {
+        super(nom,description,3,provenance, codeobjet);
         this.resistance = resistance;
     }
 

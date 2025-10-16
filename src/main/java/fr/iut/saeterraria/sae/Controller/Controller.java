@@ -261,7 +261,14 @@ public class Controller implements Initializable {
     public void ouvrirInventaire() {
         screenInventaire.toFront();
         Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(20),1);
-
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(72),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(78),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(77),64);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(51),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(54),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(51),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(79),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(80),64);
     }
 
     @FXML
