@@ -143,9 +143,9 @@
         public boolean miner(int x, int y) {
             boolean miner = false;
             if (peutEtreAtteint(x, y, 2.5)) {
-                if ( ((Bloc) Jeu.getUniqueJeu().getItems().get(Jeu.getUniqueJeu().getCarte().getCase(y,x))).getResistance() == 1 || Jeu.getUniqueJeu().getCarte().getCase(y, x) != 0 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 18 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 22 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()<55 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()>50 && compareResistance(((Bloc) Jeu.getUniqueJeu().getItems().get(Jeu.getUniqueJeu().getCarte().getCase(y,x)))) ) {
+                if ( ((Bloc) ListeItems.getItemParId(Jeu.getUniqueJeu().getCarte().getCase(y,x))).getResistance() == 1 || Jeu.getUniqueJeu().getCarte().getCase(y, x) != 0 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 18 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 22 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()<55 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()>50 && compareResistance(((Bloc) ListeItems.getItemParId(Jeu.getUniqueJeu().getCarte().getCase(y,x)))) ) {
                     int[] bloc = Jeu.getUniqueJeu().getCarte().detruireBloc(x, y);
-                    ajouterItem(Jeu.getUniqueJeu().getItems().get(bloc[0]), bloc[1]);
+                    ajouterItem(ListeItems.getItemParId(bloc[0]), bloc[1]);
                     miner = true;
                 }
             }
@@ -194,87 +194,7 @@
 
         // Vérifie si la quantité d'items nécessaires sont suffisants pour construire, puis craft l'item si les ressources sont suffisantes
         public void craftItem(Item item) {
-            int[][] necessaire = getRecette(item);
-
-            ArrayList<Case> position = new ArrayList<>();
-            boolean craftableFin = verifieQuantiteSuffisante(necessaire,position, item);
-            if (craftableFin) {
-                craftFin(item,necessaire,position);
-            }
-            else {
-                System.out.println("Craft non possible!");
-            }
-        }
-
-        public int[][] getRecette(Item item) {
-            int[][] necessaire = new int[2][item.getRecette().size()];
-            for (int i = 0; i < necessaire[0].length; i++) {
-                necessaire[0][i] = item.getRecette().get(i).getItem().getCodeObjet();
-                necessaire[1][i] = item.getRecette().get(i).getQuantite();
-            }
-            return necessaire;
-        }
-
-        public boolean verifieQuantiteSuffisante(int[][] necessaire, ArrayList<Case> position, Item item) {
-            boolean craftableFin = true;
-            boolean[] craftable = new boolean[necessaire[0].length] ;//Indique si l'objet est en quantité suffisante
-            int quantite;
-            int i = 0;
-            while ( craftableFin && i < craftable.length) { // Vérifie si les quantités sont suffisantes côté joueur
-                ArrayList<Case> tabResult = inventaire.findItem(item.getRecette().get(i).getItem());
-                if (tabResult != null) {
-                    quantite = 0;
-                    int o = 0;
-                    while (!craftable[i] && o < tabResult.size()) {
-                        if (tabResult.get(o).getItem().getCodeObjet()!=0) {
-                            quantite = quantite + inventaire.getCase(tabResult.get(o).getLigne(), tabResult.get(o).getColonne()).getQuantite();
-                            position.add(inventaire.getCase(tabResult.get(o).getLigne(), tabResult.get(o).getColonne()));
-                        }
-                        if (quantite >= necessaire[1][i]) {
-                            craftable[i] = true;
-                        }
-                        o++;
-                    }
-                }
-                else {
-                    craftableFin = false;
-                }
-                i++;
-            }
-
-            int j = 0;
-            while ( j<craftable.length && craftableFin) {
-                if (!craftable[j]) {
-                    craftableFin = false;
-                }
-                j++;
-            }
-
-            return craftableFin;
-        }
-
-        public void craftFin(Item item, int[][] necessaire, ArrayList<Case> position) {
-            int c = 0;
-            int k = 0;
-            if (inventaire.ajoutInventaire(item, 1)) {
-                while (c < necessaire[1].length && necessaire[1][c] > 0) {//Pour chaque item nécessaire
-                    while (k < position.size() && necessaire[1][c] > 0) { //Retire à chaque position des items
-                        if (necessaire[1][c] <= position.get(k).getQuantite()) { // Si la case a assez pour le craft
-                            position.get(k).retireQuantite(necessaire[1][c]);
-                            necessaire[1][c] = 0;
-                        } else { // Si la case n'a pas assez pour le craft
-                            necessaire[1][c] -= position.get(k).getQuantite();
-                            position.get(k).retireQuantite(position.get(k).getQuantite());
-                        }
-                        k++;
-                    }
-                    c++;
-                }
-                System.out.println("craft réussi");
-            }
-            else {
-                System.out.println("non réussi");
-            }
+            inventaire.verifierCraftPossible(item);
         }
 
         public void tp(int x, int y) {
@@ -326,25 +246,25 @@
             switch (armure.getTypeArmure()){
                 case 1:
                     if (equipement[0]==64 || equipement[0]==65) {
-                       inventaire.ajoutInventaire(Jeu.getUniqueJeu().getItems().get(equipement[0]), 1);
+                       inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[0]), 1);
                     }
                     equipement[0]=armure.getCodeObjet();
                     break;
                 case 2:
                     if (equipement[1]==66 || equipement[1]==67) {
-                        inventaire.ajoutInventaire(Jeu.getUniqueJeu().getItems().get(equipement[1]), 1);
+                        inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[1]), 1);
                     }
                     equipement[1]=armure.getCodeObjet();
                     break;
                 case 3:
                     if (equipement[2]==68 || equipement[2]==69) {
-                        inventaire.ajoutInventaire(Jeu.getUniqueJeu().getItems().get(equipement[2]), 1);
+                        inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[2]), 1);
                     }
                     equipement[2]=armure.getCodeObjet();
                     break;
                 case 4:
                     if (equipement[3]==70 || equipement[3]==71) {
-                        inventaire.ajoutInventaire(Jeu.getUniqueJeu().getItems().get(equipement[3]), 1);
+                        inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[3]), 1);
                     }
                     equipement[3]=armure.getCodeObjet();
                     break;
@@ -355,15 +275,15 @@
 
         public void updateDefense(){
             for ( int piece : equipement){
-                this.defProperty().setValue(this.defProperty().getValue() + ((Armure)Jeu.getUniqueJeu().getItems().get(piece)).getDefense());
+                this.defProperty().setValue(this.defProperty().getValue() + ((Armure)ListeItems.getItemParId(piece)).getDefense());
             }
         }
 
         public void swapItem(int ligneDep, int colonneDep, int ligneFin, int colonneFin) {
             stockItem[0] = inventaire.getCase(ligneDep,colonneDep).getItem().getCodeObjet();
             stockItem[1] = inventaire.getCase(ligneDep,colonneDep).getQuantite();
-            inventaire.getCase(ligneDep,colonneDep).setCase(Jeu.getUniqueJeu().getItems().get(inventaire.getCase(ligneFin,colonneFin).getItem().getCodeObjet()),inventaire.getCase(ligneFin,colonneFin).getQuantite());
-            inventaire.getCase(ligneFin,colonneFin).setCase(Jeu.getUniqueJeu().getItems().get(stockItem[0]), stockItem[1]);
+            inventaire.getCase(ligneDep,colonneDep).setCase(ListeItems.getItemParId(inventaire.getCase(ligneFin,colonneFin).getItem().getCodeObjet()),inventaire.getCase(ligneFin,colonneFin).getQuantite());
+            inventaire.getCase(ligneFin,colonneFin).setCase(ListeItems.getItemParId(stockItem[0]), stockItem[1]);
         }
 
         public void grappiner(int cibleX, int cibleY){

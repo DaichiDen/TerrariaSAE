@@ -219,6 +219,7 @@ public abstract class Entite {
         setTailleL(tailleL);
         Rectangle2D hitboxEntite = getHitbox();
 
+
         int caseX =(getX() / Jeu.getUniqueJeu().getTaille1bloc());
         int caseY =(getY() / Jeu.getUniqueJeu().getTaille1bloc());
         //boucle sur les 4 blocs autour du joueur , i+1 i-1 ,j+1 j-1

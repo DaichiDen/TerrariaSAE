@@ -2,8 +2,8 @@ package fr.iut.saeterraria.sae.Modele.Objets;
 
 public class Soins extends Consommables{
 
-    public Soins(String nom, String description, int efficacite) {
-        super(nom, description, efficacite);
+    public Soins(String nom, String description, int efficacite, int codeobjet) {
+        super(nom, description, efficacite, codeobjet);
     }
 
     // Faudrait que item ou consommable ait attribut joueur pour que actionjoueur ici puisse augmenter les pv du joueur

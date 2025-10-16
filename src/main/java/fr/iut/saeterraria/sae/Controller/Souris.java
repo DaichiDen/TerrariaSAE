@@ -3,7 +3,12 @@ package fr.iut.saeterraria.sae.Controller;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Map;
 import fr.iut.saeterraria.sae.Modele.Objets.Armure;
+
 import fr.iut.saeterraria.sae.Modele.Personnages.*;
+import fr.iut.saeterraria.sae.Modele.Personnages.Case;
+import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
+import fr.iut.saeterraria.sae.Modele.Personnages.ListeItems;
+import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -57,7 +62,7 @@ public class Souris implements EventHandler<MouseEvent> {
 
                     boolean oui = false;
                     int[] indice = new int[2];
-                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(Jeu.getUniqueJeu().getItems().get(80));
+                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(ListeItems.getItemParId(80));
                     for(Case c : tab) {
                             if (c.getItem().getCodeObjet()!=0) {
                                 oui = true;
@@ -74,7 +79,7 @@ public class Souris implements EventHandler<MouseEvent> {
                 } else if (Joueur.getUniqueJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];
-                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(Jeu.getUniqueJeu().getItems().get(77));
+                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(ListeItems.getItemParId(77));
                     for(Case c : tab) {
                         if (c.getItem().getCodeObjet()!=0) {
 
@@ -159,6 +164,6 @@ public class Souris implements EventHandler<MouseEvent> {
     }
 
     public void handleCraft (String nom){
-        Joueur.getUniqueJoueur().craftItem(Jeu.getUniqueJeu().getItem(nom));
+        Joueur.getUniqueJoueur().craftItem(ListeItems.getItemParNom(nom));
     }
 }

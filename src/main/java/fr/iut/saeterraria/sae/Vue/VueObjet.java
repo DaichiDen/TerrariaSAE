@@ -1,6 +1,7 @@
 package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Modele.Personnages.ListeItems;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -21,7 +22,7 @@ public class VueObjet extends CreateRessourceVisuel{
         this.height=150;
         spriteActuel = createImageView("/Sprite_objets/arme_test.png",150,150);
         screen.getChildren().add(spriteActuel);
-        spriteActuel.setId("" + Jeu.getUniqueJeu().getItems().get(1).getCodeObjet());
+        spriteActuel.setId("" + ListeItems.getItemParId(1).getCodeObjet());
         spriteActuel.translateXProperty().bind(Jeu.getUniqueJeu().getEnnemis().get(0).xProperty());
         spriteActuel.translateYProperty().bind(Jeu.getUniqueJeu().getEnnemis().get(0).yProperty());
         spriteActuel.setFitWidth(54);

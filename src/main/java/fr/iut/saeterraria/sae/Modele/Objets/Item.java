@@ -14,7 +14,6 @@ public class Item {
     private StringProperty description;
     private IntegerProperty codeObjet;
     private IntegerProperty typeItem; // 1=stack 64 / 2= stack 16 / 3=stack 1
-    private static int id = 0;
     private Recette recette;
     private BlocConstruction provenance;
 
@@ -27,26 +26,24 @@ public class Item {
         this.provenance = null;
     }
 
-    public Item(String nom, String description,int typeItem) {
+    public Item(String nom, String description,int typeItem, int codeobjet) {
         this.name = new SimpleStringProperty(nom);
         this.description = new SimpleStringProperty(description);
         this.typeItem = new SimpleIntegerProperty(typeItem);
         this.recette = new Recette();
-        this.codeObjet = new SimpleIntegerProperty(id);
+        this.codeObjet = new SimpleIntegerProperty(codeobjet);
         this.provenance = null;
-        id++;
     }
 
-    public Item(String nom, String description,int typeItem,BlocConstruction provenance) {
+    public Item(String nom, String description,int typeItem,BlocConstruction provenance, int codeobjet) {
 
 
         this.name = new SimpleStringProperty(nom);
         this.description = new SimpleStringProperty(description);
         this.typeItem = new SimpleIntegerProperty(typeItem);
         this.recette = new Recette();
-        this.codeObjet = new SimpleIntegerProperty(id);
+        this.codeObjet = new SimpleIntegerProperty(codeobjet);
         this.provenance = provenance;
-        id++;
     }
 
     public IntegerProperty codeObjetProperty() { return codeObjet; }

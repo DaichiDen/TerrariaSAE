@@ -7,8 +7,8 @@ public class Pierre_TP extends Outils {
     private int y;
     private boolean etat_tp;
 
-    public Pierre_TP() {
-        super("Waypoint","Cet objet semble détenir le pouvoir de se téléporter...");
+    public Pierre_TP(int codeobjet) {
+        super("Waypoint","Cet objet semble détenir le pouvoir de se téléporter...",codeobjet);
         this.x = 0;
         this.y = 0;
         this.etat_tp = false;

@@ -5,13 +5,13 @@ import fr.iut.saeterraria.sae.Modele.Objets.Outils;
 
 public class Pioche extends Outils {
     private int efficacite;
-    public Pioche(String nom,String description, int efficacite) {
-        super(nom,description);
+    public Pioche(String nom,String description, int efficacite, int codeobjet) {
+        super(nom,description,codeobjet);
         this.efficacite=efficacite;
     }
 
-    public Pioche(String nom, String description, int efficacite, BlocConstruction blocConstruction) {
-        super(nom,description, blocConstruction);
+    public Pioche(String nom, String description, int efficacite, BlocConstruction blocConstruction,int codeobjet) {
+        super(nom,description, blocConstruction,codeobjet);
         this.efficacite=efficacite;
     }
     public int getEfficacite(){ return efficacite;}

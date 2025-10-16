@@ -24,7 +24,6 @@ public class Jeu {
     private Map carte;
     private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
-    private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
     private ObservableList<Ennemi> mobs;
     // projectiles
     private ArrayList<Projectile> projectiles;
@@ -34,17 +33,12 @@ public class Jeu {
     public final static int taille1bloc = 32;
 
     private Jeu(String nomJoueur){
-        items = new HashMap<>();
-        initialiseItems();
-        initializeRecettes();
-        initializeBlocConstruction();
         carte = new Map();
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);
         projectiles= new ArrayList<>();
         liste_projectiles = FXCollections.observableArrayList(projectiles);
-
     }
 
     public static Jeu getUniqueJeu() {
@@ -118,15 +112,6 @@ public class Jeu {
     }
     public void removeEnnemi(Ennemi ennemi){
         ennemis.remove(ennemi);
-    }
-
-    public Item getItem(String nom){
-        for (Item item : items.values()) {
-            if(item.getName().equals(nom)){
-                return item;
-            }
-        }
-        return null;
     }
 
     public void addPNJ(PNJ pnj) {
@@ -404,12 +389,14 @@ public class Jeu {
         Joueur.getUniqueJoueur().setY(0*32);
     }
 
+
+
     public void testCraft() {
-        Joueur.getUniqueJoueur().ajouterItem(items.get(3),96);
-        Joueur.getUniqueJoueur().ajouterItem(items.get(5),96);
-        Joueur.getUniqueJoueur().ajouterItem(items.get(6),20);
-        Joueur.getUniqueJoueur().ajouterItem(items.get(7),20);
-        Joueur.getUniqueJoueur().ajouterItem(items.get(21),50);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(3),96);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(5),96);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(6),20);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(7),20);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(21),50);
     }
 
 }

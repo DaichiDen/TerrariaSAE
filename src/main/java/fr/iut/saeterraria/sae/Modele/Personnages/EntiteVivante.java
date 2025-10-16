@@ -134,6 +134,7 @@ public abstract class EntiteVivante extends Entite{
 
         return peutEtreAtteint;
     }
+
     public int calculDX(int blocX){
 
         int dx = blocX - transfoXJoueur();
@@ -167,6 +168,7 @@ public abstract class EntiteVivante extends Entite{
 
         return valreturn;
     }
+
     public boolean DDA(int blocX, int blocY){
         boolean valreturn=true;
 
