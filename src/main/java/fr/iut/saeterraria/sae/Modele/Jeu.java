@@ -22,7 +22,6 @@ public class Jeu {
     private static Jeu uniqueJeu = null;
 
     private Map carte;
-    private TilePane tp;
     private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
@@ -30,7 +29,7 @@ public class Jeu {
     // projectiles
     private ArrayList<Projectile> projectiles;
     private ObservableList<Projectile> liste_projectiles;
-    private boolean arretTemps;
+    private Boolean arretTemps = false;
 
     public final static int taille1bloc = 32;
 
@@ -66,32 +65,39 @@ public class Jeu {
         return liste_projectiles;
     }
 
-    //TODO Refactor de màjProjectile
+
     public void màjProjectiles() {
         if (this.getListe_projectiles() != null) {
-
             for (int i = getListe_projectiles().size() - 1; i >= 0; i--) {
                 Projectile p = getListe_projectiles().get(i);
 
                 p.màjProjectile();
 
                 if (p.collisionVerticale() || p.collisionHorizontale()) {
-                    p.action();
-                    p.setActif(false);
-                    getListe_projectiles().remove(i);
+                    supprimerProjectile(p, i);
                 }
 
-                for (int j = 0; j < mobs.size(); j++) { //dégâts sur les entités vivantes
-                    if (mobs.get(j).getHitbox().intersects(p.getHitbox())) {
-                        mobs.get(j).decrementVie(p.getAttaque());
-                        p.setActif(false);
-                        getListe_projectiles().remove(i);
-                    } else if (Joueur.getUniqueJoueur().getHitbox().intersects(p.getHitbox())) {
-                        Joueur.getUniqueJoueur().decrementVie(p.getAttaque());
-                        p.setActif(false);
-                        getListe_projectiles().remove(i);
-                    }
-                }
+                appliquerDegats(p, i);
+            }
+        }
+    }
+
+    public void supprimerProjectile(Projectile p, int ind){
+        p.action();
+        p.setActif(false);
+        getListe_projectiles().remove(ind);
+    }
+
+    public void appliquerDegats(Projectile p, int ind) {
+        for (int j = 0; j < mobs.size(); j++) { //dégâts sur les entités vivantes
+            if (mobs.get(j).getHitbox().intersects(p.getHitbox())) {
+                mobs.get(j).decrementVie(p.getAttaque());
+                p.setActif(false);
+                getListe_projectiles().remove(ind);
+            } else if (Joueur.getUniqueJoueur().getHitbox().intersects(p.getHitbox())) {
+                Joueur.getUniqueJoueur().decrementVie(p.getAttaque());
+                p.setActif(false);
+                getListe_projectiles().remove(ind);
             }
         }
     }
@@ -378,12 +384,14 @@ public class Jeu {
         this.getUniqueJeu().addMobs(mh);
 
     }
-    public void setArretJeu(boolean b){
-        this.arretTemps=b;
+
+    public void setArretTemps(boolean timeStop) {
+        this.arretTemps =timeStop;
     }
-    public boolean estArretJeu(){
+    public Boolean getArretTemps(){
         return arretTemps;
     }
+
 
 
 

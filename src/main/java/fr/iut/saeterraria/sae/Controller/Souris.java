@@ -52,8 +52,8 @@ public class Souris implements EventHandler<MouseEvent> {
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
             if (Joueur.getUniqueJoueur().getEstVivant()) {
 
-                if (Joueur.getUniqueJoueur().gunEnMain() && !Jeu.getUniqueJeu().estArretJeu()) {
-                    Jeu.getUniqueJeu().setArretJeu(true);
+                if (Joueur.getUniqueJoueur().gunEnMain() && !Jeu.getUniqueJeu().getArretTemps()) {
+                    Jeu.getUniqueJeu().setArretTemps(true);
 
                     boolean oui = false;
                     int[] indice = new int[2];

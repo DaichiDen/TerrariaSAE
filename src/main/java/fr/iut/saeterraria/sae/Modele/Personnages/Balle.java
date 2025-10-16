@@ -10,14 +10,17 @@ public class Balle extends Projectile{
         arretJeu();
     }
 
-
     @Override
     public void action() {
-        jeu.setArretJeu(false);
+        jeu.setArretTemps(false);
     }
 
     public void arretJeu(){
-        jeu.setArretJeu(true);
+        jeu.setArretTemps(true);
+    }
+
+    public boolean affecteTemps(){
+        return true;
     }
 
 }

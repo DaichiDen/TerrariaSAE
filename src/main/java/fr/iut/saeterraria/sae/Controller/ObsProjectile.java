@@ -36,7 +36,8 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
 
                     projectile_aj.xProperty().addListener((obs, oldVal, newVal) -> p.mettreAJourSpriteProjectile(projectile_aj));
                     projectile_aj.yProperty().addListener((obs, oldVal, newVal) -> p.mettreAJourSpriteProjectile(projectile_aj));
-                    //TODO oe ok peut mieux faire le boug
+
+                    //TODO oe ok peut mieux faire
                     if(projectile_aj.getClass().equals(BouleDeFeu.class)) {
                         ((BouleDeFeu) projectile_aj).aExploséProperty().addListener((obs, oldVal, newVal) -> p.detruireBlocExplosion(projectile_aj.getY() / 32, projectile_aj.getX() / 32));
                     }

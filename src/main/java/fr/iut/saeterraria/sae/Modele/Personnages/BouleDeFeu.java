@@ -15,6 +15,11 @@ public class BouleDeFeu extends Projectile{
         super("bdf", xEntite, yEntite, 12, 32, 32);
     }
 
+    public void màjProjectile(){
+        this.setForceY(this.getForceY() + super.getGravité());
+        super.màjProjectile();
+    }
+
     public BooleanProperty aExploséProperty() {
         return aExplosé;
     }
@@ -25,7 +30,6 @@ public class BouleDeFeu extends Projectile{
         aExplosé.setValue(a);
     }
 
-    //TODO à modifier en refactor
     public void action() {
         int x = getX() / 32;
         int y = getY() / 32;
@@ -33,21 +37,25 @@ public class BouleDeFeu extends Projectile{
         for (int j = x - 1; j <= x + 1; j++) {
             for (int i = y - 1; i <= y + 1; i++) {
                 if (map.getCase(i, j) != 0 && map.getCase(i, j) != 10 && map.getCase(i, j) != 18) {
-                    map.detruireBloc(j,i); // faire avec la resistance comme pour la pioche et la roche (voir avec luc et dedou) + mettre à jour la map héhé
+                    map.detruireBloc(j,i);
                 }
-                Rectangle2D touché = new Rectangle2D(j*32, i*32,Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc());
-                for (int e = 0; e < Jeu.getUniqueJeu().getMobs().size(); e++) {
-                    if (touché.intersects(Jeu.getUniqueJeu().getMobs().get(e).getHitbox()) && Jeu.getUniqueJeu().getMobs().get(e).getDef()<8) {
-                        Jeu.getUniqueJeu().getMobs().get(e).decrementVie(8-Jeu.getUniqueJeu().getMobs().get(e).getDef());
-                    }
-                }
-                if(Joueur.getUniqueJoueur().getHitbox().intersects(touché) && Joueur.getUniqueJoueur().getDef()<5){
-                    Joueur.getUniqueJoueur().decrementVie(5-Joueur.getUniqueJoueur().getDef());
-                }
+                appliquerDegatsExplosion(j, i);
                 xExplosion = x;
                 yExplosion = y;
             }
         }
         setaExplosé(true);
+    }
+
+    public void appliquerDegatsExplosion(int j, int i){
+        Rectangle2D touché = new Rectangle2D(j*32, i*32,Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc());
+        for (int e = 0; e < Jeu.getUniqueJeu().getMobs().size(); e++) {
+            if (touché.intersects(Jeu.getUniqueJeu().getMobs().get(e).getHitbox()) && Jeu.getUniqueJeu().getMobs().get(e).getDef()<8) {
+                Jeu.getUniqueJeu().getMobs().get(e).decrementVie(8-Jeu.getUniqueJeu().getMobs().get(e).getDef());
+            }
+        }
+        if(Joueur.getUniqueJoueur().getHitbox().intersects(touché) && Joueur.getUniqueJoueur().getDef()<5){
+            Joueur.getUniqueJoueur().decrementVie(5-Joueur.getUniqueJoueur().getDef());
+        }
     }
 }

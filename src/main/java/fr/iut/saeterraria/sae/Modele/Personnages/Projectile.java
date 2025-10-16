@@ -65,11 +65,13 @@ public abstract class Projectile extends Entite{
         this.forceY.setValue(forceY);
     }
 
+
     //TODO mettre des limites à la balle à babar pour timestop
     public void màjProjectile(){
         this.setX(this.getX() + (int) this.getForceX());
         this.setY(this.getY() + (int) this.getForceY());
     }
+
 
     public void initialiserProjectile(int cibleX, int cibleY) {
         // Position de l'entité
@@ -85,7 +87,7 @@ public abstract class Projectile extends Entite{
         if (distance == 0) distance = 1; // éviter division par zéro
 
         // Vitesse initiale (puissance du tir)
-        int puissance = 35;
+        int puissance = 55;
 
         int vx = (int) (((float) dx / distance) * puissance);
         int vy = (int) (((float) dy / distance) * puissance);
@@ -110,4 +112,8 @@ public abstract class Projectile extends Entite{
         Jeu.getUniqueJeu().getListe_projectilesObservable().add(this);
     }
     public abstract void action();
+
+    public boolean affecteTemps(){
+        return false;
+    }
 }

@@ -24,7 +24,6 @@
         private static Joueur uniqueJoueur = null;
         private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
         private int[] equipement;
-        private BooleanProperty timeStop = new SimpleBooleanProperty(false);
         private Pierre_TP pierreTp;
         private int mainCourante;
         private boolean enDash = false;
@@ -60,7 +59,6 @@
             }
             return uniqueJoueur;
         }
-
 
         public void setDernierPos(String val){
             this.dernierPos=val;
