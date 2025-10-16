@@ -72,12 +72,12 @@ public abstract class EntiteVivante extends Entite{
         int blocBas = getyBloc() + Jeu.getUniqueJeu().getTaille1bloc();
         int joueurHaut = getY();
         int joueurBas = getY() + (Jeu.getUniqueJeu().getTaille1bloc() * 2);
-        appliquerCollisionVertical(blocHaut,blocBas,joueurBas,joueurHaut);
+        appliquerCollisionVerticale(blocHaut,blocBas,joueurBas,joueurHaut);
         if (Carte.getUniqueCarte().getPique((joueurBas/32), (this.getX()/32)) ) {
             this.decrementVie(1);
         }
     }
-    public void appliquerCollisionVertical(int blocHaut, int blocBas, int joueurBas, int joueurHaut){
+    public void appliquerCollisionVerticale(int blocHaut, int blocBas, int joueurBas, int joueurHaut){
         if (joueurBas >= blocHaut && vitesseY >= 0 && joueurHaut < blocHaut) {
             setCollisionBas(true);
             enSaut = false;
