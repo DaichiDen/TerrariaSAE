@@ -33,11 +33,8 @@ public class Jeu {
     public final static int taille1bloc = 32;
 
 
+
     private Jeu(){
-        items = new HashMap<>();
-        initialiseItems();
-        initializeRecettes();
-        initializeBlocConstruction();
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);

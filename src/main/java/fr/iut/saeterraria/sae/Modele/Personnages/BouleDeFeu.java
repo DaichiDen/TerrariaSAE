@@ -1,7 +1,8 @@
 package fr.iut.saeterraria.sae.Modele.Personnages;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Map.Map;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Rectangle2D;
@@ -33,7 +34,7 @@ public class BouleDeFeu extends Projectile{
     public void action() {
         int x = getX() / 32;
         int y = getY() / 32;
-        Map map = Jeu.getUniqueJeu().getCarte();
+        Carte map = Carte.getUniqueCarte();
         for (int j = x - 1; j <= x + 1; j++) {
             for (int i = y - 1; i <= y + 1; i++) {
                 if (map.getCase(i, j) != 0 && map.getCase(i, j) != 10 && map.getCase(i, j) != 18) {
