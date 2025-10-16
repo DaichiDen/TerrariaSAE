@@ -5,19 +5,15 @@ import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class EntiteVivanteTest {
-   private Carte carte;
-   private Jeu jeu;
-    @BeforeEach void test(){
-        carte = new Carte();
-        jeu = new Jeu("Joueur");
-    }
 
     @Test
     void testBloqueVerticalEnTombant() {
 
 
-        var joueur = jeu.getJoueur();
+        Joueur joueur = Joueur.getUniqueJoueur();
         joueur.setX(64);
         joueur.setY(0);
         System.out.println(joueur.getVitesseY() + "vitesseY");
@@ -37,15 +33,15 @@ class EntiteVivanteTest {
 
     @Test
     void peutEtreAtteint() {
-        var joueur = jeu.getJoueur();
+        Joueur joueur = Joueur.getUniqueJoueur();
         joueur.setX(480);
         joueur.setY(448);
 
-        assertFalse(joueur.peutEtreAtteint(576/32,448/32,2)); // Test 1 , on place le joueur à 3 blocs de différence du bloc souhaité, le teste doit retourner false car la range est de 2
+        assertFalse(Carte.getUniqueCarte().peutEtreAtteint(576/32,448/32,2, Joueur.getUniqueJoueur())); // Test 1 , on place le joueur à 3 blocs de différence du bloc souhaité, le teste doit retourner false car la range est de 2
 
         joueur.setX(512);
         joueur.setY(448);
 
-        assertTrue(joueur.peutEtreAtteint(576/32,448/32,2)); // Test 2, on place le joueur à 2 blocs de différence du bloc souhaité, le test doit retourner true car on mets une range de 2 et il est à 2 blocs de différence
+        assertTrue(Carte.getUniqueCarte().peutEtreAtteint(576/32,448/32,2, Joueur.getUniqueJoueur())); // Test 2, on place le joueur à 2 blocs de différence du bloc souhaité, le test doit retourner true car on mets une range de 2 et il est à 2 blocs de différence
     }
 }

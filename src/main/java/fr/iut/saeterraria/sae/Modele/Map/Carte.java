@@ -1,7 +1,11 @@
 package fr.iut.saeterraria.sae.Modele.Map;
 
-public class Carte {
+import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
+import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
 
+public class Carte {
+    private static Carte CarteUnique = null;
     private int[][] carte;
 
     public Carte() {
@@ -20,6 +24,13 @@ public class Carte {
             }
         }
         rechargeMap();
+    }
+
+    public static Carte getUniqueCarte() {
+        if (CarteUnique == null) {
+            CarteUnique = new Carte();
+        }
+        return CarteUnique;
     }
 
     public void rechargeMap(){
@@ -90,9 +101,6 @@ public class Carte {
             }
         }
     }
-    public int[][] getMap(){
-        return carte;
-    }
 
     public int recupColonneTaille(){
         return carte[0].length;
@@ -102,16 +110,6 @@ public class Carte {
     }
 
     public int getCase(int x, int y){ return carte[x][y];}
-    public void setCase(int x, int y, int c){
-        carte[x][y] = c;
-    }
-
-    public int getCoordonnéesX(int x){
-        return x*32;
-    }
-    public int getCoordonnéesY(int y){
-        return y*32;
-    }
 
     public int[] detruireBloc(int x,int y){
         int[] blocRecup = new int[2];
@@ -143,5 +141,74 @@ public class Carte {
     }
     public void poserBloc(int x,int y,int val){
         carte[y][x]=val;
+    }
+
+    public boolean getPique(int x,int y){
+        return carte[x][y]==8;
+    }
+    public boolean blocDeFabrication(int x,int y){
+        return carte[y][x]==12 || carte[y][x]==13 || carte[y][x]==15;
+    }
+    public boolean blocTraversable(int x,int y){
+        return carte[x][y] == 0 || carte[x][y] == 10 || carte[x][y] == 18;
+    }
+
+    public boolean peutEtreAtteint(int blocX, int blocY, double portee, Entite entite) {
+        boolean peutEtreAtteint = true;
+        if(!estDansLaPortée(blocX,blocY,portee,entite)){// Quand c'est pas à portée
+            peutEtreAtteint= false;
+        }
+
+        if (!DDA(blocX,blocY,entite)) { // Si bloc devant (obstacle)
+            peutEtreAtteint= false;
+        }
+
+        return peutEtreAtteint;
+    }
+
+    public int calculDX(int blocX, Entite entite){
+
+        return blocX - transfoXEntite(entite);
+
+    }
+    public int calculDY(int blocY, Entite entite){
+
+        return blocY - transfoYEntite(entite);
+    }
+
+    public int transfoXEntite(Entite entite){
+
+        return (entite.getX() + 16) / 32;
+
+    }
+    public int transfoYEntite(Entite entite){
+
+        return (entite.getY() + 16) / 32;
+    }
+
+    public boolean estDansLaPortée(int blocX, int blocY, double portee, Entite entite) {
+        boolean valreturn=true;
+
+        double distance = Math.sqrt(calculDX(blocX,entite) * calculDX(blocX,entite) + calculDY(blocY,entite) * calculDY(blocY,entite));
+        if (distance > portee)
+            valreturn=false;
+
+        return valreturn;
+    }
+    public boolean DDA(int blocX, int blocY,Entite entite){
+        boolean valreturn=true;
+
+        int rayonLaser = (Math.max(Math.abs(calculDX(blocX,entite)), Math.abs(calculDY(blocY,entite))) * 2); // le nombre d'étapes
+        for (int i = 1; i < rayonLaser; i++) {
+            double t = i / (double) rayonLaser;
+            int xi = (int) Math.round(transfoXEntite(entite) + (calculDX(blocX,entite)) * t);
+            int yi = (int) Math.round(transfoYEntite(entite) + (calculDY(blocY,entite)) * t);
+
+            if ((xi != blocX || yi != blocY) && !blocTraversable(yi, xi)) { // Si bloc devant (obstacle)
+                valreturn=false;
+            }
+        }
+        return valreturn;
+
     }
 }

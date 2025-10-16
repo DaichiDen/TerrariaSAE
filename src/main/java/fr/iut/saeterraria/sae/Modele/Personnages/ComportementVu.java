@@ -3,13 +3,14 @@ package fr.iut.saeterraria.sae.Modele.Personnages;
 import fr.iut.saeterraria.sae.Modele.A_Star.Algo_A_Star;
 import fr.iut.saeterraria.sae.Modele.A_Star.Node;
 import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 
 import java.util.List;
 
 public class ComportementVu implements ComportementEnnemi{
     @Override
     public void agir(Ennemi ennemi) {
-        Algo_A_Star pathfinding = new Algo_A_Star(Jeu.getUniqueJeu().getCarte());
+        Algo_A_Star pathfinding = new Algo_A_Star(Carte.getUniqueCarte());
         List<Node> path = pathfinding.trouverchemin(ennemi.getX()/32, ennemi.getY()/32, Joueur.getUniqueJoueur().getX()/32, Joueur.getUniqueJoueur().getY()/32);
 
 
@@ -29,7 +30,7 @@ public class ComportementVu implements ComportementEnnemi{
                 ennemi.sauter();
             }
 
-            if(ennemi.peutEtreAtteint(Joueur.getUniqueJoueur().getX()/32, Joueur.getUniqueJoueur().getY()/32, ennemi.getRangeVue())){
+            if(Carte.getUniqueCarte().peutEtreAtteint(Joueur.getUniqueJoueur().getX()/32, Joueur.getUniqueJoueur().getY()/32, ennemi.getRangeVue(), ennemi)){
                 ennemi.action(Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY());
             }
 

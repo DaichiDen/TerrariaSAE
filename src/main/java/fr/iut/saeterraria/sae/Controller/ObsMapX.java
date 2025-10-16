@@ -1,6 +1,7 @@
 package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
+import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,7 +17,7 @@ public class ObsMapX implements ChangeListener<Number> {
     @Override
     public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
         if(!newValue.equals(oldValue) && newValue.intValue()<192 ){
-            if (Jeu.getUniqueJeu().getCarte().recupColonneTaille()>fond.getEnvironnement().getPrefRows()) {
+            if (Carte.getUniqueCarte().recupColonneTaille()>fond.getEnvironnement().getPrefRows()) {
                 fond.updateMapX();
                 fond.getEnvironnement().setPrefColumns(fond.getEnvironnement().getPrefColumns()+1);
             }

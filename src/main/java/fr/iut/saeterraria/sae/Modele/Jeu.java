@@ -20,7 +20,6 @@ import java.util.HashMap;
 public class Jeu {
     private static Jeu uniqueJeu = null;
 
-    private Carte carte;
     private ArrayList<Ennemi> ennemis;
     private ArrayList<PNJ> pNJ;
     private HashMap<Integer, Item> items; // Associe chaque item (outil) avec son id (bloc de 0 à 20 par exemple)
@@ -36,7 +35,6 @@ public class Jeu {
         initialiseItems();
         initializeRecettes();
         initializeBlocConstruction();
-        carte = new Carte();
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);
@@ -152,10 +150,6 @@ public class Jeu {
 
     public boolean estVivant(EntiteVivante entite){
         return entite.getBarreVie().getVie()>0;
-    }
-
-    public Carte getCarte(){
-        return carte;
     }
 
     public ArrayList<Ennemi> getEnnemis() {

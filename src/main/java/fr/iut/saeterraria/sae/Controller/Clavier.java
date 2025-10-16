@@ -71,17 +71,6 @@ public class Clavier implements EventHandler<KeyEvent> {
                 Joueur.getUniqueJoueur().dashKatana();
             }
 
-            if (code == KeyCode.J) { // à déplacer dans souris quand on aura une hotbar (main courante)
-                if (!Joueur.getUniqueJoueur().getPierreTp().getEtat_tp()) {
-                    Joueur.getUniqueJoueur().getPierreTp().setX(Joueur.getUniqueJoueur().getX());
-                    Joueur.getUniqueJoueur().getPierreTp().setY(Joueur.getUniqueJoueur().getY());
-                    Joueur.getUniqueJoueur().getPierreTp().setEtat_tp(true);
-                }
-                else {
-                    Joueur.getUniqueJoueur().tp(Joueur.getUniqueJoueur().getPierreTp().getX(), Joueur.getUniqueJoueur().getPierreTp().getY());
-                    Joueur.getUniqueJoueur().getPierreTp().setEtat_tp(false);
-                }
-            }
 
             String keyText = event.getText();
             if (keyText.equals("&") || keyText.equals("\"") || keyText.equals("é") || keyText.equals("'") || keyText.equals("(") || keyText.equals("-")) {

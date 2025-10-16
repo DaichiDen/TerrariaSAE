@@ -1,5 +1,6 @@
     package fr.iut.saeterraria.sae.Modele.Personnages;
     import fr.iut.saeterraria.sae.Modele.Jeu;
+    import fr.iut.saeterraria.sae.Modele.Map.Carte;
     import fr.iut.saeterraria.sae.Modele.Objets.*;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
@@ -42,7 +43,6 @@
             super(nom, 20, 100, 20, 20*32, 14*32, 1, 10,1,Jeu.getUniqueJeu().getTaille1bloc(),Jeu.getUniqueJeu().getTaille1bloc()*2,rangeVue,rangeAttaque);
             this.equipement = new int[7];
             this.inventaire = new Inventaire(7,6);
-            this.pierreTp = pierreTp;
             this.mainCourante = 0;
             this.xPrec = super.getX()/32;
             this.xMax = new SimpleIntegerProperty(getX()/Jeu.getUniqueJeu().getTaille1bloc());
@@ -147,9 +147,9 @@
 
         public boolean miner(int x, int y) {
             boolean miner = false;
-            if (peutEtreAtteint(x, y, 2.5)) {
-                if ( ((Bloc) Jeu.getUniqueJeu().getItems().get(Jeu.getUniqueJeu().getCarte().getCase(y,x))).getResistance() == 1 || Jeu.getUniqueJeu().getCarte().getCase(y, x) != 0 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 18 && Jeu.getUniqueJeu().getCarte().getCase(y, x) != 22 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()<55 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()>50 && compareResistance(((Bloc) Jeu.getUniqueJeu().getItems().get(Jeu.getUniqueJeu().getCarte().getCase(y,x)))) ) {
-                    int[] bloc = Jeu.getUniqueJeu().getCarte().detruireBloc(x, y);
+            if (Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5, Joueur.uniqueJoueur)) {
+                if ( ((Bloc) Jeu.getUniqueJeu().getItems().get(Carte.getUniqueCarte().getCase(y,x))).getResistance() == 1 ||  Carte.getUniqueCarte().blocTraversable(y,x) && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()<55 && inventaire.getCase(0,mainCourante).getItem().getCodeObjet()>50 && compareResistance(((Bloc) Jeu.getUniqueJeu().getItems().get(Carte.getUniqueCarte().getCase(y,x)))) ) {
+                    int[] bloc = Carte.getUniqueCarte().detruireBloc(x, y);
                     ajouterItem(Jeu.getUniqueJeu().getItems().get(bloc[0]), bloc[1]);
                     miner = true;
                 }
@@ -163,14 +163,13 @@
 
         public void poser(int x, int y) {//x = colonne && y = ligne
             if( ((this.getX()/32)!=x) || ((this.getY()/32)!=y) ) {
-                 if (peutEtreAtteint(x, y, 2.5) && inventaire.getCase(0,mainCourante).getItem().getCodeObjet() < 20 && (Jeu.getUniqueJeu().getCarte().getCase(y, x) == 0 || Jeu.getUniqueJeu().getCarte().getCase(y, x) == 10 || Jeu.getUniqueJeu().getCarte().getCase(y, x) == 18)) {
+                 if (Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5, this) && inventaire.getCase(0,mainCourante).getItem().getCodeObjet() < 20 && Carte.getUniqueCarte().blocTraversable(y,x)) {
                     if (inventaire.getCase(0,mainCourante).getQuantite()>0) {
-                        Jeu.getUniqueJeu().getCarte().poserBloc(x, y, inventaire.getCase(0,mainCourante).getItem().getCodeObjet());
+                        Carte.getUniqueCarte().poserBloc(x,y,inventaire.getCase(0,mainCourante).getItem().getCodeObjet());
                         inventaire.getCase(0, mainCourante).retireQuantite(1);
                     }
                 }
             }
-
         }
 
         @Override
@@ -183,7 +182,7 @@
                 if (hitboxMob.contains(x, y)) {
                     int ennemiX = (e.getX() + 16) / 32;
                     int ennemiY = (e.getY() + 16) / 32;
-                    if (peutEtreAtteint(ennemiX, ennemiY, getRangeVue())){
+                    if (Carte.getUniqueCarte().peutEtreAtteint(ennemiX, ennemiY, getRangeVue(), e)){
                         if (this.getAttaque() - e.getDef()>0){
                             e.decrementVie(getAttaque() - e.getDef());
                         }
@@ -285,10 +284,6 @@
         public void tp(int x, int y) {
             this.setX(x);
             this.setY(y);
-        }
-
-        public Pierre_TP getPierreTp() {
-            return this.pierreTp;
         }
 
         public void dashKatana() {
