@@ -127,4 +127,85 @@ public class Inventaire {
     public boolean caseEstPlein(int numeroCase) {
         return this.inventaireJoueur.get(numeroCase).getQuantite()==this.inventaireJoueur.get(numeroCase).getMaxStack();
     }
+
+    public boolean estEnQuantiteSuffisante(int[][] necessaire, ArrayList<Case> position, Item item) {
+        boolean craftableFin = true;
+        boolean[] craftable = new boolean[necessaire[0].length] ;//Indique si l'objet est en quantité suffisante
+        int quantite;
+        int i = 0;
+        while ( craftableFin && i < craftable.length) { // Vérifie si les quantités sont suffisantes côté joueur
+            ArrayList<Case> tabResult = findItem(item.getRecette().get(i).getItem());
+            if (tabResult != null) {
+                quantite = 0;
+                int o = 0;
+                while (!craftable[i] && o < tabResult.size()) {
+                    if (tabResult.get(o).getItem().getCodeObjet()!=0) {
+                        quantite = quantite + getCase(tabResult.get(o).getLigne(), tabResult.get(o).getColonne()).getQuantite();
+                        position.add(getCase(tabResult.get(o).getLigne(), tabResult.get(o).getColonne()));
+                    }
+                    if (quantite >= necessaire[1][i]) {
+                        craftable[i] = true;
+                    }
+                    o++;
+                }
+            }
+            else {
+                craftableFin = false;
+            }
+            i++;
+        }
+
+        int j = 0;
+        while ( j<craftable.length && craftableFin) {
+            if (!craftable[j]) {
+                craftableFin = false;
+            }
+            j++;
+        }
+
+        return craftableFin;
+    }
+
+    public int[][] getRecette(Item item) {
+        int[][] necessaire = new int[2][item.getRecette().size()];
+        for (int i = 0; i < necessaire[0].length; i++) {
+            necessaire[0][i] = item.getRecette().get(i).getItem().getCodeObjet();
+            necessaire[1][i] = item.getRecette().get(i).getQuantite();
+        }
+        return necessaire;
+    }
+
+    public void verifierCraftPossible(Item item) {
+        int[][] necessaire = getRecette(item);
+
+        ArrayList<Case> position = new ArrayList<>();
+        boolean craftableFin = estEnQuantiteSuffisante(necessaire,position, item);
+        if (craftableFin) {
+            debuterCraft(item,necessaire,position);
+        }
+    }
+
+    public void debuterCraft(Item item, int[][] necessaire, ArrayList<Case> position) {
+        int c = 0;
+        int k = 0;
+        if (ajoutInventaire(item, 1)) {
+            while (c < necessaire[1].length && necessaire[1][c] > 0) {//Pour chaque item nécessaire
+                while (k < position.size() && necessaire[1][c] > 0) { //Retire à chaque position des items
+                    if (necessaire[1][c] <= position.get(k).getQuantite()) { // Si la case a assez pour le craft
+                        position.get(k).retireQuantite(necessaire[1][c]);
+                        necessaire[1][c] = 0;
+                    } else { // Si la case n'a pas assez pour le craft
+                        necessaire[1][c] -= position.get(k).getQuantite();
+                        position.get(k).retireQuantite(position.get(k).getQuantite());
+                    }
+                    k++;
+                }
+                c++;
+            }
+            System.out.println("craft réussi");
+        }
+        else {
+            System.out.println("craft non réussi");
+        }
+    }
 }
