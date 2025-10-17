@@ -1,6 +1,5 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Objets;
 
-import fr.iut.saeterraria.sae.Modele.Objets.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Arme.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.*;

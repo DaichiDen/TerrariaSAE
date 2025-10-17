@@ -1,13 +1,10 @@
 package fr.iut.saeterraria.sae.Controller;
 
-import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
+import fr.iut.saeterraria.sae.Modele.Entites.Entite;
 
-import fr.iut.saeterraria.sae.Modele.Personnages.EntiteVivante;
-import fr.iut.saeterraria.sae.Modele.Personnages.Goblin;
-import fr.iut.saeterraria.sae.Modele.Personnages.Ogre;
-import fr.iut.saeterraria.sae.Vue.SpriteMob;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.value.ObservableValue;
+import fr.iut.saeterraria.sae.Modele.Entites.EntiteVivante;
+import fr.iut.saeterraria.sae.Modele.Entites.Goblin;
+import fr.iut.saeterraria.sae.Modele.Entites.Ogre;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.ProgressBar;
@@ -17,7 +14,6 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ObsEnnemi implements ListChangeListener<EntiteVivante> {

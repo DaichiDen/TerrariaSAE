@@ -1,9 +1,7 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Entites;
 
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 public class BarreVie {
     private DoubleProperty vieMax;

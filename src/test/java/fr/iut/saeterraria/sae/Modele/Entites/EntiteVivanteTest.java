@@ -1,9 +1,7 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Entites;
 
-import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 

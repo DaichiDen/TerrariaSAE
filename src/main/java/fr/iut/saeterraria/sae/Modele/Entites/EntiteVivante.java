@@ -1,4 +1,4 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Entites;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
@@ -136,20 +136,8 @@ public abstract class EntiteVivante extends Entite{
 
             // inertie
             boolean auSol = getCollisionBas();
-
-            int accel;
-            if (auSol) {
-                accel = getAccel_sol();
-            } else {
-                accel = getAccel_air();
-            }
-
-            int friction;
-            if (auSol) {
-                friction = getFriction_sol();
-            } else {
-                friction = getFriction_air();
-            }
+            int accel = initAccel(auSol);
+            int friction = initFriction(auSol);
 
             miseAJourVitesseHorizontale(accel, friction);  // Appliquer déplacement
 
@@ -158,6 +146,28 @@ public abstract class EntiteVivante extends Entite{
         }
         resterInBounds();
     }
+
+    public int initAccel(boolean auSol){
+        int accel;
+        if (auSol) {
+            accel = getAccel_sol();
+        } else {
+            accel = getAccel_air();
+        }
+        return accel;
+    }
+
+    public int initFriction(boolean auSol){
+        int friction;
+        if (auSol) {
+            friction = getFriction_sol();
+        } else {
+            friction = getFriction_air();
+        }
+        return friction;
+    }
+
+
 
     public void miseAJourGravité(){
         if (!getCollisionBas()) {

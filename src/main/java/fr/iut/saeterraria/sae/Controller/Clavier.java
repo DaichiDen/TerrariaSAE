@@ -1,7 +1,7 @@
 package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
+import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
 import fr.iut.saeterraria.sae.Vue.VueHotbar;
 import javafx.application.Platform;
 import javafx.event.EventHandler;

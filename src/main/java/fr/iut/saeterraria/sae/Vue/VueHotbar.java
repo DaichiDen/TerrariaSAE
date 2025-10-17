@@ -1,7 +1,6 @@
 package fr.iut.saeterraria.sae.Vue;
 
-import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
+import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;

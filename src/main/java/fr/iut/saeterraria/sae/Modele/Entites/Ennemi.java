@@ -1,13 +1,12 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Entites;
 
-import fr.iut.saeterraria.sae.Modele.A_Star.Algo_A_Star;
-import fr.iut.saeterraria.sae.Modele.A_Star.Node;
-import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
+import fr.iut.saeterraria.sae.Modele.Entites.Comportements.ComportementEnnemi;
+import fr.iut.saeterraria.sae.Modele.Entites.Comportements.ComportementPasVu;
+import fr.iut.saeterraria.sae.Modele.Entites.Comportements.ComportementVu;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Ennemi extends EntiteVivante {
     private long dernièreAttaque=60;
@@ -34,12 +33,6 @@ public abstract class Ennemi extends EntiteVivante {
 
     public abstract void action(int x, int y);
 
-    public int distanceJoueur(int x, int y){
-        int dx = x - Joueur.getUniqueJoueur().getX();
-        int dy = y - Joueur.getUniqueJoueur().getY();
-        int distance = (int) Math.sqrt(dx * dx + dy * dy);
-        return distance;
-    }
 
     @Override
     public void mettreAJour(){
@@ -73,7 +66,5 @@ public abstract class Ennemi extends EntiteVivante {
         this.dernièreAttaque=val;
 
     }
-    public void setCooldown(long val){
-        this.cooldown=val;
-    }
+
 }

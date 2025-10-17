@@ -1,6 +1,8 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Entites.Comportements;
 
-public class ComportementPasVu implements ComportementEnnemi{
+import fr.iut.saeterraria.sae.Modele.Entites.Ennemi;
+
+public class ComportementPasVu implements ComportementEnnemi {
     @Override
     public void agir(Ennemi ennemi) {
         int aleaComp = (int) (Math.random()*11);

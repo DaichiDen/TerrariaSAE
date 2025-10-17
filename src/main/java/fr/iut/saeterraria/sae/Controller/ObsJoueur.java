@@ -1,10 +1,8 @@
 package fr.iut.saeterraria.sae.Controller;
 
 
-import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
+import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
 import fr.iut.saeterraria.sae.Vue.SpriteJoueur;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 

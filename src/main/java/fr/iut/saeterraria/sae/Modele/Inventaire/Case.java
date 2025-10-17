@@ -1,8 +1,7 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Inventaire;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 public class Case {

@@ -1,21 +1,14 @@
 package fr.iut.saeterraria.sae.Controller;
 
-import fr.iut.saeterraria.sae.Modele.Personnages.BouleDeFeu;
-import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
+import fr.iut.saeterraria.sae.Modele.Entites.BouleDeFeu;
 
-import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
-import fr.iut.saeterraria.sae.Vue.SpriteMob;
-import javafx.beans.value.ObservableValue;
+import fr.iut.saeterraria.sae.Modele.Entites.Projectile;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import javafx.scene.layout.Pane;
 import fr.iut.saeterraria.sae.Vue.VueProjectile;
 
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ObsProjectile implements ListChangeListener<Projectile> {

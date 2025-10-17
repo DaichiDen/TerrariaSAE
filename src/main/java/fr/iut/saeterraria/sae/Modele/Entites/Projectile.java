@@ -1,9 +1,7 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Entites;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import javafx.beans.property.*;
-import javafx.geometry.Rectangle2D;
 
 public abstract class Projectile extends Entite{
     private StringProperty nom;

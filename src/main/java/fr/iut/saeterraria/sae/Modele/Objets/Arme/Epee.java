@@ -12,8 +12,5 @@ public class Epee extends Melee {
         super(nom,desc,attaque,codeobjet);
     }
 
-    @Override
-    public void attaquer() {
 
-    }
 }

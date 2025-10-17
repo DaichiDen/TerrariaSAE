@@ -2,11 +2,9 @@ package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
-import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
-import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
-import fr.iut.saeterraria.sae.Modele.Personnages.MH;
-import fr.iut.saeterraria.sae.Modele.Personnages.Ogre;
-import javafx.geometry.Rectangle2D;
+import fr.iut.saeterraria.sae.Modele.Entites.Entite;
+import fr.iut.saeterraria.sae.Modele.Entites.MH;
+import fr.iut.saeterraria.sae.Modele.Entites.Ogre;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 

@@ -1,22 +1,14 @@
 package fr.iut.saeterraria.sae.Modele;
 
 import fr.iut.saeterraria.sae.Modele.Objets.*;
-import fr.iut.saeterraria.sae.Modele.Objets.Arme.DashingKatana;
-import fr.iut.saeterraria.sae.Modele.Objets.Arme.Distance;
-import fr.iut.saeterraria.sae.Modele.Objets.Arme.Epee;
-import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
-import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
-import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
-import fr.iut.saeterraria.sae.Modele.Personnages.*;
-import fr.iut.saeterraria.sae.Modele.Map.*;
+import fr.iut.saeterraria.sae.Modele.Entites.Projectile;
+import fr.iut.saeterraria.sae.Modele.Entites.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 // Environnement du jeu
 public class Jeu {

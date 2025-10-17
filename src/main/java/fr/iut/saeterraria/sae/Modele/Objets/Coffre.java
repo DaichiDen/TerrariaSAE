@@ -1,7 +1,7 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
-import fr.iut.saeterraria.sae.Modele.Personnages.Case;
-import fr.iut.saeterraria.sae.Modele.Personnages.Inventaire;
+import fr.iut.saeterraria.sae.Modele.Inventaire.Case;
+import fr.iut.saeterraria.sae.Modele.Inventaire.Inventaire;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;

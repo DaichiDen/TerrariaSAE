@@ -1,8 +1,6 @@
 package fr.iut.saeterraria.sae.Modele.Map;
 
-import fr.iut.saeterraria.sae.Modele.Jeu;
-import fr.iut.saeterraria.sae.Modele.Personnages.Entite;
-import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
+import fr.iut.saeterraria.sae.Modele.Entites.Entite;
 
 public class Carte {
     private static Carte CarteUnique = null;
@@ -138,7 +136,7 @@ public class Carte {
 
         }
         return blocRecup;
-    }
+    } //TODO segmentation possible ?
     public void poserBloc(int x,int y,int val){
         carte[y][x]=val;
     }

@@ -14,9 +14,7 @@ public class Melee extends Armes {
         super(nom, desc, attaque,codeobjet);
     }
 
-    @Override
-    public void attaquer() {
 
-    }
+
     
 }

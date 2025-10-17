@@ -1,8 +1,6 @@
 package fr.iut.saeterraria.sae.Vue;
 
-import fr.iut.saeterraria.sae.Modele.Jeu;
-
-import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
+import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;

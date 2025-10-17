@@ -1,16 +1,11 @@
 package fr.iut.saeterraria.sae.Vue;
 
-import fr.iut.saeterraria.sae.Modele.Jeu;
-
-import fr.iut.saeterraria.sae.Modele.Personnages.Ennemi;
-import fr.iut.saeterraria.sae.Modele.Personnages.Goblin;
-import fr.iut.saeterraria.sae.Modele.Personnages.Ogre;
-import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
-import javafx.scene.image.Image;
+import fr.iut.saeterraria.sae.Modele.Entites.Ennemi;
+import fr.iut.saeterraria.sae.Modele.Entites.Goblin;
+import fr.iut.saeterraria.sae.Modele.Entites.Ogre;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 

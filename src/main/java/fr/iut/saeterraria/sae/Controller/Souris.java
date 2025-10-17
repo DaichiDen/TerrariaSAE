@@ -4,11 +4,11 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Modele.Objets.Armure;
 
-import fr.iut.saeterraria.sae.Modele.Personnages.*;
-import fr.iut.saeterraria.sae.Modele.Personnages.Case;
-import fr.iut.saeterraria.sae.Modele.Personnages.Joueur;
-import fr.iut.saeterraria.sae.Modele.Personnages.ListeItems;
-import fr.iut.saeterraria.sae.Modele.Personnages.Projectile;
+import fr.iut.saeterraria.sae.Modele.Entites.*;
+import fr.iut.saeterraria.sae.Modele.Inventaire.Case;
+import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
+import fr.iut.saeterraria.sae.Modele.Objets.ListeItems;
+import fr.iut.saeterraria.sae.Modele.Entites.Projectile;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.application.Platform;
 import javafx.event.EventHandler;

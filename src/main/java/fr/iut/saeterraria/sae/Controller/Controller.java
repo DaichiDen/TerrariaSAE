@@ -2,9 +2,9 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
-import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
-import fr.iut.saeterraria.sae.Modele.Personnages.*;
+import fr.iut.saeterraria.sae.Modele.Objets.ListeItems;
+import fr.iut.saeterraria.sae.Modele.Entites.*;
 import fr.iut.saeterraria.sae.Vue.*;
 import javafx.animation.AnimationTimer;
 
@@ -125,7 +125,7 @@ public class Controller implements Initializable {
 
         vueEnnemi = new VueEnnemi(screen);
         Jeu.getUniqueJeu().getMobs().addListener(new ObsEnnemi(screen));
-        initialisationMobs();
+        Jeu.getUniqueJeu().initialisationMobs();
 
         imageaccueil.setFitWidth(menu.getWidth());
         imageaccueil.fitWidthProperty().bind(imagebloc_accueil.widthProperty());
@@ -246,9 +246,9 @@ public class Controller implements Initializable {
 
                         });
                         delay.play();
-                        initialisationJoueur();
-                        déinitialisationMobs();
-                        initialisationMobs();
+                        Jeu.getUniqueJeu().initialisationJoueur();
+                        Jeu.getUniqueJeu().déinitialisationMobs();
+                        Jeu.getUniqueJeu().initialisationMobs();
                     }
                 }
             }
@@ -261,15 +261,8 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(20),1);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(72),1);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(78),1);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(77),64);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(51),1);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(54),1);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(51),1);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(79),1);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(80),64);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(54), 1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(76), 1);
     }
 
     @FXML
@@ -307,61 +300,7 @@ public class Controller implements Initializable {
     }
 
 
-    public void déinitialisationMobs() {
-        int i = Jeu.getUniqueJeu().getEnnemis().size()-1;
-        while (i >= 0) {
-            Jeu.getUniqueJeu().getEnnemis().get(i).decrementVie(Jeu.getUniqueJeu().getEnnemis().get(i).getBarreVie().getVieMax());
 
-            i--;
-        }
-     }
-        public void initialisationMobs () {
-            Ennemi ogre = new Ogre("Pierre l'ogre vert", 50, 20, 3000, 0, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
-            Ennemi ogre2 = new Ogre("Pierre l'ogre vert pale", 50, 20, 1340, 1340, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
-            Ennemi ogre3 = new Ogre("Pierre l'ogre vert foncé", 50, 20, 4962, 1376, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
-            Ennemi ogre4 = new Ogre("Pierre l'ogre vert clair", 50, 20, 3068, 1600, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
-            Ennemi goblin = new Goblin("Caillou le gobelin vert", 20, 20, 5000, 0, 0, 2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
-            Ennemi goblin2 = new Goblin("Caillou le gobelin vert pale", 20, 20, 1456, 1728, 0, 2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
-            Ennemi goblin3 = new Goblin("Caillou le gobelin vert foncé", 20, 20, 2959, 1088, 0, 2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
-            Ennemi goblin4 = new Goblin("Caillou le gobelin vert clair", 20, 20, 5238, 1760, 0,  2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
-            Ennemi goblin5 = new Goblin("Caillou le gobelin vert émeraude", 20, 20, 4544, 1632, 0,  2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
-            Ennemi mh = new MH("Monsieur Homps", 250, 20, 4500, 0, 5,  2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 15, 8);
-
-            Jeu.getUniqueJeu().addEnnemis(ogre);
-            Jeu.getUniqueJeu().addEnnemis(ogre2);
-            Jeu.getUniqueJeu().addEnnemis(ogre3);
-            Jeu.getUniqueJeu().addEnnemis(ogre4);
-            Jeu.getUniqueJeu().addMobs(ogre);
-            Jeu.getUniqueJeu().addMobs(ogre2);
-            Jeu.getUniqueJeu().addMobs(ogre3);
-            Jeu.getUniqueJeu().addMobs(ogre4);
-
-            Jeu.getUniqueJeu().addEnnemis(goblin);
-            Jeu.getUniqueJeu().addEnnemis(goblin2);
-            Jeu.getUniqueJeu().addEnnemis(goblin3);
-            Jeu.getUniqueJeu().addEnnemis(goblin4);
-            Jeu.getUniqueJeu().addEnnemis(goblin5);
-            Jeu.getUniqueJeu().addMobs(goblin);
-            Jeu.getUniqueJeu().addMobs(goblin2);
-            Jeu.getUniqueJeu().addMobs(goblin3);
-            Jeu.getUniqueJeu().addMobs(goblin4);
-            Jeu.getUniqueJeu().addMobs(goblin5);
-
-            Jeu.getUniqueJeu().addEnnemis(mh);
-            Jeu.getUniqueJeu().addMobs(mh);
-
-        }
-
-
-
-
-
-    public void initialisationJoueur(){
-        Joueur.getUniqueJoueur().getBarreVie().setVie(Joueur.getUniqueJoueur().getBarreVie().getVieMax());
-        Joueur.getUniqueJoueur().setEstVivant(true);
-        Joueur.getUniqueJoueur().setX(20*32);
-        Joueur.getUniqueJoueur().setY(0*32);
-    }
 }
 
 

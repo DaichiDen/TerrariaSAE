@@ -1,4 +1,4 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Inventaire;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.collections.FXCollections;
@@ -35,7 +35,7 @@ public class Inventaire {
             System.out.println("Pas de place dans l'inventaire");
         }
         else {
-            placer = AddDansCaseItemPresent(planInventaire,item,placer,reste);
+            placer = AddDansCaseItem(planInventaire,item,placer,reste);
         }
         return placer;
     }
@@ -76,10 +76,10 @@ public class Inventaire {
 
 
 
-    
+
 
     // Essaye d'ajouter l'item dans une case ayant le même item, si ce n'est pas possible, il va appeler addItemCaseVide qui va essayer d'ajouter dans une case vide
-    public boolean AddDansCaseItemPresent(ArrayList<Case> planInventaire, Item item, boolean placer, int reste) {
+    public boolean AddDansCaseItem(ArrayList<Case> planInventaire, Item item, boolean placer, int reste) {
         int compteur = 0;
         while (compteur<planInventaire.size() && !placer) {
             if (planInventaire.get(compteur).comparerId(item.getCodeObjet())) { // Si Item déjà présent dans l'inventaire
@@ -106,9 +106,6 @@ public class Inventaire {
 
 
 
-
-
-
     public boolean addItemCaseVide(ArrayList<Case> planInventaire, Item item, boolean placer, int reste) {
         int compteur2=0;
         while (compteur2<planInventaire.size() && !placer) {
@@ -128,6 +125,7 @@ public class Inventaire {
         }
         return placer;
     }
+
 
     public boolean AjoutItemDepassePasMaxStack(int numeroCase, int reste) {
         return this.inventaireJoueur.get(numeroCase).getQuantite()+reste <= this.inventaireJoueur.get(numeroCase).getMaxStack();

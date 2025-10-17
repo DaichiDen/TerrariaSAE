@@ -1,6 +1,4 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
-
-import fr.iut.saeterraria.sae.Modele.Jeu;
+package fr.iut.saeterraria.sae.Modele.Entites;
 
 public class Ogre extends Ennemi{
     public Ogre(String nom, int vieMax, int energieMax, int x, int y, int def, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {

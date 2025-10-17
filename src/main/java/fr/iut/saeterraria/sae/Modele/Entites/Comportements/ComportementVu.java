@@ -1,13 +1,14 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Entites.Comportements;
 
 import fr.iut.saeterraria.sae.Modele.A_Star.Algo_A_Star;
 import fr.iut.saeterraria.sae.Modele.A_Star.Node;
-import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
+import fr.iut.saeterraria.sae.Modele.Entites.Ennemi;
+import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
 
 import java.util.List;
 
-public class ComportementVu implements ComportementEnnemi{
+public class ComportementVu implements ComportementEnnemi {
     @Override
     public void agir(Ennemi ennemi) {
         Algo_A_Star pathfinding = new Algo_A_Star(Carte.getUniqueCarte());

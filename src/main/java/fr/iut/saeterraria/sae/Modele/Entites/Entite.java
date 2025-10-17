@@ -1,4 +1,4 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Entites;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
@@ -12,7 +12,9 @@ public abstract class Entite {
 
     private IntegerProperty x, y;
     private IntegerProperty xHitbox, yHitbox;
+
     private StringProperty nom;
+
     private int attaque;
 
     private BooleanProperty marcheDroite = new SimpleBooleanProperty(false);
@@ -26,7 +28,7 @@ public abstract class Entite {
     private final static int friction_sol = 4;
     private final static int friction_air = 1;
 
-    private int xBloc, yBloc;
+    private int xBloc, yBloc; //TODO ici ??
     private int la_case;
     private boolean collisionBas = false;
 

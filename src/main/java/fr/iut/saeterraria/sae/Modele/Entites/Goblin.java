@@ -1,6 +1,4 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
-
-import fr.iut.saeterraria.sae.Modele.Jeu;
+package fr.iut.saeterraria.sae.Modele.Entites;
 
 public class Goblin extends Ennemi{
 

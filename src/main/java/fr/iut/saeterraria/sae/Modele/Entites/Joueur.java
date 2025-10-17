@@ -1,12 +1,11 @@
-    package fr.iut.saeterraria.sae.Modele.Personnages;
+    package fr.iut.saeterraria.sae.Modele.Entites;
     import fr.iut.saeterraria.sae.Modele.Jeu;
     import fr.iut.saeterraria.sae.Modele.Map.Carte;
     import fr.iut.saeterraria.sae.Modele.Objets.*;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 
-    import javafx.beans.property.BooleanProperty;
-    import javafx.beans.property.SimpleBooleanProperty;
+    import fr.iut.saeterraria.sae.Modele.Inventaire.Inventaire;
 
     import javafx.beans.property.IntegerProperty;
     import javafx.beans.property.SimpleIntegerProperty;

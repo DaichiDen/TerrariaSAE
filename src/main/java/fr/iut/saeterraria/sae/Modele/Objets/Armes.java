@@ -17,9 +17,8 @@ public abstract class Armes extends Equipement {
         this.attaque = new SimpleIntegerProperty(attaque);
     }
 
-    public IntegerProperty attaqueProperty() { return attaque; }
     public int getAttaque(){ return attaque.getValue(); }
 
-    public abstract void attaquer();
+
 
 }

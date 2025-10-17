@@ -1,4 +1,4 @@
-package fr.iut.saeterraria.sae.Modele.Personnages;
+package fr.iut.saeterraria.sae.Modele.Entites;
 
 public class Fleche extends Projectile{
 
