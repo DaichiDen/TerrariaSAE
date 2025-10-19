@@ -44,7 +44,7 @@ public class VueProjectile extends CreateRessourceVisuel {
 
             }
 
-            sprite.setId(projectile.getNom());
+            sprite.setId("Projectile"+projectile.getId());
             sprite.translateXProperty().bind(projectile.xProperty());
             sprite.translateYProperty().bind(projectile.yProperty());
 

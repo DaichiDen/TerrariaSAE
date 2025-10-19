@@ -9,9 +9,8 @@ public abstract class Projectile extends Entite{
     private int xBloc, yBloc;
     private BooleanProperty actif;
 
-    public Projectile(String nom, int xJoueur, int yJoueur, int attaque, int tailleL, int tailleH) {
-        super(nom, xJoueur, yJoueur, attaque, tailleL, tailleH);
-        this.nom = new SimpleStringProperty(nom);
+    public Projectile(int xJoueur, int yJoueur, int attaque, int tailleL, int tailleH) {
+        super(xJoueur, yJoueur, attaque, tailleL, tailleH);
         this.actif = new SimpleBooleanProperty(true);
     }
 

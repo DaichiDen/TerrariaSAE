@@ -37,7 +37,7 @@ public class VueEnnemi extends CreateRessourceVisuel {
             sprite = createImageView("/Sprite/MH.png", 32, 64);
         }
 
-        sprite.setId(ennemi.getNom());
+        sprite.setId("Ennemi"+ennemi.getId());
         sprite.translateXProperty().bind(ennemi.xProperty());
         sprite.translateYProperty().bind(ennemi.yProperty());
 

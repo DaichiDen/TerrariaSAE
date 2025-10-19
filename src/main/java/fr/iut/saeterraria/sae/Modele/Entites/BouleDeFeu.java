@@ -13,7 +13,7 @@ public class BouleDeFeu extends Projectile{
     private BooleanProperty aExplosé = new SimpleBooleanProperty(false);
 
     public BouleDeFeu(int xEntite, int yEntite) {
-        super("bdf", xEntite, yEntite, 12, 32, 32);
+        super(xEntite, yEntite, 12, 32, 32);
     }
 
     public void màjProjectile(){

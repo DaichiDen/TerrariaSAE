@@ -1,8 +1,10 @@
 package fr.iut.saeterraria.sae.Modele.Entites;
 
+import fr.iut.saeterraria.sae.Modele.Jeu;
+
 public class Ogre extends Ennemi{
-    public Ogre(String nom, int vieMax, int energieMax, int x, int y, int def, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
-        super(nom, vieMax, energieMax, x, y, def, attaque, tailleL, tailleH, rangeVue, rangeAttaque);
+    public Ogre(int x, int y) {
+        super(50, 20, x, y, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
     }
 
     @Override

@@ -13,7 +13,7 @@ public abstract class EntiteVivante extends Entite{
 
     private BooleanProperty estVivant;
 
-    private boolean enSaut = false; //TODO c'est pas dans la bonne classe
+    private boolean enSaut = false;
 
     private int vitesseY = 0;
 
@@ -27,8 +27,8 @@ public abstract class EntiteVivante extends Entite{
 
 
 
-    public EntiteVivante(String nom, int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
-        super(nom, x, y, attaque, tailleL, tailleH);
+    public EntiteVivante(int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
+        super(x, y, attaque, tailleL, tailleH);
 
         this.barreVie = new BarreVie(vieMax);
         this.energieMax = new SimpleIntegerProperty(energieMax);
@@ -203,17 +203,6 @@ public abstract class EntiteVivante extends Entite{
         testerHorizontal();
     }
 
-
-    // Gestion du nom
-    public StringProperty getNomProperty(){
-        return super.getNomProperty();
-    }
-    public String getNom(){
-        return getNomProperty().getValue();
-    }
-    public void setNom(String nom){
-        getNomProperty().setValue(nom);
-    }
 
     // Gestion de la vie
     public BarreVie getBarreVie(){

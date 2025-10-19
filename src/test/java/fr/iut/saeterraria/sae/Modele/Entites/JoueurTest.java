@@ -19,7 +19,7 @@ class JoueurTest {
         Joueur.getUniqueJoueur().setY(224);
 
         Joueur.getUniqueJoueur().setMainCourante(0);
-        Joueur.getUniqueJoueur().poser(736/32,256/32);
+        Carte.getUniqueCarte().poser(736/32,256/32);
 
         //Test1 où le posage est validé
         assertTrue(Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getQuantite()!=0); // on vérifie que le bloc qu'on a posé s'est retiré de l'inventaire
@@ -28,7 +28,7 @@ class JoueurTest {
 
 
         //Test où le posage est pas validé
-        Joueur.getUniqueJoueur().poser(128/32,736/32);// valeurs absurdes qui sont en dehors de la portée du joueur
+        Carte.getUniqueCarte().poser(128/32,736/32);// valeurs absurdes qui sont en dehors de la portée du joueur
         assertTrue(Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getQuantite()==1); // On a posé un des 2 blocs de bois , donc si je fais poser et que la quantité n'est pas décrementé alors le bloc est pas posé
         assertTrue(Carte.getUniqueCarte().getCase(128/32,736/32)==0); // On a pas posé de bloc, donc la map reste inchangé (id 0 = bloc invisible)
 
@@ -39,7 +39,7 @@ class JoueurTest {
     @Test
     void craftItem() {
         var joueur = Joueur.getUniqueJoueur();
-        joueur.craftItem(jeu.getItems().get(12)); // craft de  l'établi qui nécessite 2 bois
+        joueur.getInventaire().craftItem(jeu.getItems().get(12)); // craft de  l'établi qui nécessite 2 bois
 
         // On s'attend que le craft item enlève les bois de l'inventaire, donc que la case 0 0 ne contient plus d'item (soit que l'id vaut 0)
         assertEquals(0, joueur.getInventaire().getCase(0,0).getItem().getCodeObjet());

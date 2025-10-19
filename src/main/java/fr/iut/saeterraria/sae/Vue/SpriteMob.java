@@ -50,7 +50,7 @@ public class SpriteMob extends CreateRessourceVisuel {
 
 
 
-        spriteActuel.setId(entite.getNom());
+        spriteActuel.setId("mob"+entite.getId());
         spriteActuel.translateXProperty().bind(entite.xProperty());
         spriteActuel.translateYProperty().bind(entite.yProperty());
         spriteActuel.setFitWidth(54);

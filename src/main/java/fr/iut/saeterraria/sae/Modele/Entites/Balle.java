@@ -6,7 +6,7 @@ public class Balle extends Projectile{
     private Jeu jeu= Jeu.getUniqueJeu();
 
     public Balle(int xJoueur, int yJoueur) {
-        super("balle", xJoueur, yJoueur, 8, 16, 16);
+        super(xJoueur, yJoueur, 8, 16, 16);
         arretJeu();
     }
 

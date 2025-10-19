@@ -1,9 +1,11 @@
 package fr.iut.saeterraria.sae.Modele.Entites;
 
+import fr.iut.saeterraria.sae.Modele.Jeu;
+
 public class MH extends Ennemi{
 
-    public MH(String nom, int vieMax, int energieMax, int x, int y, int def, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
-        super(nom, vieMax, energieMax, x, y, def, attaque, tailleL, tailleH, rangeVue, rangeAttaque);
+    public MH(int x, int y) {
+        super(100, 20, x, y, 5, 5, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2, 10, 7);
     }
 
     @Override

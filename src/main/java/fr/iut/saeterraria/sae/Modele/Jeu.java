@@ -135,16 +135,16 @@ public class Jeu {
         }
     }
     public void initialisationMobs () {
-        Ennemi ogre = new Ogre("Pierre l'ogre vert", 50, 20, 3000, 0, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
-        Ennemi ogre2 = new Ogre("Pierre l'ogre vert pale", 50, 20, 1340, 1340, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
-        Ennemi ogre3 = new Ogre("Pierre l'ogre vert foncé", 50, 20, 4962, 1376, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
-        Ennemi ogre4 = new Ogre("Pierre l'ogre vert clair", 50, 20, 3068, 1600, 0, 4, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 3);
-        Ennemi goblin = new Goblin("Caillou le gobelin vert", 20, 20, 5000, 0, 0, 2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
-        Ennemi goblin2 = new Goblin("Caillou le gobelin vert pale", 20, 20, 1456, 1728, 0, 2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
-        Ennemi goblin3 = new Goblin("Caillou le gobelin vert foncé", 20, 20, 2959, 1088, 0, 2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
-        Ennemi goblin4 = new Goblin("Caillou le gobelin vert clair", 20, 20, 5238, 1760, 0,  2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
-        Ennemi goblin5 = new Goblin("Caillou le gobelin vert émeraude", 20, 20, 4544, 1632, 0,  2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 10, 8);
-        Ennemi mh = new MH("Monsieur Homps", 250, 20, 4500, 0, 5,  2, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc() * 2, 15, 8);
+        Ennemi ogre = new Ogre( 3000, 0);
+        Ennemi ogre2 = new Ogre(1340, 1340);
+        Ennemi ogre3 = new Ogre(4962, 1376);
+        Ennemi ogre4 = new Ogre(3068, 1600);
+        Ennemi goblin = new Goblin(5000, 0);
+        Ennemi goblin2 = new Goblin(1456, 1728);
+        Ennemi goblin3 = new Goblin(2959, 1088);
+        Ennemi goblin4 = new Goblin(5238, 1760);
+        Ennemi goblin5 = new Goblin(4544, 1632);
+        Ennemi mh = new MH(4500, 0);
 
         this.addEnnemis(ogre);
        this.addEnnemis(ogre2);
