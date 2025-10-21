@@ -145,7 +145,7 @@ public class Carte {
         return carte[x][y]==8;
     }
     public boolean blocDeFabrication(int x,int y){
-        return carte[y][x]==12 || carte[y][x]==13 || carte[y][x]==15;
+        return carte[y][x]==12 || carte[y][x]==13 || carte[y][x]==14;
     }
     public boolean blocTraversable(int x,int y){
         return carte[x][y] == 0 || carte[x][y] == 10 || carte[x][y] == 18;
