@@ -1,11 +1,11 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
 public class ElementRecette {
-    private Item item;
+    private int idItem;
     private int quantite;
 
-    public ElementRecette(Item item, int quantite) {
-        this.item = item;
+    public ElementRecette(int idItem, int quantite) {
+        this.idItem = idItem;
         this.quantite = quantite;
     }
 
@@ -13,7 +13,7 @@ public class ElementRecette {
         return quantite;
     }
 
-    public Item getItem() {
-        return item;
+    public int getIdItem() {
+        return this.idItem;
     }
 }

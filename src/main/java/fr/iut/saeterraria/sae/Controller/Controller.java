@@ -109,8 +109,6 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Jeu.getUniqueJeu();
-        ListeItems.initialiserRecettes();
-        ListeItems.initialiserBlocConstructions();
         zoneNom.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 confirmerNom();

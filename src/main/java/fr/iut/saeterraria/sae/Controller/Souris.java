@@ -161,6 +161,7 @@ public class Souris implements EventHandler<MouseEvent> {
         Joueur.getUniqueJoueur().setMarcheGauche(false);
     }
 
+    // Recoit le nom du bloc en paramètre
     public void handleCraft (String nom){
         Joueur.getUniqueJoueur().craftItem(ListeItems.getItemParNom(nom));
     }
