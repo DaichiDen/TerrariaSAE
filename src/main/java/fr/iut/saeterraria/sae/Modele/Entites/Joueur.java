@@ -20,7 +20,12 @@
 
         private static Joueur uniqueJoueur = null;
         private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
-        private int[] equipement;
+
+
+
+        private Armure[] equipement;
+        private BooleanProperty timeStop = new SimpleBooleanProperty(false);
+
         private Pierre_TP pierreTp;
         private int mainCourante;
         private boolean enDash = false;
@@ -39,7 +44,7 @@
         private Joueur(String nom, int rangeVue, int rangeAttaque) {
 
             super(nom, 20, 100, 20, 20*32, 14*32, 1, 10,1,Jeu.getUniqueJeu().getTaille1bloc(),Jeu.getUniqueJeu().getTaille1bloc()*2,rangeVue,rangeAttaque);
-            this.equipement = new int[7];
+            this.equipement = new Armure[7];
             this.inventaire = new Inventaire(7,6);
             this.mainCourante = 0;
             this.xPrec = super.getX()/32;
@@ -238,28 +243,16 @@
         public void equiper(Armure armure) {
             switch (armure.getTypeArmure()){
                 case 1:
-                    if (equipement[0]==64 || equipement[0]==65) {
-                       inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[0]), 1);
-                    }
-                    equipement[0]=armure.getCodeObjet();
+                    equipement[0]=armure;
                     break;
                 case 2:
-                    if (equipement[1]==66 || equipement[1]==67) {
-                        inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[1]), 1);
-                    }
-                    equipement[1]=armure.getCodeObjet();
+                    equipement[1]=armure;
                     break;
                 case 3:
-                    if (equipement[2]==68 || equipement[2]==69) {
-                        inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[2]), 1);
-                    }
-                    equipement[2]=armure.getCodeObjet();
+                    equipement[2]=armure;
                     break;
                 case 4:
-                    if (equipement[3]==70 || equipement[3]==71) {
-                        inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[3]), 1);
-                    }
-                    equipement[3]=armure.getCodeObjet();
+                    equipement[3]=armure;
                     break;
             }
             inventaire.getCase(0,mainCourante).retireQuantite(1);
@@ -267,16 +260,17 @@
         }
 
         public void updateDefense(){
-            for ( int piece : equipement){
-                this.defProperty().setValue(this.defProperty().getValue() + ((Armure)ListeItems.getItemParId(piece)).getDefense());
+            for (Armure armure : equipement){
+                this.defProperty().setValue(this.defProperty().getValue() + armure.getDefense());
             }
         }
 
         public void swapItem(int ligneDep, int colonneDep, int ligneFin, int colonneFin) {
-            stockItem[0] = inventaire.getCase(ligneDep,colonneDep).getItem().getCodeObjet();
-            stockItem[1] = inventaire.getCase(ligneDep,colonneDep).getQuantite();
-            inventaire.getCase(ligneDep,colonneDep).setCase(ListeItems.getItemParId(inventaire.getCase(ligneFin,colonneFin).getItem().getCodeObjet()),inventaire.getCase(ligneFin,colonneFin).getQuantite());
-            inventaire.getCase(ligneFin,colonneFin).setCase(ListeItems.getItemParId(stockItem[0]), stockItem[1]);
+            Item itemCase1 = inventaire.getCase(ligneDep,colonneDep).getItem();
+            int quantiteCase1 = inventaire.getCase(ligneDep,colonneDep).getQuantite();
+
+            inventaire.getCase(ligneDep,colonneDep).setCase(inventaire.getCase(ligneFin,colonneFin).getItem(),inventaire.getCase(ligneFin,colonneFin).getQuantite());
+            inventaire.getCase(ligneFin,colonneFin).setCase(itemCase1, quantiteCase1);
         }
 
         public void grappiner(int cibleX, int cibleY){

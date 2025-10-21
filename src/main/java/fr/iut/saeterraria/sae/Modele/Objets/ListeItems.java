@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
+
 import fr.iut.saeterraria.sae.Modele.Objets.Arme.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Outil.*;
@@ -71,134 +72,16 @@ public enum ListeItems {
     ListeItems(int id, Item item) {
         this.id = id;
         this.item = item;
+
+
+
+
+
+
+
     }
 
-    public static void initialiserRecettes() {
-        // Lingot de fer : 1 Minérai de fer et 1 charbon et 1 four
-        Fer.getItem().addInRecette(new ElementRecette(Minerai_Fer.getItem(),1));
-        Fer.getItem().addInRecette(new ElementRecette(Charbon.getItem(),1));
+    public abstract Item creerItem(String nom);
 
-        // Lingot de DELJCCium : 1 Minérai de DELJCCium et 1 charbon et 1 four
-        DELJCCium.getItem().addInRecette(new ElementRecette(Minerai_DELJCCium.getItem(),1));
-        DELJCCium.getItem().addInRecette(new ElementRecette(Charbon.getItem(),1));
-
-        //Etabli : 2 bois
-        Etabli.getItem().addInRecette(new ElementRecette(Bois.getItem(),2));
-
-        //Four : 8 Pierre
-        Four.getItem().addInRecette(new ElementRecette(Pierre.getItem(),8));
-
-        // Forge : 9 fer et 1 seau
-        Forge.getItem().addInRecette(new ElementRecette(Fer.getItem(),9));
-        Forge.getItem().addInRecette(new ElementRecette(Seau_Vide.getItem(),1));
-
-        // Pioche de bois : 4 bois
-        Pioche_Bois.getItem().addInRecette(new ElementRecette(Bois.getItem(),4));
-        // Pioche de pierre : 3 pierre + 1 bois
-        Pioche_Pierre.getItem().addInRecette(new ElementRecette(Pierre.getItem(),3));
-        Pioche_Pierre.getItem().addInRecette(new ElementRecette(Bois.getItem(),1));
-        // Pioche de fer : 3 fer + 1 bois + forge
-        Pioche_Fer.getItem().addInRecette(new ElementRecette(Fer.getItem(),3));
-        Pioche_Fer.getItem().addInRecette(new ElementRecette(Bois.getItem(),1));
-        // Pioche en DELJCCnium : 3 DELJCCium + 1 bois + forge
-        Pioche_DELJCCium.getItem().addInRecette(new ElementRecette(DELJCCium.getItem(),3));
-        Pioche_DELJCCium.getItem().addInRecette(new ElementRecette(Bois.getItem(),1));
-
-        //Sceau
-        Seau_Vide.getItem().addInRecette(new ElementRecette(Fer.getItem(),3));
-        // Casque en fer + forge
-        Casque_Fer.getItem().addInRecette(new ElementRecette(Fer.getItem(),5));
-        // Plastron en fer + forge
-        Plastron_Fer.getItem().addInRecette(new ElementRecette(Fer.getItem(),8));
-        // Jambière en fer + forge
-        Jambiere_Fer.getItem().addInRecette(new ElementRecette(Fer.getItem(),6));
-        // Botte en fer + forge
-        Botte_Fer.getItem().addInRecette(new ElementRecette(Fer.getItem(),4));
-
-        // Casque en DELJCCnium + forge
-        Casque_DELJCCium.getItem().addInRecette(new ElementRecette(DELJCCium.getItem(),5));
-        // Plastron en DELJCCnium + forge
-        Plastron_DELJCCium.getItem().addInRecette(new ElementRecette(DELJCCium.getItem(),8));
-        // Jambière en DELJCCnium + forge
-        Jambiere_DELJCCium.getItem().addInRecette(new ElementRecette(DELJCCium.getItem(),6));
-        // Botte en DELJCCnium + forge
-        Botte_DELJCCium.getItem().addInRecette(new ElementRecette(DELJCCium.getItem(),4));
-
-        // Epée de bois : 3 bois
-        Epee_Bois.getItem().addInRecette(new ElementRecette(Bois.getItem(),3));
-        // Epée de pierre : 2 pîerre + 1 bois
-        Epee_Pierre.getItem().addInRecette(new ElementRecette(Pierre.getItem(),2));
-        Epee_Pierre.getItem().addInRecette(new ElementRecette(Bois.getItem(),1));
-        // Epée de fer : 2 lingot de fer + 1 bois
-        Epee_Fer.getItem().addInRecette(new ElementRecette(Fer.getItem(),2));
-        Epee_Fer.getItem().addInRecette(new ElementRecette(Bois.getItem(),1));
-        // Epée de DELJCCium : 2 DELJCCium + 1 bois
-        Epee_DELJCCium.getItem().addInRecette(new ElementRecette(DELJCCium.getItem(),2));
-        Epee_DELJCCium.getItem().addInRecette(new ElementRecette(Bois.getItem(),1));
-
-        // Flèche : 1 Bois 1 fer + forge
-        Fleche.getItem().addInRecette(new ElementRecette(Bois.getItem(),1));
-        Fleche.getItem().addInRecette(new ElementRecette(Fer.getItem(),1));
-
-        // Arc : 3 bois 2 fer + forge
-        Arc_Bois.getItem().addInRecette(new ElementRecette(Bois.getItem(),3));
-        Arc_Bois.getItem().addInRecette(new ElementRecette(Fer.getItem(),2));
-
-        // Balle en plomb : 2 fer + forge
-        Balle_Plonb.getItem().addInRecette(new ElementRecette(Fer.getItem(),2));
-
-        Grappin.getItem().addInRecette(new ElementRecette(Bois.getItem(),3));
-        Grappin.getItem().addInRecette(new ElementRecette(Fer.getItem(),3));
-        Grappin.getItem().addInRecette(new ElementRecette(DELJCCium.getItem(),1));
-    }
-
-    public static void initialiserBlocConstructions() {
-        for (ListeItems i : ListeItems.values()) {
-            // Sans bloc
-            if (i.getItem().getProvenance() == ConstructionSansBloc.getItem()) {
-                ((BlocConstruction) ConstructionSansBloc.getItem()).addRecette(i.getItem().getCodeObjet(), i.getItem().getAttributRecette());
-            }
-
-            // Etabli
-            else if (i.getItem().getProvenance() == Etabli.getItem()) {
-                ((BlocConstruction) Etabli.getItem()).addRecette(i.getItem().getCodeObjet(), i.getItem().getAttributRecette());
-            }
-
-            // Forge
-            else if (i.getItem().getProvenance() == Forge.getItem()) {
-                ((BlocConstruction) Forge.getItem()).addRecette(i.getItem().getCodeObjet(), i.getItem().getAttributRecette());
-            }
-
-            // Four
-            else if (i.getItem().getProvenance() == Four.getItem()) {
-                ((BlocConstruction) Four.getItem()).addRecette(i.getItem().getCodeObjet(), i.getItem().getAttributRecette());
-            }
-        }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public static Item getItemParId(int i) {
-        for(ListeItems item : values()) {
-            if(item.getId()==i) {
-                return item.getItem();
-            }
-        }
-        return null;
-    }
-
-    public static Item getItemParNom(String nom) {
-        for(ListeItems item : values()) {
-            if(item.getItem().getName().equals(nom)) {
-                return item.getItem();
-            }
-        }
-        return null;
-    }
+    public abstract Item creerItem(int i);
 }
