@@ -150,7 +150,7 @@
                         e.decrementVie(10);
                     }
                 }
-
+                https://github.com/DaichiDen/TerrariaSAE
                 // Mouvement : une seule fois par frame, hors de la boucle ennemis
                 if (directionDash.equals("droite")) {
                     this.setX(this.getX() + vitesseDash);
@@ -170,34 +170,15 @@
 
         }
 
-        //TODO design pattern stratégie (stp laissez moi le faire (Edin)
         public void equiper(Armure armure) {
-            switch (armure.getTypeArmure()){
-                case 1:
-                    if (equipement[0]==64 || equipement[0]==65) {
-                        inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[0]), 1);
-                    }
-                    equipement[0]=armure.getCodeObjet();
-                    break;
-                case 2:
-                    if (equipement[1]==66 || equipement[1]==67) {
-                        inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[1]), 1);
-                    }
-                    equipement[1]=armure.getCodeObjet();
-                    break;
-                case 3:
-                    if (equipement[2]==68 || equipement[2]==69) {
-                        inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[2]), 1);
-                    }
-                    equipement[2]=armure.getCodeObjet();
-                    break;
-                case 4:
-                    if (equipement[3]==70 || equipement[3]==71) {
-                        inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[3]), 1);
-                    }
-                    equipement[3]=armure.getCodeObjet();
-                    break;
+
+            int typeArmure = armure.getTypeArmure();
+            int caseEquipement = armure.getCaseEquipement();
+            if (equipement[caseEquipement]==typeArmure) {
+                inventaire.ajoutInventaire(ListeItems.getItemParId(equipement[caseEquipement]), 1);
             }
+            equipement[caseEquipement]=armure.getCodeObjet();
+
             inventaire.getCase(0,mainCourante).retireQuantite(1);
             updateDefense();
         }
@@ -207,7 +188,6 @@
                 this.defProperty().setValue(this.defProperty().getValue() + ((Armure)ListeItems.getItemParId(piece)).getDefense());
             }
         }
-
 
 
         @Override

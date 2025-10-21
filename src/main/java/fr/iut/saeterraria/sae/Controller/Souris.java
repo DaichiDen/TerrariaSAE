@@ -118,7 +118,6 @@ public class Souris implements EventHandler<MouseEvent> {
                     System.out.println("Bloc de craft ? : " + Carte.getUniqueCarte().blocDeFabrication(y, x));
                     System.out.println("Bloc de craft atteignable? : " + Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5,Joueur.getUniqueJoueur()));
                     if (Carte.getUniqueCarte().blocDeFabrication(y, x) && Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5, Joueur.getUniqueJoueur())) {
-                        System.out.println("pitié");
                         ouvrirInventaire();
                         switch (Carte.getUniqueCarte().getCase(y, x)) {
                             case 12:
