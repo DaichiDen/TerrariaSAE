@@ -1,5 +1,5 @@
 package fr.iut.saeterraria.sae.Modele.Objets.Etablis;
-import fr.iut.saeterraria.sae.Modele.Personnages.ListeItemBlocCraft;
+import fr.iut.saeterraria.sae.Modele.Objets.ListeItemBlocCraft;
 
 public class BlocCraft extends BlocConstruction{
     public BlocCraft() {

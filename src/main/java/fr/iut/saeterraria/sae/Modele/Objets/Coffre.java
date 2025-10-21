@@ -22,7 +22,7 @@ public class Coffre extends Bloc{
         contenuCoffre.ajoutInventaire(item, quantite);
     }
 
-    public ArrayList<Case> findItem(Item item) {
-        return contenuCoffre.findItem(item);
+    public ArrayList<Case> findItem(int codeobjet) {
+        return contenuCoffre.findItem(codeobjet);
     }
 }

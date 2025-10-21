@@ -18,10 +18,10 @@ public enum ListeItems {
     BedRock(9, new Bloc("BedRock","Incassable", 10,9)),
     Noir(10, new Bloc("Noir","Incassable+traversable fond", 10,10)),
 
-    ConstructionSansBloc(11, new BlocConstruction("ConstructionSansBloc","",0,0,11)),
-    Etabli(12, new BlocConstruction("Etabli","Un établi qui permet la fabrication d'objets",1,1, (BlocConstruction) ConstructionSansBloc.getItem(),12)),
-    Forge(13, new BlocConstruction("Forge","Un établi qui permet la fabrication d'objets",1,3,(BlocConstruction) Etabli.getItem(),13)),
-    Four(14, new BlocConstruction("Four","Permet de fondre et cuire ses objets",1,2,(BlocConstruction) Etabli.getItem(),14)),
+    ConstructionSansBloc(11, new BlocConstructionSansBloc()),
+    Etabli(12, new BlocCraft()),
+    Forge(13, new BlocForge()),
+    Four(14, new BlocFour()),
 
     Planche_Bois(15, new Bloc("Planche de bois","", 1,15)),
     Toit_Bois_Gauche(16, new Bloc("Toit_bois_gauche","", 1,16)),
@@ -31,40 +31,12 @@ public enum ListeItems {
 
     Coffre(20, new Coffre("Coffre", "", 3, 3,20)),
     Charbon(21, new Item("Charbon","Permet d'alimenter le four et la forge en chaleur",1,21)),
-    Fer(22, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1,(BlocConstruction) Four.getItem(),22)),
-    DELJCCium(23, new Item("DELJCCium", "", 1,(BlocConstruction) Four.getItem(),23)),
+    Fer(22, new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1,22)),
+    DELJCCium(23, new Item("DELJCCium", "", 1,23)),
+    Seau_Eau(63, new Item("Seau eau", "", 1,63)),
 
-    Pierre_TP(49, new Pierre_TP(49)),
-    Pioche_Bois(51, new Pioche("Pioche de bois","",2,(BlocConstruction) Etabli.getItem(),51)),
-    Pioche_Pierre(52, new Pioche("Pioche de pierre","",3,(BlocConstruction) Etabli.getItem(),52)),
-    Pioche_Fer(53, new Pioche("Pioche de fer","",4,(BlocConstruction) Forge.getItem(),53)),
-    Pioche_DELJCCium(54 ,new Pioche("Pioche DELJCCium","",5,(BlocConstruction) Forge.getItem(),54)),
-
-    Seau_Vide(62, new Item("Seau vide", "", 1,(BlocConstruction) Etabli.getItem(),62)),
-    Seau_Eau(63, new Item("Seau eau", "", 1,(BlocConstruction) Forge.getItem(),63)),
-
-    Casque_Fer(64, new Armure("Casque en fer","",2,(BlocConstruction) Forge.getItem(),1,64)),
-    Casque_DELJCCium(65, new Armure("Casque en DELJCCium","",3,(BlocConstruction) Forge.getItem(),1,65)),
-    Plastron_Fer(66, new Armure("Plastron en fer","",6,(BlocConstruction) Forge.getItem(),2,66)),
-    Plastron_DELJCCium(67, new Armure("Plastron en DELJCCium","",9,(BlocConstruction) Forge.getItem(),2,67)),
-    Jambiere_Fer(68, new Armure("Jambière en fer","",4,(BlocConstruction) Forge.getItem(),3,68)),
-    Jambiere_DELJCCium(69, new Armure("Jambière en DELJCCium","",6,(BlocConstruction) Forge.getItem(),3,69)),
-    Botte_Fer(70, new Armure("Botte en fer","",3,(BlocConstruction) Forge.getItem(),4,70)),
-    Botte_DELJCCium(71, new Armure("Botte en DELJCCium","",5,(BlocConstruction) Forge.getItem(),4,71)),
-
-    Katana_Etrange(72, new DashingKatana("Katana étrange","Ce Katana semble pouvoir octroyer la capacité à son détenteur de se déplacer à la vitesse du son",10,72)),
-    Epee_Bois(73, new Epee("Epée en Bois","",1,(BlocConstruction) Etabli.getItem(),73)),
-    Epee_Pierre(74, new Epee("Epée en Pierre","",3,(BlocConstruction) Etabli.getItem(),74)),
-    Epee_Fer(75, new Epee("Epée en Fer","",4,(BlocConstruction) Forge.getItem(),75)),
-    Epee_DELJCCium(76, new Epee("Epée en DELJCCium","",5,(BlocConstruction) Forge.getItem(),76)),
-
-    Fleche(77, new Item("Flèche","Flèche",1,(BlocConstruction) Forge.getItem(),77)),
-    Arc_Bois(78, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) Forge.getItem(),78)),
     Arquebuse(79, new Distance("Arquebuse","Etrange objet qui semble ralentir le temps",5,79)),
-    Balle_Plonb(80, new Item("Balle en plomb","Un projectile qui peut être utlisé",1,80)),
-    Grappin(81, new Distance("Grappin","Permet de s'accrocher aux surfaces",0,(BlocConstruction) Forge.getItem(),81)),
     Boule_De_Feu(82, new Item("Boule de feu","Une boule de feu qui explose à l'impact",1,82));
-
 
     private int id;
     private Item item;
@@ -72,16 +44,22 @@ public enum ListeItems {
     ListeItems(int id, Item item) {
         this.id = id;
         this.item = item;
-
-
-
-
-
-
-
     }
 
-    public abstract Item creerItem(String nom);
+    public Item getItem() {
+        return item;
+    }
 
-    public abstract Item creerItem(int i);
+    public int getId() {
+        return id;
+    }
+
+    public static Item getItemParId(int i) {
+        for(ListeItems item : values()) {
+            if(item.getId()==i) {
+                return item.getItem();
+            }
+        }
+        return null;
+    }
 }

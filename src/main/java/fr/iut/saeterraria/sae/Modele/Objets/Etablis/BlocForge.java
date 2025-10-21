@@ -1,6 +1,6 @@
 package fr.iut.saeterraria.sae.Modele.Objets.Etablis;
 
-import fr.iut.saeterraria.sae.Modele.Personnages.ListeItemBlocForge;
+import fr.iut.saeterraria.sae.Modele.Objets.ListeItemBlocForge;
 
 public class BlocForge extends BlocConstruction{
     public BlocForge() {

@@ -1,7 +1,7 @@
 package fr.iut.saeterraria.sae.Modele.Objets.Etablis;
 
-import fr.iut.saeterraria.sae.Modele.Personnages.ListeItemFour;
-import fr.iut.saeterraria.sae.Modele.Personnages.ListeItems;
+import fr.iut.saeterraria.sae.Modele.Objets.ListeItemFour;
+import fr.iut.saeterraria.sae.Modele.Objets.ListeItems;
 
 public class BlocFour extends BlocConstruction{
 

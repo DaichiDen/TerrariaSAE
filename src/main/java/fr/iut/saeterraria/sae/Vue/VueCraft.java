@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Vue;
 
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Recette;
 import fr.iut.saeterraria.sae.Modele.Objets.ListeItems;
 import javafx.geometry.Insets;
@@ -16,9 +17,14 @@ public class VueCraft extends SpriteItem {
     private VBox caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge, caseRecetteFour;
     private HashMap<Integer, Recette> recetteSansBloc,recetteEtabli,recetteForge, recetteFour;
 
+    private BlocConstructionSansBloc blocConstructionSansBloc;
+    private BlocCraft blocCraft;
+    private BlocForge blocForge;
+    private BlocFour blocFour;
+
     public VueCraft(ScrollPane craftSansBlocConstruction,ScrollPane craftEtabli,ScrollPane craftForge,VBox caseRecetteSansBloc,VBox caseRecetteEtabli,VBox caseRecetteForge,
                     HashMap<Integer,Recette> recetteSansBloc,HashMap<Integer, Recette> recetteEtabli,HashMap<Integer, Recette> recetteForge,
-                    VBox caseRecetteFour, HashMap<Integer, Recette> recetteFour) {
+                    VBox caseRecetteFour, HashMap<Integer, Recette> recetteFour,BlocConstructionSansBloc blocConstructionSansBloc, BlocCraft blocCraft, BlocForge blocForge, BlocFour blocFour) {
         this.craftSansBlocConstruction = craftSansBlocConstruction;
         this.craftEtabli = craftEtabli;
         this.craftForge = craftForge;
@@ -30,6 +36,10 @@ public class VueCraft extends SpriteItem {
         this.recetteForge = recetteForge;
         this.caseRecetteFour = caseRecetteFour;
         this.recetteFour = recetteFour;
+        this.blocConstructionSansBloc = blocConstructionSansBloc;
+        this.blocCraft = blocCraft;
+        this.blocForge = blocForge;
+        this.blocFour = blocFour;
 
         craftSansBlocConstruction.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         craftEtabli.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -38,7 +48,7 @@ public class VueCraft extends SpriteItem {
         initialize();
     }
 
-    public void afficherCraft(HashMap<Integer, Recette> recette, VBox caseRecette) {
+    public void afficherCraft(HashMap<Integer, Recette> recette, VBox caseRecette, BlocConstruction blocConstruction) {
         for (Integer codeObjet : recette.keySet()) {
             HBox blocRecette = new HBox();
             blocRecette.prefWidthProperty().bind(caseRecette.widthProperty());
@@ -48,7 +58,7 @@ public class VueCraft extends SpriteItem {
             VBox sectionItemConstruit = new VBox();
             VBox sectionItemsNecessaires = new VBox();
             sectionItemConstruit.getChildren().add(super.createImageView(super.getHmap().get(codeObjet), 45, 45));
-            sectionItemConstruit.getChildren().add(super.createLabelNom(ListeItems.getItemParId(codeObjet).getName()));
+            sectionItemConstruit.getChildren().add(super.createLabelNom(blocConstruction.creerItem(codeObjet).getName()));
 
             sectionItemConstruit.prefWidthProperty().bind(blocRecette.widthProperty().divide(2));
             sectionItemsNecessaires.prefWidthProperty().bind(blocRecette.widthProperty().divide(2));
@@ -61,11 +71,11 @@ public class VueCraft extends SpriteItem {
 
                 vbox.setAlignment(Pos.CENTER);
                 elementRecette.setAlignment(Pos.CENTER);
-                elementRecette.getChildren().add(super.createImageView(super.getHmap().get(recette.get(codeObjet).getRecette().get(j).getItem().getCodeObjet()), 20, 20));
+                elementRecette.getChildren().add(super.createImageView(super.getHmap().get(recette.get(codeObjet).getRecette().get(j).getIdItem()), 20, 20));
                 elementRecette.getChildren().add(createLabelQuantite(recette.get(codeObjet).getRecette().get(j).getQuantite()));
 
                 vbox.getChildren().add(elementRecette);
-                vbox.getChildren().add(super.createLabelNom((recette.get(codeObjet).getRecette().get(j).getItem().getName())));
+                vbox.getChildren().add(super.createLabelNom((recette.get(codeObjet).getRecette().get(j).getNom())));
                 sectionItemsNecessaires.getChildren().add(vbox);
             }
 
@@ -76,10 +86,10 @@ public class VueCraft extends SpriteItem {
     }
 
     public void initialize() {
-        afficherCraft(recetteSansBloc, caseRecetteSansBloc);
-        afficherCraft(recetteEtabli, caseRecetteEtabli);
-        afficherCraft(recetteForge, caseRecetteForge);
-        afficherCraft(recetteFour, caseRecetteFour);
+        afficherCraft(recetteSansBloc, caseRecetteSansBloc,blocConstructionSansBloc);
+        afficherCraft(recetteEtabli, caseRecetteEtabli,blocCraft);
+        afficherCraft(recetteForge, caseRecetteForge,blocForge);
+        afficherCraft(recetteFour, caseRecetteFour,blocFour);
     }
 
     public String getCodeObjetLigne(int numeroLigne, int typeConstruction) {

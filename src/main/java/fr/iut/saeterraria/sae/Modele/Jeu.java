@@ -3,6 +3,10 @@ package fr.iut.saeterraria.sae.Modele;
 import fr.iut.saeterraria.sae.Modele.Objets.*;
 import fr.iut.saeterraria.sae.Modele.Entites.Projectile;
 import fr.iut.saeterraria.sae.Modele.Entites.*;
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstructionSansBloc;
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocCraft;
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocForge;
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocFour;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -193,11 +197,11 @@ public class Jeu {
 
 
     public void testCraft() {
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(3),96);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(5),96);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(6),20);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(7),20);
-        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(21),50);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(3),96); // Bois
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(5),96); // Pierre
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(6),20); // Minerai Fer
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(7),20); // Minerai DelJCNium
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(21),50); // Charbon
     }
 
 }

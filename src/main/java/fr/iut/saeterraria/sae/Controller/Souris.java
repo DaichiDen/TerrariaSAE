@@ -7,6 +7,9 @@ import fr.iut.saeterraria.sae.Modele.Objets.Armure;
 import fr.iut.saeterraria.sae.Modele.Entites.*;
 import fr.iut.saeterraria.sae.Modele.Inventaire.Case;
 import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
+import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocForge;
+import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import fr.iut.saeterraria.sae.Modele.Objets.ListeItems;
 import fr.iut.saeterraria.sae.Modele.Entites.Projectile;
 import fr.iut.saeterraria.sae.Vue.Fond;
@@ -60,7 +63,7 @@ public class Souris implements EventHandler<MouseEvent> {
 
                     boolean oui = false;
                     int[] indice = new int[2];
-                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(ListeItems.getItemParId(80));
+                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(80);
                     for(Case c : tab) {
                             if (c.getItem().getCodeObjet()!=0) {
                                 oui = true;
@@ -77,7 +80,7 @@ public class Souris implements EventHandler<MouseEvent> {
                 } else if (Joueur.getUniqueJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];
-                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(ListeItems.getItemParId(77));
+                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(77);
                     for(Case c : tab) {
                         if (c.getItem().getCodeObjet()!=0) {
 
@@ -155,8 +158,8 @@ public class Souris implements EventHandler<MouseEvent> {
         Joueur.getUniqueJoueur().setMarcheGauche(false);
     }
 
-    // Recoit le nom du bloc en paramètre
-    public void handleCraft (String nom){
-        Joueur.getUniqueJoueur().craftItem(ListeItems.getItemParNom(nom));
+    // Recoit l'item en paramètre
+    public void handleCraft (Item item){
+        Joueur.getUniqueJoueur().craftItem(item);
     }
 }
