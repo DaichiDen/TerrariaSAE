@@ -2,6 +2,7 @@
     import fr.iut.saeterraria.sae.Modele.Jeu;
     import fr.iut.saeterraria.sae.Modele.Map.Carte;
     import fr.iut.saeterraria.sae.Modele.Objets.*;
+    import fr.iut.saeterraria.sae.Modele.Objets.Arme.Grappin;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 
@@ -279,27 +280,13 @@
             inventaire.getCase(ligneFin,colonneFin).setCase(ListeItems.getItemParId(stockItem[0]), stockItem[1]);
         }
 
-        public void grappiner(int cibleX, int cibleY){
-            // Position de l'entité
-            int ex = this.getX();
-            int ey = this.getY();
+        public void grappiner(int cibleX,int cibleY){
 
-            // Direction du tir
-            int dx = cibleX - ex;
-            int dy = cibleY - ey;
+            int tab[];
 
-            // Normalisation du vecteur (dx, dy)
-            int distance = (int) Math.sqrt(dx * dx + dy * dy);
-            if (distance == 0) distance = 1; // éviter division par zéro
-
-            // Vitesse initiale (puissance du tir)
-            int puissance = 50;
-
-            int vx = (int) (((float) dx / distance) * puissance);
-            int vy = (int) (((float) dy / distance) * puissance);
-
-            this.setVitesseY(this.getVitesseY() + vy);
-            this.setVitesseX(this.getVitesseX() + vx);
+            tab= ((Grappin) inventaire.getCase(0,mainCourante).getItem()).calculTrajectoireGrappin(cibleX,cibleY);
+            this.setVitesseY(this.getVitesseY() + tab[1]);
+            this.setVitesseX(this.getVitesseX() + tab[0]);
         }
     }
 

@@ -61,7 +61,7 @@ public enum ListeItems {
     Arc_Bois(78, new Distance("Arc en bois","Un vieil arc usé",10,(BlocConstruction) Forge.getItem(),78)),
     Arquebuse(79, new Distance("Arquebuse","Etrange objet qui semble ralentir le temps",5,79)),
     Balle_Plonb(80, new Item("Balle en plomb","Un projectile qui peut être utlisé",1,80)),
-    Grappin(81, new Distance("Grappin","Permet de s'accrocher aux surfaces",0,(BlocConstruction) Forge.getItem(),81)),
+    Grappin(81, new Grappin("Grappin","Permet de s'accrocher aux surfaces",0,81)),
     Boule_De_Feu(82, new Item("Boule de feu","Une boule de feu qui explose à l'impact",1,82));
 
 

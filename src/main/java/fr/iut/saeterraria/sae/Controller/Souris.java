@@ -114,9 +114,9 @@ public class Souris implements EventHandler<MouseEvent> {
 
             else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 if (Joueur.getUniqueJoueur().getEstVivant()) {
-                    System.out.println("Bloc de craft ? : " + Carte.getUniqueCarte().blocDeFabrication(y, x));
+                    System.out.println("Bloc de craft ? : " + Carte.getUniqueCarte().blocDeFabrication(x, y));
                     System.out.println("Bloc de craft atteignable? : " + Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5,Joueur.getUniqueJoueur()));
-                    if (Carte.getUniqueCarte().blocDeFabrication(y, x) && Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5, Joueur.getUniqueJoueur())) {
+                    if (Carte.getUniqueCarte().blocDeFabrication(x, y) && Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5, Joueur.getUniqueJoueur())) {
                         System.out.println("pitié");
                         ouvrirInventaire();
                         switch (Carte.getUniqueCarte().getCase(y, x)) {
