@@ -21,7 +21,7 @@ public class Recette {
     public String toStringListe() {
         String resultat = new String();
         for(int i=0; i<prerequis.size(); i++) {
-            resultat += "\t" + prerequis.get(i).getItem().getName();
+            resultat += "\t" + prerequis.get(i).getIdItem();
             resultat += "\n" + prerequis.get(i).getQuantite();
         }
         return resultat;

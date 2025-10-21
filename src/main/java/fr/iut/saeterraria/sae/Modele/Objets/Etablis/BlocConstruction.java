@@ -1,32 +1,26 @@
 package fr.iut.saeterraria.sae.Modele.Objets.Etablis;
 
-import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
-import fr.iut.saeterraria.sae.Modele.Objets.Recette;
+import fr.iut.saeterraria.sae.Modele.Objets.*;
 
 import java.util.HashMap;
 
-public class BlocConstruction extends Bloc {
-    HashMap<Integer, Recette> listeRecettes;
+public abstract class BlocConstruction extends Bloc {
+    private ListeItemCraft listeConstructionsItemsPossibles;
 
-    public BlocConstruction(String nom, String desc, int typeBloc, int resistance, BlocConstruction provenance, int codeobjet) {
-        super(nom,desc, resistance,provenance, codeobjet);
-        this.listeRecettes = new HashMap<>();
-    }
-
-    public BlocConstruction(String nom, String desc, int typeBloc, int resistance, int codeobjet) {
+    public BlocConstruction(String nom, String desc, int resistance, int codeobjet, ListeItemCraft constructionsItems) {
         super(nom,desc, resistance, codeobjet);
-        this.listeRecettes = new HashMap<>();
+        this.listeConstructionsItemsPossibles = constructionsItems;
     }
 
-    public void addRecette(Integer idItem, Recette recette){
-        this.listeRecettes.put(idItem, recette);
+    public Item creerItem(String nom) {
+        return listeConstructionsItemsPossibles.creerItem(nom);
     }
 
-    public HashMap<Integer, Recette> getListeRecette(){
-        return this.listeRecettes;
+    public Item creerItem(int id) {
+        return listeConstructionsItemsPossibles.creerItem(id);
     }
 
-    public Recette getRecette(Integer idItem){
-        return this.listeRecettes.get(idItem);
+    public HashMap<Integer,Recette> getListeRecettes() {
+        return listeConstructionsItemsPossibles.listRecettes();
     }
 }

@@ -15,7 +15,6 @@ public class Item {
     private IntegerProperty codeObjet;
     private IntegerProperty typeItem; // 1=stack 64 / 2= stack 16 / 3=stack 1
     private Recette recette;
-    private BlocConstruction provenance;
 
     public Item(){
         this.name = new SimpleStringProperty("");
@@ -23,7 +22,6 @@ public class Item {
         this.typeItem = new SimpleIntegerProperty(0);
         this.recette = new Recette();
         this.codeObjet = new SimpleIntegerProperty(0);
-        this.provenance = null;
     }
 
     public Item(String nom, String description,int typeItem, int codeobjet) {
@@ -32,7 +30,6 @@ public class Item {
         this.typeItem = new SimpleIntegerProperty(typeItem);
         this.recette = new Recette();
         this.codeObjet = new SimpleIntegerProperty(codeobjet);
-        this.provenance = null;
     }
 
     public Item(String nom, String description,int typeItem,BlocConstruction provenance, int codeobjet) {
@@ -43,7 +40,6 @@ public class Item {
         this.typeItem = new SimpleIntegerProperty(typeItem);
         this.recette = new Recette();
         this.codeObjet = new SimpleIntegerProperty(codeobjet);
-        this.provenance = provenance;
     }
 
     public IntegerProperty codeObjetProperty() { return codeObjet; }
@@ -87,11 +83,4 @@ public class Item {
         return this.recette;
     }
 
-    public void setProvenance(BlocConstruction provenance) {
-        this.provenance = provenance;
-    }
-
-    public BlocConstruction getProvenance() {
-        return this.provenance;
-    }
 }

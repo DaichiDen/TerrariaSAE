@@ -28,7 +28,7 @@ public class Inventaire {
 
     // Ajoute l'item dans une case ou dans plusieurs si aucune case peut contenir toute la quantité (ou pas du tout si aucune case le permet)==
     public boolean ajoutInventaire(Item item, int quantite) {
-        ArrayList<Case> planInventaire= findItem(item);
+        ArrayList<Case> planInventaire= findItem(item.getCodeObjet());
         boolean placer = false;
         int reste = quantite;
         if(planInventaire == null) {//Pas de place
@@ -54,10 +54,10 @@ public class Inventaire {
     }
 
     // Trouve toutes les instances de l'item dans l'inventaire ainsi que les cases vides, retourne null si pas de place
-    public ArrayList<Case> findItem(Item item) {
+    public ArrayList<Case> findItem(int iditem) {
         ArrayList<Case> listInstances = new ArrayList<>();
         for (int i = 0; i < this.inventaireJoueur.size(); i++) {
-                if (this.inventaireJoueur.get(i).comparerId(item.getCodeObjet())) { //Item présent
+                if (this.inventaireJoueur.get(i).comparerId(iditem)) { //Item présent
                     listInstances.add(inventaireJoueur.get(i));
                 } else if (this.inventaireJoueur.get(i).getItem().getCodeObjet() == 0) {//Case vide
                     listInstances.add(inventaireJoueur.get(i));
@@ -145,7 +145,7 @@ public class Inventaire {
         int quantite;
         int i = 0;
         while ( craftableFin && i < craftable.length) { // Vérifie si les quantités sont suffisantes côté joueur
-            ArrayList<Case> tabResult = findItem(item.getRecette().get(i).getItem());
+            ArrayList<Case> tabResult = findItem(item.getRecette().get(i).getIdItem());
             if (tabResult != null) {
                 quantite = 0;
                 int o = 0;
@@ -180,7 +180,7 @@ public class Inventaire {
     public int[][] getRecette(Item item) {
         int[][] necessaire = new int[2][item.getRecette().size()];
         for (int i = 0; i < necessaire[0].length; i++) {
-            necessaire[0][i] = item.getRecette().get(i).getItem().getCodeObjet();
+            necessaire[0][i] = item.getRecette().get(i).getIdItem();
             necessaire[1][i] = item.getRecette().get(i).getQuantite();
         }
         return necessaire;

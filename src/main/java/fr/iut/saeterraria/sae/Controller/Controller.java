@@ -2,8 +2,8 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
-import fr.iut.saeterraria.sae.Modele.Objets.ListeItems;
+import fr.iut.saeterraria.sae.Modele.Objets.*;
+import fr.iut.saeterraria.sae.Modele.Objets.Etablis.*;
 import fr.iut.saeterraria.sae.Modele.Entites.*;
 import fr.iut.saeterraria.sae.Vue.*;
 import javafx.animation.AnimationTimer;
@@ -106,17 +106,24 @@ public class Controller implements Initializable {
     private VueSon BiblioSon = new VueSon();
     private VueCraft vueCraft;
 
+    private BlocConstructionSansBloc blocConstructionSansBloc;
+    private BlocCraft blocCraft;
+    private BlocForge blocForge;
+    private BlocFour blocFour;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Jeu.getUniqueJeu();
-        ListeItems.initialiserRecettes();
-        ListeItems.initialiserBlocConstructions();
         zoneNom.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 confirmerNom();
             }
         });
+
+        blocConstructionSansBloc = new BlocConstructionSansBloc();
+        blocCraft = new BlocCraft();
+        blocForge = new BlocForge();
+        blocFour = new BlocFour();
 
         scene = new Fond(fond);// Initialise le fond (décor du jeu)
 
@@ -144,8 +151,8 @@ public class Controller implements Initializable {
         vuejoueur = new SpriteJoueur(screen, background,opaciteBackground); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.mettreAJourSpriteJoueur(Joueur.getUniqueJoueur());
         vueCraft = new VueCraft(craftSansBlocConstruction,craftEtabli,craftForge,caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge,
-                ((BlocConstruction) ListeItems.getItemParId(11)).getListeRecette(), ((BlocConstruction) ListeItems.getItemParId(12)).getListeRecette(),
-                ((BlocConstruction) ListeItems.getItemParId(13)).getListeRecette(), caseRecetteFour, ((BlocConstruction) ListeItems.getItemParId(14)).getListeRecette());
+                blocConstructionSansBloc.getListeRecettes(), blocCraft.getListeRecettes(),
+                blocForge.getListeRecettes(), caseRecetteFour, blocFour.getListeRecettes(),blocConstructionSansBloc,blocCraft,blocForge,blocFour);
 
         screenPrincipal.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
         screen.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
@@ -169,26 +176,26 @@ public class Controller implements Initializable {
         for (int i = 0; i < caseRecetteSansBloc.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteSansBloc.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
-                controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI, 0));
+                controlleurSouris.handleCraft(blocConstructionSansBloc.creerItem(vueCraft.getCodeObjetLigne(finalI, 0)));
             });
         }
         for (int i = 0; i < caseRecetteEtabli.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteEtabli.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
-                controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI, 1));
+                controlleurSouris.handleCraft(blocCraft.creerItem(vueCraft.getCodeObjetLigne(finalI, 1)));
             });
         }
         for (int i = 0; i < caseRecetteForge.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteForge.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
-                controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI, 2));
+                controlleurSouris.handleCraft(blocForge.creerItem(vueCraft.getCodeObjetLigne(finalI, 2)));
             });
         }
         //BiblioSon.play(1);
         for(int i=0; i<caseRecetteFour.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteFour.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
-                controlleurSouris.handleCraft(vueCraft.getCodeObjetLigne(finalI,3));
+                controlleurSouris.handleCraft(blocFour.creerItem(vueCraft.getCodeObjetLigne(finalI,3)));
             });
         }
 
@@ -261,9 +268,14 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
+
         Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(54), 1);
         Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(76), 1);
         Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(81), 1);
+
+        Joueur.getUniqueJoueur().ajouterItem(blocForge.creerItem(54), 1);
+        Joueur.getUniqueJoueur().ajouterItem(blocForge.creerItem(76), 1);
+
     }
 
     @FXML
