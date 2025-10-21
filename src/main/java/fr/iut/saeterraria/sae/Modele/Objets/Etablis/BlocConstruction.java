@@ -1,8 +1,8 @@
 package fr.iut.saeterraria.sae.Modele.Objets.Etablis;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
+import fr.iut.saeterraria.sae.Modele.Objets.ListeItems;
 import fr.iut.saeterraria.sae.Modele.Objets.Recette;
-import fr.iut.saeterraria.sae.Modele.Personnages.ListeItems;
 
 import java.util.HashMap;
 
