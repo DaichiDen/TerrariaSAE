@@ -15,28 +15,32 @@ public class ListeItemBlocCraft extends ListeItemCraft{
     @Override
     public Item creerItem(String nom) {
         switch (nom) {
-            case "Forge" :
+            case "Forge":
                 BlocForge blocForge = new BlocForge();
-                blocForge.addInRecette(new ElementRecette(22,"Fer",9));
-                blocForge.addInRecette(new ElementRecette(62,"Seau",1));
+                blocForge.addInRecette(new ElementRecette(22, "Fer", 9));
+                blocForge.addInRecette(new ElementRecette(62,"Seau vide",1));
                 return blocForge;
-            case "Four" :
+            case "Four":
                 BlocFour blocFour = new BlocFour();
-                blocFour.addInRecette(new ElementRecette(5,"Pierre",8));
+                blocFour.addInRecette(new ElementRecette(5, "Pierre", 8));
                 return blocFour;
-            case "Pioche de bois" :
-                Pioche piocheDeBois = new Pioche("Pioche de bois","",2,51);
-                piocheDeBois.addInRecette(new ElementRecette(3,"Bois",4));
+            case "Pioche de bois":
+                Pioche piocheDeBois = new Pioche("Pioche de bois", "", 2, 51);
+                piocheDeBois.addInRecette(new ElementRecette(3, "Bois", 4));
                 return piocheDeBois;
-            case "Pioche de pierre" :
-                Pioche piocheDePierre = new Pioche("Pioche de pierre","",3,52);
-                piocheDePierre.addInRecette(new ElementRecette(3,"Bois",1));
-                piocheDePierre.addInRecette(new ElementRecette(5,"Pierre",3));
+            case "Pioche de pierre":
+                Pioche piocheDePierre = new Pioche("Pioche de pierre", "", 3, 52);
+                piocheDePierre.addInRecette(new ElementRecette(3, "Bois", 1));
+                piocheDePierre.addInRecette(new ElementRecette(5, "Pierre", 3));
                 return piocheDePierre;
-            case "Epée en Bois" :
-                Epee epeeBois = new Epee("Epée en Bois","",1,73);
-                epeeBois.addInRecette(new ElementRecette(3,"Bois",3));
+            case "Epée en Bois":
+                Epee epeeBois = new Epee("Epée en Bois", "", 1, 73);
+                epeeBois.addInRecette(new ElementRecette(3, "Bois", 3));
                 return epeeBois;
+            case "Seau vide":
+                Item seau = new Item("Seau vide", "", 1, 62);
+                seau.addInRecette(new ElementRecette(22, "Fer", 3));
+                return seau;
         }
         return null;
     }
@@ -47,8 +51,12 @@ public class ListeItemBlocCraft extends ListeItemCraft{
             case 13 :
                 BlocForge blocForge = new BlocForge();
                 blocForge.addInRecette(new ElementRecette(22,"Fer",9));
-                blocForge.addInRecette(new ElementRecette(62,"Seau",1));
+                blocForge.addInRecette(new ElementRecette(62,"Seau vide",1));
                 return blocForge;
+            case 62 :
+                Item seau = new Item("Seau vide", "", 1,62);
+                seau.addInRecette(new ElementRecette(22,"Fer",3));
+                return seau;
             case 14 :
                 BlocFour blocFour = new BlocFour();
                 blocFour.addInRecette(new ElementRecette(5,"Pierre",8));
@@ -78,6 +86,7 @@ public class ListeItemBlocCraft extends ListeItemCraft{
         list.put(14,creerItem(14).getAttributRecette());
         list.put(51,creerItem(52).getAttributRecette());
         list.put(52,creerItem(52).getAttributRecette());
+        list.put(62,creerItem(62).getAttributRecette());
         list.put(73,creerItem(73).getAttributRecette());
 
         return list;

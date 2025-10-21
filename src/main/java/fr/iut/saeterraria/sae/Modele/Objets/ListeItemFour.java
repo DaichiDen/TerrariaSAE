@@ -12,9 +12,15 @@ public class ListeItemFour extends ListeItemCraft{
     public Item creerItem(String nom) {
         switch (nom) {
             case "Fer" :
-                return new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1,22);
+                Item fer = new Item("Fer","Métal obtenu en fondant des Minerai de Fer",1,22);
+                fer.addInRecette(new ElementRecette(6, "Minerai Fer",1));
+                fer.addInRecette(new ElementRecette(21, "Charbon",1));
+                return fer;
             case "DELJCCium" :
-                return  new Item("DELJCCium", "", 1,(23));
+                Item del = new Item("DELJCCium", "", 1,(23));
+                del.addInRecette(new ElementRecette(7, "Minerai Deljccium",1));
+                del.addInRecette(new ElementRecette(21, "Charbon",1));
+                return del;
         }
         return null;
     }
