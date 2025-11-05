@@ -25,6 +25,7 @@ public class Jeu {
     private ArrayList<Projectile> projectiles;
     private ObservableList<Projectile> liste_projectiles;
     private Boolean arretTemps = false;
+    private FabriqueDifficulteEnnemis fabriqueDEnnemis;
 
     public final static int taille1bloc = 32;
 
@@ -138,42 +139,7 @@ public class Jeu {
             i--;
         }
     }
-    public void initialisationMobs () {
-        Ennemi ogre = new Ogre( 3000, 0);
-        Ennemi ogre2 = new Ogre(1340, 1340);
-        Ennemi ogre3 = new Ogre(4962, 1376);
-        Ennemi ogre4 = new Ogre(3068, 1600);
-        Ennemi goblin = new Goblin(5000, 0);
-        Ennemi goblin2 = new Goblin(1456, 1728);
-        Ennemi goblin3 = new Goblin(2959, 1088);
-        Ennemi goblin4 = new Goblin(5238, 1760);
-        Ennemi goblin5 = new Goblin(4544, 1632);
-        Ennemi mh = new MH(4500, 0);
 
-        this.addEnnemis(ogre);
-       this.addEnnemis(ogre2);
-        this.addEnnemis(ogre3);
-        this.addEnnemis(ogre4);
-        this.addMobs(ogre);
-        this.addMobs(ogre2);
-        this.addMobs(ogre3);
-        this.addMobs(ogre4);
-
-        this.addEnnemis(goblin);
-        this.addEnnemis(goblin2);
-        this.addEnnemis(goblin3);
-        this.addEnnemis(goblin4);
-        this.addEnnemis(goblin5);
-        this.addMobs(goblin);
-        this.addMobs(goblin2);
-        this.addMobs(goblin3);
-        this.addMobs(goblin4);
-        this.addMobs(goblin5);
-
-        this.getUniqueJeu().addEnnemis(mh);
-        this.getUniqueJeu().addMobs(mh);
-
-    }
 
     public void setArretTemps(boolean timeStop) {
         this.arretTemps =timeStop;
