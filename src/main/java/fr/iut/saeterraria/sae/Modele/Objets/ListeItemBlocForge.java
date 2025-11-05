@@ -6,7 +6,7 @@ import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
 
 import java.util.HashMap;
 
-public class ListeItemBlocForge extends ListeItemCraft{
+public class ListeItemBlocForge implements ListeItemCraft{
 
     public ListeItemBlocForge() {
 
@@ -26,35 +26,35 @@ public class ListeItemBlocForge extends ListeItemCraft{
                 piocheDeljcCium.addInRecette(new ElementRecette(3,"Bois",1));
                 return piocheDeljcCium;
             case "Casque en fer" :
-                Armure casqueEnFer = new Armure("Casque en fer","",2,1,64);
+                Armure casqueEnFer = new Casque("Casque en fer","",2,64);
                 casqueEnFer.addInRecette(new ElementRecette(22,"Fer",5));
                 return casqueEnFer;
             case "Casque en DELJCCium" :
-                Armure casqueEnDeljcCium =  new Armure("Casque en DELJCCium","",3,1,65);
+                Armure casqueEnDeljcCium =  new Casque("Casque en DELJCCium","",3,65);
                 casqueEnDeljcCium.addInRecette(new ElementRecette(23,"DELJCCium",5));
                 return casqueEnDeljcCium;
             case "Plastron en fer" :
-                Armure plastronEnFer = new Armure("Plastron en fer","",6,2,66);
+                Armure plastronEnFer = new Plastron("Plastron en fer","",6,66);
                 plastronEnFer.addInRecette(new ElementRecette(22,"Fer",8));
                 return plastronEnFer;
             case "Plastron en DELJCCium" :
-                Armure plastronEnDeljcCium = new Armure("Plastron en DELJCCium","",9,2,67);
+                Armure plastronEnDeljcCium = new Plastron("Plastron en DELJCCium","",9,67);
                 plastronEnDeljcCium.addInRecette(new ElementRecette(23,"DELJCCium",8));
                 return plastronEnDeljcCium;
             case "Jambière en fer" :
-                Armure jambièreEnFer = new Armure("Jambière en fer","",4,3,68);
+                Armure jambièreEnFer = new Jambieres("Jambière en fer","",4,68);
                 jambièreEnFer.addInRecette(new ElementRecette(22,"Fer",6));
                 return jambièreEnFer;
             case "Jambière en DELJCCium" :
-                Armure jambièreEnDeljcCium = new Armure("Jambière en DELJCCium","",6,3,69);
+                Armure jambièreEnDeljcCium = new Jambieres("Jambière en DELJCCium","",6,69);
                 jambièreEnDeljcCium.addInRecette(new ElementRecette(23,"DELJCCium",6));
                 return jambièreEnDeljcCium;
             case "Botte en fer" :
-                Armure botteEnFer = new Armure("Botte en fer","",3,4,70);
+                Armure botteEnFer = new Bottes("Botte en fer","",3,70);
                 botteEnFer.addInRecette(new ElementRecette(22,"Fer",4));
                 return botteEnFer;
             case "Botte en DELJCCium" :
-                Armure botteEnDeljcCium = new Armure("Botte en DELJCCium","",5,4,71);
+                Armure botteEnDeljcCium = new Bottes("Botte en DELJCCium","",5,71);
                 botteEnDeljcCium.addInRecette(new ElementRecette(23,"DELJCCium",4));
                 return botteEnDeljcCium;
             case "Epée en Fer" :
@@ -105,35 +105,35 @@ public class ListeItemBlocForge extends ListeItemCraft{
                 piocheDeljcCium.addInRecette(new ElementRecette(3,"Bois",1));
                 return piocheDeljcCium;
             case 64 :
-                Armure casqueEnFer = new Armure("Casque en fer","",2,1,64);
+                Armure casqueEnFer = new Casque("Casque en fer","",2,64);
                 casqueEnFer.addInRecette(new ElementRecette(22,"Fer",5));
                 return casqueEnFer;
             case 65 :
-                Armure casqueEnDeljcCium =  new Armure("Casque en DELJCCium","",3,1,65);
+                Armure casqueEnDeljcCium =  new Casque("Casque en DELJCCium","",3,65);
                 casqueEnDeljcCium.addInRecette(new ElementRecette(23,"DELJCCium",5));
                 return casqueEnDeljcCium;
             case 66 :
-                Armure plastronEnFer = new Armure("Plastron en fer","",6,2,66);
+                Armure plastronEnFer = new Plastron("Plastron en fer","",6,66);
                 plastronEnFer.addInRecette(new ElementRecette(22,"Fer",8));
                 return plastronEnFer;
             case 67 :
-                Armure plastronEnDeljcCium = new Armure("Plastron en DELJCCium","",9,2,67);
+                Armure plastronEnDeljcCium = new Plastron("Plastron en DELJCCium","",9,67);
                 plastronEnDeljcCium.addInRecette(new ElementRecette(23,"DELJCCium",8));
                 return plastronEnDeljcCium;
             case 68 :
-                Armure jambièreEnFer = new Armure("Jambière en fer","",4,3,68);
+                Armure jambièreEnFer = new Jambieres("Jambière en fer","",4,68);
                 jambièreEnFer.addInRecette(new ElementRecette(22,"Fer",6));
                 return jambièreEnFer;
             case 69 :
-                Armure jambièreEnDeljcCium = new Armure("Jambière en DELJCCium","",6,3,69);
+                Armure jambièreEnDeljcCium = new Jambieres("Jambière en DELJCCium","",6,69);
                 jambièreEnDeljcCium.addInRecette(new ElementRecette(23,"DELJCCium",6));
                 return jambièreEnDeljcCium;
             case 70 :
-                Armure botteEnFer = new Armure("Botte en fer","",3,4,70);
+                Armure botteEnFer = new Bottes("Botte en fer","",3,70);
                 botteEnFer.addInRecette(new ElementRecette(22,"Fer",4));
                 return botteEnFer;
             case 71 :
-                Armure botteEnDeljcCium = new Armure("Botte en DELJCCium","",5,4,71);
+                Armure botteEnDeljcCium = new Bottes("Botte en DELJCCium","",5,71);
                 botteEnDeljcCium.addInRecette(new ElementRecette(23,"DELJCCium",4));
                 return botteEnDeljcCium;
             case 75 :

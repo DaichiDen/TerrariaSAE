@@ -123,9 +123,6 @@ public class Souris implements EventHandler<MouseEvent> {
 
                     if (Carte.getUniqueCarte().blocDeFabrication(x, y) && Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5, Joueur.getUniqueJoueur())) {
 
-
-
-
                         ouvrirInventaire();
                         switch (Carte.getUniqueCarte().getCase(y, x)) {
                             case 12:
@@ -141,7 +138,7 @@ public class Souris implements EventHandler<MouseEvent> {
                     } else if (Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() >= 64 && Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() <= 71) {
                         Joueur.getUniqueJoueur().equiper((Armure) (Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).getItem()));
                     } else {
-                        Carte.getUniqueCarte().miner(x, y);
+                        Carte.getUniqueCarte().poser(x, y);
                         this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
                         this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(Carte.getUniqueCarte().getCase(y, x))));
 
@@ -149,10 +146,6 @@ public class Souris implements EventHandler<MouseEvent> {
                 }
             }
         }
-
-
-
-
 
     @FXML
     public void ouvrirInventaire() {
@@ -163,13 +156,9 @@ public class Souris implements EventHandler<MouseEvent> {
         Joueur.getUniqueJoueur().setMarcheGauche(false);
     }
 
-<<<<<<< HEAD
     // Recoit l'item en paramètre
     public void handleCraft (Item item){
         Joueur.getUniqueJoueur().craftItem(item);
-=======
-    public void handleCraft (String nom){
-        Joueur.getUniqueJoueur().getInventaire().craftItem(ListeItems.getItemParNom(nom));
->>>>>>> 893132cd8a077adaab6c2043f3e03b0eef1a5cef
-    }
+
+}
 }

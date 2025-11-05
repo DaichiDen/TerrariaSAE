@@ -14,11 +14,5 @@ public abstract class Outils extends Item{
         super(nom,description,3, codeobjet);
     }
 
-    public Outils (String nom, String description, BlocConstruction blocConstruction, int codeobjet) {
-        super(nom,description,3,blocConstruction,codeobjet);
-    }
-
-
-
     public abstract void action();
 }

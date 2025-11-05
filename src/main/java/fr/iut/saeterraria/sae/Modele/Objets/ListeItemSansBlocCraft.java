@@ -4,7 +4,7 @@ import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocCraft;
 
 import java.util.HashMap;
 
-public class ListeItemSansBlocCraft extends ListeItemCraft{
+public class ListeItemSansBlocCraft implements ListeItemCraft{
 
     public ListeItemSansBlocCraft() {
 

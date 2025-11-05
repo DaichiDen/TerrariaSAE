@@ -32,16 +32,6 @@ public class Item {
         this.codeObjet = new SimpleIntegerProperty(codeobjet);
     }
 
-    public Item(String nom, String description,int typeItem,BlocConstruction provenance, int codeobjet) {
-
-
-        this.name = new SimpleStringProperty(nom);
-        this.description = new SimpleStringProperty(description);
-        this.typeItem = new SimpleIntegerProperty(typeItem);
-        this.recette = new Recette();
-        this.codeObjet = new SimpleIntegerProperty(codeobjet);
-    }
-
     public IntegerProperty codeObjetProperty() { return codeObjet; }
     public int getCodeObjet() { return codeObjet.getValue(); }
 

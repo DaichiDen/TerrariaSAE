@@ -7,7 +7,7 @@ import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
 
 import java.util.HashMap;
 
-public class ListeItemBlocCraft extends ListeItemCraft{
+public class ListeItemBlocCraft implements ListeItemCraft{
 
     public ListeItemBlocCraft() {
 

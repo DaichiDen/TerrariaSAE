@@ -4,8 +4,8 @@ import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 
 public class Jambieres extends Armure{
 
-    public Jambieres(String nom, String desc, double defense, BlocConstruction blocConstruction, int codeobjet) {
-        super(nom, desc, defense, blocConstruction, codeobjet);
+    public Jambieres(String nom, String desc, double defense, int codeobjet) {
+        super(nom, desc, defense, codeobjet);
     }
 
     @Override

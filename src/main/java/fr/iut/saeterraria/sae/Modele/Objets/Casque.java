@@ -3,8 +3,8 @@ package fr.iut.saeterraria.sae.Modele.Objets;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 
 public class Casque extends Armure{
-    public Casque(String nom, String desc, double defense, BlocConstruction blocConstruction, int codeobjet) {
-        super(nom, desc, defense, blocConstruction, codeobjet);
+    public Casque(String nom, String desc, double defense, int codeobjet) {
+        super(nom, desc, defense, codeobjet);
     }
 
     @Override

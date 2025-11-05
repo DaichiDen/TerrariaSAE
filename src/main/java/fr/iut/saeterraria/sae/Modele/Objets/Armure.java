@@ -8,12 +8,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 public abstract  class Armure extends Equipement {
     private DoubleProperty defense; // Valeur de défense de l'armure
 
-
-
-
-
-    public Armure(String nom, String desc, double defense, BlocConstruction blocConstruction, int codeobjet) {
-        super(nom, desc, blocConstruction, codeobjet);
+    public Armure(String nom, String desc, double defense, int codeobjet) {
+        super(nom, desc, codeobjet);
 
         this.defense = new SimpleDoubleProperty(defense);
     }

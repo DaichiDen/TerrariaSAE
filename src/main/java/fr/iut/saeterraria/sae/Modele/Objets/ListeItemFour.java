@@ -2,7 +2,7 @@ package fr.iut.saeterraria.sae.Modele.Objets;
 
 import java.util.HashMap;
 
-public class ListeItemFour extends ListeItemCraft{
+public class ListeItemFour implements ListeItemCraft{
 
     public ListeItemFour() {
 

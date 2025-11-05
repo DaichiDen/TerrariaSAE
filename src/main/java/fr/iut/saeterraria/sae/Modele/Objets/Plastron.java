@@ -4,8 +4,8 @@ import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 
 public class Plastron extends Armure{
 
-    public Plastron(String nom, String desc, double defense, BlocConstruction blocConstruction, int codeobjet) {
-        super(nom, desc, defense, blocConstruction, codeobjet);
+    public Plastron(String nom, String desc, double defense, int codeobjet) {
+        super(nom, desc, defense, codeobjet);
     }
 
     @Override

@@ -10,11 +10,6 @@ public class Bloc extends Item{
         this.resistance = resistance;
     }
 
-    public Bloc (String nom, String description, int resistance, BlocConstruction provenance, int codeobjet) {
-        super(nom,description,3,provenance, codeobjet);
-        this.resistance = resistance;
-    }
-
 
     public int getResistance() { return resistance; }
 

@@ -10,10 +10,6 @@ public class Pioche extends Outils {
         this.efficacite=efficacite;
     }
 
-    public Pioche(String nom, String description, int efficacite, BlocConstruction blocConstruction,int codeobjet) {
-        super(nom,description, blocConstruction,codeobjet);
-        this.efficacite=efficacite;
-    }
     public int getEfficacite(){ return efficacite;}
     @Override
     public void action() {

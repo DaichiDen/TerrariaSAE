@@ -2,14 +2,12 @@ package fr.iut.saeterraria.sae.Modele.Objets;
 
 import java.util.HashMap;
 
-public abstract class ListeItemCraft {
+public interface ListeItemCraft {
 
-    public ListeItemCraft() {
-    }
 
-    public abstract Item creerItem(String nom);
+    public Item creerItem(String nom);
 
-    public abstract Item creerItem(int i);
+    public Item creerItem(int i);
 
-    public abstract HashMap<Integer,Recette> listRecettes();
+    public HashMap<Integer,Recette> listRecettes();
 }
