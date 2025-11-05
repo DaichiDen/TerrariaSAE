@@ -13,7 +13,8 @@ public abstract class Entite {
     private IntegerProperty x, y;
     private IntegerProperty xHitbox, yHitbox;
 
-    private StringProperty nom;
+    private static int compteurId = -1;
+    private final IntegerProperty id = new SimpleIntegerProperty();
 
     private int attaque;
 
@@ -35,8 +36,8 @@ public abstract class Entite {
 //    MediaPlayer damage1 = super.Sonore("/Sound/damage1.wav");
 //    MediaPlayer damage2 = super.Sonore("/Sound/damage2.wav");
 
-    public Entite(String nom, int x, int y, int attaque, int tailleL, int tailleH) {
-        this.nom = new SimpleStringProperty(nom);
+    public Entite(int x, int y, int attaque, int tailleL, int tailleH) {
+        setId(compteurId++);
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.attaque = attaque;
@@ -102,12 +103,14 @@ public abstract class Entite {
         return friction_sol;
     }
 
-    public String getNom() {
-        return nom.get();
+    public int getId() {
+        return id.get();
     }
-
-    public StringProperty getNomProperty() {
-        return nom;
+    public IntegerProperty getIdProperty() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id.set(id);
     }
 
     public int getxBloc() {

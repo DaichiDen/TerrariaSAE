@@ -269,8 +269,14 @@ public class Controller implements Initializable {
     public void ouvrirInventaire() {
         screenInventaire.toFront();
 
+
         Joueur.getUniqueJoueur().ajouterItem(blocForge.creerItem(54), 1);
         Joueur.getUniqueJoueur().ajouterItem(blocForge.creerItem(76), 1);
+
+
+
+
+
 
     }
 

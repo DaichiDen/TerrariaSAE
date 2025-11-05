@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Modele.Inventaire;
 
+import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -219,4 +220,10 @@ public class Inventaire {
             System.out.println("craft non réussi");
         }
     }
+
+    // Vérifie si la quantité d'items nécessaires sont suffisants pour construire, puis craft l'item si les ressources sont suffisantes
+    public void craftItem(Item item) {
+        this.verifierCraftPossible(item);
+    }
+
 }

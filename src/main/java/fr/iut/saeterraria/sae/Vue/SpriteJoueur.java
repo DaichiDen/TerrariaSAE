@@ -108,7 +108,7 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         }
 
 
-        spriteActuel.setId(joueur.getNom());
+        spriteActuel.setId("joueur");
         spriteActuel.translateXProperty().bind(joueur.xProperty());
         spriteActuel.translateYProperty().bind(joueur.yProperty());
         spriteActuel.setFitWidth(54);

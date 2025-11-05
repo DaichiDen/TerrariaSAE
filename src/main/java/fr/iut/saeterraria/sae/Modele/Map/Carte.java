@@ -1,6 +1,10 @@
 package fr.iut.saeterraria.sae.Modele.Map;
 
 import fr.iut.saeterraria.sae.Modele.Entites.Entite;
+import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
+import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
+import fr.iut.saeterraria.sae.Modele.Objets.ListeItems;
+import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
 
 public class Carte {
     private static Carte CarteUnique = null;
@@ -208,5 +212,45 @@ public class Carte {
         }
         return valreturn;
 
+    }
+
+
+    public boolean miner(int x, int y) {
+        boolean miner = false;
+        if (Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5,Joueur.getUniqueJoueur())) {
+            System.out.println(Carte.getUniqueCarte().getCase(y,x));
+            if (possibiliteMinerBloc(x,y)) {
+                int[] bloc = Carte.getUniqueCarte().detruireBloc(x, y);
+                Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(bloc[0]), bloc[1]);
+                miner = true;
+            }
+        }
+        return miner;
+    }
+    public boolean possibiliteMinerBloc(int x, int y) {
+        return ((Bloc) ListeItems.getItemParId(Carte.getUniqueCarte().getCase(y,x))).getResistance() == 1 ||
+                Carte.getUniqueCarte().getCase(y, x) != 0 && Carte.getUniqueCarte().getCase(y, x) != 18 &&
+                Carte.getUniqueCarte().getCase(y, x) != 22 &&
+                Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet()<55 &&
+                Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet()>50 &&
+                compareResistance(((Bloc) ListeItems.getItemParId(Carte.getUniqueCarte().getCase(y,x))));
+    }
+    public boolean compareResistance(Bloc bloc){
+        return bloc.getResistance()<=((Pioche) Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).getItem()).getEfficacite();
+    }
+    public void poser(int x, int y) {//x = colonne && y = ligne
+        if( ((Joueur.getUniqueJoueur().getX()/32)!=x) || ((Joueur.getUniqueJoueur().getY()/32)!=y) ) {
+            if (conditionPoser(x,y)) {
+                if (Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getQuantite()>0) {
+                    Carte.getUniqueCarte().poserBloc(x,y,Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet());
+                    Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).retireQuantite(1);
+                }
+            }
+        }
+    }
+    public boolean conditionPoser(int x, int y) {
+        return Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5, Joueur.getUniqueJoueur()) &&
+                Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() < 20 &&
+                Carte.getUniqueCarte().blocTraversable(y,x);
     }
 }

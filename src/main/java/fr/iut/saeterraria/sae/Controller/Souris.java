@@ -1,5 +1,6 @@
 package fr.iut.saeterraria.sae.Controller;
 
+import fr.iut.saeterraria.sae.Modele.Inventaire.Inventaire;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Modele.Objets.Armure;
@@ -105,7 +106,7 @@ public class Souris implements EventHandler<MouseEvent> {
                         }
                     }
 
-                } else if (Joueur.getUniqueJoueur().miner(x, y)) {
+                } else if (Carte.getUniqueCarte().miner(x, y)) {
                     this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// faire de la taille de la map un un getter
                     this.tp.getChildren().add((((y * tp.getPrefColumns()) + x)), new ImageView(fond.getTiles().get(Carte.getUniqueCarte().getCase(y, x))));
                 } else {
@@ -119,8 +120,12 @@ public class Souris implements EventHandler<MouseEvent> {
                 if (Joueur.getUniqueJoueur().getEstVivant()) {
                     System.out.println("Bloc de craft ? : " + Carte.getUniqueCarte().blocDeFabrication(x, y));
                     System.out.println("Bloc de craft atteignable? : " + Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5,Joueur.getUniqueJoueur()));
+
                     if (Carte.getUniqueCarte().blocDeFabrication(x, y) && Carte.getUniqueCarte().peutEtreAtteint(x, y, 2.5, Joueur.getUniqueJoueur())) {
-                        System.out.println("pitié");
+
+
+
+
                         ouvrirInventaire();
                         switch (Carte.getUniqueCarte().getCase(y, x)) {
                             case 12:
@@ -136,7 +141,7 @@ public class Souris implements EventHandler<MouseEvent> {
                     } else if (Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() >= 64 && Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet() <= 71) {
                         Joueur.getUniqueJoueur().equiper((Armure) (Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).getItem()));
                     } else {
-                        Joueur.getUniqueJoueur().poser(x, y);
+                        Carte.getUniqueCarte().miner(x, y);
                         this.tp.getChildren().remove((y * tp.getPrefColumns()) + x);// X = Ligne, Y = Colonne
                         this.tp.getChildren().add(((y * tp.getPrefColumns()) + x), new ImageView(fond.getTiles().get(Carte.getUniqueCarte().getCase(y, x))));
 
@@ -158,8 +163,13 @@ public class Souris implements EventHandler<MouseEvent> {
         Joueur.getUniqueJoueur().setMarcheGauche(false);
     }
 
+<<<<<<< HEAD
     // Recoit l'item en paramètre
     public void handleCraft (Item item){
         Joueur.getUniqueJoueur().craftItem(item);
+=======
+    public void handleCraft (String nom){
+        Joueur.getUniqueJoueur().getInventaire().craftItem(ListeItems.getItemParNom(nom));
+>>>>>>> 893132cd8a077adaab6c2043f3e03b0eef1a5cef
     }
 }

@@ -3,7 +3,7 @@ package fr.iut.saeterraria.sae.Modele.Entites;
 public class Fleche extends Projectile{
 
     public Fleche(int xJoueur, int yJoueur) {
-        super("flèche", xJoueur, yJoueur, 5, 32, 32);
+        super(xJoueur, yJoueur, 5, 32, 32);
     }
 
     public void màjProjectile(){
