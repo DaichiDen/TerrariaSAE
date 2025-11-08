@@ -18,6 +18,14 @@
 
     import java.util.*;
 
+    /*
+     * Classe représentant le joueur
+     * Elle définit ses propriétés:
+     * son inventaire, son equipement, les propriétés de son dash avec le katana
+     *
+     * Elle donne les méthodes utilisées par le joueur pour la gestion de son inventaire et equipement et la gestion de son dash
+     *
+     */
 
     public class Joueur extends EntiteVivante {
 
@@ -102,7 +110,6 @@
         }
 
 
-        //TODO  ici ?
         public boolean ajouterItem(Item item, int quantite) {
             return inventaire.ajoutInventaire(item, quantite);
         }
@@ -110,7 +117,6 @@
             return inventaire;
         }
 
-        //TODO ici ? dans inventaire plutôt non ?
         public boolean katanaEnMain(){
             return  inventaire.getCase(0,mainCourante).getItem().getCodeObjet() == 72;
         }
@@ -123,7 +129,6 @@
         public boolean gunEnMain() {
             return inventaire.getCase(0,mainCourante).getItem().getCodeObjet() == 79;
         }
-
 
 
         public void mettreAJour() {
@@ -140,35 +145,32 @@
                 setDernierPos("droite");
             }
             if (enDash) {
-                Rectangle2D hitboxJoueur = new Rectangle2D(getX(), getY(), Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2);
+                appliquerDash();
+            }
+            super.mettreAJour();
+            // appel normal sinon
+        }
 
-                for (int i = 0; i < Jeu.getUniqueJeu().getEnnemis().size(); i++) {
-                    Ennemi e = Jeu.getUniqueJeu().getEnnemis().get(i);
-                    Rectangle2D hitboxEnnemi = new Rectangle2D(e.getX(), e.getY(), Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2);
-
-                    if (hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(e)) {
-                        ennemis_touchées_dash.add(e);
-                        e.decrementVie(10);
-                    }
-                }
-                https://github.com/DaichiDen/TerrariaSAE
-                // Mouvement : une seule fois par frame, hors de la boucle ennemis
-                if (directionDash.equals("droite")) {
-                    this.setX(this.getX() + vitesseDash);
-                } else {
-                    this.setX(this.getX() - vitesseDash);
-                }
-
-                dureeDash--;
-                if (dureeDash <= 0) {
-                    enDash = false;
+        public void appliquerDash(){
+            Rectangle2D hitboxJoueur = new Rectangle2D(getX(), getY(), Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2);
+            for (int i = 0; i < Jeu.getUniqueJeu().getEnnemis().size(); i++) {
+                Ennemi e = Jeu.getUniqueJeu().getEnnemis().get(i);
+                Rectangle2D hitboxEnnemi = new Rectangle2D(e.getX(), e.getY(), Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2);
+                if (hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(e)) {
+                    ennemis_touchées_dash.add(e);
+                    e.decrementVie(10);
                 }
             }
-
-            super.mettreAJour();
-
-            // appel normal sinon
-
+            // Mouvement : une seule fois par frame, hors de la boucle ennemis
+            if (directionDash.equals("droite")) {
+                this.setX(this.getX() + vitesseDash);
+            } else {
+                this.setX(this.getX() - vitesseDash);
+            }
+            dureeDash--;
+            if (dureeDash <= 0) {
+                enDash = false;
+            }
         }
 
         public void craftItem(Item item) {
@@ -194,9 +196,7 @@
         @Override
         public void action(int x, int y) {
             for (EntiteVivante e : Jeu.getUniqueJeu().getEnnemis()) {
-
                 Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(), Jeu.getUniqueJeu().getTaille1bloc(), (Jeu.getUniqueJeu().getTaille1bloc()) * 2);
-
                 // Si le clic est à l'intérieur de la hitbox du mob
                 if (hitboxMob.contains(x, y)) {
                     int ennemiX = (e.getX() + 16) / 32;
@@ -206,7 +206,7 @@
                             e.decrementVie(getAttaque() - e.getDef());
                         }
                         System.out.println("Touché !");
-                        System.out.println("Vie restante : dddddd" +e.getBarreVie().getVie());
+                        System.out.println("Vie restante : " +e.getBarreVie().getVie());
                     }
                 }
             }

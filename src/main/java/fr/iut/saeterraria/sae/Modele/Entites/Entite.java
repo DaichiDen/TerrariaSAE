@@ -6,8 +6,13 @@ import javafx.beans.property.*;
 import javafx.geometry.Rectangle2D;
 
 /*
+ * Classe abstraite représentant une entité du jeu (joueur, ennemi, projectile...).
+ * Elle définit les propriétés communes à toutes les entités :
+ * position (x, y), taille, hitbox, direction de déplacement, attaque (dégâts infligés), gravité appliqué sur l'entité.
  *
+ * Elle donne les méthodes utilisées par toutes les entités pour la détection des collisions.
  */
+
 public abstract class Entite {
 
     private IntegerProperty x, y;
@@ -29,8 +34,7 @@ public abstract class Entite {
     private final static int friction_sol = 4;
     private final static int friction_air = 1;
 
-    private int xBloc, yBloc; //TODO ici ??
-    private int la_case;
+    private int xBloc, yBloc;
     private boolean collisionBas = false;
 
 //    MediaPlayer damage1 = super.Sonore("/Sound/damage1.wav");
@@ -74,12 +78,6 @@ public abstract class Entite {
         this.yHitbox.set(yHitbox);
     }
 
-    public int getTailleH() {
-        return tailleH;
-    }
-    public int getTailleL() {
-        return tailleL;
-    }
     public void setTailleH(int tailleH) {
         this.tailleH = tailleH;
     }
@@ -121,24 +119,8 @@ public abstract class Entite {
         return yBloc;
     }
 
-    public void setxBloc(int xBloc) {
-        this.xBloc = xBloc;
-    }
-
-    public void setyBloc(int yBloc) {
-        this.yBloc = yBloc;
-    }
-
     public int getGravité() {
         return gravité;
-    }
-
-    public int getLa_case() {
-        return la_case;
-    }
-
-    public void setLa_case(int la_case) {
-        this.la_case = la_case;
     }
 
     public boolean getCollisionBas() {
@@ -149,6 +131,10 @@ public abstract class Entite {
         this.collisionBas = collisionBas;
     }
 
+
+
+
+    /**    --------------------Ici ? dans entite vivantes plutot---------------------   */
     public BooleanProperty marcheGaucheProperty() {
         return marcheGauche;
     }
@@ -172,6 +158,9 @@ public abstract class Entite {
     public void setMarcheGauche(boolean val) {
         marcheGauche.set(val);
     }
+    /**    ----------------------------------------------------------------------------   */
+
+
 
     // Gestion du positionnement horizontal
     public final IntegerProperty xProperty() {
@@ -210,23 +199,26 @@ public abstract class Entite {
     }
 
 
+
+
+
     public boolean collisionVerticale() { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
-        setTailleH(tailleH);
-        setTailleL(tailleL);
         Rectangle2D hitboxEntite = getHitbox();
-
         int caseX =(getX() / Jeu.getUniqueJeu().getTaille1bloc());
         int caseY =(getY() / Jeu.getUniqueJeu().getTaille1bloc());
+        return testerCollisionVerticale(hitboxEntite, caseX, caseY);
+    }
+
+    public boolean testerCollisionVerticale(Rectangle2D hitboxEntite, int caseX,int caseY){
         //boucle sur les 4 blocs autour du joueur , i+1 i-1 ,j+1 j-1
         for (int i = caseY - 1; i <= caseY + 2; i++) { // +2 pour la taille du personnage (2 blocs de hauteur)
             for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (estDansMap(i,j)) {
                     if (!Carte.getUniqueCarte().blocTraversable(i,j)) {
-
                         xBloc = j*Jeu.getUniqueJeu().getTaille1bloc();
                         yBloc = i*Jeu.getUniqueJeu().getTaille1bloc();
-                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()); // création d'un rectangle de hitbox pour le bloc en cours
+                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, tailleL, tailleH); // création d'un rectangle de hitbox pour le bloc en cours
                         if (hitboxEntite.intersects(hitboxBloc)) {// si le rectangle du joueur se superpose au carré du bloc alors :
                             collisionBas = true;
                             return true;
@@ -240,10 +232,12 @@ public abstract class Entite {
 
     public boolean collisionHorizontale() {
         Rectangle2D hitboxEntite = getHitbox();
-        setTailleH(tailleH);
-        setTailleL(tailleL);
         int caseX =  (this.getX() / Jeu.getUniqueJeu().getTaille1bloc());
         int caseY = (this.getY() / Jeu.getUniqueJeu().getTaille1bloc());
+        return testerCollisionHorizontale(hitboxEntite, caseX, caseY);
+    }
+
+    public boolean testerCollisionHorizontale(Rectangle2D hitboxEntite, int caseX,int caseY){
         for (int i = caseY ; i <= caseY + 2; i++) {
             for (int j = caseX - 1; j <= caseX + 1; j++) {
                 if (estDansMap(i,j)) {
@@ -251,7 +245,6 @@ public abstract class Entite {
                         xBloc = j*Jeu.getUniqueJeu().getTaille1bloc();
                         yBloc = i*Jeu.getUniqueJeu().getTaille1bloc();
                         Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, tailleL, tailleH);
-
                         if (hitboxEntite.intersects(hitboxBloc)) {
                             return true;
                         }
@@ -261,10 +254,6 @@ public abstract class Entite {
         }
         return false;
     }
-
-
-
-
 
 }
 
