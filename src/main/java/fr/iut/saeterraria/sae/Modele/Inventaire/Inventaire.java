@@ -1,6 +1,5 @@
 package fr.iut.saeterraria.sae.Modele.Inventaire;
 
-import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,14 +28,14 @@ public class Inventaire {
 
     // Ajoute l'item dans une case ou dans plusieurs si aucune case peut contenir toute la quantité (ou pas du tout si aucune case le permet)==
     public boolean ajoutInventaire(Item item, int quantite) {
-        ArrayList<Case> planInventaire= findItem(item.getCodeObjet());
+        ArrayList<Case> planInventaire= touverItem(item.getCodeObjet());
         boolean placer = false;
         int reste = quantite;
         if(planInventaire == null) {//Pas de place
             System.out.println("Pas de place dans l'inventaire");
         }
         else {
-            placer = AddDansCaseItem(planInventaire,item,placer,reste);
+            placer = ajouterDansCaseItem(planInventaire,item,placer,reste);
         }
         return placer;
     }
@@ -45,7 +44,7 @@ public class Inventaire {
         return inventaireJoueur;
     }
 
-    public void removeItem(int ligne, int colonne) {
+    public void enleverItem(int ligne, int colonne) {
         this.inventaireJoueur.get(ligne*this.colonneMax+colonne).setCase(new Item(), 0);
         System.out.println("Suppression item de l'inventaire effectué");
     }
@@ -55,7 +54,7 @@ public class Inventaire {
     }
 
     // Trouve toutes les instances de l'item dans l'inventaire ainsi que les cases vides, retourne null si pas de place
-    public ArrayList<Case> findItem(int iditem) {
+    public ArrayList<Case> touverItem(int iditem) {
         ArrayList<Case> listInstances = new ArrayList<>();
         for (int i = 0; i < this.inventaireJoueur.size(); i++) {
                 if (this.inventaireJoueur.get(i).comparerId(iditem)) { //Item présent
@@ -73,14 +72,8 @@ public class Inventaire {
         }
     }
 
-
-
-
-
-
-
     // Essaye d'ajouter l'item dans une case ayant le même item, si ce n'est pas possible, il va appeler addItemCaseVide qui va essayer d'ajouter dans une case vide
-    public boolean AddDansCaseItem(ArrayList<Case> planInventaire, Item item, boolean placer, int reste) {
+    public boolean ajouterDansCaseItem(ArrayList<Case> planInventaire, Item item, boolean placer, int reste) {
         int compteur = 0;
         while (compteur<planInventaire.size() && !placer) {
             if (planInventaire.get(compteur).comparerId(item.getCodeObjet())) { // Si Item déjà présent dans l'inventaire
@@ -98,16 +91,12 @@ public class Inventaire {
         }
         // Si ce n'est pas possible d'ajouter les items dans les cases ayant déjà un item alors on va essayer d'ajouter dans des cases vides
         if(!placer) {
-            placer = addItemCaseVide(planInventaire,item,placer,reste);
+            placer = ajouterItemCaseVide(planInventaire,item,placer,reste);
         }
         return placer;
     }
 
-
-
-
-
-    public boolean addItemCaseVide(ArrayList<Case> planInventaire, Item item, boolean placer, int reste) {
+    public boolean ajouterItemCaseVide(ArrayList<Case> planInventaire, Item item, boolean placer, int reste) {
         int compteur2=0;
         while (compteur2<planInventaire.size() && !placer) {
             if (planInventaire.get(compteur2).getItem().getCodeObjet()==0) {  // Si la case est vide
@@ -146,7 +135,7 @@ public class Inventaire {
         int quantite;
         int i = 0;
         while ( craftableFin && i < craftable.length) { // Vérifie si les quantités sont suffisantes côté joueur
-            ArrayList<Case> tabResult = findItem(item.getRecette().get(i).getIdItem());
+            ArrayList<Case> tabResult = touverItem(item.getRecette().get(i).getIdItem());
             if (tabResult != null) {
                 quantite = 0;
                 int o = 0;

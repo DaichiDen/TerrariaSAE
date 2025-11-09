@@ -37,9 +37,6 @@ public abstract class Entite {
     private int xBloc, yBloc;
     private boolean collisionBas = false;
 
-//    MediaPlayer damage1 = super.Sonore("/Sound/damage1.wav");
-//    MediaPlayer damage2 = super.Sonore("/Sound/damage2.wav");
-
     public Entite(int x, int y, int attaque, int tailleL, int tailleH) {
         setId(compteurId++);
         this.x = new SimpleIntegerProperty(x);
@@ -58,31 +55,12 @@ public abstract class Entite {
         return new Rectangle2D(getxHitbox(), getyHitbox(), tailleL, tailleH);
     }
 
-    public IntegerProperty xHitboxProperty(){
-        return this.xHitbox;
-    }
     public int getxHitbox() {
         return this.xHitbox.getValue();
     }
-    public void setxHitbox(int xHitbox) {
-        this.xHitbox.set(xHitbox);
-    }
 
-    public IntegerProperty yHitboxProperty(){
-        return this.yHitbox;
-    }
     public int getyHitbox(){
         return this.yHitbox.getValue();
-    }
-    public void setyHitbox(int yHitbox) {
-        this.yHitbox.set(yHitbox);
-    }
-
-    public void setTailleH(int tailleH) {
-        this.tailleH = tailleH;
-    }
-    public void setTailleL(int tailleL) {
-        this.tailleL = tailleL;
     }
 
     public static int getAccel_air() {
@@ -104,9 +82,7 @@ public abstract class Entite {
     public int getId() {
         return id.get();
     }
-    public IntegerProperty getIdProperty() {
-        return id;
-    }
+
     public void setId(int id) {
         this.id.set(id);
     }
@@ -131,10 +107,6 @@ public abstract class Entite {
         this.collisionBas = collisionBas;
     }
 
-
-
-
-    /**    --------------------Ici ? dans entite vivantes plutot---------------------   */
     public BooleanProperty marcheGaucheProperty() {
         return marcheGauche;
     }
@@ -158,9 +130,6 @@ public abstract class Entite {
     public void setMarcheGauche(boolean val) {
         marcheGauche.set(val);
     }
-    /**    ----------------------------------------------------------------------------   */
-
-
 
     // Gestion du positionnement horizontal
     public final IntegerProperty xProperty() {
@@ -199,9 +168,6 @@ public abstract class Entite {
     }
 
 
-
-
-
     public boolean collisionVerticale() { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
         Rectangle2D hitboxEntite = getHitbox();
@@ -218,7 +184,7 @@ public abstract class Entite {
                     if (!Carte.getUniqueCarte().blocTraversable(i,j)) {
                         xBloc = j*Jeu.getUniqueJeu().getTaille1bloc();
                         yBloc = i*Jeu.getUniqueJeu().getTaille1bloc();
-                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, tailleL, tailleH); // création d'un rectangle de hitbox pour le bloc en cours
+                        Rectangle2D hitboxBloc = new Rectangle2D(xBloc, yBloc, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc());
                         if (hitboxEntite.intersects(hitboxBloc)) {// si le rectangle du joueur se superpose au carré du bloc alors :
                             collisionBas = true;
                             return true;
@@ -230,6 +196,7 @@ public abstract class Entite {
         return false;
     }
 
+    
     public boolean collisionHorizontale() {
         Rectangle2D hitboxEntite = getHitbox();
         int caseX =  (this.getX() / Jeu.getUniqueJeu().getTaille1bloc());

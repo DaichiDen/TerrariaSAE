@@ -10,7 +10,7 @@ public class Goblin extends Ennemi{
 
     @Override
     public void action(int x, int y) {
-        if(getDernièreAttaque()==getCooldown()) {
+        if(getDernièreAttaque()== getDelaiAttaque()) {
             if (this.getAttaque() - Joueur.getUniqueJoueur().getDef() > 0){
                 Projectile p=new Fleche(this.getX(), this.getY());
                 p.initialiserProjectile(Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY());

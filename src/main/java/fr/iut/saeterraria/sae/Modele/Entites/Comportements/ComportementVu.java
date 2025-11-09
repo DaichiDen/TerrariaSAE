@@ -14,7 +14,6 @@ public class ComportementVu implements ComportementEnnemi {
         Algo_A_Star pathfinding = new Algo_A_Star(Carte.getUniqueCarte());
         List<Node> path = pathfinding.trouverchemin(ennemi.getX()/32, ennemi.getY()/32, Joueur.getUniqueJoueur().getX()/32, Joueur.getUniqueJoueur().getY()/32);
 
-
         if (!path.isEmpty() && path.size()>1) {
             Node nextStep = path.get(1); // [0] = position actuelle
             int dx = nextStep.x - (ennemi.getX() / 32);
@@ -31,7 +30,7 @@ public class ComportementVu implements ComportementEnnemi {
                 ennemi.sauter();
             }
 
-            if(Carte.getUniqueCarte().peutEtreAtteint(Joueur.getUniqueJoueur().getX()/32, Joueur.getUniqueJoueur().getY()/32, ennemi.getRangeVue(), ennemi)){
+            if(Carte.getUniqueCarte().peutEtreAtteint(Joueur.getUniqueJoueur().getX()/32, Joueur.getUniqueJoueur().getY()/32, ennemi.getPorteeVue(), ennemi)){
                 ennemi.action(Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY());
             }
 

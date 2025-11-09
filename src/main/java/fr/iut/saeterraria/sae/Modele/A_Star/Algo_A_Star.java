@@ -13,41 +13,41 @@ public class Algo_A_Star {
     }
 
     public List<Node> trouverchemin(int x1,int y1,int x2,int y2){
-        Node start = new Node(x1,y1);
+        Node debut = new Node(x1,y1);
 
-        start.atteignable = isWalkable(x1, y1);
+        debut.atteignable = isWalkable(x1, y1);
 
-        Node goal = new Node(x2,y2);
+        Node but = new Node(x2,y2);
 
-        goal.atteignable = true;
+        but.atteignable = true;
 
         PriorityQueue<Node> openList = new PriorityQueue<>(Comparator.comparingInt(Node::getCost));
         HashSet<Node> closedList = new HashSet<>();
 
-        openList.add(start);
+        openList.add(debut);
 
         while (!openList.isEmpty()) {
-            Node current = openList.poll();
+            Node actuel = openList.poll();
 
-            if (current.x == goal.x && current.y == goal.y) {
-                return reconstructPath(current);
+            if (actuel.x == but.x && actuel.y == but.y) {
+                return reconstructPath(actuel);
             }
 
-            closedList.add(current);
+            closedList.add(actuel);
 
-            for (Node neighbor : getNeighbors(current)) {
-                if (!neighbor.walkable || closedList.contains(neighbor)) continue;
+            for (Node voisin : getVoisin(actuel)) {
+                if (!voisin.walkable || closedList.contains(voisin)) continue;
 
-                int tentativeG = current.gCost + 1;
+                int tentativeG = actuel.gCost + 1;
 
-                boolean inOpenList = openList.contains(neighbor);
-                if (!inOpenList || tentativeG < neighbor.gCost) {
-                    neighbor.gCost = tentativeG;
-                    neighbor.hCost = heuristic(neighbor, goal);
-                    neighbor.parent = current;
+                boolean inOpenList = openList.contains(voisin);
+                if (!inOpenList || tentativeG < voisin.gCost) {
+                    voisin.gCost = tentativeG;
+                    voisin.hCost = heuristique(voisin, but);
+                    voisin.parent = actuel;
 
                     if (!inOpenList) {
-                        openList.add(neighbor);
+                        openList.add(voisin);
                     }
                 }
             }
@@ -56,26 +56,26 @@ public class Algo_A_Star {
         return new ArrayList<>(); // Aucun chemin trouvé
     }
 
-    private List<Node> getNeighbors(Node node) {
-        List<Node> neighbors = new ArrayList<>();
+    private List<Node> getVoisin(Node node) {
+        List<Node> voisins = new ArrayList<>();
         int[][] dirs = {{0,1}, {1,0}, {0,-1}, {-1,0}};
 
         for (int[] dir : dirs) {
             int newX = node.x + dir[0];
             int newY = node.y + dir[1];
 
-            if (inBounds(newX, newY)) {
-                Node neighbor = new Node(newX,newY);
-                neighbor.x = newX;
-                neighbor.y = newY;
-                neighbor.walkable = isWalkable(newX, newY);
-                neighbors.add(neighbor);
+            if (dansLaMap(newX, newY)) {
+                Node voisin = new Node(newX,newY);
+                voisin.x = newX;
+                voisin.y = newY;
+                voisin.walkable = isWalkable(newX, newY);
+                voisins.add(voisin);
             }
         }
 
-        return neighbors;
+        return voisins;
     }
-    private boolean inBounds(int x, int y) { // à refaire, quand on fera des collisions au bord de la map
+    private boolean dansLaMap(int x, int y) { // à refaire, quand on fera des collisions au bord de la map
         return x >= 0 && x < carte.recupColonneTaille() && y >= 0 && y < carte.recupLigneTaille();
     }
     public boolean isWalkable(int x, int y) {
@@ -87,18 +87,18 @@ public class Algo_A_Star {
         int val = carte.getCase(y, x); // attention, map[y][x] est l'ordre ligne-colonne
         return val == 0; // Seul le ciel est considéré comme marchable
     }
-    private int heuristic(Node a, Node b) {
+    private int heuristique(Node a, Node b) {
         return Math.abs(a.x - b.x) + Math.abs(a.y - b.y); // Manhattan
     }
     private List<Node> reconstructPath(Node endNode) {
-        List<Node> path = new ArrayList<>();
-        Node current = endNode;
-        while (current != null) {
-            path.add(current);
-            current = current.parent;
+        List<Node> chemin = new ArrayList<>();
+        Node actuel = endNode;
+        while (actuel != null) {
+            chemin.add(actuel);
+            actuel = actuel.parent;
         }
-        Collections.reverse(path);
-        return path;
+        Collections.reverse(chemin);
+        return chemin;
     }
 
 

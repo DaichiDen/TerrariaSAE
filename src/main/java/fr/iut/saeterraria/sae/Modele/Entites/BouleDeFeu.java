@@ -24,9 +24,6 @@ public class BouleDeFeu extends Projectile{
     public BooleanProperty aExploséProperty() {
         return aExplosé;
     }
-    public boolean getaExplosé(){
-        return aExplosé.getValue();
-    }
     public void setaExplosé(boolean a){
         aExplosé.setValue(a);
     }

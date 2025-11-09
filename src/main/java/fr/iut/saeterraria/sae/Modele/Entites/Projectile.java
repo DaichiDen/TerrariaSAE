@@ -31,22 +31,12 @@ public abstract class Projectile extends Entite{
     public void setActif(boolean actif) {
         this.actif.set(actif);
     }
-    public boolean getActif() {
-        return actif.getValue();
-    }
-
 
     public int getxBloc() {
         return xBloc;
     }
     public int getyBloc() {
         return yBloc;
-    }
-    public void setxBloc(int xBloc) {
-        this.xBloc = xBloc;
-    }
-    public void setyBloc(int yBloc) {
-        this.yBloc = yBloc;
     }
 
     public String getNom() {
@@ -65,13 +55,10 @@ public abstract class Projectile extends Entite{
         this.forceY.setValue(forceY);
     }
 
-
-    //TODO mettre des limites à la balle à babar pour timestop
     public void màjProjectile(){
         this.setX(this.getX() + (int) this.getForceX());
         this.setY(this.getY() + (int) this.getForceY());
     }
-
 
     public void initialiserProjectile(int cibleX, int cibleY) {
         // Position de l'entité

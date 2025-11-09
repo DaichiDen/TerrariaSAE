@@ -9,7 +9,7 @@ public class Ogre extends Ennemi{
 
     @Override
     public void action(int x, int y) {
-        if(getDernièreAttaque()==getCooldown()) {
+        if(getDernièreAttaque()== getDelaiAttaque()) {
             if (this.getAttaque() - Joueur.getUniqueJoueur().getDef() > 0){
                 Joueur.getUniqueJoueur().decrementVie(this.getAttaque() - Joueur.getUniqueJoueur().getDef());
             }

@@ -27,8 +27,8 @@ public abstract class EntiteVivante extends Entite{
 
     private int vitesseY = 0;
 
-    private int rangeVue; //TODO c'est quoi ?
-    private int rangeAttaque;
+    private int porteeVue; //TODO c'est quoi ?
+    private int porteeAttaque;
 
     //constantes
     protected final int forceSaut = -18;
@@ -37,7 +37,7 @@ public abstract class EntiteVivante extends Entite{
 
 
 
-    public EntiteVivante(int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, int attaque, int tailleL, int tailleH, int rangeVue, int rangeAttaque) {
+    public EntiteVivante(int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, int attaque, int tailleL, int tailleH, int porteeVue, int porteeAttaque) {
         super(x, y, attaque, tailleL, tailleH);
 
         this.barreVie = new BarreVie(vieMax);
@@ -46,15 +46,15 @@ public abstract class EntiteVivante extends Entite{
         this.def = new SimpleIntegerProperty(def);
         this.vitesseMax = new SimpleIntegerProperty(vitesseMax);
         this.estVivant= new SimpleBooleanProperty(true);
-        this.rangeVue = rangeVue;
-        this.rangeAttaque = rangeAttaque;
+        this.porteeVue = porteeVue;
+        this.porteeAttaque = porteeAttaque;
     }
 
-    public int getRangeVue() {
-        return rangeVue;
+    public int getPorteeVue() {
+        return porteeVue;
     }
-    public int getRangeAttaque() {
-        return rangeAttaque;
+    public int getPorteeAttaque() {
+        return porteeAttaque;
     }
 
     public int getVitesseY(){
@@ -126,10 +126,6 @@ public abstract class EntiteVivante extends Entite{
             this.setX(blocDroite);
         }
     }
-
-
-
-
 
     public void setVitesseX(int val){
         this.vitesseX=val;

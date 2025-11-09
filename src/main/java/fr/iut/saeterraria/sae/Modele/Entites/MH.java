@@ -11,8 +11,8 @@ public class MH extends Ennemi{
     @Override
     public void action(int x, int y) {
        int attaque = (int) (Math.random() * 10);
-        if (getDernièreAttaque() == getCooldown()) {
-            if (this.getAttaque() - Joueur.getUniqueJoueur().getDef() > 0) {
+        if (getDernièreAttaque() == getDelaiAttaque()) {
+            if (this.getAttaque() - Joueur.getUniqueJoueur().getDef() > 0){
                 if (attaque<2) {
                     Joueur.getUniqueJoueur().decrementVie(getAttaque());
                     System.out.println("Mandale");

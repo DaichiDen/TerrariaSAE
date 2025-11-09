@@ -19,7 +19,6 @@ public class Jeu {
     private static Jeu uniqueJeu = null;
 
     private ArrayList<Ennemi> ennemis;
-    private ArrayList<PNJ> pNJ;
     private ObservableList<Ennemi> mobs;
     // projectiles
     private ArrayList<Projectile> projectiles;
@@ -32,7 +31,6 @@ public class Jeu {
 
     private Jeu(){
         ennemis = new ArrayList<>();
-        pNJ = new ArrayList<>();
         mobs = FXCollections.observableArrayList(ennemis);
         projectiles= new ArrayList<>();
         liste_projectiles = FXCollections.observableArrayList(projectiles);
@@ -100,34 +98,13 @@ public class Jeu {
     public void addMobs(Ennemi entite){
         mobs.add(entite);
     }
-    public void removeMob(Entite entite){
-        mobs.remove(entite);
-    }
 
     public void addEnnemis(Ennemi ennemi) {
         ennemis.add(ennemi);
     }
-    public void removeEnnemi(Ennemi ennemi){
-        ennemis.remove(ennemi);
-    }
-
-    public void addPNJ(PNJ pnj) {
-        pNJ.add(pnj);
-    }
-    public void removePNJ(PNJ pnj) {
-        pNJ.remove(pnj);
-    }
-
-    public boolean estVivant(EntiteVivante entite){
-        return entite.getBarreVie().getVie()>0;
-    }
 
     public ArrayList<Ennemi> getEnnemis() {
         return ennemis;
-    }
-
-    public ArrayList<PNJ> getpNJ() {
-        return pNJ;
     }
 
     public void déinitialisationMobs() {
@@ -182,19 +159,12 @@ public class Jeu {
         return arretTemps;
     }
 
-
-
-
-
-
     public void initialisationJoueur(){
         Joueur.getUniqueJoueur().getBarreVie().setVie(Joueur.getUniqueJoueur().getBarreVie().getVieMax());
         Joueur.getUniqueJoueur().setEstVivant(true);
         Joueur.getUniqueJoueur().setX(20*32);
         Joueur.getUniqueJoueur().setY(0*32);
     }
-
-
 
     public void testCraft() {
         Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(3),96); // Bois

@@ -14,10 +14,6 @@ public abstract  class Armure extends Equipement {
         this.defense = new SimpleDoubleProperty(defense);
     }
 
-    public DoubleProperty defenseProperty() {
-        return defense;
-    }
-
     public double getDefense() {
         return defense.getValue();
     }
