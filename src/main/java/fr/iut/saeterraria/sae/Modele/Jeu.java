@@ -25,7 +25,7 @@ public class Jeu {
     private ArrayList<Projectile> projectiles;
     private ObservableList<Projectile> liste_projectiles;
     private Boolean arretTemps = false;
-    private FabriqueDifficulteEnnemis fabriqueDEnnemis;
+    private FabriqueDifficulteEnnemis fabriqueDEnnemis; // il aurait été possible de choisir la difficulté (ce qui impacte le type et le nombre de mobs qu'il y a dans le jeu) dans le menu start.
 
     public final static int taille1bloc = 32;
 
