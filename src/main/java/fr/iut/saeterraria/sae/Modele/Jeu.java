@@ -79,17 +79,19 @@ public class Jeu {
     }
 
     public void appliquerDegats(Projectile p, int ind) {
-        for (int j = 0; j < mobs.size(); j++) { //dégâts sur les entités vivantes
-            if (mobs.get(j).getHitbox().intersects(p.getHitbox())) {
-                mobs.get(j).decrementVie(p.getAttaque());
-                p.setActif(false);
-                getListe_projectiles().remove(ind);
-            } else if (Joueur.getUniqueJoueur().getHitbox().intersects(p.getHitbox())) {
-                Joueur.getUniqueJoueur().decrementVie(p.getAttaque());
-                p.setActif(false);
-                getListe_projectiles().remove(ind);
+            int j= mobs.size()-1;
+            while(getListe_projectiles().size() > 0 && j>0){
+                if (mobs.get(j).getHitbox().intersects(p.getHitbox())) {
+                    mobs.get(j).decrementVie(p.getAttaque());
+                    p.setActif(false);
+                    getListe_projectiles().remove(ind);
+                } else if (Joueur.getUniqueJoueur().getHitbox().intersects(p.getHitbox())) {
+                    Joueur.getUniqueJoueur().decrementVie(p.getAttaque());
+                    p.setActif(false);
+                    getListe_projectiles().remove(ind);
+                }
+                j--;
             }
-        }
     }
 
     public ObservableList<Ennemi> getMobs() {
@@ -150,6 +152,10 @@ public class Jeu {
         Joueur.getUniqueJoueur().setEstVivant(true);
         Joueur.getUniqueJoueur().setX(20*32);
         Joueur.getUniqueJoueur().setY(0*32);
+    }
+    public void initialisationMobs(){
+        fabriqueDEnnemis = new FabriqueDifficulteNormale();
+        fabriqueDEnnemis.creerJeu();
     }
 
     public void testCraft() {
