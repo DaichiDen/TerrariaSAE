@@ -74,7 +74,7 @@ public class SpriteJoueur extends CreateRessourceVisuel {
         } else if ((!joueur.getMarcheDroite() && !joueur.getMarcheGauche()) || (joueur.getMarcheDroite() && joueur.getMarcheGauche())) {
             etatActuel = "stop";
         }
-        if (joueur.getEnDash()) {
+        if (joueur.getEnRuée()) {
             if (joueur.getDirectionDash().equals("droite")) {
                 etatActuel = "dash_droit";
             } else {

@@ -8,5 +8,5 @@ public abstract class Consommables extends Item {
         this.valeur=valeur;
     }
 
-    public abstract void actionJoueur();
+
 }

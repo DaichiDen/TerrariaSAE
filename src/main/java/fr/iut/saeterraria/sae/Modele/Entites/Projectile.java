@@ -3,6 +3,16 @@ package fr.iut.saeterraria.sae.Modele.Entites;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import javafx.beans.property.*;
 
+/*
+ * Classe représentant une entité non vivante du jeu (projectile...).
+ * Elle définit les propriétés communes à toutes les entités non vivantes:
+ * vitesse de déplacement
+ *
+ * Elle donne les méthodes utilisées par toutes les entités non vivantes pour la gestion de leurs collisions et
+ * la gestion de leur déplacement
+ *
+ */
+
 public abstract class Projectile extends Entite{
     private Double forceX = 0.0;
     private Double forceY = 0.0;
@@ -29,14 +39,16 @@ public abstract class Projectile extends Entite{
     public int getyBloc() {
         return yBloc;
     }
-    public void setxBloc(int xBloc) {
-        this.xBloc = xBloc;
-    }
-    public void setyBloc(int yBloc) {
-        this.yBloc = yBloc;
-    }
+
 
     public double getForceX() {return forceX;}
+
+
+
+
+
+
+
     public double getForceY() {
         return forceY;
     }
@@ -49,11 +61,13 @@ public abstract class Projectile extends Entite{
     }
 
 
+
+
+
     public void màjProjectile(){
         this.setX(this.getX() + (int) this.getForceX());
         this.setY(this.getY() + (int) this.getForceY());
     }
-
 
     public void initialiserProjectile(int cibleX, int cibleY) {
         // Position de l'entité

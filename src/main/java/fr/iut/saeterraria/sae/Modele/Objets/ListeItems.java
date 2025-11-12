@@ -53,7 +53,7 @@ public enum ListeItems {
     Botte_Fer(70, new Jambieres("Botte en fer","",3,70)),
     Botte_DELJCCium(71, new Jambieres("Botte en DELJCCium","",5,71)),
 
-    Katana_Etrange(72, new DashingKatana("Katana étrange","Ce Katana semble pouvoir octroyer la capacité à son détenteur de se déplacer à la vitesse du son",10,72)),
+    Katana_Etrange(72, new Katana("Katana étrange","Ce Katana semble pouvoir octroyer la capacité à son détenteur de se déplacer à la vitesse du son",10,72)),
     Epee_Bois(73, new Epee("Epée en Bois","",1,73)),
     Epee_Pierre(74, new Epee("Epée en Pierre","",3,74)),
     Epee_Fer(75, new Epee("Epée en Fer","",4,75)),

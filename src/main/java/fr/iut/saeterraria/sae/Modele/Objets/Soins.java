@@ -6,9 +6,4 @@ public class Soins extends Consommables{
         super(nom, description, efficacite, codeobjet);
     }
 
-    // Faudrait que item ou consommable ait attribut joueur pour que actionjoueur ici puisse augmenter les pv du joueur
-    public void actionJoueur() {
-
-    }
-    //Créer une class Inventaire qui elle sera  lié au joueur?
 }

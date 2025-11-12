@@ -36,10 +36,6 @@ public class Case {
         return this.item.getCodeObjet()==id;
     }
 
-    public void setQuantite (int quantite) {
-        this.quantite = quantite;
-    }
-
     public void ajouteQuantite(int quantite) {
         this.quantite += quantite;
         activerChangement();

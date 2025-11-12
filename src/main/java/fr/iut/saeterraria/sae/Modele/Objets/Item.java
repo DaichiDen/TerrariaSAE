@@ -32,35 +32,15 @@ public class Item {
         this.codeObjet = new SimpleIntegerProperty(codeobjet);
     }
 
-    public IntegerProperty codeObjetProperty() { return codeObjet; }
     public int getCodeObjet() { return codeObjet.getValue(); }
 
     public int getType(){
         return typeItem.getValue();
     }
 
-    public int nombreMax(){
-        int nbMax=1;
-        if (getType()==1){
-            nbMax=64;
-        }
-        else if (getType()==2) {
-            nbMax=16;
-        }
-        return nbMax;
-    }
-
-    public StringProperty nameProperty() {
-        return this.name;
-    }
     public String getName(){
         return this.name.getValue();
     }
-
-    public StringProperty descriptionProperty() {
-        return this.description;
-    }
-    public String getDescription(){ return this.description.getValue(); }
 
     public void addInRecette(ElementRecette recette){
         this.recette.addElementRecette(recette);

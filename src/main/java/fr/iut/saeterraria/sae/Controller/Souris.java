@@ -1,6 +1,5 @@
 package fr.iut.saeterraria.sae.Controller;
 
-import fr.iut.saeterraria.sae.Modele.Inventaire.Inventaire;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Modele.Objets.Armure;
@@ -8,10 +7,7 @@ import fr.iut.saeterraria.sae.Modele.Objets.Armure;
 import fr.iut.saeterraria.sae.Modele.Entites.*;
 import fr.iut.saeterraria.sae.Modele.Inventaire.Case;
 import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
-import fr.iut.saeterraria.sae.Modele.Objets.Bloc;
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocForge;
 import fr.iut.saeterraria.sae.Modele.Objets.Item;
-import fr.iut.saeterraria.sae.Modele.Objets.ListeItems;
 import fr.iut.saeterraria.sae.Modele.Entites.Projectile;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.application.Platform;
@@ -64,7 +60,7 @@ public class Souris implements EventHandler<MouseEvent> {
 
                     boolean oui = false;
                     int[] indice = new int[2];
-                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(80);
+                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().touverItem(80);
                     for(Case c : tab) {
                             if (c.getItem().getCodeObjet()!=0) {
                                 oui = true;
@@ -81,7 +77,7 @@ public class Souris implements EventHandler<MouseEvent> {
                 } else if (Joueur.getUniqueJoueur().arcEnMain()) {
                     boolean oui = false;
                     int[] indice = new int[2];
-                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().findItem(77);
+                    ArrayList<Case> tab = Joueur.getUniqueJoueur().getInventaire().touverItem(77);
                     for(Case c : tab) {
                         if (c.getItem().getCodeObjet()!=0) {
 

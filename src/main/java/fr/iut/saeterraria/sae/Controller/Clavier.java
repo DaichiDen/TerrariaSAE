@@ -69,8 +69,8 @@ public class Clavier implements EventHandler<KeyEvent> {
             }
 
             if(code == KeyCode.E && Joueur.getUniqueJoueur().katanaEnMain()){
-                Joueur.getUniqueJoueur().setEnDash(true);
-                Joueur.getUniqueJoueur().dashKatana();
+                Joueur.getUniqueJoueur().setEnRuée(true);
+                Joueur.getUniqueJoueur().ruéeKatana();
             }
 
 

@@ -14,15 +14,4 @@ public class Coffre extends Bloc{
         this.contenuCoffre = new Inventaire(4,4);
     }
 
-    public ObservableList<Case> getContenu() {
-        return contenuCoffre.getInventaireJoueur();
-    }
-
-    public void addItem(Item item, int quantite) {
-        contenuCoffre.ajoutInventaire(item, quantite);
-    }
-
-    public ArrayList<Case> findItem(int codeobjet) {
-        return contenuCoffre.findItem(codeobjet);
-    }
 }

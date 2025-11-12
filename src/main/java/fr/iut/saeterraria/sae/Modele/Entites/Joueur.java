@@ -3,13 +3,14 @@
     import fr.iut.saeterraria.sae.Modele.Map.Carte;
     import fr.iut.saeterraria.sae.Modele.Objets.*;
     import fr.iut.saeterraria.sae.Modele.Objets.Arme.Grappin;
+
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
+
+
 
     import fr.iut.saeterraria.sae.Modele.Inventaire.Inventaire;
 
-    import javafx.beans.property.BooleanProperty;
     import javafx.beans.property.IntegerProperty;
-    import javafx.beans.property.SimpleBooleanProperty;
     import javafx.beans.property.SimpleIntegerProperty;
 
     import javafx.geometry.Rectangle2D;
@@ -17,62 +18,52 @@
 
     import java.util.*;
 
+    /*
+     * Classe représentant le joueur
+     * Elle définit ses propriétés:
+     * son inventaire, son equipement, les propriétés de son dash avec le katana
+     *
+     * Elle donne les méthodes utilisées par le joueur pour la gestion de son inventaire et equipement et la gestion de son dash
+     *
+     */
 
     public class Joueur extends EntiteVivante {
 
         private static Joueur uniqueJoueur = null;
         private Inventaire inventaire; //hotbar (1-6), inventaire de taille 36
 
-
-
         private Armure[] equipement;
-        private BooleanProperty timeStop = new SimpleBooleanProperty(false);
 
-        private Pierre_TP pierreTp;
         private int mainCourante;
-        private boolean enDash = false;
+        private boolean enRuée = false;
         private int dureeDash = 0;
         private final int DUREE_DASH_MAX = 20; // environ 15 frames = 250ms à 60fps
         private int vitesseDash = 5;
-        private int[] stockItem;
 
         private String nom;
 
         private String directionDash = "droite";// 1 = droite, -1 = gauche
         private String dernierPos = "droite"; // 1 gauche et -1 droite
         ArrayList<Ennemi> ennemis_touchées_dash = new ArrayList();
-        private int xPrec;
         private IntegerProperty xMax,yMax;
 
 
-        private Joueur(String nom, int rangeVue, int rangeAttaque) {
+        private Joueur(int porteeVue, int porteeAttaque) {
 
-            super(20, 100, 20, 20*32, 14*32, 1, 10,1,Jeu.getUniqueJeu().getTaille1bloc(),Jeu.getUniqueJeu().getTaille1bloc()*2,rangeVue,rangeAttaque);
+            super(20, 100, 20, 20*32, 14*32, 1, 10,1,Jeu.getUniqueJeu().getTaille1bloc(),Jeu.getUniqueJeu().getTaille1bloc()*2,porteeVue,porteeAttaque);
             this.equipement = new Armure[7];
             this.inventaire = new Inventaire(7,6);
             this.mainCourante = 0;
-            this.xPrec = super.getX()/32;
             this.xMax = new SimpleIntegerProperty(getX()/Jeu.getUniqueJeu().getTaille1bloc());
             this.yMax = new SimpleIntegerProperty(getY()/Jeu.getUniqueJeu().getTaille1bloc());
-            this.stockItem = new int[2];
 
         }
 
         public static Joueur getUniqueJoueur() {
             if(uniqueJoueur == null) {
-                uniqueJoueur = new Joueur("Joueur",3,3);
+                uniqueJoueur = new Joueur(3,3);
             }
             return uniqueJoueur;
-        }
-
-        public Armure[] getEquipement() {
-            return equipement;
-        }
-        public Armure getCaseEquipement(int x) {
-            return equipement[x];
-        }
-        public void setEquipement(int x, Armure codeObjet) {
-            this.equipement[x] = codeObjet;
         }
 
         public String getNom() {
@@ -101,7 +92,6 @@
         }
 
 
-        //TODO  ici ?
         public boolean ajouterItem(Item item, int quantite) {
             return inventaire.ajoutInventaire(item, quantite);
         }
@@ -109,7 +99,6 @@
             return inventaire;
         }
 
-        //TODO ici ? dans inventaire plutôt non ?
         public boolean katanaEnMain(){
             return  inventaire.getCase(0,mainCourante).getItem().getCodeObjet() == 72;
         }
@@ -122,7 +111,6 @@
         public boolean gunEnMain() {
             return inventaire.getCase(0,mainCourante).getItem().getCodeObjet() == 79;
         }
-
 
 
         public void mettreAJour() {
@@ -138,36 +126,33 @@
             else if(getMarcheDroite()){
                 setDernierPos("droite");
             }
-            if (enDash) {
-                Rectangle2D hitboxJoueur = new Rectangle2D(getX(), getY(), Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2);
+            if (enRuée) {
+                appliquerDash();
+            }
+            super.mettreAJour();
+            // appel normal sinon
+        }
 
-                for (int i = 0; i < Jeu.getUniqueJeu().getEnnemis().size(); i++) {
-                    Ennemi e = Jeu.getUniqueJeu().getEnnemis().get(i);
-                    Rectangle2D hitboxEnnemi = new Rectangle2D(e.getX(), e.getY(), Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2);
-
-                    if (hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(e)) {
-                        ennemis_touchées_dash.add(e);
-                        e.decrementVie(10);
-                    }
-                }
-                https://github.com/DaichiDen/TerrariaSAE
-                // Mouvement : une seule fois par frame, hors de la boucle ennemis
-                if (directionDash.equals("droite")) {
-                    this.setX(this.getX() + vitesseDash);
-                } else {
-                    this.setX(this.getX() - vitesseDash);
-                }
-
-                dureeDash--;
-                if (dureeDash <= 0) {
-                    enDash = false;
+        public void appliquerDash(){
+            Rectangle2D hitboxJoueur = new Rectangle2D(getX(), getY(), Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2);
+            for (int i = 0; i < Jeu.getUniqueJeu().getEnnemis().size(); i++) {
+                Ennemi e = Jeu.getUniqueJeu().getEnnemis().get(i);
+                Rectangle2D hitboxEnnemi = new Rectangle2D(e.getX(), e.getY(), Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2);
+                if (hitboxJoueur.intersects(hitboxEnnemi) && !ennemis_touchées_dash.contains(e)) {
+                    ennemis_touchées_dash.add(e);
+                    e.decrementVie(10);
                 }
             }
-
-            super.mettreAJour();
-
-            // appel normal sinon
-
+            // Mouvement : une seule fois par frame, hors de la boucle ennemis
+            if (directionDash.equals("droite")) {
+                this.setX(this.getX() + vitesseDash);
+            } else {
+                this.setX(this.getX() - vitesseDash);
+            }
+            dureeDash--;
+            if (dureeDash <= 0) {
+                enRuée = false;
+            }
         }
 
         public void craftItem(Item item) {
@@ -193,31 +178,24 @@
         @Override
         public void action(int x, int y) {
             for (EntiteVivante e : Jeu.getUniqueJeu().getEnnemis()) {
-
                 Rectangle2D hitboxMob = new Rectangle2D(e.getX(), e.getY(), Jeu.getUniqueJeu().getTaille1bloc(), (Jeu.getUniqueJeu().getTaille1bloc()) * 2);
-
                 // Si le clic est à l'intérieur de la hitbox du mob
                 if (hitboxMob.contains(x, y)) {
                     int ennemiX = (e.getX() + 16) / 32;
                     int ennemiY = (e.getY() + 16) / 32;
-                    if (Carte.getUniqueCarte().peutEtreAtteint(ennemiX, ennemiY, getRangeVue(), e)){
+                    if (Carte.getUniqueCarte().peutEtreAtteint(ennemiX, ennemiY, getPorteeVue(), e)){
                         if (this.getAttaque() - e.getDef()>0){
                             e.decrementVie(getAttaque() - e.getDef());
                         }
                         System.out.println("Touché !");
-                        System.out.println("Vie restante : dddddd" +e.getBarreVie().getVie());
+                        System.out.println("Vie restante : " +e.getBarreVie().getVie());
                     }
                 }
             }
         }
 
-        public void tp(int x, int y) {
-            this.setX(x);
-            this.setY(y);
-        }
-
-        public void dashKatana() {
-            if (enDash) {
+        public void ruéeKatana() {
+            if (enRuée) {
                 System.out.println("dash");
                 ennemis_touchées_dash.clear();
                 dureeDash = DUREE_DASH_MAX;
@@ -225,25 +203,19 @@
             }
         }
 
-        public void setEnDash(boolean val){
-            this.enDash=val;
+        public void setEnRuée(boolean val){
+            this.enRuée =val;
         }
-        public boolean getEnDash(){
-            return enDash;
+        public boolean getEnRuée(){
+            return enRuée;
         }
         public String getDirectionDash(){
             return directionDash;
         }
 
-        public int getXMax(){
-            return xMax.getValue();
-        }
         public IntegerProperty getXMaxProperty(){ return xMax; }
         public void setXMax(int xMax){ this.xMax.setValue(xMax/Jeu.getUniqueJeu().getTaille1bloc()); }
 
-        public int getYMax(){
-            return yMax.getValue();
-        }
         public IntegerProperty getYMaxProperty(){ return yMax; }
 
         public void setYMax(int yMax){ this.yMax.setValue(yMax/Jeu.getUniqueJeu().getTaille1bloc()); }
