@@ -2,7 +2,6 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
-import fr.iut.saeterraria.sae.Modele.Objets.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.*;
 import fr.iut.saeterraria.sae.Modele.Entites.*;
 import fr.iut.saeterraria.sae.Vue.*;
@@ -31,7 +30,9 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/*
+Initialisation du jeu ainsi que de sa boucle
+ */
 public class Controller implements Initializable {
 
     @FXML
@@ -40,8 +41,6 @@ public class Controller implements Initializable {
     private TilePane fond;
     @FXML
     private Pane screen;
-    @FXML
-    private Button mapButton;
     @FXML
     private Button openInventaire;
     @FXML
@@ -97,17 +96,15 @@ public class Controller implements Initializable {
     @FXML
     private Spinner<Integer> colonneCase2;
 
-    public Fond scene;
+    public Fond decor;
     private VueInventaire inventaireVue;
-    private VueHotbar hotBarVue;
+    private VueBarreRaccourci barreRaccourci;
     private VueProjectile projectileVue;
     private SpriteJoueur vuejoueur;
-    private VueEnnemi vueEnnemi;
-    private VueSon BiblioSon = new VueSon();
-    private VueCraft vueCraft;
+    private VueCreation vueCreation;
 
     private BlocConstructionSansBloc blocConstructionSansBloc;
-    private BlocCraft blocCraft;
+    private BlocCraft blocCreation;
     private BlocForge blocForge;
     private BlocFour blocFour;
 
@@ -121,16 +118,15 @@ public class Controller implements Initializable {
         });
 
         blocConstructionSansBloc = new BlocConstructionSansBloc();
-        blocCraft = new BlocCraft();
+        blocCreation = new BlocCraft();
         blocForge = new BlocForge();
         blocFour = new BlocFour();
 
-        scene = new Fond(fond);// Initialise le fond (décor du jeu)
+        decor = new Fond(fond);// Initialise le fond (décor du jeu)
 
-        projectileVue = new VueProjectile(screen,fond, scene);
+        projectileVue = new VueProjectile(screen,fond, decor);
         Jeu.getUniqueJeu().getListe_projectilesObservable().addListener(new ObsProjectile(screen, projectileVue));
 
-        vueEnnemi = new VueEnnemi(screen);
         Jeu.getUniqueJeu().getMobs().addListener(new ObsEnnemi(screen));
         Jeu.getUniqueJeu().initialisationMobs();
 
@@ -141,26 +137,26 @@ public class Controller implements Initializable {
 
         Clavier controlleurJoueur = new Clavier(screenInventaire,quitterInventaire,openInventaire,fond,hotBar, screenPrincipal);
 
-        Souris controlleurSouris = new Souris(scene,fond,screenInventaire,craftSansBlocConstruction,craftEtabli,craftForge,four);
+        Souris controlleurSouris = new Souris(decor,fond,screenInventaire,craftSansBlocConstruction,craftEtabli,craftForge,four);
 
         inventaireVue = new VueInventaire(quitterInventaire, screenInventaire, inventaire, screen);
 
-        hotBarVue = new VueHotbar(hotBar);
+        barreRaccourci = new VueBarreRaccourci(hotBar);
         Platform.runLater(() -> fond.requestFocus()); // Permet de faire fonctionner la méthode mouvement
 
         vuejoueur = new SpriteJoueur(screen, background,opaciteBackground); // Appelle la classe de la vue pour l'initialiser
         vuejoueur.mettreAJourSpriteJoueur(Joueur.getUniqueJoueur());
-        vueCraft = new VueCraft(craftSansBlocConstruction,craftEtabli,craftForge,caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge,
-                blocConstructionSansBloc.getListeRecettes(), blocCraft.getListeRecettes(),
-                blocForge.getListeRecettes(), caseRecetteFour, blocFour.getListeRecettes(),blocConstructionSansBloc,blocCraft,blocForge,blocFour);
+        vueCreation = new VueCreation(craftSansBlocConstruction,craftEtabli,craftForge,caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge,
+                blocConstructionSansBloc.getListeRecettes(), blocCreation.getListeRecettes(),
+                blocForge.getListeRecettes(), caseRecetteFour, blocFour.getListeRecettes(),blocConstructionSansBloc,blocCreation,blocForge,blocFour);
 
         screenPrincipal.addEventHandler(KeyEvent.ANY, c -> controlleurJoueur.handle(c));
         screen.addEventHandler(MouseEvent.MOUSE_CLICKED, s -> controlleurSouris.handle(s));
 
         ObsJoueur obsJ = new ObsJoueur(vuejoueur,controlleurJoueur);
 
-        Joueur.getUniqueJoueur().getXMaxProperty().addListener(new ObsMapX(scene));
-        Joueur.getUniqueJoueur().getYMaxProperty().addListener(new ObsMapY(scene));
+        Joueur.getUniqueJoueur().getXMaxProperty().addListener(new ObsMapX(decor));
+        Joueur.getUniqueJoueur().getYMaxProperty().addListener(new ObsMapY(decor));
 
         Joueur.getUniqueJoueur().yProperty().addListener(obsJ);
 
@@ -170,32 +166,32 @@ public class Controller implements Initializable {
 
 
         for (int i = 0; i < Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().size(); i++) {
-            Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(i).changementProperty().addListener(new ListenerInventaire(inventaireVue, hotBarVue, Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(i).getLigne(), Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(i).getColonne()));
+            Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(i).changementProperty().addListener(new ListenerInventaire(inventaireVue, barreRaccourci, Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(i).getLigne(), Joueur.getUniqueJoueur().getInventaire().getInventaireJoueur().get(i).getColonne()));
         }
 
         for (int i = 0; i < caseRecetteSansBloc.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteSansBloc.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
-                controlleurSouris.handleCraft(blocConstructionSansBloc.creerItem(vueCraft.getCodeObjetLigne(finalI, 0)));
+                controlleurSouris.handleCraft(blocConstructionSansBloc.creerItem(vueCreation.getCodeObjetLigne(finalI, 0)));
             });
         }
         for (int i = 0; i < caseRecetteEtabli.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteEtabli.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
-                controlleurSouris.handleCraft(blocCraft.creerItem(vueCraft.getCodeObjetLigne(finalI, 1)));
+                controlleurSouris.handleCraft(blocCreation.creerItem(vueCreation.getCodeObjetLigne(finalI, 1)));
             });
         }
         for (int i = 0; i < caseRecetteForge.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteForge.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
-                controlleurSouris.handleCraft(blocForge.creerItem(vueCraft.getCodeObjetLigne(finalI, 2)));
+                controlleurSouris.handleCraft(blocForge.creerItem(vueCreation.getCodeObjetLigne(finalI, 2)));
             });
         }
         //BiblioSon.play(1);
         for(int i=0; i<caseRecetteFour.getChildren().size(); i++) {
             int finalI = i;
             caseRecetteFour.getChildren().get(i).setOnMouseClicked(mouseEvent -> {
-                controlleurSouris.handleCraft(blocFour.creerItem(vueCraft.getCodeObjetLigne(finalI,3)));
+                controlleurSouris.handleCraft(blocFour.creerItem(vueCreation.getCodeObjetLigne(finalI,3)));
             });
         }
 
@@ -205,16 +201,15 @@ public class Controller implements Initializable {
         setupSpinner(ligneCase2, 1, 7, 1);
 
 
-        // BiblioSon.play(1);
         AnimationTimer timer = new AnimationTimer() { // classe qui sert pour faire des animations fluides car dans sa méthode handle ,ce qui est écrit dedans est effectué toutes les frames
-            private long lastUpdate = 0;
+            private long dernierChangement = 0;
             private final long frameInterval = 16_666_666; //TODO plus faire comme ça
             // Conversion nano secondes en secondes = 60 FPS
             private boolean arretTempsActif = false;
 
             @Override
             public void handle(long now) {
-                if (now - lastUpdate >= frameInterval) {
+                if (now - dernierChangement >= frameInterval) {
                     if (Jeu.getUniqueJeu().getArretTemps()) {
                         Joueur.getUniqueJoueur().mettreAJour();
 
@@ -243,7 +238,7 @@ public class Controller implements Initializable {
                         Jeu.getUniqueJeu().màjProjectiles();
                     }
 
-                    lastUpdate = now;
+                    dernierChangement = now;
 
                     if (!Joueur.getUniqueJoueur().getEstVivant()) {
                         PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
@@ -268,16 +263,8 @@ public class Controller implements Initializable {
     @FXML
     public void ouvrirInventaire() {
         screenInventaire.toFront();
-
-
-        Joueur.getUniqueJoueur().ajouterItem(blocForge.creerItem(54), 1);
-        Joueur.getUniqueJoueur().ajouterItem(blocForge.creerItem(76), 1);
-
-
-
-
-
-
+        Joueur.getUniqueJoueur().setMarcheDroite(false);
+        Joueur.getUniqueJoueur().setMarcheGauche(false);
     }
 
     @FXML

@@ -148,6 +148,7 @@ public class Carte {
     public boolean getPique(int x,int y){
         return carte[x][y]==8;
     }
+
     public boolean blocDeFabrication(int x,int y){
         return carte[y][x]==12 || carte[y][x]==13 || carte[y][x]==14;
     }
@@ -235,9 +236,11 @@ public class Carte {
                 Joueur.getUniqueJoueur().getInventaire().getCase(0,Joueur.getUniqueJoueur().getMainCourante()).getItem().getCodeObjet()>50 &&
                 compareResistance(((Bloc) ListeItems.getItemParId(Carte.getUniqueCarte().getCase(y,x))));
     }
+
     public boolean compareResistance(Bloc bloc){
         return bloc.getResistance()<=((Pioche) Joueur.getUniqueJoueur().getInventaire().getCase(0, Joueur.getUniqueJoueur().getMainCourante()).getItem()).getEfficacite();
     }
+
     public void poser(int x, int y) {//x = colonne && y = ligne
         if( ((Joueur.getUniqueJoueur().getX()/32)!=x) || ((Joueur.getUniqueJoueur().getY()/32)!=y) ) {
             if (conditionPoser(x,y)) {

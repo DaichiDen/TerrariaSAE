@@ -2,7 +2,6 @@ package fr.iut.saeterraria.sae.Vue;
 
 import fr.iut.saeterraria.sae.Modele.Objets.Etablis.*;
 import fr.iut.saeterraria.sae.Modele.Objets.Recette;
-import fr.iut.saeterraria.sae.Modele.Objets.ListeItems;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -12,7 +11,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.HashMap;
 
-public class VueCraft extends SpriteItem {
+public class VueCreation extends SpriteItem {
     private ScrollPane craftSansBlocConstruction,craftEtabli,craftForge, four;
     private VBox caseRecetteSansBloc,caseRecetteEtabli,caseRecetteForge, caseRecetteFour;
     private HashMap<Integer, Recette> recetteSansBloc,recetteEtabli,recetteForge, recetteFour;
@@ -22,9 +21,9 @@ public class VueCraft extends SpriteItem {
     private BlocForge blocForge;
     private BlocFour blocFour;
 
-    public VueCraft(ScrollPane craftSansBlocConstruction,ScrollPane craftEtabli,ScrollPane craftForge,VBox caseRecetteSansBloc,VBox caseRecetteEtabli,VBox caseRecetteForge,
-                    HashMap<Integer,Recette> recetteSansBloc,HashMap<Integer, Recette> recetteEtabli,HashMap<Integer, Recette> recetteForge,
-                    VBox caseRecetteFour, HashMap<Integer, Recette> recetteFour,BlocConstructionSansBloc blocConstructionSansBloc, BlocCraft blocCraft, BlocForge blocForge, BlocFour blocFour) {
+    public VueCreation(ScrollPane craftSansBlocConstruction, ScrollPane craftEtabli, ScrollPane craftForge, VBox caseRecetteSansBloc, VBox caseRecetteEtabli, VBox caseRecetteForge,
+                       HashMap<Integer,Recette> recetteSansBloc, HashMap<Integer, Recette> recetteEtabli, HashMap<Integer, Recette> recetteForge,
+                       VBox caseRecetteFour, HashMap<Integer, Recette> recetteFour, BlocConstructionSansBloc blocConstructionSansBloc, BlocCraft blocCraft, BlocForge blocForge, BlocFour blocFour) {
         this.craftSansBlocConstruction = craftSansBlocConstruction;
         this.craftEtabli = craftEtabli;
         this.craftForge = craftForge;

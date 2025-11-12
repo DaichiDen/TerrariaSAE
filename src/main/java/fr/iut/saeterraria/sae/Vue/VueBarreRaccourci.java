@@ -8,10 +8,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
-public class VueHotbar extends SpriteItem {
+public class VueBarreRaccourci extends SpriteItem {
     private GridPane hotBar;
 
-    public VueHotbar( GridPane hotBar) {
+    public VueBarreRaccourci(GridPane hotBar) {
         this.hotBar = hotBar;
         afficherHotBar();
     }

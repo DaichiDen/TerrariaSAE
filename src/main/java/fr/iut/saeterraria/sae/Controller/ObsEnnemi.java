@@ -15,7 +15,10 @@ import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.HashMap;
-
+/*
+S'occupe des Entite de type ennemi du jeu, permet d'ajouter et de mettre à jour les mouvements des entites.
+Donne et met à jour les sprites des entites ennemi
+ */
 public class ObsEnnemi implements ListChangeListener<EntiteVivante> {
     private Pane screen;
     private HashMap<Entite, Node> spritesMobs;

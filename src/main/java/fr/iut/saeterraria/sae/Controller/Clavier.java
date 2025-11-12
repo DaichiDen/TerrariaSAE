@@ -2,7 +2,7 @@ package fr.iut.saeterraria.sae.Controller;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
-import fr.iut.saeterraria.sae.Vue.VueHotbar;
+import fr.iut.saeterraria.sae.Vue.VueBarreRaccourci;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,12 +16,14 @@ import javafx.scene.layout.TilePane;
 
 import java.util.HashSet;
 import java.util.Set;
-
+/*
+Gère toutes les instructions clavier que le joueur peut utiliser dans le jeu, certaines touches font réagir le programme
+ */
 public class Clavier implements EventHandler<KeyEvent> {
     @FXML
     private TilePane fond;
     @FXML
-    private Button openInventaire;
+    private Button ouvrirInventaire;
     @FXML
     private Button quitterInventaire;
     @FXML
@@ -31,16 +33,16 @@ public class Clavier implements EventHandler<KeyEvent> {
 
     private final Set<KeyCode> touchesAppuyees = new HashSet<>();
     private boolean inventaireOuvert = false;
-    private VueHotbar vueHotbar;
+    private VueBarreRaccourci vueBarreRaccourci;
 
-    public Clavier( AnchorPane screenInventaire,Button quitterInventaire,Button openInventaire,TilePane fond, GridPane hotBarInventaire, Pane pane) {
+    public Clavier( AnchorPane screenInventaire,Button quitterInventaire,Button ouvrirInventaire,TilePane fond, GridPane hotBarInventaire, Pane pane) {
 
         this.screenInventaire=screenInventaire;
         this.quitterInventaire=quitterInventaire;
-        this.openInventaire=openInventaire;
+        this.ouvrirInventaire=ouvrirInventaire;
         this.fond=fond;
         this.screenPrincipal=pane;
-        this.vueHotbar = new VueHotbar(hotBarInventaire);
+        this.vueBarreRaccourci = new VueBarreRaccourci(hotBarInventaire);
     }
 
     public void handle(KeyEvent event) { //
@@ -58,10 +60,10 @@ public class Clavier implements EventHandler<KeyEvent> {
 
             if(code == KeyCode.I ) {
                 if (!inventaireOuvert){
-                    ouvrirInventaire();
+                    ouvrertureInventaire();
                     inventaireOuvert = true;
                 } else {
-                    exitInventaire();
+                    sortirInventaire();
                     inventaireOuvert = false;
                 }
             }
@@ -76,14 +78,14 @@ public class Clavier implements EventHandler<KeyEvent> {
             if (keyText.equals("&") || keyText.equals("\"") || keyText.equals("é") || keyText.equals("'") || keyText.equals("(") || keyText.equals("-")) {
             int mainCourante = Joueur.getUniqueJoueur().getMainCourante();
             switch (keyText) {
-                case "&" -> { Joueur.getUniqueJoueur().setMainCourante(0); vueHotbar.updateElement(0); }
-                case "é" -> { Joueur.getUniqueJoueur().setMainCourante(1); vueHotbar.updateElement(1); }
-                case "\"" -> { Joueur.getUniqueJoueur().setMainCourante(2); vueHotbar.updateElement(2); }
-                case "'" -> { Joueur.getUniqueJoueur().setMainCourante(3); vueHotbar.updateElement(3); }
-                case "(" -> { Joueur.getUniqueJoueur().setMainCourante(4); vueHotbar.updateElement(4); }
-                case "-" -> { Joueur.getUniqueJoueur().setMainCourante(5); vueHotbar.updateElement(5); }
+                case "&" -> { Joueur.getUniqueJoueur().setMainCourante(0); vueBarreRaccourci.updateElement(0); }
+                case "é" -> { Joueur.getUniqueJoueur().setMainCourante(1); vueBarreRaccourci.updateElement(1); }
+                case "\"" -> { Joueur.getUniqueJoueur().setMainCourante(2); vueBarreRaccourci.updateElement(2); }
+                case "'" -> { Joueur.getUniqueJoueur().setMainCourante(3); vueBarreRaccourci.updateElement(3); }
+                case "(" -> { Joueur.getUniqueJoueur().setMainCourante(4); vueBarreRaccourci.updateElement(4); }
+                case "-" -> { Joueur.getUniqueJoueur().setMainCourante(5); vueBarreRaccourci.updateElement(5); }
             }
-                vueHotbar.updateElement(mainCourante);
+                vueBarreRaccourci.updateElement(mainCourante);
             }
         }
         else if (event.getEventType() == KeyEvent.KEY_RELEASED) {
@@ -91,13 +93,13 @@ public class Clavier implements EventHandler<KeyEvent> {
         }
     }
 
-    public void update() {
+    public void misAJour() {
         Joueur.getUniqueJoueur().setMarcheDroite(touchesAppuyees.contains(KeyCode.RIGHT) || touchesAppuyees.contains(KeyCode.D));
         Joueur.getUniqueJoueur().setMarcheGauche(touchesAppuyees.contains(KeyCode.LEFT) || touchesAppuyees.contains(KeyCode.Q));
     }
 
     @FXML
-    public void ouvrirInventaire() {
+    public void ouvrertureInventaire() {
         Platform.runLater(() -> screenInventaire.requestFocus());
         Jeu.getUniqueJeu().testCraft();
         screenInventaire.toFront();
@@ -105,7 +107,7 @@ public class Clavier implements EventHandler<KeyEvent> {
         Joueur.getUniqueJoueur().setMarcheGauche(false);
     }
     @FXML
-    public void exitInventaire(){
+    public void sortirInventaire(){
         screenInventaire.toBack();
         Platform.runLater(() -> screenPrincipal.requestFocus());
     }

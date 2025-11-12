@@ -28,8 +28,6 @@ public class Jeu {
 
     public final static int taille1bloc = 32;
 
-
-
     private Jeu(){
         ennemis = new ArrayList<>();
         pNJ = new ArrayList<>();
@@ -92,7 +90,6 @@ public class Jeu {
             }
         }
     }
-
 
     public ObservableList<Ennemi> getMobs() {
         return mobs;
@@ -182,11 +179,6 @@ public class Jeu {
         return arretTemps;
     }
 
-
-
-
-
-
     public void initialisationJoueur(){
         Joueur.getUniqueJoueur().getBarreVie().setVie(Joueur.getUniqueJoueur().getBarreVie().getVieMax());
         Joueur.getUniqueJoueur().setEstVivant(true);
@@ -194,9 +186,9 @@ public class Jeu {
         Joueur.getUniqueJoueur().setY(0*32);
     }
 
-
-
     public void testCraft() {
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(78),1);
+        Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(77),64);
         Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(3),96); // Bois
         Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(5),96); // Pierre
         Joueur.getUniqueJoueur().ajouterItem(ListeItems.getItemParId(6),20); // Minerai Fer

@@ -35,8 +35,6 @@ public enum ListeItems {
     DELJCCium(23, new Item("DELJCCium", "", 1,23)),
 
 
-
-
     Pierre_TP(49, new Pierre_TP(49)),
     Pioche_Bois(51, new Pioche("Pioche de bois","",2, 51)),
     Pioche_Pierre(52, new Pioche("Pioche de pierre","",3, 52)),

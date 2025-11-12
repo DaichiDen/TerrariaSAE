@@ -16,6 +16,11 @@ public class BouleDeFeu extends Projectile{
         super(xEntite, yEntite, 12, 32, 32);
     }
 
+    @Override
+    public int getType(){
+        return 82;
+    }
+
     public void màjProjectile(){
         this.setForceY(this.getForceY() + super.getGravité());
         super.màjProjectile();

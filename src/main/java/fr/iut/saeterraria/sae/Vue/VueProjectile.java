@@ -18,7 +18,6 @@ public class VueProjectile extends CreateRessourceVisuel {
 
     private Map<Projectile, ImageView> sprites = new HashMap<>();
 
-
     private ImageView spriteActuel = new ImageView();
 
     public VueProjectile(Pane screen, TilePane tp, Fond fond) {
@@ -33,10 +32,10 @@ public class VueProjectile extends CreateRessourceVisuel {
 
         if (sprite == null) {
             // Si pas existant, créer et configurer le sprite une fois
-            if (projectile.getNom().equals("flèche")) {
+            if (projectile.getType()==77) {
                 sprite = createImageView("/Sprite_objets/Flèche.png", 24, 24);
 
-            } else if (projectile.getNom().equals("balle")) {
+            } else if (projectile.getType()==80) {
                 sprite = createImageView("/Sprite_objets/Balle.png", 20, 20);
 
             } else {

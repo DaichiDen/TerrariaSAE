@@ -10,7 +10,9 @@ import javafx.scene.layout.Pane;
 import fr.iut.saeterraria.sae.Vue.VueProjectile;
 
 import java.util.HashMap;
-
+/*
+Permet la misa à jour des projectiles
+ */
 public class ObsProjectile implements ListChangeListener<Projectile> {
     private Pane screen;
     private VueProjectile p;
@@ -29,8 +31,7 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
 
                     projectile_aj.xProperty().addListener((obs, oldVal, newVal) -> p.mettreAJourSpriteProjectile(projectile_aj));
                     projectile_aj.yProperty().addListener((obs, oldVal, newVal) -> p.mettreAJourSpriteProjectile(projectile_aj));
-
-                    //TODO oe ok peut mieux faire
+                    
                     if(projectile_aj.getClass().equals(BouleDeFeu.class)) {
                         ((BouleDeFeu) projectile_aj).aExploséProperty().addListener((obs, oldVal, newVal) -> p.detruireBlocExplosion(projectile_aj.getY() / 32, projectile_aj.getX() / 32));
                     }

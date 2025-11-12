@@ -5,7 +5,9 @@ import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
 import fr.iut.saeterraria.sae.Vue.SpriteJoueur;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-
+/*
+S'occupe de l'Entite de type joueurdu jeu, permet de mettre à jour automatiquement le joueur dans le jeu
+ */
 public class ObsJoueur implements ChangeListener<Number> {
     private SpriteJoueur sprite;
     private Clavier clavier;
@@ -17,7 +19,7 @@ public class ObsJoueur implements ChangeListener<Number> {
 
     @Override
     public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-        clavier.update();
+        clavier.misAJour();
         sprite.mettreAJourSpriteJoueur(Joueur.getUniqueJoueur());
     }
     

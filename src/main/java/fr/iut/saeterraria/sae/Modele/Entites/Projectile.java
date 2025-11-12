@@ -4,8 +4,8 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 import javafx.beans.property.*;
 
 public abstract class Projectile extends Entite{
-    private StringProperty nom;
-    private DoubleProperty forceX = new SimpleDoubleProperty(0), forceY = new SimpleDoubleProperty(0);
+    private Double forceX = 0.0;
+    private Double forceY = 0.0;
     private int xBloc, yBloc;
     private BooleanProperty actif;
 
@@ -14,6 +14,7 @@ public abstract class Projectile extends Entite{
         this.actif = new SimpleBooleanProperty(true);
     }
 
+    public abstract int getType();
 
     public BooleanProperty getActifProperty() {
         return actif;
@@ -21,10 +22,6 @@ public abstract class Projectile extends Entite{
     public void setActif(boolean actif) {
         this.actif.set(actif);
     }
-    public boolean getActif() {
-        return actif.getValue();
-    }
-
 
     public int getxBloc() {
         return xBloc;
@@ -39,30 +36,19 @@ public abstract class Projectile extends Entite{
         this.yBloc = yBloc;
     }
 
-    public String getNom() {
-        return nom.get();
-    }
-
-    public DoubleProperty forceXProperty() {
-        return forceX;
-    }
-    public DoubleProperty forceYProperty() {
-        return forceY;
-    }
-    public double getForceX() {return forceX.getValue();}
+    public double getForceX() {return forceX;}
     public double getForceY() {
-        return forceY.getValue();
+        return forceY;
     }
 
     public void setForceX(double forceX) {
-        this.forceX.setValue(forceX);
+        this.forceX=forceX;
     }
     public void setForceY(double forceY) {
-        this.forceY.setValue(forceY);
+        this.forceY=forceY;
     }
 
 
-    //TODO mettre des limites à la balle à babar pour timestop
     public void màjProjectile(){
         this.setX(this.getX() + (int) this.getForceX());
         this.setY(this.getY() + (int) this.getForceY());

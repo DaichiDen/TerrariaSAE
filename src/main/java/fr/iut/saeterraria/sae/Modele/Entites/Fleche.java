@@ -15,4 +15,9 @@ public class Fleche extends Projectile{
     public void action() {
 
     }
+
+    @Override
+    public int getType() {
+        return 77;
+    }
 }

@@ -11,6 +11,11 @@ public class Balle extends Projectile{
     }
 
     @Override
+    public int getType() {
+        return 80;
+    }
+
+    @Override
     public void action() {
         jeu.setArretTemps(false);
     }

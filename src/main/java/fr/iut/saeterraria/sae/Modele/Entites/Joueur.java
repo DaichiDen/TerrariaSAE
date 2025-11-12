@@ -3,7 +3,6 @@
     import fr.iut.saeterraria.sae.Modele.Map.Carte;
     import fr.iut.saeterraria.sae.Modele.Objets.*;
     import fr.iut.saeterraria.sae.Modele.Objets.Arme.Grappin;
-    import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pioche;
     import fr.iut.saeterraria.sae.Modele.Objets.Outil.Pierre_TP;
 
     import fr.iut.saeterraria.sae.Modele.Inventaire.Inventaire;
