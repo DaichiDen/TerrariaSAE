@@ -2,7 +2,7 @@ package fr.iut.saeterraria.sae.Modele.Entites;
 
 import fr.iut.saeterraria.sae.Modele.Jeu;
 
-public class FabriqueDifficulteDifficile {
+public class FabriqueDifficulteDifficile implements FabriqueDifficulteEnnemis {
     public void creerJeu() {
         Ennemi ogre = new Ogre( 3000, 0);
         Ennemi ogre2 = new Ogre(1340, 1340);
