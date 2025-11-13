@@ -60,12 +60,15 @@ public abstract class Projectile extends Entite{
 
     @Override
     public void appliquerCollisionVerticale(int blocHaut, int blocBas, int entiteBas, int entiteHaut){ // Oui, on n'utilise aucun paramètre, c'est pas bien, à modifier (template)
-        this.action();
-        this.setActif(false);
+        supprimerProjectile();
     }
 
     @Override
     public void appliquerCollisionHorizontale(int blocGauche, int blocDroite, int entiteGauche, int entiteDroite){
+        supprimerProjectile();
+    }
+
+    public void supprimerProjectile(){
         this.action();
         this.setActif(false);
     }
