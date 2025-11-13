@@ -8,7 +8,7 @@ import javafx.geometry.Rectangle2D;
 /*
  * Classe abstraite représentant une entité du jeu (joueur, ennemi, projectile...).
  * Elle définit les propriétés communes à toutes les entités :
- * position (x, y), taille, hitbox, direction de déplacement, attaque (dégâts infligés), gravité appliqué sur l'entité.
+ * position (x, y), taille, hitbox, attaque (dégâts infligés), gravité appliquée sur l'entité.
  *
  * Elle donne les méthodes utilisées par toutes les entités pour la détection des collisions.
  */

@@ -7,7 +7,7 @@ import javafx.beans.property.*;
 /*
  * Classe représentant une entité vivante du jeu (joueur, ennemi...).
  * Elle définit les propriétés communes à toutes les entités vivantes:
- * vitesse de déplacement, energie, defense, vie, la portée
+ * déplacements, vitesse de déplacement, energie, defense, vie, la portée
  *
  * Elle donne les méthodes utilisées par toutes les entités vivantes pour la gestion de leurs collisions,
  * la gestion de leur déplacements ainsi que la gestion de leur attributs (vie, defense, energie...)

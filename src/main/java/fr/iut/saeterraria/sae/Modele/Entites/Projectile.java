@@ -6,7 +6,7 @@ import javafx.beans.property.*;
 /*
  * Classe représentant une entité non vivante du jeu (projectile...).
  * Elle définit les propriétés communes à toutes les entités non vivantes:
- * vitesse de déplacement
+ * déplacement, vitesse de déplacement
  *
  * Elle donne les méthodes utilisées par toutes les entités non vivantes pour la gestion de leurs collisions et
  * la gestion de leur déplacement
