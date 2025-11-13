@@ -61,19 +61,13 @@ public class Jeu {
 
                 p.màjProjectile();
 
-                if (p.collisionVerticale() || p.collisionHorizontale()) {
-                    supprimerProjectile(p, i);
+                if (p.testerVertical() ||  p.testerHorizontal()) {
+                    getListe_projectiles().remove(i);
                 }
 
                 appliquerDegats(p, i);
             }
         }
-    }
-
-    public void supprimerProjectile(Projectile p, int ind){
-        p.action();
-        p.setActif(false);
-        getListe_projectiles().remove(ind);
     }
 
     public void appliquerDegats(Projectile p, int ind) {

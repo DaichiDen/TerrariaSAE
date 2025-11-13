@@ -168,6 +168,45 @@ public abstract class Entite {
     }
 
 
+    public boolean testerVertical() {
+        if(collisionVerticale()){
+            gérerCollisionVerticale();
+            return true;
+        }
+        return false;
+    }
+
+    public void gérerCollisionVerticale(){
+        int blocHaut = getyBloc();
+        int blocBas = getyBloc() + Jeu.getUniqueJeu().getTaille1bloc();
+        int entiteHaut = getY();
+        int entiteBas = getY() + (Jeu.getUniqueJeu().getTaille1bloc() * 2);
+        appliquerCollisionVerticale(blocHaut,blocBas,entiteBas,entiteHaut);
+
+    }
+
+    public abstract void appliquerCollisionVerticale(int blocHaut, int blocBas, int entiteBas, int entiteHaut);
+
+    public boolean testerHorizontal() {
+        if (collisionHorizontale()) {
+            gérerCollisionHorizontale();
+            return true;
+        }
+        return false;
+    }
+    public void gérerCollisionHorizontale(){
+        // Bords du bloc
+        int blocGauche = getxBloc();
+        int blocDroite = getxBloc() + Jeu.getUniqueJeu().getTaille1bloc();
+        // Bords de l'entite
+        int entiteGauche = this.getX();
+        int entiteDroite = this.getX() + Jeu.getUniqueJeu().getTaille1bloc();
+        appliquerCollisionHorizontale(blocGauche, blocDroite, entiteGauche, entiteDroite);
+    }
+
+    public abstract void appliquerCollisionHorizontale(int blocGauche, int blocDroite, int entiteGauche, int entiteDroite);
+
+
     public boolean collisionVerticale() { /** Fonction qui teste la collision verticale de façon dynamique, regarde seulement les 3 blocs autour du joueur (verticalement et horizontalement)*/
         collisionBas = false;
         Rectangle2D hitboxEntite = getHitbox();

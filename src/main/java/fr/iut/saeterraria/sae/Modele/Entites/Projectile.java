@@ -40,14 +40,7 @@ public abstract class Projectile extends Entite{
         return yBloc;
     }
 
-
     public double getForceX() {return forceX;}
-
-
-
-
-
-
 
     public double getForceY() {
         return forceY;
@@ -60,13 +53,21 @@ public abstract class Projectile extends Entite{
         this.forceY=forceY;
     }
 
-
-
-
-
     public void màjProjectile(){
         this.setX(this.getX() + (int) this.getForceX());
         this.setY(this.getY() + (int) this.getForceY());
+    }
+
+    @Override
+    public void appliquerCollisionVerticale(int blocHaut, int blocBas, int entiteBas, int entiteHaut){ // Oui, on n'utilise aucun paramètre, c'est pas bien, à modifier (template)
+        this.action();
+        this.setActif(false);
+    }
+
+    @Override
+    public void appliquerCollisionHorizontale(int blocGauche, int blocDroite, int entiteGauche, int entiteDroite){
+        this.action();
+        this.setActif(false);
     }
 
     public void initialiserProjectile(int cibleX, int cibleY) {

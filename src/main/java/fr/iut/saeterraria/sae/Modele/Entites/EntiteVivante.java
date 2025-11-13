@@ -64,60 +64,7 @@ public abstract class EntiteVivante extends Entite{
 
     public abstract void action(int x, int y);
 
-    public void testerVertical() {
-        if(collisionVerticale()){
-            gérerCollisionVerticale();
-        }
-    }
-    public void gérerCollisionVerticale(){
-        int blocHaut = getyBloc();
-        int blocBas = getyBloc() + Jeu.getUniqueJeu().getTaille1bloc();
-        int joueurHaut = getY();
-        int joueurBas = getY() + (Jeu.getUniqueJeu().getTaille1bloc() * 2);
-        appliquerCollisionVerticale(blocHaut,blocBas,joueurBas,joueurHaut);
-        if (Carte.getUniqueCarte().getPique((joueurBas/32), (this.getX()/32)) ) {
-            this.decrementVie(1);
-        }
-    }
-    public void appliquerCollisionVerticale(int blocHaut, int blocBas, int joueurBas, int joueurHaut){
-        if (joueurBas >= blocHaut && vitesseY >= 0 && joueurHaut < blocHaut) {
-            setCollisionBas(true);
-            enSaut = false;
-            vitesseY = 0;
-            setY(blocHaut - (Jeu.getUniqueJeu().getTaille1bloc() * 2));
-        } else if (joueurHaut <= blocBas && vitesseY < 0 && joueurBas > blocBas) {
-            vitesseY = 0;
-            setY(blocBas);
-        }
-    }
 
-    public void testerHorizontal() {
-        if (collisionHorizontale()) {
-            gérerCollisionHorizontale();
-        }
-    }
-    public void gérerCollisionHorizontale(){
-        // Bords du bloc
-        int blocGauche = getxBloc();
-        int blocDroite = getxBloc() + Jeu.getUniqueJeu().getTaille1bloc();
-        // Bords du joueur
-        int joueurGauche = this.getX();
-        int joueurDroite = this.getX() + Jeu.getUniqueJeu().getTaille1bloc();
-        appliquerCollisionHorizontale(blocGauche, blocDroite, joueurGauche, joueurDroite);
-    }
-    public void appliquerCollisionHorizontale(int blocGauche, int blocDroite, int joueurGauche, int joueurDroite){
-        if (joueurDroite > blocGauche && joueurGauche < blocGauche) {
-            // Collision côté droit du joueur contre gauche du bloc
-            setMarcheDroite(false);
-            // Repositionner le joueur pile à gauche du bloc
-            this.setX(blocGauche - Jeu.getUniqueJeu().getTaille1bloc());
-        } else if (joueurGauche < blocDroite && joueurDroite > blocDroite) {
-            // Collision côté gauche du joueur contre droite du bloc
-            setMarcheGauche(false);
-            // Repositionner le joueur pile à droite du bloc
-            this.setX(blocDroite);
-        }
-    }
 
     public void setVitesseX(int val){
         this.vitesseX=val;
@@ -165,7 +112,34 @@ public abstract class EntiteVivante extends Entite{
         return friction;
     }
 
+    public void appliquerCollisionVerticale(int blocHaut, int blocBas, int joueurBas, int joueurHaut){
+        if (joueurBas >= blocHaut && vitesseY >= 0 && joueurHaut < blocHaut) {
+            setCollisionBas(true);
+            enSaut = false;
+            vitesseY = 0;
+            setY(blocHaut - (Jeu.getUniqueJeu().getTaille1bloc() * 2));
+        } else if (joueurHaut <= blocBas && vitesseY < 0 && joueurBas > blocBas) {
+            vitesseY = 0;
+            setY(blocBas);
+        }
+        if (Carte.getUniqueCarte().getPique((joueurBas/32), (this.getX()/32)) ) {
+            this.decrementVie(1);
+        }
+    }
 
+    public void appliquerCollisionHorizontale(int blocGauche, int blocDroite, int joueurGauche, int joueurDroite){
+        if (joueurDroite > blocGauche && joueurGauche < blocGauche) {
+            // Collision côté droit du joueur contre gauche du bloc
+            setMarcheDroite(false);
+            // Repositionner le joueur pile à gauche du bloc
+            this.setX(blocGauche - Jeu.getUniqueJeu().getTaille1bloc());
+        } else if (joueurGauche < blocDroite && joueurDroite > blocDroite) {
+            // Collision côté gauche du joueur contre droite du bloc
+            setMarcheGauche(false);
+            // Repositionner le joueur pile à droite du bloc
+            this.setX(blocDroite);
+        }
+    }
 
     public void miseAJourGravité(){
         if (!getCollisionBas()) {
