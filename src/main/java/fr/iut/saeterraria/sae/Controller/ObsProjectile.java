@@ -32,7 +32,7 @@ public class ObsProjectile implements ListChangeListener<Projectile> {
                     projectile_aj.xProperty().addListener((obs, oldVal, newVal) -> p.mettreAJourSpriteProjectile(projectile_aj));
                     projectile_aj.yProperty().addListener((obs, oldVal, newVal) -> p.mettreAJourSpriteProjectile(projectile_aj));
                     
-                    if(projectile_aj.getClass().equals(BouleDeFeu.class)) {
+                    if(projectile_aj.getType()==82) {
                         ((BouleDeFeu) projectile_aj).aExploséProperty().addListener((obs, oldVal, newVal) -> p.detruireBlocExplosion(projectile_aj.getY() / 32, projectile_aj.getX() / 32));
                     }
                     // Met à jour le sprite depuis VueProjectile

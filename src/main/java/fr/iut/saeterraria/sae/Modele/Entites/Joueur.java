@@ -48,9 +48,9 @@
         private IntegerProperty xMax,yMax;
 
 
-        private Joueur(int porteeVue, int porteeAttaque) {
+        private Joueur(int porteeVue) {
 
-            super(20, 100, 20, 20*32, 14*32, 1, 10,1,Jeu.getUniqueJeu().getTaille1bloc(),Jeu.getUniqueJeu().getTaille1bloc()*2,porteeVue,porteeAttaque);
+            super(20, 20*32, 14*32, 1, 10,1,Jeu.getUniqueJeu().getTaille1bloc(),Jeu.getUniqueJeu().getTaille1bloc()*2,porteeVue);
             this.equipement = new Armure[7];
             this.inventaire = new Inventaire(7,6);
             this.mainCourante = 0;
@@ -61,7 +61,7 @@
 
         public static Joueur getUniqueJoueur() {
             if(uniqueJoueur == null) {
-                uniqueJoueur = new Joueur(3,3);
+                uniqueJoueur = new Joueur(3);
             }
             return uniqueJoueur;
         }
@@ -220,8 +220,6 @@
 
         public void setYMax(int yMax){ this.yMax.setValue(yMax/Jeu.getUniqueJeu().getTaille1bloc()); }
 
-
-
         public void updateDefense(){
             int defense = 1;
             for (Armure armure : equipement){
@@ -229,7 +227,7 @@
                     defense+=armure.getDefense();
                 }
             }
-            this.defProperty().setValue(defense);
+            this.setDef(defense);
         }
 
         public void swapItem(int ligneDep, int colonneDep, int ligneFin, int colonneFin) {

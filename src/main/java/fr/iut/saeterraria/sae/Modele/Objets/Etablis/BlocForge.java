@@ -4,6 +4,6 @@ import fr.iut.saeterraria.sae.Modele.Objets.ListeItemBlocForge;
 
 public class BlocForge extends BlocConstruction{
     public BlocForge() {
-        super("Forge","Un établi qui permet la fabrication d'objets", 1, 13, new ListeItemBlocForge());
+        super("Forge", 1, 13, new ListeItemBlocForge());
     }
 }

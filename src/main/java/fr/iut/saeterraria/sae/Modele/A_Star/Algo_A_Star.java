@@ -3,7 +3,9 @@ package fr.iut.saeterraria.sae.Modele.A_Star;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
 
 import java.util.*;
-
+/*
+Algorithme A* qui permet de tracer le chemin le plus court vers le joueur pour les entités ennemis
+ */
 public class Algo_A_Star {
 
     private Carte carte;

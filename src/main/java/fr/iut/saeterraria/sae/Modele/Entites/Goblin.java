@@ -5,7 +5,7 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 public class Goblin extends Ennemi{
 
     public Goblin(int x, int y) {
-        super(20, 20, x, y, 0, 2, Jeu.getUniqueJeu().getTaille1bloc(),  Jeu.getUniqueJeu().getTaille1bloc()*2, 10, 8);
+        super(20, x, y, 0, 2, Jeu.getUniqueJeu().getTaille1bloc(),  Jeu.getUniqueJeu().getTaille1bloc()*2, 10);
     }
 
     @Override

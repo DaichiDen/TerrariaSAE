@@ -1,12 +1,11 @@
 package fr.iut.saeterraria.sae.Modele.Objets.Outil;
 
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
 import fr.iut.saeterraria.sae.Modele.Objets.Outils;
 
 public class Pioche extends Outils {
     private int efficacite;
     public Pioche(String nom,String description, int efficacite, int codeobjet) {
-        super(nom,description,codeobjet);
+        super(nom, codeobjet);
         this.efficacite=efficacite;
     }
 

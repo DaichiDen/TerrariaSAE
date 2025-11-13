@@ -1,10 +1,8 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
-
 public class Casque extends Armure{
-    public Casque(String nom, String desc, double defense, int codeobjet) {
-        super(nom, desc, defense, codeobjet);
+    public Casque(String nom, double defense, int codeobjet) {
+        super(nom, defense, codeobjet);
     }
 
     @Override

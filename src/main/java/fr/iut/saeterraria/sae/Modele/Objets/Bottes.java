@@ -1,11 +1,9 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
-
 public class Bottes extends Armure{
 
-    public Bottes(String nom, String desc, double defense, int codeobjet) {
-        super(nom, desc, defense, codeobjet);
+    public Bottes(String nom, double defense, int codeobjet) {
+        super(nom, defense, codeobjet);
     }
 
     @Override

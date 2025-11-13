@@ -6,7 +6,7 @@ public class Grappin extends Distance {
 
     public Grappin(String nom, String desc, int attaque,int codeobjet){
 
-            super(nom,desc,attaque,codeobjet);
+            super(nom, attaque,codeobjet);
         }
 
 

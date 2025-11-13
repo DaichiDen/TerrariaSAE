@@ -7,7 +7,9 @@ import fr.iut.saeterraria.sae.Modele.Entites.Ennemi;
 import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
 
 import java.util.List;
-
+/*
+Déplacement vers le joueur lorsqu'un ennemu voit le joueur dans la portée de détection
+ */
 public class ComportementVu implements ComportementEnnemi {
     @Override
     public void agir(Ennemi ennemi) {

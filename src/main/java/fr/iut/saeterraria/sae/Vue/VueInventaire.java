@@ -7,23 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 
 public class VueInventaire extends SpriteItem {
-    private Pane fond;
-    private Button quitterInventaire;
-    private Pane screenInventaire;
     private GridPane tableauInventaire;//Affichage de l'inventaire
 
     // gridpane.add(new Button(), 1, 0); // column=1 row=0
-    public VueInventaire(Button button, Pane pane, GridPane tableauInventaire, Pane fond) {
-        this.quitterInventaire = button;
-        this.screenInventaire = pane;
+    public VueInventaire( GridPane tableauInventaire) {
         this.tableauInventaire = tableauInventaire;
-        this.fond = fond;
         afficherInventaire();
     }
 
-    // Permet de lier l'id de l'item avec le chemin amenant vers son image
-
-    
     public void afficherInventaire() {
 
         // Affiche l'hotbar

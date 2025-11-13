@@ -18,8 +18,6 @@ public class VueProjectile extends CreateRessourceVisuel {
 
     private Map<Projectile, ImageView> sprites = new HashMap<>();
 
-    private ImageView spriteActuel = new ImageView();
-
     public VueProjectile(Pane screen, TilePane tp, Fond fond) {
         this.screen = screen;
         this.tp = tp;

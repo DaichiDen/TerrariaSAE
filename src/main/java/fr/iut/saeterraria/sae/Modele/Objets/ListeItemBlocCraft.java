@@ -34,11 +34,11 @@ public class ListeItemBlocCraft implements ListeItemCraft{
                 piocheDePierre.addInRecette(new ElementRecette(5, "Pierre", 3));
                 return piocheDePierre;
             case "Epée en Bois":
-                Epee epeeBois = new Epee("Epée en Bois", "", 1, 73);
+                Epee epeeBois = new Epee("Epée en Bois", 1, 73);
                 epeeBois.addInRecette(new ElementRecette(3, "Bois", 3));
                 return epeeBois;
             case "Seau vide":
-                Item seau = new Item("Seau vide", "", 1, 62);
+                Item seau = new Item("Seau vide", 1, 62);
                 seau.addInRecette(new ElementRecette(22, "Fer", 3));
                 return seau;
         }
@@ -54,7 +54,7 @@ public class ListeItemBlocCraft implements ListeItemCraft{
                 blocForge.addInRecette(new ElementRecette(62,"Seau vide",1));
                 return blocForge;
             case 62 :
-                Item seau = new Item("Seau vide", "", 1,62);
+                Item seau = new Item("Seau vide", 1,62);
                 seau.addInRecette(new ElementRecette(22,"Fer",3));
                 return seau;
             case 14 :
@@ -71,7 +71,7 @@ public class ListeItemBlocCraft implements ListeItemCraft{
                 piocheDePierre.addInRecette(new ElementRecette(5,"Pierre",3));
                 return piocheDePierre;
             case 73 :
-                Epee epeeBois = new Epee("Epée en Bois","",1,73);
+                Epee epeeBois = new Epee("Epée en Bois", 1,73);
                 epeeBois.addInRecette(new ElementRecette(3,"Bois",3));
                 return epeeBois;
         }

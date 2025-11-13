@@ -3,7 +3,6 @@ package fr.iut.saeterraria.sae.Controller;
 import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Modele.Objets.Armure;
-
 import fr.iut.saeterraria.sae.Modele.Entites.*;
 import fr.iut.saeterraria.sae.Modele.Inventaire.Case;
 import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
@@ -22,6 +21,9 @@ import javafx.scene.layout.TilePane;
 
 import java.util.ArrayList;
 
+/*
+Gère toutes les entrées reconnu par le modèle que fait l'utilisateur à travers la souris
+ */
 public class Souris implements EventHandler<MouseEvent> {
     private Fond fond;
     private TilePane tp;
@@ -155,6 +157,6 @@ public class Souris implements EventHandler<MouseEvent> {
     // Recoit l'item en paramètre
     public void handleCraft (Item item){
         Joueur.getUniqueJoueur().craftItem(item);
+    }
 
-}
 }

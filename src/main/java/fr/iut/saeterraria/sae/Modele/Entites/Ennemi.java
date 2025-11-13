@@ -19,9 +19,9 @@ public abstract class Ennemi extends EntiteVivante {
     private long delaiAttaque =60;
     private ComportementEnnemi comportementEnnemi;
 
-    public Ennemi(int vieMax,int energieMax, int x, int y, int def, int attaque, int tailleL, int tailleH, int porteeVue, int porteeAttaque) {
+    public Ennemi(int vieMax, int x, int y, int def, int attaque, int tailleL, int tailleH, int porteeVue) {
 
-        super(vieMax,  energieMax, 20, x, y, def, 5,attaque, tailleL, tailleH, porteeVue,porteeAttaque );
+        super(vieMax, x, y, def, 5,attaque, tailleL, tailleH, porteeVue );
 
     }
 
@@ -31,23 +31,15 @@ public abstract class Ennemi extends EntiteVivante {
     public void mettreAJour(){
         if(!detecterJoueur()){
             comportementEnnemi = new ComportementPasVu();
-            comportementEnnemi.agir(this);
-            super.mettreAJour();
         }else{
             comportementEnnemi = new ComportementVu();
-            comportementEnnemi.agir(this);
-            super.mettreAJour();
-
         }
-
+        comportementEnnemi.agir(this);
+        super.mettreAJour();
     }
 
     public boolean detecterJoueur() {// À définir la distance où il détecte le joueur
-        boolean aVuJoueur = false;
-        if (Carte.getUniqueCarte().peutEtreAtteint(Joueur.getUniqueJoueur().getX()/32, Joueur.getUniqueJoueur().getY()/32, getPorteeVue(), this)) {
-            aVuJoueur = true;
-        }
-        return aVuJoueur;
+        return Carte.getUniqueCarte().peutEtreAtteint(Joueur.getUniqueJoueur().getX() / 32, Joueur.getUniqueJoueur().getY() / 32, getPorteeVue(), this);
     }
     public long getDernièreAttaque(){
         return dernièreAttaque;
@@ -57,7 +49,6 @@ public abstract class Ennemi extends EntiteVivante {
     }
     public void setDernièreAttaque(long val){
         this.dernièreAttaque=val;
-
     }
 
 }

@@ -1,6 +1,5 @@
 package fr.iut.saeterraria.sae.Controller;
 
-import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
 import fr.iut.saeterraria.sae.Vue.Fond;
 import javafx.beans.value.ChangeListener;

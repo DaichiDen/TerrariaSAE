@@ -5,7 +5,7 @@ import fr.iut.saeterraria.sae.Modele.Jeu;
 public class MH extends Ennemi{
 
     public MH(int x, int y) {
-        super(100, 20, x, y, 5, 5, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2, 10, 7);
+        super(100, x, y, 5, 5, Jeu.getUniqueJeu().getTaille1bloc(), Jeu.getUniqueJeu().getTaille1bloc()*2, 10);
     }
 
     @Override
@@ -15,11 +15,9 @@ public class MH extends Ennemi{
             if (this.getAttaque() - Joueur.getUniqueJoueur().getDef() > 0){
                 if (attaque<2) {
                     Joueur.getUniqueJoueur().decrementVie(getAttaque());
-                    System.out.println("Mandale");
                 } else {
                     Projectile p=new BouleDeFeu(this.getX(), this.getY());
                     p.initialiserProjectile(Joueur.getUniqueJoueur().getX(), Joueur.getUniqueJoueur().getY());
-                    System.out.println("BDF");
                 }
             }
             setDernièreAttaque(0);

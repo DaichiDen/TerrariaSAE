@@ -1,11 +1,9 @@
 package fr.iut.saeterraria.sae.Modele.Objets.Arme;
 
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
-
 public class Epee extends Melee {
 
-    public Epee(String nom,String desc,int attaque, int codeobjet) {
-        super(nom,desc,attaque,codeobjet);
+    public Epee(String nom,int attaque, int codeobjet) {
+        super(nom, attaque,codeobjet);
     }
 
 

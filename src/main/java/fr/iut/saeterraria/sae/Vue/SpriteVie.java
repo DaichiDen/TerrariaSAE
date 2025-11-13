@@ -8,7 +8,6 @@ public class SpriteVie extends CreateRessourceVisuel {
     private Pane screen;
     private int width,height;
 
-    private int viePre;
     private int vieAct;
 
     public SpriteVie(Pane screen) {
@@ -46,8 +45,6 @@ public class SpriteVie extends CreateRessourceVisuel {
                 screen.getChildren().add(createImageView("/Sprite/no_life.png", width, height));
             }
         }
-
-        viePre = vieAct; // Met à jour l'ancienne vie
     }
 
 }

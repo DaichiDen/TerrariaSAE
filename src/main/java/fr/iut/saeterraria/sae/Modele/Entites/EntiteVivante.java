@@ -16,9 +16,8 @@ import javafx.beans.property.*;
 
 public abstract class EntiteVivante extends Entite{
 
-    private IntegerProperty energieMax, def;
-    private IntegerProperty energie;
-    private IntegerProperty vitesseMax;
+    private Integer def;
+    private Integer vitesseMax;
     private BarreVie barreVie;
 
     private BooleanProperty estVivant;
@@ -27,8 +26,7 @@ public abstract class EntiteVivante extends Entite{
 
     private int vitesseY = 0;
 
-    private int porteeVue; //TODO c'est quoi ?
-    private int porteeAttaque;
+    private int porteeVue;
 
     //constantes
     protected final int forceSaut = -18;
@@ -37,24 +35,18 @@ public abstract class EntiteVivante extends Entite{
 
 
 
-    public EntiteVivante(int vieMax, int energieMax, int energie, int x, int y, int def, int vitesseMax, int attaque, int tailleL, int tailleH, int porteeVue, int porteeAttaque) {
+    public EntiteVivante(int vieMax, int x, int y, int def, int vitesseMax, int attaque, int tailleL, int tailleH, int porteeVue) {
         super(x, y, attaque, tailleL, tailleH);
 
         this.barreVie = new BarreVie(vieMax);
-        this.energieMax = new SimpleIntegerProperty(energieMax);
-        this.energie = new SimpleIntegerProperty(energie);
-        this.def = new SimpleIntegerProperty(def);
-        this.vitesseMax = new SimpleIntegerProperty(vitesseMax);
+        this.def = def;
+        this.vitesseMax = vitesseMax;
         this.estVivant= new SimpleBooleanProperty(true);
         this.porteeVue = porteeVue;
-        this.porteeAttaque = porteeAttaque;
     }
 
     public int getPorteeVue() {
         return porteeVue;
-    }
-    public int getPorteeAttaque() {
-        return porteeAttaque;
     }
 
     public int getVitesseY(){
@@ -243,34 +235,15 @@ public abstract class EntiteVivante extends Entite{
     }
 
 
-    // Gestion de l'energie
-    public final IntegerProperty energieMaxProperty(){return energieMax;}
-    public final int getEnergieMax() {return energieMax.get();}
-    public final void setEnergieMax(int energieMax) {this.energieMax.set(energieMax);}
-    public final int getEnergie() {return energie.get();}
-    public final void setEnergie(int energie) {this.energie.set(energie);}
-
-
     // Gestion de la defense
-    public final IntegerProperty defProperty(){ return def; }
-    public final void setDef(int def) { this.def.setValue(def);}
-    public final int getDef() { return def.get(); }
-    public final void incrementDef(int val) {
-        setDef(getDef()+val);
-    }
-    public final void decrementDef(int val) {
-        if(getDef()-val < 0){
-            setDef(0);
-        }else{
-            setDef(getDef()-val);
-        }
-    }
+    public final Integer getdef(){ return def; }
+    public final void setDef(int def) { this.def=def;}
+    public final int getDef() { return def; }
 
 
     // Gestion de la vitesse
-    public final IntegerProperty vitesseMaxProperty(){return vitesseMax;}
-    public final int getVitesseMax() {return vitesseMax.getValue();}
-    public void setVitesseMax(int vitesse) {this.vitesseMax.setValue(vitesse);}
+    public final int getVitesseMax() {return vitesseMax;}
+    public void setVitesseMax(int vitesse) {this.vitesseMax=vitesse;}
 
     public void resterInBounds(){
         if(this.getX()<=0){

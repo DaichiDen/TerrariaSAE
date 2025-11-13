@@ -40,10 +40,6 @@ public class VueCreation extends SpriteItem {
         this.blocForge = blocForge;
         this.blocFour = blocFour;
 
-        craftSansBlocConstruction.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        craftEtabli.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        craftForge.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
         initialize();
     }
 
@@ -85,6 +81,9 @@ public class VueCreation extends SpriteItem {
     }
 
     public void initialize() {
+        this.craftSansBlocConstruction.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        this.craftEtabli.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        this.craftForge.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         afficherCraft(recetteSansBloc, caseRecetteSansBloc,blocConstructionSansBloc);
         afficherCraft(recetteEtabli, caseRecetteEtabli,blocCraft);
         afficherCraft(recetteForge, caseRecetteForge,blocForge);

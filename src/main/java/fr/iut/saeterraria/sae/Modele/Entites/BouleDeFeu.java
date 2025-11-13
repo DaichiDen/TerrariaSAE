@@ -9,7 +9,6 @@ import javafx.geometry.Rectangle2D;
 
 public class BouleDeFeu extends Projectile{
 
-    private int xExplosion, yExplosion;
     private BooleanProperty aExplosé = new SimpleBooleanProperty(false);
 
     public BouleDeFeu(int xEntite, int yEntite) {
@@ -43,8 +42,6 @@ public class BouleDeFeu extends Projectile{
                     map.detruireBloc(j,i);
                 }
                 appliquerDegatsExplosion(j, i);
-                xExplosion = x;
-                yExplosion = y;
             }
         }
         setaExplosé(true);

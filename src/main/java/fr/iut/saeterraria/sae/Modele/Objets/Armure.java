@@ -1,21 +1,16 @@
 package fr.iut.saeterraria.sae.Modele.Objets;
 
-import fr.iut.saeterraria.sae.Modele.Entites.Joueur;
-import fr.iut.saeterraria.sae.Modele.Objets.Etablis.BlocConstruction;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-
 public abstract  class Armure extends Equipement {
-    private DoubleProperty defense; // Valeur de défense de l'armure
+    private Double defense; // Valeur de défense de l'armure
 
-    public Armure(String nom, String desc, double defense, int codeobjet) {
-        super(nom, desc, codeobjet);
+    public Armure(String nom, double defense, int codeobjet) {
+        super(nom, codeobjet);
 
-        this.defense = new SimpleDoubleProperty(defense);
+        this.defense = defense;
     }
 
     public double getDefense() {
-        return defense.getValue();
+        return defense;
     }
 
     public abstract int getTypeArmure();

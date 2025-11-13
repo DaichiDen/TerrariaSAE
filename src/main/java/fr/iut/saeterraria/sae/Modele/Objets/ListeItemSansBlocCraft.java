@@ -12,22 +12,20 @@ public class ListeItemSansBlocCraft implements ListeItemCraft{
 
     @Override
     public Item creerItem(String nom) {
-        switch (nom) {
-            case "Etabli" :
-                BlocCraft blocCraft = new BlocCraft();
-                blocCraft.addInRecette(new ElementRecette(3,"Bois",2));
-                return blocCraft;
+        if (nom.equals("Etabli")){
+            BlocCraft blocCraft = new BlocCraft();
+            blocCraft.addInRecette(new ElementRecette(3,"Bois",2));
+            return blocCraft;
         }
         return null;
     }
 
     @Override
     public Item creerItem(int i) {
-        switch (i) {
-            case 12 :
-                BlocCraft blocCraft = new BlocCraft();
-                blocCraft.addInRecette(new ElementRecette(3,"Bois",2));
-                return blocCraft;
+        if (i==12){
+            BlocCraft blocCraft = new BlocCraft();
+            blocCraft.addInRecette(new ElementRecette(3,"Bois",2));
+            return blocCraft;
         }
         return null;
     }
