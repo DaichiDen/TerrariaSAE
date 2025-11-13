@@ -1,9 +1,6 @@
 
 package fr.iut.saeterraria.sae.Vue;
-
-import fr.iut.saeterraria.sae.Modele.Jeu;
 import fr.iut.saeterraria.sae.Modele.Map.Carte;
-import fr.iut.saeterraria.sae.Modele.Objets.Coffre;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
