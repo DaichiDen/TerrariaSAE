@@ -23,9 +23,6 @@ public abstract class Entite {
 
     private int attaque;
 
-    private BooleanProperty marcheDroite = new SimpleBooleanProperty(false);
-    private BooleanProperty marcheGauche = new SimpleBooleanProperty(false);
-
     private int tailleH, tailleL;
 
     private final int gravité = 2;
@@ -105,30 +102,6 @@ public abstract class Entite {
 
     public void setCollisionBas(boolean collisionBas) {
         this.collisionBas = collisionBas;
-    }
-
-    public BooleanProperty marcheGaucheProperty() {
-        return marcheGauche;
-    }
-
-    public boolean getMarcheDroite() {
-        return marcheDroite.get();
-    }
-
-    public void setMarcheDroite(boolean val) {
-        marcheDroite.set(val);
-    }
-
-    public BooleanProperty marcheDroiteProperty() {
-        return marcheDroite;
-    }
-
-    public boolean getMarcheGauche() {
-        return marcheGauche.get();
-    }
-
-    public void setMarcheGauche(boolean val) {
-        marcheGauche.set(val);
     }
 
     // Gestion du positionnement horizontal

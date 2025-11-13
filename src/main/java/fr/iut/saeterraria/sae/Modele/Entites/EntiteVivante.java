@@ -23,6 +23,8 @@ public abstract class EntiteVivante extends Entite{
     private BooleanProperty estVivant;
 
     private boolean enSaut = false;
+    private BooleanProperty marcheDroite = new SimpleBooleanProperty(false);
+    private BooleanProperty marcheGauche = new SimpleBooleanProperty(false);
 
     private int vitesseY = 0;
 
@@ -61,6 +63,29 @@ public abstract class EntiteVivante extends Entite{
         }
     }
 
+    public BooleanProperty marcheGaucheProperty() {
+        return marcheGauche;
+    }
+
+    public boolean getMarcheDroite() {
+        return marcheDroite.get();
+    }
+
+    public void setMarcheDroite(boolean val) {
+        marcheDroite.set(val);
+    }
+
+    public BooleanProperty marcheDroiteProperty() {
+        return marcheDroite;
+    }
+
+    public boolean getMarcheGauche() {
+        return marcheGauche.get();
+    }
+
+    public void setMarcheGauche(boolean val) {
+        marcheGauche.set(val);
+    }
 
     public abstract void action(int x, int y);
 
